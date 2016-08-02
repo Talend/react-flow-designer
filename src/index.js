@@ -1,4 +1,7 @@
 import FlowDesigner from './components/FlowDesigner.container';
+import AbstractNode from './components/node/AbstractNode.component';
+import AbstractLink from './components/link/AbstractLink.component';
+import Port from './components/port/Port.component';
 import NodeType from './components/NodeType.component';
 import LinkType from './components/LinkType.component';
 import flowDesignerReducer from './reducers/';
@@ -10,6 +13,9 @@ import * as flowPropTypes from './constants/flowdesigner.proptypes';
 export {
     flowDesignerReducer,
     FlowDesigner,
+    AbstractNode,
+    AbstractLink,
+    Port,
     NodeType,
     LinkType,
     flowDesignerConstants,
