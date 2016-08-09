@@ -10,7 +10,6 @@ import {
   FLOWDESIGNER_PORT_SET_ATTR,
   FLOWDESIGNER_PORT_REMOVE,
   FLOWDESIGNER_NODE_MOVE,
-  FLOWDESIGNER_PORT_MERGE,
   FLOWDESIGNER_NODE_REMOVE,
 } from '../constants/flowdesigner.constants';
 
@@ -28,11 +27,9 @@ export default function portReducer(state = defaultState, action) {
         return state.mergeIn([action.portId, 'attr'], new Map(action.attr));
     case FLOWDESIGNER_PORT_REMOVE:
         return state.delete(action.id);
-    case FLOWDESIGNER_PORT_MERGE:
-        return state.merge(action.ports);
     case FLOWDESIGNER_NODE_MOVE:
-        if (action.ports) {
-            return state.merge(action.ports);
+        if (action.portsPosition) {
+            return state.mergeDeep(action.portsPosition);
         }
         return state;
     case FLOWDESIGNER_NODE_REMOVE:

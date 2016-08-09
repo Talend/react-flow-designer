@@ -15,6 +15,8 @@ import PortsRenderer from './port/PortsRenderer.component';
 import { moveNodeTo } from '../actions/node.actions';
 import { setNodeTypes } from '../actions/nodeType.actions';
 
+import { getNodesWithPorts } from '../selectors/nodeSelectors';
+
 export const FlowDesigner = React.createClass({
     propTypes: {
         children: PropTypes.node,
@@ -93,7 +95,7 @@ export const FlowDesigner = React.createClass({
               <NodesRenderer
                 nodeTypeMap={this.state.nodeTypeMap}
                 moveNodeTo={this.props.moveNodeTo}
-                nodes={this.props.nodes}
+                nodesWithPorts={this.props.nodesWithPorts}
               />
               <PortsRenderer ports={this.props.ports} />
               <LinksRenderer linkTypeMap={this.state.linkTypeMap} links={this.props.links} />
@@ -104,7 +106,7 @@ export const FlowDesigner = React.createClass({
 });
 
 const mapStateToProps = state => ({
-    nodes: state.flowDesigner.nodes,
+    nodesWithPorts: getNodesWithPorts(state),
     links: state.flowDesigner.links,
     ports: state.flowDesigner.ports,
 });

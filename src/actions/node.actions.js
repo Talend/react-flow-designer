@@ -8,7 +8,7 @@ import {
   FLOWDESIGNER_NODE_REMOVE,
 } from '../constants/flowdesigner.constants';
 
-import { getPortsForNode } from '../selectors/portSelectors';
+import { getNodesWithPorts } from '../selectors/nodeSelectors';
 
 
 /**
@@ -23,30 +23,16 @@ import { getPortsForNode } from '../selectors/portSelectors';
 export const addNode = (nodeId, nodePosition, nodeSize, nodeType, attr) => (
     (dispatch, getState) => {
         const state = getState();
-        const size = nodeSize || state.flowDesigner.nodeTypes.getIn([nodeType, 'component']).size;
         dispatch({
             type: FLOWDESIGNER_NODE_ADD,
             nodeId,
             nodePosition,
-            size,
+            nodeSize: nodeSize || state.flowDesigner.nodeTypes.getIn([nodeType, 'component']).size,
             nodeType,
             attr,
         });
     }
 );
-
-
-/**
- * Ask to update node type of a specific node
- * @param {string} nodeId
- * @param {string} nodeType
- * @return {Object}
- */
-export const updateNodeType = (nodeId, nodeType) => ({
-    type: FLOWDESIGNER_NODE_UPDATE_TYPE,
-    nodeId,
-    nodeType,
-});
 
 /**
  * Ask for moving node
@@ -54,18 +40,16 @@ export const updateNodeType = (nodeId, nodeType) => ({
  * @param {{x: number, y: number}} nodePosition - the new absolute position of the node
  * @return {Object}
  */
-export const moveNodeTo = (nodeId, nodePosition) => (
+export const moveNodeTo = (nodeId, nodePosition, portsPosition) => (
     (dispatch, getState) => {
         const state = getState();
-        const node = state.flowDesigner.nodes.get(nodeId);
-        const calculatePortPosition = state.flowDesigner.nodeTypes.getIn([node.nodeType, 'component']).calculatePortPosition;
-        let ports = getPortsForNode(state)(node.id);
-        ports = calculatePortPosition(ports, nodePosition, node.nodeSize);
+        const nodesWithPorts = getNodesWithPorts(state);
+        const nodeTypes = state.flowDesigner.nodeTypes;
         dispatch({
             type: FLOWDESIGNER_NODE_MOVE,
             nodeId,
             nodePosition,
-            ports,
+            portsPosition,
         });
     }
 );

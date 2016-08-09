@@ -18,7 +18,7 @@ const nodeReducer = (state = defaultState, action) => {
         return state.set(action.nodeId, new NodeRecord({
             id: action.nodeId,
             position: new PositionRecord(action.nodePosition),
-            nodeSize: new SizeRecord(action.size),
+            nodeSize: new SizeRecord(action.nodeSize),
             nodeType: action.nodeType,
             attr: new Map(action.attr),
         }));

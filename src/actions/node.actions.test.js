@@ -20,7 +20,7 @@ describe('Check that node action creators generate proper action objects', () =>
             type: 'FLOWDESIGNER_NODE_ADD',
             nodeId: 'id',
             nodePosition: { x: 75, y: 75 },
-            size: { width: 50, heigth: 50 },
+            nodeSize: { width: 50, heigth: 50 },
             nodeType: 'nodeType',
             attr: {},
         }];
@@ -32,21 +32,12 @@ describe('Check that node action creators generate proper action objects', () =>
         expect(store.getActions()).toEqual(expectedActions);
     });
 
-    it('updateNodeType should properly update node type', () => {
-        const action = nodeActions.updateNodeType('id', 'newNodeType');
-        expect(action).toEqual({
-            type: 'FLOWDESIGNER_NODE_UPDATE_TYPE',
-            nodeId: 'id',
-            nodeType: 'newNodeType',
-        });
-    });
-
     it('moveNode generate a proper action object witch nodeId and nodePosition parameter', () => {
         const expectedActions = [{
             type: 'FLOWDESIGNER_NODE_MOVE',
             nodeId: 'id',
             nodePosition: { x: 10, y: 20 },
-            ports: Object({}),
+            portsPosition: Object({}),
         }];
 
         const store = mockStore({
@@ -61,7 +52,7 @@ describe('Check that node action creators generate proper action objects', () =>
             },
         });
 
-        store.dispatch(nodeActions.moveNodeTo('id', { x: 10, y: 20 }));
+        store.dispatch(nodeActions.moveNodeTo('id', { x: 10, y: 20 }, {}));
 
         expect(store.getActions()).toEqual(expectedActions);
     });
