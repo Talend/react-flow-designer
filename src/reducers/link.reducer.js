@@ -30,13 +30,6 @@ export default function linkReducer(state = defaultState, action) {
         return state.delete(action.linkId);
     case FLOWDESIGNER_LINK_SET_ATTR:
         return state.mergeIn([action.linkId, 'attr'], new Map(action.attr));
-    case FLOWDESIGNER_NODE_REMOVE:
-        return state.filter(link => {
-            const result = action.linksId.filter(linkId => {
-                return linkId === link.id;
-            });
-            return result.size === 0;
-        });
     default:
         return state;
     }

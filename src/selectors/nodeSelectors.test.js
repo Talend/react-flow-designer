@@ -2,12 +2,12 @@ jest.unmock('reselect');
 jest.unmock('./nodeSelectors');
 jest.unmock('../constants/flowdesigner.model');
 
-import { Map, OrderedMap, List } from 'immutable';
+import { Map, OrderedMap } from 'immutable';
 import matchers from 'jasmine-immutable-matchers';
 import * as Selectors from './nodeSelectors';
 import {
-  NodeRecord,
-  PortRecord,
+    NodeRecord,
+    PortRecord,
 } from '../constants/flowdesigner.model';
 
 describe('Testing node selectors', () => {
@@ -33,15 +33,13 @@ describe('Testing node selectors', () => {
     });
 
     const givenState = {
-        flowDesigner: {
-            nodes: new Map()
+        nodes: new Map()
             .set('id1', node1)
             .set('id2', node2),
-            ports: new OrderedMap()
+        ports: new OrderedMap()
             .set('id1', port1)
             .set('id2', port2)
             .set('id3', port3),
-        },
     };
 
     beforeEach(() => {
@@ -50,8 +48,8 @@ describe('Testing node selectors', () => {
 
     it('get node with their attached ports', () => {
         const expectedResult = new Map()
-        .set('id1', new Map({ node: node1, ports: new OrderedMap().set('id1', port1) }))
-        .set('id2', new Map({ node: node2, ports: new OrderedMap().set('id2', port2).set('id3', port3) }));
+            .set('id1', new Map({ node: node1, ports: new OrderedMap().set('id1', port1) }))
+            .set('id2', new Map({ node: node2, ports: new OrderedMap().set('id2', port2).set('id3', port3) }));
         expect(Selectors.getNodesWithPorts(givenState)).toEqualImmutable(expectedResult);
     });
 });

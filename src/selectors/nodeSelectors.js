@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect';
 import { List, Map } from 'immutable';
 
-const getNodes = state => state.flowDesigner.nodes;
-const getPorts = state => state.flowDesigner.ports;
+const getNodes = state => state.nodes;
+const getPorts = state => state.ports;
 
 export const getNodesWithPorts = createSelector(
     [getNodes, getPorts],

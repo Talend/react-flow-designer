@@ -95,7 +95,7 @@ export const FlowDesigner = React.createClass({
               <NodesRenderer
                 nodeTypeMap={this.state.nodeTypeMap}
                 moveNodeTo={this.props.moveNodeTo}
-                nodesWithPorts={this.props.nodesWithPorts}
+                nodes={this.props.nodes}
               />
               <PortsRenderer ports={this.props.ports} />
               <LinksRenderer linkTypeMap={this.state.linkTypeMap} links={this.props.links} />
@@ -106,7 +106,7 @@ export const FlowDesigner = React.createClass({
 });
 
 const mapStateToProps = state => ({
-    nodesWithPorts: getNodesWithPorts(state),
+    nodes: state.flowDesigner.nodes,
     links: state.flowDesigner.links,
     ports: state.flowDesigner.ports,
 });

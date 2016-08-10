@@ -58,10 +58,20 @@ describe('Check that node action creators generate proper action objects', () =>
     });
 
     it('setNodeAttribute', () => {
-        expect(nodeActions.setNodeAttribute('id', { selected: true })).toEqual({
+        const expectedActions = [{
             type: 'FLOWDESIGNER_NODE_SET_ATTR',
             nodeId: 'id',
             attr: { selected: true },
+        }];
+
+        const store = mockStore({
+            flowDesigner: {
+                nodes: new Map({ id: { id: 'nodeId', nodeType: 'type' } }),
+            },
         });
+
+        store.dispatch(nodeActions.setNodeAttribute('id', { selected: true }));
+
+        expect(store.getActions()).toEqual(expectedActions);
     });
 });

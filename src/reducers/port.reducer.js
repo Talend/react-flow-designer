@@ -1,4 +1,4 @@
-import { OrderedMap } from 'immutable';
+import { Map, OrderedMap } from 'immutable';
 import {
     PortRecord,
 } from '../constants/flowdesigner.model';
@@ -9,7 +9,6 @@ import {
   FLOWDESIGNER_PORT_ADD,
   FLOWDESIGNER_PORT_SET_ATTR,
   FLOWDESIGNER_PORT_REMOVE,
-  FLOWDESIGNER_NODE_MOVE,
   FLOWDESIGNER_NODE_REMOVE,
 } from '../constants/flowdesigner.constants';
 
@@ -27,11 +26,6 @@ export default function portReducer(state = defaultState, action) {
         return state.mergeIn([action.portId, 'attr'], new Map(action.attr));
     case FLOWDESIGNER_PORT_REMOVE:
         return state.delete(action.id);
-    case FLOWDESIGNER_NODE_MOVE:
-        if (action.portsPosition) {
-            return state.mergeDeep(action.portsPosition);
-        }
-        return state;
     case FLOWDESIGNER_NODE_REMOVE:
         return state.filter(port => port.nodeId !== action.nodeId);
     default:

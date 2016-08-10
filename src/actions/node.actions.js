@@ -1,11 +1,13 @@
+import invariant from 'invariant';
+
 import {
-  FLOWDESIGNER_NODE_MOVE,
-  FLOWDESIGNER_NODE_ADD,
-  FLOWDESIGNER_NODE_UPDATE_TYPE,
-  FLOWDESIGNER_NODE_SET_ATTR,
-  FLOWDESIGNER_NODE_REMOVE_ATTR,
-  FLOWDESIGNER_NODE_SET_SIZE,
-  FLOWDESIGNER_NODE_REMOVE,
+    FLOWDESIGNER_NODE_MOVE,
+    FLOWDESIGNER_NODE_ADD,
+    FLOWDESIGNER_NODE_UPDATE_TYPE,
+    FLOWDESIGNER_NODE_SET_ATTR,
+    FLOWDESIGNER_NODE_REMOVE_ATTR,
+    FLOWDESIGNER_NODE_SET_SIZE,
+    FLOWDESIGNER_NODE_REMOVE,
 } from '../constants/flowdesigner.constants';
 
 import { getNodesWithPorts } from '../selectors/nodeSelectors';
@@ -43,7 +45,7 @@ export const addNode = (nodeId, nodePosition, nodeSize, nodeType, attr) => (
 export const moveNodeTo = (nodeId, nodePosition, portsPosition) => (
     (dispatch, getState) => {
         const state = getState();
-        const nodesWithPorts = getNodesWithPorts(state);
+        const nodesWithPorts = getNodesWithPorts(state.flowDesigner);
         const nodeTypes = state.flowDesigner.nodeTypes;
         dispatch({
             type: FLOWDESIGNER_NODE_MOVE,
@@ -71,22 +73,40 @@ export const setNodeSize = (nodeId, nodeSize) => ({
  * @param {string} nodeId
  * @param {Object} attr
  */
-export const setNodeAttribute = (nodeId, attr) => ({
-    type: FLOWDESIGNER_NODE_SET_ATTR,
-    nodeId,
-    attr,
-});
+export const setNodeAttribute = (nodeId, attr) => (
+    (dispatch, getState) => {
+        const state = getState();
+        const node = state.flowDesigner.nodes.get(nodeId);
+        if (!node) {
+            invariant(false, `Can't set an attribute on non existing node ${nodeId}`)
+        }
+        dispatch({
+            type: FLOWDESIGNER_NODE_SET_ATTR,
+            nodeId,
+            attr,
+        })
+    }
+);
 
 /**
  * Ask to remove an attribute on target node
  * @param {string} nodeId
  * @param {string} attrKey - the key of the attribute to be removed
  */
-export const removeNodeAttribute = (nodeId, attrKey) => ({
-    type: FLOWDESIGNER_NODE_REMOVE_ATTR,
-    nodeId,
-    attrKey,
-});
+export const removeNodeAttribute = (nodeId, attrKey) => (
+    (dispatch, getState) => {
+        const state = getState();
+        const node = state.flowDesigner.nodes.get(nodeId);
+        if (!node) {
+            invariant(false, `Can't remove an attribute on non existing node ${nodeId}`)
+        }
+        dispatch({
+            type: FLOWDESIGNER_NODE_REMOVE_ATTR,
+            nodeId,
+            attrKey,
+        });
+    }
+);
 
 /**
  * Ask for removal of target node and each ports/links attached to it
