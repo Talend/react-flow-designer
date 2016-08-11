@@ -7,7 +7,6 @@ import {
   FLOWDESIGNER_PORT_ADD,
   FLOWDESIGNER_PORT_SET_ATTR,
   FLOWDESIGNER_PORT_REMOVE,
-  FLOWDESIGNER_NODE_REMOVE,
 } from '../constants/flowdesigner.constants';
 
 const defaultState = new OrderedMap();
@@ -24,7 +23,7 @@ export default function portReducer(state = defaultState, action) {
     case FLOWDESIGNER_PORT_SET_ATTR:
         return state.mergeIn([action.portId, 'attr'], new Map(action.attr));
     case FLOWDESIGNER_PORT_REMOVE:
-        return state.delete(action.id);
+        return state.delete(action.portId);
     default:
         return state;
     }

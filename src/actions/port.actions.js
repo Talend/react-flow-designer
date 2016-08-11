@@ -57,9 +57,3 @@ export const removePort = portId => ({
     type: FLOWDESIGNER_PORT_REMOVE,
     portId,
 });
-
-
-export const removePortsFromNode = nodeId => ({
-    type: FLOWDESIGNER_PORT_REMOVE_FROM_NODE,
-    nodeId,
-});

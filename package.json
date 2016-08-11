@@ -11,6 +11,7 @@
     "dev": "webpack --progress --colors --watch --env.dev",
     "lint": "npm run lint:es",
     "lint:es": "eslint --config .eslintrc src/app/**/*.js",
+    "prepublish": "npm run build",
     "test": "jest --no-cache",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage"
