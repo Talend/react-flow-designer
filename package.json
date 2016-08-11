@@ -16,8 +16,8 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Axel Cateland <acateland@talend.com>",
+  "license": "Apache-2.0",
   "jest": {
     "automock": false,
     "testRegex": "/.*\\.test(.js|.jsx)$",
