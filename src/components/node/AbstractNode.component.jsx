@@ -109,8 +109,7 @@ export const Node = React.createClass({
         if (this.props.children) {
             return this.props.children;
         }
-        invariant(false, `<Node /> should not be used without giving it a children
-        ex: <Node><rect /></Node>`);
+        invariant(false, `<AbstractNode /> should not be used without giving it a children ex: <AbstractNode><rect /></AbstractNode>`);
         return null;
     },
     render() {

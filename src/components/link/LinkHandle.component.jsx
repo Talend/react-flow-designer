@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 import { select, event } from 'd3-selection';
 import { drag } from 'd3-drag';
 
-const EdgeHandle = React.createClass({
+const LinkHandle = React.createClass({
     propTypes: {
         position: PropTypes.shape({
             x: PropTypes.number.isRequired,
@@ -56,4 +56,4 @@ const EdgeHandle = React.createClass({
     },
 });
 
-export default EdgeHandle;
+export default LinkHandle;
