@@ -6,7 +6,6 @@ import './port.css';
 export const PortType = PropTypes.shape({
     id: PropTypes.string.isRequired,
     nodeId: PropTypes.string.isRequired,
-    portType: PropTypes.string.isRequired,
     position: PropTypes.shape({
         x: PropTypes.number.isRequired,
         y: PropTypes.number.isRequired,

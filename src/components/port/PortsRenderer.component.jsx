@@ -1,11 +1,11 @@
-import React, { PropTypes } from 'react';
-import invariant from 'invariant';
+import React from 'react';
+import { orderedMapOf } from 'react-immutable-proptypes';
 
 import Port, { PortType } from './Port.component';
 
 const PortsRenderer = React.createClass({
     propTypes: {
-        ports: PropTypes.arrayOf(PortType).isRequired,
+        ports: orderedMapOf(PortType).isRequired,
     },
     renderPort(port) {
         return (<Port key={port.id} port={port} />);

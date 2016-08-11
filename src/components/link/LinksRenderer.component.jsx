@@ -1,7 +1,12 @@
 import React from 'react';
 import invariant from 'invariant';
+import { mapOf } from 'react-immutable-proptypes';
+import { LinkType } from './AbstractLink.component';
 
 const LinksRender = React.createClass({
+    propTypes: {
+        links: mapOf(LinkType).isRequired,
+    },
     renderLink(link) {
         const ConcreteLink = this.props.linkTypeMap[link.linkType].component;
         if (!ConcreteLink) {

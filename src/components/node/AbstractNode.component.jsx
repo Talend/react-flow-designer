@@ -58,7 +58,7 @@ export const NodeType = PropTypes.shape({
 
 export const Node = React.createClass({
     propTypes: {
-        node: NodeType,
+        node: NodeType.isRequired,
         moveNodeTo: PropTypes.func.isRequired,
         onDragStart: PropTypes.func,
         onDrag: PropTypes.func,

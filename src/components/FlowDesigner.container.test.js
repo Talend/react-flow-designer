@@ -1,5 +1,5 @@
 jest.unmock('./FlowDesigner.container.jsx');
-
+jest.unmock('react-immutable-proptypes');
 import React from 'react';
 import { shallow } from 'enzyme';
 import configureMockStore from 'redux-mock-store';

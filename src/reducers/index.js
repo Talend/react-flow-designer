@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers, compose } from 'redux';
 import { Map } from 'immutable';
 
 import nodesReducer from './node.reducer';
@@ -50,10 +50,13 @@ const destroyDetachedLinks = (state) => {
 };
 
 
-const enhancedReducer = (state, action) => {
-    let newState = combinedReducer(state, action);
-    newState = calculatePortsPosition(destroyDetachedLinks(destroyDetachedPorts(newState)));
-    return newState;
-};
+const enhancedReducer = (state, action) => (
+    compose(
+        calculatePortsPosition,
+        destroyDetachedLinks,
+        destroyDetachedPorts,
+        combinedReducer
+    )(state, action)
+);
 
 export default enhancedReducer;

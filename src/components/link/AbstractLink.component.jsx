@@ -4,11 +4,6 @@ import { connect } from 'react-redux';
 import { line, curveBasis } from 'd3-shape';
 import { interpolateBasis } from 'd3-interpolate';
 
-import * as EdgeActionCreator from '../../actions/link.actions';
-import * as ConnectorActionCreator from '../../actions/port.actions';
-
-import { getFreeInputConnectors } from '../../selectors/portSelectors';
-
 import LinkHandle from './LinkHandle.component';
 
 import './link.css';
@@ -27,11 +22,15 @@ const calculatePath = (sourcePosition, targetPosition) => {
     return { path, xInterpolate, yInterpolate };
 };
 
+export const LinkType = PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    sourceId: PropTypes.string.isRequired,
+    targetId: PropTypes.string.isRequired,
+});
+
 const AbstractLink = React.createClass({
     propTypes: {
-        link: PropTypes.shape({
-            id: PropTypes.string.isRequired,
-        }).isRequired,
+        link: LinkType.isRequired,
     },
     statics: calculatePath,
     componentWillMount() {
@@ -39,7 +38,7 @@ const AbstractLink = React.createClass({
             .curve(curveBasis);
     },
     shouldComponentUpdate(nextProps) {
-        return nextProps.source !== this.props.source || nextProps.target !== this.props.target ||  nextProps.targetHandlePosition !== this.props.targetHandlePosition;
+        return nextProps.source !== this.props.source || nextProps.target !== this.props.target || nextProps.targetHandlePosition !== this.props.targetHandlePosition;
     },
     render() {
         const pathCalculationMethod = this.props.calculatePath || calculatePath;
