@@ -1,9 +1,3 @@
-jest.unmock('./node.actions');
-jest.unmock('redux-thunk');
-jest.unmock('lodash/memoize');
-jest.unmock('../selectors/portSelectors');
-jest.unmock('reselect');
-
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Map, OrderedMap } from 'immutable';
@@ -25,7 +19,11 @@ describe('Check that node action creators generate proper action objects', () =>
             attr: {},
         }];
 
-        const store = mockStore();
+        const store = mockStore({
+            flowDesigner: {
+                nodes: new Map({}),
+            },
+        });
 
         store.dispatch(nodeActions.addNode('id', { x: 75, y: 75 }, { width: 50, heigth: 50 }, 'nodeType', {}));
 
@@ -35,14 +33,13 @@ describe('Check that node action creators generate proper action objects', () =>
     it('moveNode generate a proper action object witch nodeId and nodePosition parameter', () => {
         const expectedActions = [{
             type: 'FLOWDESIGNER_NODE_MOVE',
-            nodeId: 'id',
+            nodeId: 'nodeId',
             nodePosition: { x: 10, y: 20 },
-            portsPosition: Object({}),
         }];
 
         const store = mockStore({
             flowDesigner: {
-                nodes: new Map({ id: { id: 'nodeId', nodeType: 'type' } }),
+                nodes: new Map({ nodeId: { id: 'nodeId', nodeType: 'type' } }),
                 nodeTypes: new Map({
                     type: new Map({
                         component: { calculatePortPosition: () => ({}) },
@@ -52,7 +49,7 @@ describe('Check that node action creators generate proper action objects', () =>
             },
         });
 
-        store.dispatch(nodeActions.moveNodeTo('id', { x: 10, y: 20 }, {}));
+        store.dispatch(nodeActions.moveNodeTo('nodeId', { x: 10, y: 20 }, {}));
 
         expect(store.getActions()).toEqual(expectedActions);
     });

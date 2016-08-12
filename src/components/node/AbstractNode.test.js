@@ -33,10 +33,21 @@ describe('Testing <AbstractNode>', () => {
     // if anyone got a clue on how to test react + d3 events
 
     // it('call the injected onDragStart action when drag action start', () => {
+    //     const evt = document.createEvent('HTMLEvents');
+    //     evt.initEvent('click', false, true);
     //     const onDragStart = jasmine.createSpy('onDragStart');
-    //     const wrapper = mount(<AbstractNode node={node} onDragStart={onDragStart} />);
+    //     const wrapper = mount(
+    //         <AbstractNode node={node} click={onDragStart}>
+    //             <rect />
+    //         </AbstractNode>
+    //     , { attachTo: document.body });
+    //     document.querySelector('g g').addEventListener('click', function() {
+    //         console.error('super');
+    //     });
+    //     console.error('childNodes', wrapper.ref);
+    //     document.querySelector('g g').dispatchEvent(evt);
     //     // wrapper.find('g[transform]').simulate('dragStart');
-    //     ReactTestUtils.Simulate.dragStart(wrapper.find('g[transform]'));
+    //     // ReactTestUtils.Simulate.dragStart(wrapper.find('g[transform]'));
     //     expect(onDragStart.and.identity()).toEqual('onDragStart');
     //     expect(onDragStart).toHaveBeenCalled();
     //     expect(onDragStart.calls.count()).toEqual(1);

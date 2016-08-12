@@ -72,12 +72,4 @@ describe('Testing dataflow selectors', () => {
         const expectedPortMap = new Map().set('id2', port2);
         expect(Selectors.getEmitterPortsForNode(givenState)('nodeId1')).toEqualImmutable(expectedPortMap);
     });
-
-    // it('getFreeSinkConnectors return a map of connectors from a map of nodes', () => {
-    //     const expectedConnectorsMap = new Map().set('id4', new ConnectorRecord({
-    //         id: 'id4',
-    //         type: 'SINK',
-    //     }));
-    //     expect(Selectors.getFreeSinkConnectors(givenState)).toEqualImmutable(expectedConnectorsMap);
-    // });
 });
