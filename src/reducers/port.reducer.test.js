@@ -1,8 +1,3 @@
-jest.unmock('immutable');
-jest.unmock('jasmine-immutable-matchers');
-jest.unmock('../constants/flowdesigner.model');
-jest.unmock('./port.reducer');
-
 import { Map, OrderedMap } from 'immutable';
 import matchers from 'jasmine-immutable-matchers';
 

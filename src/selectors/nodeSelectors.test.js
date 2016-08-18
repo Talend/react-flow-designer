@@ -1,7 +1,3 @@
-jest.unmock('reselect');
-jest.unmock('./nodeSelectors');
-jest.unmock('../constants/flowdesigner.model');
-
 import { Map, OrderedMap } from 'immutable';
 import matchers from 'jasmine-immutable-matchers';
 import * as Selectors from './nodeSelectors';
