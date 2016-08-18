@@ -9,7 +9,6 @@ import matchers from 'jasmine-immutable-matchers';
 import portReducer from './port.reducer';
 import { PortRecord, PositionRecord } from '../constants/flowdesigner.model';
 
-
 describe('Check port reducer', () => {
     beforeEach(() => {
         jasmine.addMatchers(matchers);
