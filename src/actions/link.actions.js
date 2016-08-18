@@ -6,6 +6,7 @@ import {
     FLOWDESIGNER_LINK_SET_SOURCE,
     FLOWDESIGNER_LINK_REMOVE,
     FLOWDESIGNER_LINK_SET_ATTR,
+    FLOWDESIGNER_LINK_REMOVE_ATTR,
 } from '../constants/flowdesigner.constants';
 
 /**
@@ -142,21 +143,46 @@ export const removeLink = (linkId) => (
  * @param {string} linkId
  * @param {Object} attr
  */
-export const setLinkAttr = (linkId, attr) => (
+export const setLinkAttribute = (linkId, attr) => (
     (dispatch, getState) => {
         const state = getState();
         let error = false;
-        if (state.flowDesigner.links[linkId]) {
+        if (!state.flowDesigner.links.get(linkId)) {
             error = true;
             invariant(
                 false,
-                `can't set attribute on non existing link ${linkId}`);
+                `Can't set an attribute on non existing link ${linkId}`);
         }
         if (!error) {
             dispatch({
                 type: FLOWDESIGNER_LINK_SET_ATTR,
                 linkId,
                 attr,
+            });
+        }
+    }
+);
+
+/**
+ * Ask to remove an attribute on target link
+ * @param {string} linkId
+ * @param {string} attrKey - the key of the attribute to be removed
+ */
+export const removeLinkAttribute = (linkId, attrKey) => (
+    (dispatch, getState) => {
+        const state = getState();
+        let error = false;
+        if (!state.flowDesigner.links.get(linkId)) {
+            error = true;
+            invariant(
+                false,
+                `Can't remove an attribute on non existing link ${linkId}`);
+        }
+        if (!error) {
+            dispatch({
+                type: FLOWDESIGNER_LINK_REMOVE_ATTR,
+                linkId,
+                attrKey,
             });
         }
     }

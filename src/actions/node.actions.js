@@ -84,15 +84,18 @@ export const setNodeSize = (nodeId, nodeSize) => (
 export const setNodeAttribute = (nodeId, attr) => (
     (dispatch, getState) => {
         const state = getState();
-        const node = state.flowDesigner.nodes.get(nodeId);
-        if (!node) {
+        let error = false;
+        if (!state.flowDesigner.nodes.get(nodeId)) {
+            error = true;
             invariant(false, `Can't set an attribute on non existing node ${nodeId}`);
         }
-        dispatch({
-            type: FLOWDESIGNER_NODE_SET_ATTR,
-            nodeId,
-            attr,
-        });
+        if (!error) {
+            dispatch({
+                type: FLOWDESIGNER_NODE_SET_ATTR,
+                nodeId,
+                attr,
+            });
+        }
     }
 );
 
@@ -101,7 +104,6 @@ export const setNodeAttribute = (nodeId, attr) => (
  * @param {string} nodeId
  * @param {string} attrKey - the key of the attribute to be removed
  */
-// TODO specific for TFD should be moved
 export const removeNodeAttribute = (nodeId, attrKey) => (
     (dispatch, getState) => {
         const state = getState();

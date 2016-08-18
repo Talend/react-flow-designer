@@ -1,16 +1,10 @@
-import { Map } from 'immutable';
 import invariant from 'invariant';
 import {
   FLOWDESIGNER_PORT_ADD,
   FLOWDESIGNER_PORT_SET_ATTR,
+  FLOWDESIGNER_PORT_REMOVE_ATTR,
   FLOWDESIGNER_PORT_REMOVE,
-  FLOWDESIGNER_PORT_MERGE,
-  FLOWDESIGNER_PORT_REMOVE_FROM_NODE,
 } from '../constants/flowdesigner.constants';
-
-import { getPortsForNode } from '../selectors/portSelectors';
-import { PortRecord } from '../constants/flowdesigner.model';
-
 /**
  * return an action to create a new port
  * @param {string} nodeId - identifier of the node to wich the created connector should be attached
@@ -41,13 +35,48 @@ export const addPort = (nodeId, portId, portType, attr) => (
  * @param {string} portId
  * @param {Object} attr
  */
-export const setPortAttribute = (portId, attr) => {
-    return {
-        type: FLOWDESIGNER_PORT_SET_ATTR,
-        portId,
-        attr,
-    };
-};
+export const setPortAttribute = (portId, attr) => (
+    (dispatch, getState) => {
+        const state = getState();
+        let error = false;
+        if (!state.flowDesigner.ports.get(portId)) {
+            error = true;
+            invariant(false, `Can't set an attribute on non existing port ${portId}`);
+        }
+        if (!error) {
+            dispatch({
+                type: FLOWDESIGNER_PORT_SET_ATTR,
+                portId,
+                attr,
+            });
+        }
+    }
+);
+
+/**
+ * Ask to remove an attribute on target port
+ * @param {string} portId
+ * @param {string} attrKey - the key of the attribute to be removed
+ */
+export const removePortAttribute = (portId, attrKey) => (
+    (dispatch, getState) => {
+        const state = getState();
+        let error = false;
+        if (!state.flowDesigner.ports.get(portId)) {
+            error = true;
+            invariant(
+                false,
+                `Can't remove an attribute on non existing port ${portId}`);
+        }
+        if (!error) {
+            dispatch({
+                type: FLOWDESIGNER_PORT_REMOVE_ATTR,
+                portId,
+                attrKey,
+            });
+        }
+    }
+);
 
 /**
  * return an action to remove port and all attached links

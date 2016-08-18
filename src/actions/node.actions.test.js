@@ -8,7 +8,8 @@ import * as nodeActions from './node.actions';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe('Check that node action creators generate proper action objects', () => {
+describe('Check that node action creators generate proper' +
+    ' action objects and perform checking', () => {
     it('addNode generate action with 0 configuration', () => {
         const expectedActions = [{
             type: 'FLOWDESIGNER_NODE_ADD',
@@ -71,4 +72,71 @@ describe('Check that node action creators generate proper action objects', () =>
 
         expect(store.getActions()).toEqual(expectedActions);
     });
+
+    it('setNodeAttribute throw an error if said node doesn\'t exist', () => {
+        const store = mockStore({
+            flowDesigner: {
+                nodes: new Map({ id: { id: 'nodeId', nodeType: 'type' } }),
+            },
+        });
+
+        expect(() => {
+            store.dispatch(nodeActions.setNodeAttribute('nonexistingId', { selected: true }));
+        }).toThrowError('Can\'t set an attribute on non existing node nonexistingId');
+    });
+
+    it('setNodeAttribute do not dispatch an action if said node doesn\'t exist', () => {
+        const store = mockStore({
+            flowDesigner: {
+                nodes: new Map({ id: { id: 'nodeId', nodeType: 'type' } }),
+            },
+        });
+        expect(() => {
+            store.dispatch(nodeActions.setNodeAttribute('nonexistingId', { selected: true }));
+        }).toThrowError('Can\'t set an attribute on non existing node nonexistingId');
+        expect(store.getActions()).toEqual([]);
+    });
+
+    it('removeNodeAttribute', () => {
+        const expectedActions = [{
+            type: 'FLOWDESIGNER_NODE_REMOVE_ATTR',
+            nodeId: 'id',
+            attrKey: 'selected',
+        }];
+
+        const store = mockStore({
+            flowDesigner: {
+                nodes: new Map({ id: { id: 'nodeId', nodeType: 'type' } }),
+            },
+        });
+
+        store.dispatch(nodeActions.removeNodeAttribute('id', 'selected'));
+
+        expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('removeNodeAttribute throw an error if said node doesn\'t exist', () => {
+        const store = mockStore({
+            flowDesigner: {
+                nodes: new Map({ id: { id: 'nodeId', nodeType: 'type' } }),
+            },
+        });
+
+        expect(() => {
+            store.dispatch(nodeActions.removeNodeAttribute('nonexistingId', 'selected'));
+        }).toThrowError('Can\'t remove an attribute on non existing node nonexistingId');
+    });
+
+    it('removeNodeAttribute do not dispatch an action if said node doesn\'t exist', () => {
+        const store = mockStore({
+            flowDesigner: {
+                nodes: new Map({ id: { id: 'nodeId', nodeType: 'type' } }),
+            },
+        });
+        expect(() => {
+            store.dispatch(nodeActions.removeNodeAttribute('nonexistingId', 'selected'));
+        }).toThrowError('Can\'t remove an attribute on non existing node nonexistingId');
+        expect(store.getActions()).toEqual([]);
+    });
+
 });
