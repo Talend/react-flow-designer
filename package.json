@@ -14,7 +14,8 @@
     "prepublish": "npm run build",
     "test": "jest --no-cache",
     "test:watch": "jest --watch",
-    "test:cov": "jest --coverage"
+    "test:cov": "jest --coverage",
+    "test:reset:snapshot": "jest --no-cache -u"
   },
   "author": "Axel Cateland <acateland@talend.com>",
   "license": "Apache-2.0",
