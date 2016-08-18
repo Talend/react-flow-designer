@@ -5,8 +5,8 @@ jest.unmock('./port.reducer');
 
 import { Map, OrderedMap } from 'immutable';
 import matchers from 'jasmine-immutable-matchers';
-import portReducer from './port.reducer';
 
+import portReducer from './port.reducer';
 import { PortRecord, PositionRecord } from '../constants/flowdesigner.model';
 
 

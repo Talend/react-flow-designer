@@ -19,8 +19,11 @@ const calculatePortsPosition = (state) => {
     let newPortsPosition = new Map();
     state.nodes.forEach(node => {
         const ports = state.ports.filter(port => port.nodeId === node.id);
-        const calculatePortPosition = state.nodeTypes.getIn([node.nodeType, 'component']).calculatePortPosition;
-        newPortsPosition = newPortsPosition.merge(calculatePortPosition(ports, node.position, node.nodeSize));
+        const calculatePortPosition = state.nodeTypes
+            .getIn([node.nodeType, 'component'])
+            .calculatePortPosition;
+        newPortsPosition = newPortsPosition
+            .merge(calculatePortPosition(ports, node.position, node.nodeSize));
     });
     return { ...state, ports: state.ports.merge(newPortsPosition) };
 };

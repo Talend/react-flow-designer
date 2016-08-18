@@ -1,3 +1,4 @@
+/* eslint-disable import/imports-first */
 jest.unmock('immutable');
 jest.unmock('jasmine-immutable-matchers');
 jest.unmock('../constants/flowdesigner.model');
@@ -5,8 +6,8 @@ jest.unmock('./node.reducer');
 
 import { Map } from 'immutable';
 import matchers from 'jasmine-immutable-matchers';
-import nodeReducer from './node.reducer';
 
+import nodeReducer from './node.reducer';
 import { NodeRecord, PositionRecord, SizeRecord } from '../constants/flowdesigner.model';
 
 describe('Check node reducer', () => {

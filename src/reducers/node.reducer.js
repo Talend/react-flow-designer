@@ -11,6 +11,7 @@ import {
 import {
     NodeRecord, PositionRecord, SizeRecord,
 } from '../constants/flowdesigner.model';
+
 const defaultState = new Map();
 const nodeReducer = (state = defaultState, action) => {
     switch (action.type) {

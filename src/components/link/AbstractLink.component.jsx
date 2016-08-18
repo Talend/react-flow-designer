@@ -5,7 +5,7 @@ import { line, curveBasis } from 'd3-shape';
 import { interpolateBasis } from 'd3-interpolate';
 
 import LinkHandle from './LinkHandle.component';
-
+import { NodeType, LinkType } from '../../constants/flowdesigner.proptypes';
 import './link.css';
 
 const calculatePath = (sourcePosition, targetPosition) => {
@@ -22,15 +22,19 @@ const calculatePath = (sourcePosition, targetPosition) => {
     return { path, xInterpolate, yInterpolate };
 };
 
-export const LinkType = PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    sourceId: PropTypes.string.isRequired,
-    targetId: PropTypes.string.isRequired,
-});
-
 const AbstractLink = React.createClass({
     propTypes: {
         link: LinkType.isRequired,
+        source: NodeType.isRequired,
+        target: NodeType.isRequired,
+        targetHandlePosition: PropTypes.shape({
+            x: PropTypes.number.isRequired,
+            y: PropTypes.number.isRequired,
+        }),
+        calculatePath: PropTypes.func.isRequired,
+        onTargetDrag: PropTypes.func.isRequired,
+        onTargetDragEnd: PropTypes.func.isRequired,
+        children: PropTypes.node,
     },
     statics: calculatePath,
     componentWillMount() {
@@ -38,13 +42,15 @@ const AbstractLink = React.createClass({
             .curve(curveBasis);
     },
     shouldComponentUpdate(nextProps) {
-        return nextProps.source !== this.props.source || nextProps.target !== this.props.target || nextProps.targetHandlePosition !== this.props.targetHandlePosition;
+        return nextProps.source !== this.props.source ||
+            nextProps.target !== this.props.target ||
+            nextProps.targetHandlePosition !== this.props.targetHandlePosition;
     },
     render() {
         const pathCalculationMethod = this.props.calculatePath || calculatePath;
         const { path, xInterpolate, yInterpolate } = pathCalculationMethod(
             this.props.source.position,
-            this.props.targetHandlePosition || this.props.target.position
+            this.props.targetHandlePosition || this.props.target.position
         );
         const newChildren = React.Children.map(this.props.children, child => (
                 React.cloneElement(child, { d: path, xInterpolate, yInterpolate })
@@ -54,7 +60,7 @@ const AbstractLink = React.createClass({
             {newChildren}
             <LinkHandle
               onDrag={this.props.onTargetDrag} onDragEnd={this.props.onTargetDragEnd}
-              position={this.props.targetHandlePosition || this.props.target.position}
+              position={this.props.targetHandlePosition || this.props.target.position}
             />
           </g>
         );

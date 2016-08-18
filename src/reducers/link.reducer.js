@@ -6,10 +6,10 @@ import {
     FLOWDESIGNER_LINK_SET_SOURCE,
     FLOWDESIGNER_LINK_REMOVE,
     FLOWDESIGNER_LINK_SET_ATTR,
-    FLOWDESIGNER_NODE_REMOVE,
 } from '../constants/flowdesigner.constants';
 
 import { LinkRecord } from '../constants/flowdesigner.model';
+
 const defaultState = new Map();
 
 export default function linkReducer(state = defaultState, action) {
