@@ -65,7 +65,8 @@ describe('Testing <AbstractNode>', () => {
         expect(() => {
             shallow(<AbstractNode node={node} />);
         }).toThrowError(
-            `<AbstractNode /> should not be used without giving it a children ex: <AbstractNode><rect /></AbstractNode>`
+            '<AbstractNode /> should not be used without giving it a children' +
+                'ex: <AbstractNode><rect /></AbstractNode>'
         );
     });
 });

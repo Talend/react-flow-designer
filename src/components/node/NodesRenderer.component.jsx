@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import invariant from 'invariant';
 import { mapOf } from 'react-immutable-proptypes';
 
-import { NodeType } from './AbstractNode.component';
+import { NodeType } from '../../constants/flowdesigner.proptypes';
 
 const NodesRenderer = React.createClass({
     propTypes: {

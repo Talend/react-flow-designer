@@ -6,8 +6,7 @@ import invariant from 'invariant';
 
 import ZoomHandler from './ZoomHandler.component';
 import Grid from './grid/Grid.component';
-import { NodeType } from './node/AbstractNode.component.jsx';
-import { PortType } from './port/Port.component.jsx';
+import { NodeType, PortType } from '../constants/flowdesigner.proptypes';
 import NodesRenderer from './node/NodesRenderer.component';
 import LinksRenderer from './link/LinksRenderer.component';
 import PortsRenderer from './port/PortsRenderer.component';
@@ -15,12 +14,16 @@ import PortsRenderer from './port/PortsRenderer.component';
 import { moveNodeTo } from '../actions/node.actions';
 import { setNodeTypes } from '../actions/nodeType.actions';
 
+
+
 export const FlowDesigner = React.createClass({
     propTypes: {
         children: PropTypes.node,
         setNodeTypes: PropTypes.func.isRequired,
         moveNodeTo: PropTypes.func.isRequired,
-        nodes: mapOf(NodeType).isRequired,
+        nodes: mapOf(
+            NodeType
+        ).isRequired,
         ports: orderedMapOf(PortType).isRequired,
         links: mapOf(PropTypes.object).isRequired,
     },

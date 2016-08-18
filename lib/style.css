@@ -21,7 +21,35 @@
   fill: none;
   stroke: #BFBDBD;
   stroke-width: 1; }
-.node-element {
+
+.connector {
+    r: 8;
+    stroke: #266092;
+    stroke-width: 2;
+    fill: white;
+    transition: r .1s ease-in-out;
+    cursor: pointer;
+}
+
+.connector:hover {
+    r: 12;
+}
+
+.connector.VALID_TARGET {
+    stroke: green;
+    r: 12;
+}
+
+.connector__label__box {
+    fill: white;
+    stroke: #266092;
+    stroke-width: 1px;
+}
+
+.connector__label__text {
+    fill: #266092;
+    color: #266092;
+}.node-element {
     fill: white;
     stroke: #B8C6D3;
     stroke-width: 2;
@@ -60,34 +88,6 @@
     font-size: 0.8em;
     text-align: center;
     text-anchor: middle;
-}
-.connector {
-    r: 8;
-    stroke: #266092;
-    stroke-width: 2;
-    fill: white;
-    transition: r .1s ease-in-out;
-    cursor: pointer;
-}
-
-.connector:hover {
-    r: 12;
-}
-
-.connector.VALID_TARGET {
-    stroke: green;
-    r: 12;
-}
-
-.connector__label__box {
-    fill: white;
-    stroke: #266092;
-    stroke-width: 1px;
-}
-
-.connector__label__text {
-    fill: #266092;
-    color: #266092;
 }.edge-element {
     fill: transparent;
     stroke: #266092;
