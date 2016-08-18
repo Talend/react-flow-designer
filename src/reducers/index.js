@@ -52,7 +52,6 @@ const destroyDetachedLinks = (state) => {
     return newState;
 };
 
-
 const enhancedReducer = (state, action) => (
     compose(
         calculatePortsPosition,

@@ -3,8 +3,6 @@ import { createSelector } from 'reselect';
 const getPorts = state => state.ports;
 const getLinks = state => state.links;
 
-
-
 export const getDetachedLinks = createSelector(
     [getLinks, getPorts],
     (links, ports) => (
