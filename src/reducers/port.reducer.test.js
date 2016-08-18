@@ -1,14 +1,8 @@
-jest.unmock('immutable');
-jest.unmock('jasmine-immutable-matchers');
-jest.unmock('../constants/flowdesigner.model');
-jest.unmock('./port.reducer');
-
 import { Map, OrderedMap } from 'immutable';
 import matchers from 'jasmine-immutable-matchers';
 
 import portReducer from './port.reducer';
 import { PortRecord, PositionRecord } from '../constants/flowdesigner.model';
-
 
 describe('Check port reducer', () => {
     beforeEach(() => {

@@ -1,9 +1,3 @@
-/* eslint-disable import/imports-first */
-jest.unmock('immutable');
-jest.unmock('jasmine-immutable-matchers');
-jest.unmock('../constants/flowdesigner.model');
-jest.unmock('./node.reducer');
-
 import { Map } from 'immutable';
 import matchers from 'jasmine-immutable-matchers';
 
