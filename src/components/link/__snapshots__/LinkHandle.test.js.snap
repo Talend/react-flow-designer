@@ -1,4 +1,4 @@
-exports[`<LinkHandle /> renders correctly <LinkHandle /> renders correctly 0`] = `
+exports[`<LinkHandle /> renders correctly <LinkHandle /> renders correctly 1`] = `
 <circle
   className="edge-handle "
   cx={10}
