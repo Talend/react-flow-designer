@@ -1,4 +1,5 @@
 import invariant from 'invariant';
+
 import {
   FLOWDESIGNER_PORT_ADD,
   FLOWDESIGNER_PORT_SET_ATTR,
@@ -82,7 +83,19 @@ export const removePortAttribute = (portId, attrKey) => (
  * return an action to remove port and all attached links
  * @param {string} portId
  */
-export const removePort = portId => ({
-    type: FLOWDESIGNER_PORT_REMOVE,
-    portId,
-});
+export const removePort = portId => (
+    (dispatch, getState) => {
+        const state = getState();
+        let error = false;
+        if (!state.flowDesigner.ports.get(portId)) {
+            error = true;
+            invariant(false, `Can not remove port ${portId} since it doesn't exist`);
+        }
+        if (!error) {
+            dispatch({
+                type: FLOWDESIGNER_PORT_REMOVE,
+                portId,
+            });
+        }
+    }
+);

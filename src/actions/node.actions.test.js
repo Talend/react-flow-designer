@@ -31,6 +31,31 @@ describe('Check that node action creators generate proper' +
         expect(store.getActions()).toEqual(expectedActions);
     });
 
+    it('addNode should throw if a node already exist with same id', () => {
+        const store = mockStore({
+            flowDesigner: {
+                nodes: new Map({ nodeId: { id: 'nodeId', nodeType: 'type' } }),
+            },
+        });
+
+        expect(() => {
+            store.dispatch(nodeActions.addNode('nodeId'));
+        }).toThrowError('Can not create node nodeId since it does already exist');
+    });
+
+    it('addNode should throw if a node already exist with same id and not dispatch action', () => {
+        const store = mockStore({
+            flowDesigner: {
+                nodes: new Map({ nodeId: { id: 'nodeId', nodeType: 'type' } }),
+            },
+        });
+
+        expect(() => {
+            store.dispatch(nodeActions.addNode('nodeId'));
+        }).toThrowError('Can not create node nodeId since it does already exist');
+        expect(store.getActions()).toEqual([]);
+    });
+
     it('moveNode generate a proper action object witch nodeId and nodePosition parameter', () => {
         const expectedActions = [{
             type: 'FLOWDESIGNER_NODE_MOVE',
@@ -52,6 +77,23 @@ describe('Check that node action creators generate proper' +
 
         store.dispatch(nodeActions.moveNodeTo('nodeId', { x: 10, y: 20 }, {}));
 
+        expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('setNodeSize', () => {
+        const expectedActions = [{
+            type: 'FLOWDESIGNER_NODE_SET_SIZE',
+            nodeId: 'nodeId',
+            nodeSize: { width: 100, height: 100 },
+        }];
+
+        const store = mockStore({
+            flowDesigner: {
+                nodes: new Map({ nodeId: { id: 'nodeId', nodeType: 'type' } }),
+            },
+        });
+
+        store.dispatch(nodeActions.setNodeSize('nodeId', { width: 100, height: 100 }));
         expect(store.getActions()).toEqual(expectedActions);
     });
 
@@ -139,4 +181,46 @@ describe('Check that node action creators generate proper' +
         expect(store.getActions()).toEqual([]);
     });
 
+    it('removeNode', () => {
+        const expectedActions = [{
+            type: 'FLOWDESIGNER_NODE_REMOVE',
+            nodeId: 'id',
+        }];
+
+        const store = mockStore({
+            flowDesigner: {
+                nodes: new Map({ id: { id: 'nodeId', nodeType: 'type' } }),
+            },
+        });
+
+        store.dispatch(nodeActions.removeNode('id'));
+
+        expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('removeNode should throw if targeted node doesn\'t exist', () => {
+        const store = mockStore({
+            flowDesigner: {
+                nodes: new Map({ id: { id: 'nodeId', nodeType: 'type' } }),
+            },
+        });
+
+        expect(() => {
+            store.dispatch(nodeActions.removeNode('nodeId'));
+        }).toThrowError('Can not remove node nodeId since it doesn\'t exist');
+    });
+
+    it('removeNode should not dispatch an action if targeted node doesn\'t exist', () => {
+        const store = mockStore({
+            flowDesigner: {
+                nodes: new Map({ id: { id: 'nodeId', nodeType: 'type' } }),
+            },
+        });
+
+        expect(() => {
+            store.dispatch(nodeActions.removeNode('nodeId'));
+        }).toThrowError('Can not remove node nodeId since it doesn\'t exist');
+
+        expect(store.getActions()).toEqual([]);
+    });
 });

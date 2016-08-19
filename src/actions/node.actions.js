@@ -23,7 +23,7 @@ export const addNode = (nodeId, nodePosition, nodeSize, nodeType, attr) => (
     (dispatch, getState) => {
         const state = getState();
         if (state.flowDesigner.nodes.get(nodeId)) {
-            invariant(false, `Can't not create node ${nodeId} since it does already exist`);
+            invariant(false, `Can not create node ${nodeId} since it does already exist`);
         }
         dispatch({
             type: FLOWDESIGNER_NODE_ADD,
@@ -126,12 +126,16 @@ export const removeNodeAttribute = (nodeId, attrKey) => (
 export const removeNode = nodeId => (
     (dispatch, getState) => {
         const state = getState();
+        let error = false;
         if (!state.flowDesigner.nodes.get(nodeId)) {
+            error = true;
             invariant(false, `Can not remove node ${nodeId} since it doesn't exist`);
         }
-        dispatch({
-            type: FLOWDESIGNER_NODE_REMOVE,
-            nodeId,
-        });
+        if (!error) {
+            dispatch({
+                type: FLOWDESIGNER_NODE_REMOVE,
+                nodeId,
+            });
+        }
     }
 );

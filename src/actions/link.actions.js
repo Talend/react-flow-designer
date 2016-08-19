@@ -34,6 +34,13 @@ export const addLink = (linkId, sourceId, targetId, linkType, attr) => (
                 `can't set a non existing target with id ${targetId} on link ${linkId}`
             );
         }
+        if (state.flowDesigner.ports[sourceId]) {
+            error = true;
+            invariant(
+                false,
+                `can't set a non existing source with id ${sourceId} on link ${linkId}`
+            );
+        }
         if (!error) {
             dispatch({
                 type: FLOWDESIGNER_LINK_ADD,
@@ -86,7 +93,7 @@ export const setLinkTarget = (linkId, targetId) => (
  * @param {string} linkId
  * @param {string} sourceId - the source port identifier
  */
-export const setSourceTarget = (linkId, sourceId) => (
+export const setLinkSource = (linkId, sourceId) => (
     (dispatch, getState) => {
         const state = getState();
         let error = false;
@@ -109,30 +116,6 @@ export const setSourceTarget = (linkId, sourceId) => (
                 type: FLOWDESIGNER_LINK_SET_SOURCE,
                 linkId,
                 sourceId,
-            });
-        }
-    }
-);
-
-/**
- * Ask for link removal
- * @param {string} linkId
- * @return {Object}
- */
-export const removeLink = (linkId) => (
-    (dispatch, getState) => {
-        const state = getState();
-        let error = false;
-        if (state.flowDesigner.links[linkId]) {
-            error = true;
-            invariant(
-                false,
-                `can't remove non existing link ${linkId}`);
-        }
-        if (!error) {
-            dispatch({
-                type: FLOWDESIGNER_LINK_REMOVE,
-                linkId,
             });
         }
     }
@@ -183,6 +166,30 @@ export const removeLinkAttribute = (linkId, attrKey) => (
                 type: FLOWDESIGNER_LINK_REMOVE_ATTR,
                 linkId,
                 attrKey,
+            });
+        }
+    }
+);
+
+/**
+ * Ask for link removal
+ * @param {string} linkId
+ * @return {Object}
+ */
+export const removeLink = (linkId) => (
+    (dispatch, getState) => {
+        const state = getState();
+        let error = false;
+        if (!state.flowDesigner.links.get(linkId)) {
+            error = true;
+            invariant(
+                false,
+                `can't remove non existing link ${linkId}`);
+        }
+        if (!error) {
+            dispatch({
+                type: FLOWDESIGNER_LINK_REMOVE,
+                linkId,
             });
         }
     }

@@ -50,7 +50,7 @@ const calculatePortPosition = (ports, nodePosition, nodeSize) => {
 };
 
 
-export const Node = React.createClass({
+export const AbstractNode = React.createClass({
     propTypes: {
         node: NodeType.isRequired,
         moveNodeTo: PropTypes.func.isRequired,
@@ -123,4 +123,4 @@ export const Node = React.createClass({
 });
 
 
-export default Node;
+export default AbstractNode;
