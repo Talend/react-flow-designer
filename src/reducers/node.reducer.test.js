@@ -50,24 +50,6 @@ describe('Check node reducer', () => {
         })));
     });
 
-    it('updateNodeType', () => {
-        expect(nodeReducer(initialState, {
-            type: 'FLOWDESIGNER_NODE_UPDATE_TYPE',
-            nodeId: 'id2',
-            nodeType: 'new node type',
-        })).toEqualImmutable(new Map().set('id1', new NodeRecord({
-            id: 'id1',
-            position: new PositionRecord({ x: 10, y: 10 }),
-            nodeType: 'type1',
-            attr: new Map({ selected: true }),
-        })).set('id2', new NodeRecord({
-            id: 'id2',
-            position: new PositionRecord({ x: 10, y: 10 }),
-            nodeType: 'new node type',
-            attr: new Map({ selected: false }),
-        })));
-    });
-
   // TODO
     it('move node update node position', () => {
         expect(nodeReducer(initialState, {

@@ -77,9 +77,9 @@ export const AbstractNode = React.createClass({
     componentWillUnmount() {
         this.d3Node.remove();
     },
-    onClick() {
+    onClick(event) {
         if (this.props.onClick) {
-            this.props.onClick();
+            this.props.onClick(event);
         }
     },
     onDragStart() {
