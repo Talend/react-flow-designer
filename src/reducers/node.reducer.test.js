@@ -41,12 +41,13 @@ describe('Check node reducer', () => {
             nodeId: 'id',
             nodeType: 'MY_NODE_TYPE',
             nodePosition: { x: 10, y: 10 },
+            attr: { name: 'test' },
         })).toEqualImmutable(new Map().set('id', new NodeRecord({
             id: 'id',
             position: new PositionRecord({ x: 10, y: 10 }),
             nodeType: 'MY_NODE_TYPE',
             nodeSize: new SizeRecord({ width: undefined, height: undefined }),
-            attr: new Map(),
+            attr: new Map().set('name', 'test'),
         })));
     });
 
