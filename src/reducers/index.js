@@ -15,6 +15,14 @@ const combinedReducer = combineReducers({
     nodeTypes: nodeTypeReducer,
 });
 
+
+/**
+ * Calculate port position with the methods provided by port parent node
+ * Beware could be slow if the calculus methode provided is slow
+ * @params {object} react-flow-designer state
+ * 
+ * @return {object} new state
+ */
 const calculatePortsPosition = (state) => {
     let newPortsPosition = new Map();
     state.nodes.forEach(node => {
@@ -52,13 +60,12 @@ const destroyDetachedLinks = (state) => {
     return newState;
 };
 
-const enhancedReducer = (state, action) => (
-    compose(
-        calculatePortsPosition,
-        destroyDetachedLinks,
-        destroyDetachedPorts,
-        combinedReducer
-    )(state, action)
-);
+const enhancedReducer = (state, action) => {
+    let newState = combinedReducer(state, action);
+    newState = destroyDetachedPorts(newState, action, state);
+    newState = destroyDetachedLinks(newState, action, state);
+    newState = calculatePortsPosition(newState, action, state);
+    return newState;
+};
 
 export default enhancedReducer;
