@@ -2,6 +2,7 @@ import invariant from 'invariant';
 
 import {
   FLOWDESIGNER_PORT_ADD,
+  FLOWDESIGNER_PORT_ADDS,
   FLOWDESIGNER_PORT_SET_ATTR,
   FLOWDESIGNER_PORT_REMOVE_ATTR,
   FLOWDESIGNER_PORT_REMOVE,
@@ -26,6 +27,22 @@ export const addPort = (nodeId, portId, portType, attr) => (
                 portId,
                 portType,
                 attr,
+            });
+        }
+    }
+);
+
+export const addPorts = (nodeId, ports) => (
+    (dispatch, getState) => {
+        const state = getState();
+        const node = state.flowDesigner.nodes.get(nodeId);
+        if (!node) {
+            invariant(false, `Can't set a new ports on non existing node ${nodeId}`);
+        } else {
+            dispatch({
+                type: FLOWDESIGNER_PORT_ADDS,
+                nodeId,
+                ports,
             });
         }
     }
