@@ -1,4 +1,4 @@
-import { combineReducers, compose } from 'redux';
+import { combineReducers } from 'redux';
 import { Map } from 'immutable';
 import invariant from 'invariant';
 
