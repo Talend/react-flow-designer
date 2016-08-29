@@ -2,6 +2,7 @@ import invariant from 'invariant';
 
 import {
     FLOWDESIGNER_NODE_MOVE,
+    FLOWDESIGNER_NODE_MOVE_END,
     FLOWDESIGNER_NODE_ADD,
     FLOWDESIGNER_NODE_SET_ATTR,
     FLOWDESIGNER_NODE_REMOVE_ATTR,
@@ -50,6 +51,26 @@ export const moveNodeTo = (nodeId, nodePosition) => (
         }
         dispatch({
             type: FLOWDESIGNER_NODE_MOVE,
+            nodeId,
+            nodePosition,
+        });
+    }
+);
+
+/**
+ * When node movement is done
+ * @param {string} nodeId - identifier of the targeted node
+ * @param {{x: number, y: number}} nodePosition - the new absolute position of the node
+ * @return {Object}
+ */
+export const moveNodeToEnd = (nodeId, nodePosition) => (
+    (dispatch, getState) => {
+        const state = getState();
+        if (!state.flowDesigner.nodes.get(nodeId)) {
+            invariant(false, `Can't move node ${nodeId} since it doesn't exist`);
+        }
+        dispatch({
+            type: FLOWDESIGNER_NODE_MOVE_END,
             nodeId,
             nodePosition,
         });

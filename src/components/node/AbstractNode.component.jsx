@@ -55,6 +55,7 @@ export const AbstractNode = React.createClass({
     propTypes: {
         node: NodeType.isRequired,
         moveNodeTo: PropTypes.func.isRequired,
+        moveNodeToEnd: PropTypes.func.isRequired,
         onDragStart: PropTypes.func,
         onDrag: PropTypes.func,
         onDragEnd: PropTypes.func,
@@ -96,6 +97,7 @@ export const AbstractNode = React.createClass({
         }
     },
     onDragEnd() {
+        this.props.moveNodeToEnd(this.props.node.id, event);
         if (this.props.onDragEnd) {
             this.props.onDragEnd(event);
         }
