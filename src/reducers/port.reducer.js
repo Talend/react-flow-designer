@@ -41,7 +41,7 @@ export default function portReducer(state = defaultState, action) {
 			invariant(false,
 				`Can't set a new port ${action.portId} on non existing node ${action.nodeId}`);
 		}
-		return action.ports.reducer(
+		return action.ports.reduce(
 			(cumulatedState, port) =>
 				setPort(cumulatedState, {
 					id: port.portId,

@@ -22,13 +22,13 @@ export default function linkReducer(state = defaultState, action) {
 				false,
 				`can't create a link ${action.linkId} when it already exist`);
 		}
-		if (state.getIn(['ports', action.targetId])) {
+		if (!state.getIn(['ports', action.targetId])) {
 			invariant(
 				false,
 				`can't set a non existing target with id ${action.targetId} on link ${action.linkId}`
 			);
 		}
-		if (state.getIn(['ports', action.targetId])) {
+		if (!state.getIn(['ports', action.sourceId])) {
 			invariant(
 				false,
 				`can't set a non existing source with id ${action.sourceId} on link ${action.linkId}`

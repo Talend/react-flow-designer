@@ -6,35 +6,35 @@ export const DROP_TARGET = 'DROP_TARGET';
 export const FORBIDDEN_DROP_TARGET = 'FORBIDDEN_DROP_TARGET';
 
 export const PositionRecord = Record({
-    x: undefined,
-    y: undefined,
+	x: undefined,
+	y: undefined,
 });
 
 export const SizeRecord = Record({
-    width: undefined,
-    height: undefined,
+	width: undefined,
+	height: undefined,
 });
 
 export const NodeRecord = Record({
-    id: undefined,
-    position: undefined,
-    nodeSize: undefined,
-    nodeType: undefined,
-    attr: undefined,
+	id: undefined,
+	position: undefined,
+	nodeSize: undefined,
+	nodeType: undefined,
+	attr: undefined,
 });
 
 export const LinkRecord = Record({
-    id: undefined,
-    sourceId: undefined,
-    targetId: undefined,
-    linkType: undefined,
-    attr: undefined,
+	id: undefined,
+	sourceId: undefined,
+	targetId: undefined,
+	linkType: undefined,
+	attr: undefined,
 });
 
 export const PortRecord = Record({
-    id: undefined,
-    nodeId: undefined,
-    portType: undefined,
-    position: undefined,
-    attr: undefined,
+	id: undefined,
+	nodeId: undefined,
+	portType: undefined,
+	position: undefined,
+	attr: undefined,
 });

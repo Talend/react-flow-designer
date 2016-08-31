@@ -6,7 +6,7 @@ const defaultState = new Map();
 const nodeTypeReducer = (state = defaultState, action) => {
     switch (action.type) {
     case FLOWDESIGNER_NODETYPE_SET:
-        return state.merge(action.nodeTypes);
+        return state.mergeIn(['nodeTypes'], action.nodeTypes);
     default:
         return state;
     }
