@@ -6,8 +6,6 @@ import { getDetachedLinks } from '../selectors/linkSelectors';
 import { flowReducer } from './flow.reducer';
 
 
-
-
 /**
  * Calculate port position with the methods provided by port parent node
  * calcul is done only if node moved or list of attached port have its size changed
@@ -18,27 +16,27 @@ import { flowReducer } from './flow.reducer';
  * @return {object} new state
  */
 const calculatePortsPosition = (state, action) => {
-	let node;
+	let nodes = [];
 	// TODO: NOT a big fan of this way to optimize port recalculations, don't feel future proof
 	if ((/FLOWDESIGNER_NODE_/.exec(action.type) && action.type !== 'FLOWDESIGNER_NODE_REMOVE') ||
-		(/FLOWDESIGNER_PORT_/.exec(action.type) && action.type !== 'FLOWDESIGNER_PORT_REMOVE')) {
+		(/FLOWDESIGNER_PORT_/.exec(action.type) && action.type !== 'FLOWDESIGNER_PORT_REMOVE') ||
+		(action.type === 'FLOWDESIGNER.FLOW.ADD_ELEMENTS')) {
 		if (action.nodeId) {
-			node = state.getIn(['nodes', action.nodeId]);
+			nodes.push(state.getIn(['nodes', action.nodeId]));
 		} else if (action.portId) {
-			node = state.getIn(['nodes'], state.getIn(['ports', action.portId]).nodeId);
+			nodes.push(state.getIn(['nodes'], state.getIn(['ports', action.portId]).nodeId));
 		} else {
-			invariant(false, `can't process calculatePortsPosition on ${action.type}`);
+			nodes = state.get('nodes');
 		}
+		return nodes.reduce((cumulativeState, node) => {
+			const ports = state.get('ports').filter(port => port.nodeId === node.id);
+			const calculatePortPosition = state.getIn(['nodeTypes', node.nodeType, 'component'])
+				.calculatePortPosition;
+			return cumulativeState.mergeIn(['ports'], calculatePortPosition(ports, node.position, node.nodeSize));
+		}, state);
 	}
-	let newPortsPosition = new Map();
-	if (node) {
-		const ports = state.get('ports').filter(port => port.nodeId === node.id);
-		const calculatePortPosition = state.getIn(['nodeTypes',node.nodeType, 'component'])
-			.calculatePortPosition;
-		newPortsPosition = newPortsPosition
-			.merge(calculatePortPosition(ports, node.position, node.nodeSize));
-	}
-    return state.mergeIn(['ports'], newPortsPosition);
+	return state;
+
 };
 
 /**
