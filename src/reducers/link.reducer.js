@@ -42,12 +42,12 @@ export default function linkReducer(state = defaultState, action) {
 			attr: new Map(action.attr),
 		}));
 	case FLOWDESIGNER_LINK_SET_TARGET:
-		if (state.get(['links', action.linkId])) {
+		if (!state.getIn(['links', action.linkId])) {
 			invariant(
 				false,
 				`can't set a target ${action.targetId} on non existing link with id ${action.linkId}`);
 		}
-		if (state.getIn(['ports', action.targetId])) {
+		if (!state.getIn(['ports', action.targetId])) {
 			invariant(
 				false,
 				`can't set a non existing target with id ${action.targetId} on link ${action.linkId}`
@@ -55,13 +55,13 @@ export default function linkReducer(state = defaultState, action) {
 		}
 		return state.setIn(['links', action.linkId, 'targetId'], action.targetId);
 	case FLOWDESIGNER_LINK_SET_SOURCE:
-		if (state.getIn(['links', action.linkId])) {
+		if (!state.getIn(['links', action.linkId])) {
 			invariant(
 				false,
 				`can't set a source ${action.sourceId} on non existing link with id ${action.linkId}`
 			);
 		}
-		if (state.getIn(['ports', action.sourceId])) {
+		if (!state.getIn(['ports', action.sourceId])) {
 			invariant(
 				false,
 				`can't set a non existing target with id ${action.sourceId} on link ${action.linkId}`
