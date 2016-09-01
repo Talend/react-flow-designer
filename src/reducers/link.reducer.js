@@ -74,9 +74,9 @@ export default function linkReducer(state = defaultState, action) {
 				false,
 				`can't remove non existing link ${action.linkId}`);
 		}
-		return state.delete(action.linkId);
+		return state.deleteIn(['links', action.linkId]);
 	case FLOWDESIGNER_LINK_SET_ATTR:
-		if (!state.getIn(['links', action.linkId])) {;
+		if (!state.getIn(['links', action.linkId])) {
 			invariant(
 				false,
 				`Can't set an attribute on non existing link ${action.linkId}`);
