@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect';
 import { List, Map } from 'immutable';
 
-const getNodes = state => state.nodes;
-const getPorts = state => state.ports;
+const getNodes = state => state.get('nodes');
+const getPorts = state => state.get('ports');
 
 export const getNodesWithPorts = createSelector(
     [getNodes, getPorts],

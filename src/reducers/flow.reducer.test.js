@@ -6,7 +6,6 @@ import * as portActions from '../actions/port.actions';
 import { NodeRecord, PortRecord, SizeRecord, PositionRecord } from '../constants/flowdesigner.model';
 
 describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS is batching elements creation', () => {
-
 	it('should batch one element creation', () => {
 		expect(flowReducer(new Map(), {
 			type: 'FLOWDESIGNER.FLOW.ADD_ELEMENTS',
@@ -101,7 +100,7 @@ describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS is batching elements creation', () => {
 		);
 	});
 
-    it('should handle throwing sub reducer by returning old state', () => {
+	it('should handle throwing sub reducer by returning old state', () => {
 		expect(flowReducer(new Map(), {
 			type: 'FLOWDESIGNER.FLOW.ADD_ELEMENTS',
 			listOfActionCreation: [

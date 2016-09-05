@@ -29,7 +29,7 @@ describe('Testing node selectors', () => {
         nodeId: 'id2',
     });
 
-    const givenState = {
+    const givenState = new Map({
         nodes: new Map()
             .set('id1', node1)
             .set('id2', node2),
@@ -37,7 +37,7 @@ describe('Testing node selectors', () => {
             .set('id1', port1)
             .set('id2', port2)
             .set('id3', port3),
-    };
+    });
 
 
     it('get node with their attached ports', () => {
