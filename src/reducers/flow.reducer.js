@@ -1,6 +1,7 @@
 import { Map, OrderedMap } from 'immutable';
 import {
 	FLOWDESIGNER_FLOW_ADD_ELEMENTS,
+	FLOWDESIGNER_FLOW_RESET,
 } from '../constants/flowdesigner.constants';
 import nodesReducer from './node.reducer';
 import linksReducer from './link.reducer';
@@ -30,8 +31,11 @@ export const flowReducer = (state, action) => {
 			state
 		);
 		} catch (error) {
+			console.warn('Something happenned preventing FLOWDESIGNER_FLOW_ADD_ELEMENTS to be applied', error);
 			return state;
 		}
+	case FLOWDESIGNER_FLOW_RESET:
+		return defaultState;
 	default:
 		return combinedReducer(state, action);
 	}
