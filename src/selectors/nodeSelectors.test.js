@@ -1,5 +1,4 @@
 import { Map, OrderedMap } from 'immutable';
-import matchers from 'jasmine-immutable-matchers';
 import * as Selectors from './nodeSelectors';
 import {
     NodeRecord,
@@ -24,7 +23,7 @@ describe('Testing node selectors', () => {
         id: 'id2',
         nodeId: 'id2',
     });
-    
+
     const port3 = new PortRecord({
         id: 'id3',
         nodeId: 'id2',
@@ -40,14 +39,11 @@ describe('Testing node selectors', () => {
             .set('id3', port3),
     };
 
-    beforeEach(() => {
-        jasmine.addMatchers(matchers);
-    });
 
     it('get node with their attached ports', () => {
         const expectedResult = new Map()
             .set('id1', new Map({ node: node1, ports: new OrderedMap().set('id1', port1) }))
             .set('id2', new Map({ node: node2, ports: new OrderedMap().set('id2', port2).set('id3', port3) }));
-        expect(Selectors.getNodesWithPorts(givenState)).toEqualImmutable(expectedResult);
+        expect(Selectors.getNodesWithPorts(givenState)).toEqual(expectedResult);
     });
 });

@@ -1,5 +1,4 @@
 import { Map, OrderedMap } from 'immutable';
-import matchers from 'jasmine-immutable-matchers';
 
 import { flowReducer } from './flow.reducer';
 import * as nodeActions from '../actions/node.actions';
@@ -7,9 +6,6 @@ import * as portActions from '../actions/port.actions';
 import { NodeRecord, PortRecord, SizeRecord, PositionRecord } from '../constants/flowdesigner.model';
 
 describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS is batching elements creation', () => {
-	beforeEach(() => {
-		jasmine.addMatchers(matchers);
-	});
 
 	it('should batch one element creation', () => {
 		expect(flowReducer(new Map(), {
@@ -23,7 +19,7 @@ describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS is batching elements creation', () => {
 					{}
 				),
 			],
-		})).toEqualImmutable(new Map()
+		})).toEqual(new Map()
 			.set('nodes', new Map()
 				.set('nodeId', new NodeRecord({
 					id: 'nodeId',
@@ -66,7 +62,7 @@ describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS is batching elements creation', () => {
 					{},
 				),
 			],
-		})).toEqualImmutable(new Map()
+		})).toEqual(new Map()
 			.set('nodes', new Map()
 				.set('nodeId', new NodeRecord({
 					id: 'nodeId',
@@ -130,6 +126,6 @@ describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS is batching elements creation', () => {
 					{},
 				),
 			],
-		})).toEqualImmutable(new Map());
+		})).toEqual(new Map());
 	});
 });

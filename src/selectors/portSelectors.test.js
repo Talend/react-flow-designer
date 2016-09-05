@@ -1,5 +1,4 @@
 import { Map } from 'immutable';
-import matchers from 'jasmine-immutable-matchers';
 import * as Selectors from './portSelectors';
 import {
 	LinkRecord,
@@ -38,30 +37,27 @@ describe('Testing dataflow selectors', () => {
 		.set('id3', port3)
 		.set('id4', port4));
 
-	beforeEach(() => {
-		jasmine.addMatchers(matchers);
-	});
 
 	it('getEmitterPorts return a map of Emitter ports', () => {
 		const expectedPortMap = new Map().set('id2', port2)
 			.set('id4', port4);
-		expect(Selectors.getEmitterPorts(givenState)).toEqualImmutable(expectedPortMap);
+		expect(Selectors.getEmitterPorts(givenState)).toEqual(expectedPortMap);
 	});
 
 	it(`getEmitterPortsForNode return a function
 	  wich can be used to retribe emitterPorts form specific node`, () => {
 		const expectedPortMap = new Map().set('id2', port2);
-		expect(Selectors.getEmitterPortsForNode(givenState)('nodeId1')).toEqualImmutable(expectedPortMap);
+		expect(Selectors.getEmitterPortsForNode(givenState)('nodeId1')).toEqual(expectedPortMap);
 	});
 
 	it('getSinkPorts return a map of Sink ports ', () => {
 		const expectedPortsMap = new Map().set('id1', port1).set('id3', port3);
-		expect(Selectors.getSinkPorts(givenState)).toEqualImmutable(expectedPortsMap);
+		expect(Selectors.getSinkPorts(givenState)).toEqual(expectedPortsMap);
 	});
 
 	it(`getSinkPortsForNode return a function
 	  wich can be used to retribe emitterPorts form specific node`, () => {
 		const expectedPortMap = new Map().set('id2', port2);
-		expect(Selectors.getEmitterPortsForNode(givenState)('nodeId1')).toEqualImmutable(expectedPortMap);
+		expect(Selectors.getEmitterPortsForNode(givenState)('nodeId1')).toEqual(expectedPortMap);
 	});
 });

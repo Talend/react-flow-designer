@@ -1,13 +1,9 @@
 import { Map } from 'immutable';
-import matchers from 'jasmine-immutable-matchers';
 
 import linkReducer from './link.reducer';
 import { LinkRecord, PortRecord } from '../constants/flowdesigner.model';
 
 describe('check linkreducer', () => {
-	beforeEach(() => {
-		jasmine.addMatchers(matchers);
-	});
 
 	const initialState = new Map()
 		.set('links', new Map()

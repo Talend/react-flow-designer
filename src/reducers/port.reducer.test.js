@@ -1,13 +1,9 @@
 import { Map, OrderedMap } from 'immutable';
-import matchers from 'jasmine-immutable-matchers';
 
 import portReducer from './port.reducer';
 import { PortRecord, PositionRecord } from '../constants/flowdesigner.model';
 
 describe('Check port reducer', () => {
-	beforeEach(() => {
-		jasmine.addMatchers(matchers);
-	});
 
 	const initialState = new Map().set('ports', new OrderedMap()
 		.set('id1', new PortRecord({
@@ -31,7 +27,7 @@ describe('Check port reducer', () => {
 			portId: 'portId',
 			portType: 'portType',
 			attr: { clicked: true },
-		})).toEqualImmutable(new Map().set('ports', new OrderedMap().set('id1', new PortRecord({
+		})).toEqual(new Map().set('ports', new OrderedMap().set('id1', new PortRecord({
 			id: 'id1',
 			position: new PositionRecord({ x: 10, y: 10 }),
 		}))

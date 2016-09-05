@@ -1,13 +1,9 @@
 import { Map } from 'immutable';
-import matchers from 'jasmine-immutable-matchers';
 
 import nodeReducer from './node.reducer';
 import { NodeRecord, PositionRecord, SizeRecord } from '../constants/flowdesigner.model';
 
 describe('Check node reducer', () => {
-	beforeEach(() => {
-		jasmine.addMatchers(matchers);
-	});
 
 	const initialState = new Map().setIn(['nodes', 'id1'], new NodeRecord({
 		id: 'id1',
@@ -26,7 +22,7 @@ describe('Check node reducer', () => {
 			type: 'FLOWDESIGNER_NODE_ADD',
 			nodeId: 'id',
 			nodePosition: { x: 10, y: 10 },
-		})).toEqualImmutable(new Map().setIn(['nodes', 'id'], new NodeRecord({
+		})).toEqual(new Map().setIn(['nodes', 'id'], new NodeRecord({
 			id: 'id',
 			nodeType: undefined,
 			position: new PositionRecord({ x: 10, y: 10 }),
@@ -42,7 +38,7 @@ describe('Check node reducer', () => {
 			nodeType: 'MY_NODE_TYPE',
 			nodePosition: { x: 10, y: 10 },
 			attr: { name: 'test' },
-		})).toEqualImmutable(new Map().setIn(['nodes', 'id'], new NodeRecord({
+		})).toEqual(new Map().setIn(['nodes', 'id'], new NodeRecord({
 			id: 'id',
 			position: new PositionRecord({ x: 10, y: 10 }),
 			nodeType: 'MY_NODE_TYPE',
@@ -57,7 +53,7 @@ describe('Check node reducer', () => {
 			type: 'FLOWDESIGNER_NODE_MOVE',
 			nodeId: 'id2',
 			nodePosition: { x: 50, y: 50 },
-		})).toEqualImmutable(new Map().setIn(['nodes', 'id1'], new NodeRecord({
+		})).toEqual(new Map().setIn(['nodes', 'id1'], new NodeRecord({
 			id: 'id1',
 			position: new PositionRecord({ x: 10, y: 10 }),
 			nodeType: 'type1',
@@ -75,7 +71,7 @@ describe('Check node reducer', () => {
 			type: 'FLOWDESIGNER_NODE_SET_SIZE',
 			nodeId: 'id1',
 			nodeSize: { height: 200, width: 200 },
-		})).toEqualImmutable(new Map().setIn(['nodes', 'id1'], new NodeRecord({
+		})).toEqual(new Map().setIn(['nodes', 'id1'], new NodeRecord({
 			id: 'id1',
 			position: new PositionRecord({ x: 10, y: 10 }),
 			nodeSize: new SizeRecord({ height: 200, width: 200 }),
