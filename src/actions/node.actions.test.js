@@ -26,7 +26,9 @@ describe('Check that node action creators generate proper' +
 			},
 		});
 
-		store.dispatch(nodeActions.addNode('id', { x: 75, y: 75 }, { width: 50, heigth: 50 }, 'nodeType', {}));
+		store.dispatch(
+			nodeActions.addNode('id', { x: 75, y: 75 }, { width: 50, heigth: 50 }, 'nodeType', {})
+		);
 
 		expect(store.getActions()).toEqual(expectedActions);
 	});

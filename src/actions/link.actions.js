@@ -1,5 +1,3 @@
-import invariant from 'invariant';
-
 import {
 	FLOWDESIGNER_LINK_ADD,
 	FLOWDESIGNER_LINK_SET_TARGET,

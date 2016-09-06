@@ -1,6 +1,6 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { Map, OrderedMap } from 'immutable';
+import { Map } from 'immutable';
 
 import * as linkActions from './link.actions';
 

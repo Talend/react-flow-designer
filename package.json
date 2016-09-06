@@ -10,7 +10,7 @@
     "clean:coverage": "rimraf ./coverage",
     "dev": "webpack --progress --colors --watch --env.dev",
     "lint": "npm run lint:es",
-    "lint:es": "eslint --config .eslintrc src/app/**/*.js",
+    "lint:es": "eslint --config .eslintrc src/**/*.js",
     "prepublish": "npm run build",
     "test": "jest --no-cache",
     "test:watch": "jest --watch",
@@ -84,6 +84,7 @@
     "d3-shape": "1.0.3",
     "d3-zoom": "1.0.2",
     "invariant": "2.2.1",
+    "lodash": "^4.15.0",
     "react-immutable-proptypes": "2.1.0"
   }
 }

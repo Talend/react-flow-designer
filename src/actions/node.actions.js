@@ -1,5 +1,3 @@
-import invariant from 'invariant';
-
 import {
 	FLOWDESIGNER_NODE_MOVE,
 	FLOWDESIGNER_NODE_MOVE_END,

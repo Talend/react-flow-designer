@@ -1,6 +1,6 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { Map, OrderedMap } from 'immutable';
+import { Map } from 'immutable';
 
 import * as portActions from './port.actions';
 
@@ -9,7 +9,6 @@ const mockStore = configureMockStore(middlewares);
 
 describe('Check that port action creators generate proper' +
 	' action objects and perform checking', () => {
-
 	it('addPort', () => {
 		const expectedActions = [{
 			type: 'FLOWDESIGNER_PORT_ADD',

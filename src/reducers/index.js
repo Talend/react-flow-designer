@@ -1,6 +1,3 @@
-import { Map } from 'immutable';
-import invariant from 'invariant';
-
 import { getDetachedPorts } from '../selectors/portSelectors';
 import { getDetachedLinks } from '../selectors/linkSelectors';
 import { flowReducer } from './flow.reducer';
@@ -32,11 +29,13 @@ const calculatePortsPosition = (state, action) => {
 			const ports = state.get('ports').filter(port => port.nodeId === node.id);
 			const calculatePortPosition = state.getIn(['nodeTypes', node.nodeType, 'component'])
 				.calculatePortPosition;
-			return cumulativeState.mergeIn(['ports'], calculatePortPosition(ports, node.position, node.nodeSize));
+			return cumulativeState.mergeIn(
+				['ports'],
+				calculatePortPosition(ports, node.position, node.nodeSize)
+			);
 		}, state);
 	}
 	return state;
-
 };
 
 /**
