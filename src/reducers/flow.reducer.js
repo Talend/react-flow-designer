@@ -27,15 +27,15 @@ export const flowReducer = (state, action) => {
 	case FLOWDESIGNER_FLOW_ADD_ELEMENTS:
 		try {
 			return action.listOfActionCreation.reduce(
-			(cumulativeState, actionCreation) => combinedReducer(cumulativeState, actionCreation),
-			state
-		);
+				(cumulativeState, actionCreation) => combinedReducer(cumulativeState, actionCreation),
+				state
+			);
 		} catch (error) {
 			console.warn('Something happenned preventing FLOWDESIGNER_FLOW_ADD_ELEMENTS to be applied', error);
 			return state;
 		}
 	case FLOWDESIGNER_FLOW_RESET:
-		return defaultState;
+		return defaultState.set('nodeTypes', state.get('nodeTypes'));
 	default:
 		return combinedReducer(state, action);
 	}
