@@ -4,7 +4,6 @@ import portReducer from './port.reducer';
 import { PortRecord, PositionRecord } from '../constants/flowdesigner.model';
 
 describe('Check port reducer', () => {
-
 	const initialState = new Map().set('ports', new OrderedMap()
 		.set('id1', new PortRecord({
 			id: 'id1',

@@ -4,7 +4,6 @@ import linkReducer from './link.reducer';
 import { LinkRecord, PortRecord } from '../constants/flowdesigner.model';
 
 describe('check linkreducer', () => {
-
 	const initialState = new Map()
 		.set('links', new Map()
 			.set('id1', new LinkRecord({

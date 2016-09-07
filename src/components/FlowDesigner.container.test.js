@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies, react/jsx-filename-extension */
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { Map } from 'immutable';

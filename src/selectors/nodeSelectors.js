@@ -16,3 +16,5 @@ export const getNodesWithPorts = createSelector(
 		return nodesWithPorts;
 	}
 );
+
+export default getNodesWithPorts;

@@ -12,3 +12,5 @@ export const getDetachedLinks = createSelector(
 		)
 	)
 );
+
+export default getDetachedLinks;

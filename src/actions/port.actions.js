@@ -1,5 +1,3 @@
-import invariant from 'invariant';
-
 import {
 	FLOWDESIGNER_PORT_ADD,
 	FLOWDESIGNER_PORT_ADDS,

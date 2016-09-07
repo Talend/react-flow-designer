@@ -4,7 +4,6 @@ import nodeReducer from './node.reducer';
 import { NodeRecord, PositionRecord, SizeRecord } from '../constants/flowdesigner.model';
 
 describe('Check node reducer', () => {
-
 	const initialState = new Map().setIn(['nodes', 'id1'], new NodeRecord({
 		id: 'id1',
 		nodeType: 'type1',

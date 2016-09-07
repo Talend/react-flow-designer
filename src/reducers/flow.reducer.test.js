@@ -1,9 +1,14 @@
-import { Map, OrderedMap } from 'immutable';
+import { Map } from 'immutable';
 
 import { flowReducer } from './flow.reducer';
 import * as nodeActions from '../actions/node.actions';
 import * as portActions from '../actions/port.actions';
-import { NodeRecord, PortRecord, SizeRecord, PositionRecord } from '../constants/flowdesigner.model';
+import {
+	NodeRecord,
+	PortRecord,
+	SizeRecord,
+	PositionRecord,
+} from '../constants/flowdesigner.model';
 
 describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS is batching elements creation', () => {
 	it('should batch one element creation', () => {

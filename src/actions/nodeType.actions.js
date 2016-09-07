@@ -8,3 +8,5 @@ export const setNodeTypes = (nodeTypes) => ({
 	type: FLOWDESIGNER_NODETYPE_SET,
 	nodeTypes,
 });
+
+export default setNodeTypes;

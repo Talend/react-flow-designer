@@ -1,4 +1,5 @@
 import { Map, OrderedMap } from 'immutable';
+import invariant from 'invariant';
 import {
 	FLOWDESIGNER_FLOW_ADD_ELEMENTS,
 	FLOWDESIGNER_FLOW_RESET,
@@ -31,7 +32,10 @@ export const flowReducer = (state, action) => {
 				state
 			);
 		} catch (error) {
-			console.warn('Something happenned preventing FLOWDESIGNER_FLOW_ADD_ELEMENTS to be applied', error);
+			invariant(
+				true,
+				`Something happenned preventing FLOWDESIGNER_FLOW_ADD_ELEMENTS to be applied :${error}`
+			);
 			return state;
 		}
 	case FLOWDESIGNER_FLOW_RESET:
@@ -40,3 +44,5 @@ export const flowReducer = (state, action) => {
 		return combinedReducer(state, action);
 	}
 };
+
+export default flowReducer;
