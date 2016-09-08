@@ -1,6 +1,6 @@
 import { Map } from 'immutable';
 
-import { flowReducer } from './flow.reducer';
+import { reducer } from './flow.reducer';
 import * as nodeActions from '../actions/node.actions';
 import * as portActions from '../actions/port.actions';
 import {
@@ -12,7 +12,7 @@ import {
 
 describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS is batching elements creation', () => {
 	it('should batch one element creation', () => {
-		expect(flowReducer(new Map(), {
+		expect(reducer(new Map(), {
 			type: 'FLOWDESIGNER.FLOW.ADD_ELEMENTS',
 			listOfActionCreation: [
 				nodeActions.addNode(
@@ -42,7 +42,7 @@ describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS is batching elements creation', () => {
 	});
 
 	it('should batch many elements creation', () => {
-		expect(flowReducer(new Map(), {
+		expect(reducer(new Map(), {
 			type: 'FLOWDESIGNER.FLOW.ADD_ELEMENTS',
 			listOfActionCreation: [
 				nodeActions.addNode(
@@ -106,7 +106,7 @@ describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS is batching elements creation', () => {
 	});
 
 	it('should handle throwing sub reducer by returning old state', () => {
-		expect(flowReducer(new Map(), {
+		expect(reducer(new Map(), {
 			type: 'FLOWDESIGNER.FLOW.ADD_ELEMENTS',
 			listOfActionCreation: [
 				nodeActions.addNode(
