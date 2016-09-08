@@ -88,7 +88,7 @@ export default function linkReducer(state = defaultState, action) {
 				false,
 				`Can't remove an attribute on non existing link ${action.linkId}`);
 		}
-		return state;
+		return state.deleteIn(['links', action.linkId, 'attr', action.attrKey]);
 	default:
 		return state;
 	}
