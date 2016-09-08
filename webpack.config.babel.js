@@ -20,44 +20,44 @@ const uglify = new UglifyJsPlugin({ minimize: true });
 const license = new webpack.BannerPlugin(licenceTemplate);
 
 const CONFIG = {
-	entry: path.join(PATH.src, 'index.js'),
-	devtool: 'source-map',
-	externals: {
-		'immutable': 'immutable',
-		'react': 'react',
-		'react-dom': 'react-dom',
-		'react-redux': 'react-redux',
-		'redux': 'redux',
-		'reselect': 'reselect',
-		'lodash': 'lodash'
-	},
-	resolve: {
-		extensions: ['', '.js', '.jsx'],
-	},
-	module: {
-		loaders: [
-			{
-				test: /(\.jsx|\.js)$/,
-				loader: 'babel',
-				exclude: /node_modules/,
-				query: {
-					presets: ['react'],
-				},
-			},
-			{
-				test: /\.css$/,
-				loader: ExtractTextPlugin.extract({
-					fallbackLoader: 'style-loader',
-					loader: 'css-loader',
-				}),
-				exclude: /node_modules/,
-			}, {
-				test: /\.scss$/,
-				loader: extractCSS.extract({ fallbackLoader: 'style', loader: sass }),
-			},
-		],
-	},
-	plugins: [extractCSS, license],
+    entry: path.join(PATH.src, 'index.js'),
+    devtool: 'source-map',
+    externals: {
+        'immutable': 'immutable',
+		'lodash': 'lodash',
+        'react': 'react',
+        'react-dom': 'react-dom',
+        'react-redux': 'react-redux',
+        'redux': 'redux',
+        'reselect': 'reselect',
+    },
+    resolve: {
+        extensions: ['', '.js', '.jsx'],
+    },
+    module: {
+        loaders: [
+            {
+                test: /(\.jsx|\.js)$/,
+                loader: 'babel',
+                exclude: /node_modules/,
+                query: {
+                    presets: ['react'],
+                },
+            },
+            {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract({
+                    fallbackLoader: 'style-loader',
+                    loader: 'css-loader',
+                }),
+                exclude: /node_modules/,
+            }, {
+                test: /\.scss$/,
+                loader: extractCSS.extract({ fallbackLoader: 'style', loader: sass }),
+            },
+        ],
+    },
+    plugins: [extractCSS, license],
 };
 
 const umd = Object.assign({}, CONFIG, {
