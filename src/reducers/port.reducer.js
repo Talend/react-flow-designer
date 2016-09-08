@@ -61,7 +61,7 @@ export default function portReducer(state = defaultState, action) {
 			invariant(false,
 				`Can't remove an attribute on non existing port ${action.portId}`);
 		}
-		return state;
+		return state.deleteIn(['ports', action.portId, 'attr', action.attrKey]);
 	case FLOWDESIGNER_PORT_REMOVE:
 		if (!state.getIn(['ports', action.portId])) {
 			invariant(false,
