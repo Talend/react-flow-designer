@@ -53,7 +53,7 @@ const nodeReducer = (state = defaultState, action) => {
 		if (!state.getIn(['nodes', action.nodeId])) {
 			invariant(false, `Can't remove an attribute on non existing node ${action.nodeId}`);
 		}
-		return state;
+		return state.deleteIn(['nodes', action.nodeId, 'attr', action.attrKey]);
 	case FLOWDESIGNER_NODE_REMOVE:
 		if (!state.getIn(['nodes', action.nodeId])) {
 			invariant(false, `Can not remove node ${action.nodeId} since it doesn't exist`);

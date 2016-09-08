@@ -46,7 +46,6 @@ describe('Check node reducer', () => {
 		})));
 	});
 
-	// TODO
 	it('FLOWDESIGNER_NODE_MOVE update node position', () => {
 		expect(nodeReducer(initialState, {
 			type: 'FLOWDESIGNER_NODE_MOVE',
@@ -77,6 +76,54 @@ describe('Check node reducer', () => {
 			nodeType: 'type1',
 			attr: new Map({ selected: true }),
 		})).setIn(['nodes', 'id2'], new NodeRecord({
+			id: 'id2',
+			position: new PositionRecord({ x: 10, y: 10 }),
+			nodeType: 'type2',
+			attr: new Map({ selected: false }),
+		})));
+	});
+
+	it('FLOWDESIGNER_NODE_SET_ATTR should add attribute to node attribute map', () => {
+		expect(nodeReducer(initialState, {
+			type: 'FLOWDESIGNER_NODE_SET_ATTR',
+			nodeId: 'id1',
+			attr: { selected: false },
+		})).toEqual(new Map().setIn(['nodes', 'id1'], new NodeRecord({
+			id: 'id1',
+			position: new PositionRecord({ x: 10, y: 10 }),
+			nodeType: 'type1',
+			attr: new Map({ selected: false }),
+		})).setIn(['nodes', 'id2'], new NodeRecord({
+			id: 'id2',
+			position: new PositionRecord({ x: 10, y: 10 }),
+			nodeType: 'type2',
+			attr: new Map({ selected: false }),
+		})));
+	});
+
+		it('FLOWDESIGNER_NODE_REMOVE_ATTR should add attribute to node attribute map', () => {
+		expect(nodeReducer(initialState, {
+			type: 'FLOWDESIGNER_NODE_REMOVE_ATTR',
+			nodeId: 'id1',
+			attrKey: 'selected',
+		})).toEqual(new Map().setIn(['nodes', 'id1'], new NodeRecord({
+			id: 'id1',
+			position: new PositionRecord({ x: 10, y: 10 }),
+			nodeType: 'type1',
+			attr: new Map(),
+		})).setIn(['nodes', 'id2'], new NodeRecord({
+			id: 'id2',
+			position: new PositionRecord({ x: 10, y: 10 }),
+			nodeType: 'type2',
+			attr: new Map({ selected: false }),
+		})));
+	});
+
+	it('FLOWDESIGNER_NODE_REMOVE should remove node from node collection', () => {
+		expect(nodeReducer(initialState, {
+			type: 'FLOWDESIGNER_NODE_REMOVE',
+			nodeId: 'id1',
+		})).toEqual(new Map().setIn(['nodes', 'id2'], new NodeRecord({
 			id: 'id2',
 			position: new PositionRecord({ x: 10, y: 10 }),
 			nodeType: 'type2',
