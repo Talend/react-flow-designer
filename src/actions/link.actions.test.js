@@ -92,30 +92,6 @@ describe('Check that link action creators generate proper' +
 		expect(store.getActions()).toEqual(expectedActions);
 	});
 
-	// it('setLinkAttribute throw an error if said link doesn\'t exist', () => {
-	// 	const store = mockStore({
-	// 		flowDesigner: {
-	// 			links: new Map({ id: { id: 'linkId', linkType: 'type' } }),
-	// 		},
-	// 	});
-
-	// 	expect(() => {
-	// 		store.dispatch(linkActions.setLinkAttribute('nonexistingId', { selected: true }));
-	// 	}).toThrowError('Can\'t set an attribute on non existing link nonexistingId');
-	// });
-
-	// it('setLinkAttribute do not dispatch an action if said link doesn\'t exist', () => {
-	// 	const store = mockStore({
-	// 		flowDesigner: {
-	// 			links: new Map({ id: { id: 'linkId', linkType: 'type' } }),
-	// 		},
-	// 	});
-	// 	expect(() => {
-	// 		store.dispatch(linkActions.setLinkAttribute('nonexistingId', { selected: true }));
-	// 	}).toThrowError('Can\'t set an attribute on non existing link nonexistingId');
-	// 	expect(store.getActions()).toEqual([]);
-	// });
-
 	it('removeLinkAttribute', () => {
 		const expectedActions = [{
 			type: 'FLOWDESIGNER_LINK_REMOVE_ATTR',
@@ -133,30 +109,6 @@ describe('Check that link action creators generate proper' +
 
 		expect(store.getActions()).toEqual(expectedActions);
 	});
-
-	// it('removeLinkAttribute throw an error if said link doesn\'t exist', () => {
-	// 	const store = mockStore({
-	// 		flowDesigner: {
-	// 			links: new Map({ id: { id: 'linkId', linkType: 'type' } }),
-	// 		},
-	// 	});
-
-	// 	expect(() => {
-	// 		store.dispatch(linkActions.removeLinkAttribute('nonexistingId', 'selected'));
-	// 	}).toThrowError('Can\'t remove an attribute on non existing link nonexistingId');
-	// });
-
-	// it('removeLinkAttribute do not dispatch an action if said link doesn\'t exist', () => {
-	// 	const store = mockStore({
-	// 		flowDesigner: {
-	// 			links: new Map({ id: { id: 'linkId', linkType: 'type' } }),
-	// 		},
-	// 	});
-	// 	expect(() => {
-	// 		store.dispatch(linkActions.removeLinkAttribute('nonexistingId', 'selected'));
-	// 	}).toThrowError('Can\'t remove an attribute on non existing link nonexistingId');
-	// 	expect(store.getActions()).toEqual([]);
-	// });
 
 	it('removeLink', () => {
 		const expectedActions = [{

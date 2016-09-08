@@ -49,31 +49,6 @@ describe('Check that port action creators generate proper' +
 		expect(store.getActions()).toEqual(expectedActions);
 	});
 
-	// it('setPortAttribute throw an error if said port doesn\'t exist', () => {
-	// 	const store = mockStore({
-	// 		flowDesigner: {
-	// 			ports: new Map({ id: { id: 'portId', linkType: 'type' } }),
-	// 		},
-	// 	});
-
-	// 	expect(() => {
-	// 		store.dispatch(portActions.setPortAttribute('nonexistingId', { selected: true }));
-	// 	}).toThrowError('Can\'t set an attribute on non existing port nonexistingId');
-	// });
-
-	// it('setPortAttribute do not dispatch an action if said port doesn\'t exist', () => {
-	// 	const store = mockStore({
-	// 		flowDesigner: {
-	// 			ports: new Map({ id: { id: 'portId', linkType: 'type' } }),
-	// 		},
-	// 	});
-	// 	expect(() => {
-	// 		store.dispatch(portActions.setPortAttribute('nonexistingId', { selected: true }));
-	// 	}).toThrowError('Can\'t set an attribute on non existing port nonexistingId');
-	// 	expect(store.getActions()).toEqual([]);
-	// });
-
-
 	it('removePortAttribute', () => {
 		const expectedActions = [{
 			type: 'FLOWDESIGNER_PORT_REMOVE_ATTR',
@@ -91,30 +66,6 @@ describe('Check that port action creators generate proper' +
 
 		expect(store.getActions()).toEqual(expectedActions);
 	});
-
-	// it('removePortAttribute throw an error if said port doesn\'t exist', () => {
-	// 	const store = mockStore({
-	// 		flowDesigner: {
-	// 			ports: new Map({ id: { id: 'portId' } }),
-	// 		},
-	// 	});
-
-	// 	expect(() => {
-	// 		store.dispatch(portActions.removePortAttribute('nonexistingId', 'selected'));
-	// 	}).toThrowError('Can\'t remove an attribute on non existing port nonexistingId');
-	// });
-
-	// it('removePortAttribute do not dispatch an action if said port doesn\'t exist', () => {
-	// 	const store = mockStore({
-	// 		flowDesigner: {
-	// 			ports: new Map({ id: { id: 'portId' } }),
-	// 		},
-	// 	});
-	// 	expect(() => {
-	// 		store.dispatch(portActions.removePortAttribute('nonexistingId', 'selected'));
-	// 	}).toThrowError('Can\'t remove an attribute on non existing port nonexistingId');
-	// 	expect(store.getActions()).toEqual([]);
-	// });
 
 	it('removePort', () => {
 		const expectedActions = [{
