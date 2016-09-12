@@ -70,12 +70,12 @@ export const reducer = (state, action) => {
  *
  * @return {object} new state
  */
-const calculatePortsPosition = (state, action) => {
+export const calculatePortsPosition = (state, action) => {
 	let nodes = [];
 	// TODO: NOT a big fan of this way to optimize port recalculations, don't feel future proof
 	if ((/FLOWDESIGNER_NODE_/.exec(action.type) && action.type !== 'FLOWDESIGNER_NODE_REMOVE') ||
 		(/FLOWDESIGNER_PORT_/.exec(action.type) && action.type !== 'FLOWDESIGNER_PORT_REMOVE') ||
-		(action.type === 'FLOWDESIGNER.FLOW.ADD_ELEMENTS')) {
+		(/FLOWDESIGNER.FLOW_/.exec(action.type))) {
 		if (action.nodeId) {
 			nodes.push(state.getIn(['nodes', action.nodeId]));
 		} else if (action.portId) {
