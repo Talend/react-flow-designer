@@ -1,4 +1,4 @@
-import { Map } from 'immutable';
+import { Map, OrderedMap } from 'immutable';
 
 import { reducer } from './flow.reducer';
 import * as nodeActions from '../actions/node.actions';
@@ -13,7 +13,7 @@ import {
 describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS is batching elements creation', () => {
 	it('should batch one element creation', () => {
 		expect(reducer(new Map(), {
-			type: 'FLOWDESIGNER.FLOW.ADD_ELEMENTS',
+			type: 'FLOWDESIGNER.FLOW_ADD_ELEMENTS',
 			listOfActionCreation: [
 				nodeActions.addNode(
 					'nodeId',
@@ -43,7 +43,7 @@ describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS is batching elements creation', () => {
 
 	it('should batch many elements creation', () => {
 		expect(reducer(new Map(), {
-			type: 'FLOWDESIGNER.FLOW.ADD_ELEMENTS',
+			type: 'FLOWDESIGNER.FLOW_ADD_ELEMENTS',
 			listOfActionCreation: [
 				nodeActions.addNode(
 					'nodeId',
@@ -102,12 +102,12 @@ describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS is batching elements creation', () => {
 					position: undefined,
 					attr: new Map(),
 				})))
-		);
+			);
 	});
 
 	it('should handle throwing sub reducer by returning old state', () => {
 		expect(reducer(new Map(), {
-			type: 'FLOWDESIGNER.FLOW.ADD_ELEMENTS',
+			type: 'FLOWDESIGNER.FLOW_ADD_ELEMENTS',
 			listOfActionCreation: [
 				nodeActions.addNode(
 					'nodeId',
@@ -131,5 +131,74 @@ describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS is batching elements creation', () => {
 				),
 			],
 		})).toEqual(new Map());
+	});
+});
+
+describe('FLOWDESIGNER_FLOW_LOAD should reset old flow state and load news not touching flow config', () => {
+	it('should load elements', () => {
+		expect(reducer(new Map({ nports: new Map(), links: new Map(), ports: new Map(), nodeTypes: new Map() }), {
+			type: 'FLOWDESIGNER.FLOW_LOAD',
+			listOfActionCreation: [
+				nodeActions.addNode(
+					'nodeId',
+					{ x: 10, y: 10 },
+					{ height: 10, width: 10 },
+					undefined,
+					{}
+				),
+				nodeActions.addNode(
+					'node2',
+					{ x: 10, y: 10 },
+					{ height: 10, width: 10 },
+					undefined,
+					{}
+				),
+				portActions.addPort(
+					'nodeId',
+					'portId',
+					undefined,
+					{},
+				),
+			],
+		})).toEqual(new Map()
+			.set('nodes', new Map()
+				.set('nodeId', new NodeRecord({
+					id: 'nodeId',
+					position: new PositionRecord({
+						x: 10,
+						y: 10,
+					}),
+					nodeSize: new SizeRecord({
+						height: 10,
+						width: 10,
+					}),
+					nodeType: undefined,
+					attr: new Map(),
+				}))
+				.set('node2', new NodeRecord({
+					id: 'node2',
+					position: new PositionRecord({
+						x: 10,
+						y: 10,
+					}),
+					nodeSize: new SizeRecord({
+						height: 10,
+						width: 10,
+					}),
+					nodeType: undefined,
+					attr: new Map(),
+				}))
+			).set('links', new Map())
+			.set('ports', new OrderedMap()
+				.set('portId', new PortRecord({
+					id: 'portId',
+					nodeId: 'nodeId',
+					portType: undefined,
+					position: undefined,
+					attr: new Map(),
+				}))
+			)
+			.set('nodeTypes', new Map())
+		);
 	});
 });

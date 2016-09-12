@@ -3,6 +3,7 @@ import invariant from 'invariant';
 import {
 	FLOWDESIGNER_FLOW_ADD_ELEMENTS,
 	FLOWDESIGNER_FLOW_RESET,
+	FLOWDESIGNER_FLOW_LOAD,
 } from '../constants/flowdesigner.constants';
 import nodesReducer from './node.reducer';
 import linksReducer from './link.reducer';
@@ -42,6 +43,19 @@ export const reducer = (state, action) => {
 		}
 	case FLOWDESIGNER_FLOW_RESET:
 		return defaultState.set('nodeTypes', state.get('nodeTypes'));
+	case FLOWDESIGNER_FLOW_LOAD:
+		try {
+			return action.listOfActionCreation.reduce(
+				(cumulativeState, actionCreation) => combinedReducer(cumulativeState, actionCreation),
+				defaultState.set('nodeTypes', state.get('nodeTypes'))
+			);
+		} catch (error) {
+			invariant(
+				true,
+				`Something happenned preventing FLOWDESIGNER_FLOW_LOAD to be applied :${error}`
+			);
+			return state;
+		}
 	default:
 		return combinedReducer(state, action);
 	}

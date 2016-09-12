@@ -23,7 +23,7 @@ export const resetFlow = () => ({
 });
 
 /**
- * load a new flow
+ * reset old flow, load elements for the new flow
  */
 export const loadFlow = listOfActionCreation => ({
 	type: FLOWDESIGNER_FLOW_LOAD,
