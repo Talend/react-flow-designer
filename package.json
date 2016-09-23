@@ -22,7 +22,7 @@
   "author": "Axel Cateland <acateland@talend.com>",
   "license": "Apache-2.0",
   "jest": {
-    "testRegex": "/.*\\.test(.js|.jsx)$",
+    "testRegex": "/src/.*\\.test(.js|.jsx)$",
     "moduleNameMapper": {
       "^.+\\.(css|sass|scss)$": "<rootDir>/test/styleMock.js",
       "^.+\\.(gif|ttf|eot|svg)$": "<rootDir>/test/fileMock.js"
