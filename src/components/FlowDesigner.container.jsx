@@ -39,7 +39,7 @@ export const FlowDesigner = React.createClass({
 		let linkTypeMap = {};
 		let portTypeMap = {};
 		if (children) {
-			children.forEach(element => {
+			children.forEach((element) => {
 				switch (element.type.displayName) {
 				case 'NodeType':
 					nodeTypeMap = Object.assign(
@@ -89,38 +89,40 @@ export const FlowDesigner = React.createClass({
 		this.setState({ nodeTypeMap, linkTypeMap, portTypeMap });
 	},
 	render() {
+		const grid = this.props.grid || <Grid />;
 		return (
-		  <svg ref={c => (this.node = c)} width="100%" height="800">
-			<defs>
-			  <filter id="blur-filter" x="-1" y="-1" width="200" height="200">
-				<feFlood floodColor="#01A7CF" result="COLOR" />
-				<feComposite in="COLOR" in2="SourceGraphic" operator="in" result="shadow" />
-				<feGaussianBlur in="shadow" stdDeviation="3" />
-				<feOffset dx="0" dy="0" />
-				<feMerge>
-				  <feMergeNode />
-				  <feMergeNode in="SourceGraphic" />
-				</feMerge>
-			  </filter>
-			</defs>
-			<Grid />
-			<ZoomHandler>
-			  <NodesRenderer
-				nodeTypeMap={this.state.nodeTypeMap}
-				moveNodeTo={this.props.moveNodeTo}
-				moveNodeToEnd={this.props.moveNodeToEnd}
-				nodes={this.props.nodes}
-			  />
-			  <PortsRenderer
-			  	portTypeMap={this.state.portTypeMap}
-			  	ports={this.props.ports} />
-			  <LinksRenderer
-				linkTypeMap={this.state.linkTypeMap}
-				links={this.props.links}
-				ports={this.props.ports}
-			  />
-			</ZoomHandler>
-		  </svg>
+			<svg ref={c => (this.node = c)} width="100%" height="800">
+				<defs>
+					<filter id="blur-filter" x="-1" y="-1" width="200" height="200">
+						<feFlood floodColor="#01A7CF" result="COLOR" />
+						<feComposite in="COLOR" in2="SourceGraphic" operator="in" result="shadow" />
+						<feGaussianBlur in="shadow" stdDeviation="3" />
+						<feOffset dx="0" dy="0" />
+						<feMerge>
+						<feMergeNode />
+						<feMergeNode in="SourceGraphic" />
+						</feMerge>
+					</filter>
+				</defs>
+				{grid}
+				<ZoomHandler>
+					<NodesRenderer
+						nodeTypeMap={this.state.nodeTypeMap}
+						moveNodeTo={this.props.moveNodeTo}
+						moveNodeToEnd={this.props.moveNodeToEnd}
+						nodes={this.props.nodes}
+					/>
+					<PortsRenderer
+						portTypeMap={this.state.portTypeMap}
+						ports={this.props.ports}
+					/>
+					<LinksRenderer
+						linkTypeMap={this.state.linkTypeMap}
+						links={this.props.links}
+						ports={this.props.ports}
+					/>
+				</ZoomHandler>
+			</svg>
 		);
 	},
 });

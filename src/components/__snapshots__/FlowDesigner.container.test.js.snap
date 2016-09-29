@@ -1,0 +1,35 @@
+exports[`<FlowDesigner /> renders correctly <FlowDesigner /> renders correctly 1`] = `
+<svg
+  height="800"
+  width="100%">
+  <defs>
+    <filter
+      height="200"
+      id="blur-filter"
+      width="200"
+      x="-1"
+      y="-1">
+      <feFlood
+        floodColor="#01A7CF"
+        result="COLOR" />
+      <feComposite
+        in="COLOR"
+        in2="SourceGraphic"
+        operator="in"
+        result="shadow" />
+      <feGaussianBlur
+        in="shadow"
+        stdDeviation="3" />
+      <feOffset
+        dx="0"
+        dy="0" />
+      <feMerge>
+        <feMergeNode />
+        <feMergeNode
+          in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <g />
+</svg>
+`;
