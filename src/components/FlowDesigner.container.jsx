@@ -19,6 +19,8 @@ import { setNodeTypes } from '../actions/nodeType.actions';
 export const FlowDesigner = React.createClass({
 	propTypes: {
 		children: PropTypes.node,
+		defs: PropTypes.arrayOf(PropTypes.element),
+		grid: PropTypes.element,
 		setNodeTypes: PropTypes.func.isRequired,
 		moveNodeTo: PropTypes.func.isRequired,
 		nodes: mapOf(
@@ -72,7 +74,7 @@ export const FlowDesigner = React.createClass({
 								component: element.props.component,
 							},
 						}
-					)
+					);
 					break;
 				default:
 					invariant(
@@ -90,19 +92,11 @@ export const FlowDesigner = React.createClass({
 	},
 	render() {
 		const grid = this.props.grid || <Grid />;
+		const defs = this.props.defs || [];
 		return (
 			<svg ref={c => (this.node = c)} width="100%" height="800">
 				<defs>
-					<filter id="blur-filter" x="-1" y="-1" width="200" height="200">
-						<feFlood floodColor="#01A7CF" result="COLOR" />
-						<feComposite in="COLOR" in2="SourceGraphic" operator="in" result="shadow" />
-						<feGaussianBlur in="shadow" stdDeviation="3" />
-						<feOffset dx="0" dy="0" />
-						<feMerge>
-						<feMergeNode />
-						<feMergeNode in="SourceGraphic" />
-						</feMerge>
-					</filter>
+					{defs.map(def => def)}
 				</defs>
 				{grid}
 				<ZoomHandler>
