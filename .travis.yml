@@ -8,9 +8,9 @@ node_js:
   - "4"
   - "6"
 before_install:
-  - time npm i -g yarn --cache-min 999999999
+  - npm i -g yarn --cache-min 999999999
 install:
-  - time yarn
+  - yarn
 after_success:
   - npm run test:cov
   - cat ./coverage/lcov.info | node_modules/.bin/coveralls --verbose
