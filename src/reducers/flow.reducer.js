@@ -17,6 +17,10 @@ const defaultState = new Map({
 	nodes: new Map(),
 	links: new Map(),
 	ports: new OrderedMap(),
+	out: new Map(),
+	in: new Map(),
+	sucs: new Map(),
+	preds: new Map(),
 	nodeTypes: new Map(),
 	transform: { k: 1, x: 0, y: 0 },
 });
