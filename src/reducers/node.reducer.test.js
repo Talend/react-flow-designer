@@ -2,7 +2,7 @@ import { Map } from 'immutable';
 
 import { defaultState } from './flow.reducer';
 import nodeReducer from './node.reducer';
-import { NodeRecord, PositionRecord, SizeRecord } from '../constants/flowdesigner.model';
+import { NodeRecord, PositionRecord } from '../constants/flowdesigner.model';
 
 describe('Check node reducer', () => {
 	const initialState = defaultState.setIn(['nodes', 'id1'], new NodeRecord({

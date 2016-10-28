@@ -1,4 +1,4 @@
-import { Map, OrderedMap } from 'immutable';
+import { Map } from 'immutable';
 
 import { reducer, calculatePortsPosition, defaultState } from './flow.reducer';
 import * as nodeActions from '../actions/node.actions';

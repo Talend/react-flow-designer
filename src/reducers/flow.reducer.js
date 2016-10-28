@@ -102,8 +102,6 @@ export const calculatePortsPosition = (state, action) => {
 	return state;
 };
 
-
-
 const flowDesignerReducer = (state, action) => {
 	let newState = reducer(state, action);
 	newState = calculatePortsPosition(newState, action, state);
