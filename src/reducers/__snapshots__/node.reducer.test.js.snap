@@ -1,0 +1,84 @@
+exports[`Check node reducer FLOWDESIGNER_NODE_ADD add a new node to the node collection with the right type 1`] = `
+Object {
+  "in": Object {
+    "id": Object {},
+  },
+  "nodes": Object {
+    "id": Object {
+      "attributes": Object {
+        "name": "test",
+      },
+      "id": "id",
+      "nodeSize": Object {
+        "height": undefined,
+        "width": undefined,
+      },
+      "nodeType": "MY_NODE_TYPE",
+      "position": Object {
+        "x": 10,
+        "y": 10,
+      },
+    },
+  },
+  "out": Object {
+    "id": Object {},
+  },
+  "preds": Object {
+    "id": Object {},
+  },
+  "sucs": Object {
+    "id": Object {},
+  },
+}
+`;
+
+exports[`Check node reducer FLOWDESIGNER_NODE_ADD properly add a new node to the node collection 1`] = `
+Object {
+  "in": Object {
+    "id": Object {},
+  },
+  "nodes": Object {
+    "id": Object {
+      "attributes": Object {},
+      "id": "id",
+      "nodeSize": Object {
+        "height": undefined,
+        "width": undefined,
+      },
+      "nodeType": undefined,
+      "position": Object {
+        "x": 10,
+        "y": 10,
+      },
+    },
+  },
+  "out": Object {
+    "id": Object {},
+  },
+  "preds": Object {
+    "id": Object {},
+  },
+  "sucs": Object {
+    "id": Object {},
+  },
+}
+`;
+
+exports[`Check node reducer FLOWDESIGNER_NODE_REMOVE should remove node from node collection 1`] = `
+Object {
+  "nodes": Object {
+    "id2": Object {
+      "attributes": Object {
+        "selected": false,
+      },
+      "id": "id2",
+      "nodeSize": undefined,
+      "nodeType": "type2",
+      "position": Object {
+        "x": 10,
+        "y": 10,
+      },
+    },
+  },
+}
+`;

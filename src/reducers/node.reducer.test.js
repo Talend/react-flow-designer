@@ -21,13 +21,7 @@ describe('Check node reducer', () => {
 			type: 'FLOWDESIGNER_NODE_ADD',
 			nodeId: 'id',
 			nodePosition: { x: 10, y: 10 },
-		})).toEqual(new Map().setIn(['nodes', 'id'], new NodeRecord({
-			id: 'id',
-			nodeType: undefined,
-			position: new PositionRecord({ x: 10, y: 10 }),
-			nodeSize: new SizeRecord({ width: undefined, height: undefined }),
-			attributes: new Map(),
-		})));
+		})).toMatchSnapshot();
 	});
 
 	it('FLOWDESIGNER_NODE_ADD add a new node to the node collection with the right type', () => {
@@ -37,13 +31,7 @@ describe('Check node reducer', () => {
 			nodeType: 'MY_NODE_TYPE',
 			nodePosition: { x: 10, y: 10 },
 			attributes: { name: 'test' },
-		})).toEqual(new Map().setIn(['nodes', 'id'], new NodeRecord({
-			id: 'id',
-			position: new PositionRecord({ x: 10, y: 10 }),
-			nodeType: 'MY_NODE_TYPE',
-			nodeSize: new SizeRecord({ width: undefined, height: undefined }),
-			attributes: new Map().set('name', 'test'),
-		})));
+		})).toMatchSnapshot();
 	});
 
 	it('FLOWDESIGNER_NODE_MOVE update node position', () => {
@@ -123,11 +111,6 @@ describe('Check node reducer', () => {
 		expect(nodeReducer(initialState, {
 			type: 'FLOWDESIGNER_NODE_REMOVE',
 			nodeId: 'id1',
-		})).toEqual(new Map().setIn(['nodes', 'id2'], new NodeRecord({
-			id: 'id2',
-			position: new PositionRecord({ x: 10, y: 10 }),
-			nodeType: 'type2',
-			attributes: new Map({ selected: false }),
-		})));
+		})).toMatchSnapshot();
 	});
 });

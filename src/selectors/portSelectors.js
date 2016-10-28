@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import memoize from 'lodash/memoize';
+import { Map } from 'immutable';
 
 const getNodes = state => state.get('nodes');
 const getPorts = state => state.get('ports');
@@ -9,14 +10,14 @@ const getLinks = state => state.get('links');
  * return a list of outgoing port for this node
  */
 export function outPort(state, nodeId) {
-	return state.getIn(['out', nodeId]);
+	return state.getIn(['out', nodeId]) || new Map();
 }
 
 /**
  * return a list of ingoing port for this node
  */
 export function inPort(state, nodeId) {
-	return state.getIn(['in', nodeId]);
+	return state.getIn(['in', nodeId]) || new Map();
 }
 
 /**

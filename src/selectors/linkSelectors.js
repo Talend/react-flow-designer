@@ -20,7 +20,7 @@ export const getDetachedLinks = createSelector(
  * @return {Link}
  */
 export function portOutLink(state, portId) {
-	return state.get('links').filter(link => link.sourceId === portId);
+	return state.get('links').filter(link => link.sourceId === portId) || new Map();
 }
 
 /**
@@ -29,7 +29,7 @@ export function portOutLink(state, portId) {
  * @return {Link}
  */
 export function portInLink(state, portId) {
-	return state.get('links').filter(link => link.targetId === portId);
+	return state.get('links').filter(link => link.targetId === portId) || new Map();
 }
 
 /**
