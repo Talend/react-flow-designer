@@ -1,6 +1,8 @@
 exports[`Check port reducer FLOWDESIGNER_PORT_ADD properly add the port to the port OrderedMap 1`] = `
 Object {
+  "in": Object {},
   "links": Object {},
+  "nodeTypes": Object {},
   "nodes": Object {
     "nodeId": Object {},
   },
@@ -53,6 +55,13 @@ Object {
       "position": undefined,
     },
   },
+  "preds": Object {},
+  "sucs": Object {},
+  "transform": Object {
+    "k": 1,
+    "x": 0,
+    "y": 0,
+  },
 }
 `;
 
@@ -64,6 +73,7 @@ Object {
     },
   },
   "links": Object {},
+  "nodeTypes": Object {},
   "nodes": Object {
     "nodeId": Object {},
   },
@@ -124,15 +134,25 @@ Object {
       "position": undefined,
     },
   },
+  "preds": Object {},
+  "sucs": Object {},
+  "transform": Object {
+    "k": 1,
+    "x": 0,
+    "y": 0,
+  },
 }
 `;
 
 exports[`Check port reducer FLOWDESIGNER_PORT_REMOVE should remove port from ports collection 1`] = `
 Object {
+  "in": Object {},
   "links": Object {},
+  "nodeTypes": Object {},
   "nodes": Object {
     "nodeId": Object {},
   },
+  "out": Object {},
   "ports": Object {
     "id2": Object {
       "attributes": undefined,
@@ -155,15 +175,25 @@ Object {
       },
     },
   },
+  "preds": Object {},
+  "sucs": Object {},
+  "transform": Object {
+    "k": 1,
+    "x": 0,
+    "y": 0,
+  },
 }
 `;
 
 exports[`Check port reducer FLOWDESIGNER_PORT_REMOVE_ATTR to remove attr from attr map 1`] = `
 Object {
+  "in": Object {},
   "links": Object {},
+  "nodeTypes": Object {},
   "nodes": Object {
     "nodeId": Object {},
   },
+  "out": Object {},
   "ports": Object {
     "id1": Object {
       "attributes": Object {},
@@ -196,15 +226,25 @@ Object {
       },
     },
   },
+  "preds": Object {},
+  "sucs": Object {},
+  "transform": Object {
+    "k": 1,
+    "x": 0,
+    "y": 0,
+  },
 }
 `;
 
 exports[`Check port reducer FLOWDESIGNER_PORT_SET_ATTR to merge a new attributes in attribute collection 1`] = `
 Object {
+  "in": Object {},
   "links": Object {},
+  "nodeTypes": Object {},
   "nodes": Object {
     "nodeId": Object {},
   },
+  "out": Object {},
   "ports": Object {
     "id1": Object {
       "attributes": Object {
@@ -239,6 +279,13 @@ Object {
         "y": 10,
       },
     },
+  },
+  "preds": Object {},
+  "sucs": Object {},
+  "transform": Object {
+    "k": 1,
+    "x": 0,
+    "y": 0,
   },
 }
 `;

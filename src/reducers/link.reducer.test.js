@@ -1,10 +1,11 @@
 import { Map } from 'immutable';
 
+import { defaultState } from './flow.reducer';
 import linkReducer from './link.reducer';
 import { LinkRecord, PortRecord, NodeRecord } from '../constants/flowdesigner.model';
 
 describe('check linkreducer', () => {
-	const initialState = new Map()
+	const initialState = defaultState
 		.set('nodes', new Map()
 			.set('id1', new NodeRecord({
 				id: 'id1',

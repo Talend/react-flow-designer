@@ -25,6 +25,7 @@ Object {
       "targetId": "id2",
     },
   },
+  "nodeTypes": Object {},
   "nodes": Object {
     "id1": Object {
       "attributes": undefined,
@@ -88,12 +89,19 @@ Object {
       "id2": "id2",
     },
   },
+  "transform": Object {
+    "k": 1,
+    "x": 0,
+    "y": 0,
+  },
 }
 `;
 
 exports[`check linkreducer FLOWDESIGNER_LINK_REMOVE should remove link from state 1`] = `
 Object {
+  "in": Object {},
   "links": Object {},
+  "nodeTypes": Object {},
   "nodes": Object {
     "id1": Object {
       "attributes": undefined,
@@ -110,6 +118,7 @@ Object {
       "position": undefined,
     },
   },
+  "out": Object {},
   "ports": Object {
     "id1": Object {
       "attributes": undefined,
@@ -140,11 +149,19 @@ Object {
       "position": undefined,
     },
   },
+  "preds": Object {},
+  "sucs": Object {},
+  "transform": Object {
+    "k": 1,
+    "x": 0,
+    "y": 0,
+  },
 }
 `;
 
 exports[`check linkreducer FLOWDESIGNER_LINK_REMOVE_ATTR should remove a specific attributes from attr map 1`] = `
 Object {
+  "in": Object {},
   "links": Object {
     "id1": Object {
       "attributes": Object {},
@@ -154,6 +171,7 @@ Object {
       "targetId": "id2",
     },
   },
+  "nodeTypes": Object {},
   "nodes": Object {
     "id1": Object {
       "attributes": undefined,
@@ -170,6 +188,7 @@ Object {
       "position": undefined,
     },
   },
+  "out": Object {},
   "ports": Object {
     "id1": Object {
       "attributes": undefined,
@@ -200,11 +219,19 @@ Object {
       "position": undefined,
     },
   },
+  "preds": Object {},
+  "sucs": Object {},
+  "transform": Object {
+    "k": 1,
+    "x": 0,
+    "y": 0,
+  },
 }
 `;
 
 exports[`check linkreducer FLOWDESIGNER_LINK_SET_ATTR should merge attributes within link attr property 1`] = `
 Object {
+  "in": Object {},
   "links": Object {
     "id1": Object {
       "attributes": Object {
@@ -217,6 +244,7 @@ Object {
       "targetId": "id2",
     },
   },
+  "nodeTypes": Object {},
   "nodes": Object {
     "id1": Object {
       "attributes": undefined,
@@ -233,6 +261,7 @@ Object {
       "position": undefined,
     },
   },
+  "out": Object {},
   "ports": Object {
     "id1": Object {
       "attributes": undefined,
@@ -263,11 +292,19 @@ Object {
       "position": undefined,
     },
   },
+  "preds": Object {},
+  "sucs": Object {},
+  "transform": Object {
+    "k": 1,
+    "x": 0,
+    "y": 0,
+  },
 }
 `;
 
 exports[`check linkreducer FLOWDESIGNER_LINK_SET_SOURCE switch source to correct port if it exist 1`] = `
 Object {
+  "in": Object {},
   "links": Object {
     "id1": Object {
       "attributes": Object {
@@ -279,6 +316,7 @@ Object {
       "targetId": "id2",
     },
   },
+  "nodeTypes": Object {},
   "nodes": Object {
     "id1": Object {
       "attributes": undefined,
@@ -332,6 +370,13 @@ Object {
       "position": undefined,
     },
   },
+  "preds": Object {},
+  "sucs": Object {},
+  "transform": Object {
+    "k": 1,
+    "x": 0,
+    "y": 0,
+  },
 }
 `;
 
@@ -355,6 +400,7 @@ Object {
       "targetId": "id3",
     },
   },
+  "nodeTypes": Object {},
   "nodes": Object {
     "id1": Object {
       "attributes": undefined,
@@ -371,6 +417,7 @@ Object {
       "position": undefined,
     },
   },
+  "out": Object {},
   "ports": Object {
     "id1": Object {
       "attributes": undefined,
@@ -400,6 +447,13 @@ Object {
       "portType": undefined,
       "position": undefined,
     },
+  },
+  "preds": Object {},
+  "sucs": Object {},
+  "transform": Object {
+    "k": 1,
+    "x": 0,
+    "y": 0,
   },
 }
 `;

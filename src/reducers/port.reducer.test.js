@@ -1,10 +1,11 @@
 import { Map, OrderedMap } from 'immutable';
 
+import { defaultState } from './flow.reducer';
 import portReducer from './port.reducer';
 import { PortRecord, PositionRecord } from '../constants/flowdesigner.model';
 
 describe('Check port reducer', () => {
-	const initialState = new Map().set('ports', new OrderedMap()
+	const initialState = defaultState.set('ports', new OrderedMap()
 		.set('id1', new PortRecord({
 			id: 'id1',
 			position: new PositionRecord({ x: 10, y: 10 }),

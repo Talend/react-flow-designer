@@ -1,6 +1,6 @@
 import { Map, OrderedMap } from 'immutable';
 
-import { reducer, calculatePortsPosition } from './flow.reducer';
+import { reducer, calculatePortsPosition, defaultState } from './flow.reducer';
 import * as nodeActions from '../actions/node.actions';
 import * as portActions from '../actions/port.actions';
 import {
@@ -12,7 +12,7 @@ import {
 
 describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS is batching elements creation', () => {
 	it('should batch one element creation', () => {
-		expect(reducer(new Map(), {
+		expect(reducer(defaultState, {
 			type: 'FLOWDESIGNER.FLOW_ADD_ELEMENTS',
 			listOfActionCreation: [
 				nodeActions.addNode(
@@ -27,7 +27,7 @@ describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS is batching elements creation', () => {
 	});
 
 	it('should batch many elements creation', () => {
-		expect(reducer(new Map(), {
+		expect(reducer(defaultState, {
 			type: 'FLOWDESIGNER.FLOW_ADD_ELEMENTS',
 			listOfActionCreation: [
 				nodeActions.addNode(
@@ -55,7 +55,7 @@ describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS is batching elements creation', () => {
 	});
 
 	it('should handle throwing sub reducer by returning old state', () => {
-		expect(reducer(new Map(), {
+		expect(reducer(defaultState, {
 			type: 'FLOWDESIGNER.FLOW_ADD_ELEMENTS',
 			listOfActionCreation: [
 				nodeActions.addNode(
@@ -79,45 +79,36 @@ describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS is batching elements creation', () => {
 					{},
 				),
 			],
-		})).toEqual(new Map());
+		})).toMatchSnapshot();
 	});
 });
 
 describe('FLOWDESIGNER_FLOW_LOAD should reset old flow state and load news not touching flow config', () => {
 	it('should load elements', () => {
-		expect(reducer(new Map({
-			nodes: new Map(),
-			links: new Map(),
-			ports: new Map(),
-			out: new Map(),
-			in: new Map(),
-			sucs: new Map(),
-			preds: new Map(),
-			nodeTypes: new Map(),
-			transform: { k: 1, x: 0, y: 0 } }),
+		expect(reducer(defaultState,
 			{
 				type: 'FLOWDESIGNER.FLOW_LOAD',
 				listOfActionCreation: [
 					nodeActions.addNode(
-					'nodeId',
-					{ x: 10, y: 10 },
-					{ height: 10, width: 10 },
-					undefined,
-					{}
-				),
+						'nodeId',
+						{ x: 10, y: 10 },
+						{ height: 10, width: 10 },
+						undefined,
+						{}
+					),
 					nodeActions.addNode(
-					'node2',
-					{ x: 10, y: 10 },
-					{ height: 10, width: 10 },
-					undefined,
-					{}
-				),
+						'node2',
+						{ x: 10, y: 10 },
+						{ height: 10, width: 10 },
+						undefined,
+						{}
+					),
 					portActions.addPort(
-					'nodeId',
-					'portId',
-					undefined,
-					{},
-				),
+						'nodeId',
+						'portId',
+						undefined,
+						{},
+					),
 				],
 			})).toMatchSnapshot();
 	});
@@ -125,7 +116,7 @@ describe('FLOWDESIGNER_FLOW_LOAD should reset old flow state and load news not t
 
 
 describe('calculatePortsPosition behavior', () => {
-	const state = new Map()
+	const state = defaultState
 		.set('nodes', new Map()
 			.set('42', new NodeRecord({
 				id: '42',

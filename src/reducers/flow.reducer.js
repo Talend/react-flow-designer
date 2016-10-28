@@ -11,7 +11,7 @@ import linksReducer from './link.reducer';
 import portsReducer from './port.reducer';
 import nodeTypeReducer from './nodeType.reducer';
 
-const defaultState = new Map({
+export const defaultState = new Map({
 	nodes: new Map(),
 	links: new Map(),
 	ports: new OrderedMap(),
