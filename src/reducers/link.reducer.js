@@ -14,46 +14,6 @@ import { LinkRecord } from '../constants/flowdesigner.model';
 
 const defaultState = new Map();
 
-/**
- * Delete link information in (In and Out) cache
- * @params state
- * @params action
- */
-function tryDeleteLinkCache(state, action) {
-	let newState = state;
-	if (state.getIn(['links', action.linkId])) {
-		if (state.getIn(['ports', state.getIn(['links', action.linkId]).targetId])) {
-			newState = newState.deleteIn([
-				'in',
-				state.getIn(['ports', state.getIn(['links', action.linkId]).targetId]).nodeId,
-				state.getIn(['links', action.linkId]).targetId,
-				action.linkId,
-			]);
-		}
-		if (state.getIn(['ports', state.getIn(['links', action.linkId]).sourceId])) {
-			newState = newState.deleteIn([
-				'out',
-				state.getIn(['ports', state.getIn(['links', action.linkId]).sourceId]).nodeId,
-				state.getIn(['links', action.linkId]).sourceId,
-				action.linkId,
-			]);
-		}
-		if (state.getIn(['ports', state.getIn(['links', action.linkId]).targetId]) && state.getIn(['ports', state.getIn(['links', action.linkId]).sourceId])){
-			newState = newState.deleteIn([
-				'sucs',
-				state.getIn(['ports', state.getIn(['links', action.linkId]).sourceId]).nodeId,
-				state.getIn(['ports', state.getIn(['links', action.linkId]).targetId]).nodeId,
-			])
-			.deleteIn([
-				'preds',
-				state.getIn(['ports', state.getIn(['links', action.linkId]).targetId]).nodeId,
-				state.getIn(['ports', state.getIn(['links', action.linkId]).sourceId]).nodeId,
-			]);
-		}
-	}
-	return newState;
-}
-
 export default function linkReducer(state = defaultState, action) {
 	switch (action.type) {
 	case FLOWDESIGNER_LINK_ADD:
@@ -122,7 +82,29 @@ export default function linkReducer(state = defaultState, action) {
 					false,
 					`can't remove non existing link ${action.linkId}`);
 		}
-		return tryDeleteLinkCache(state, action).deleteIn(['links', action.linkId]);
+		return state.deleteIn([
+			'in',
+			state.getIn(['ports', state.getIn(['links', action.linkId]).targetId]).nodeId,
+			state.getIn(['links', action.linkId]).targetId,
+			action.linkId,
+		])
+		.deleteIn([
+			'out',
+			state.getIn(['ports', state.getIn(['links', action.linkId]).sourceId]).nodeId,
+			state.getIn(['links', action.linkId]).sourceId,
+			action.linkId,
+		])
+		.deleteIn([
+			'sucs',
+			state.getIn(['ports', state.getIn(['links', action.linkId]).sourceId]).nodeId,
+			state.getIn(['ports', state.getIn(['links', action.linkId]).targetId]).nodeId,
+		])
+		.deleteIn([
+			'preds',
+			state.getIn(['ports', state.getIn(['links', action.linkId]).targetId]).nodeId,
+			state.getIn(['ports', state.getIn(['links', action.linkId]).sourceId]).nodeId,
+		])
+			.deleteIn(['links', action.linkId]);
 	case FLOWDESIGNER_LINK_SET_ATTR:
 		if (!state.getIn(['links', action.linkId])) {
 			invariant(
