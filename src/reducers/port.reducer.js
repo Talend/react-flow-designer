@@ -3,6 +3,9 @@ import { Map, OrderedMap } from 'immutable';
 import {
 	PortRecord,
 } from '../constants/flowdesigner.model';
+import { removeLink } from '../actions/link.actions';
+import linkReducer from './link.reducer';
+import { portOutLink, portInLink } from '../selectors/linkSelectors';
 
 import {
 	FLOWDESIGNER_PORT_ADD,
@@ -76,15 +79,16 @@ export default function portReducer(state = defaultState, action) {
 			invariant(false,
 					`Can not remove port ${action.portId} since it doesn't exist`);
 		}
-		return state.deleteIn(['ports', action.portId])
+		return portInLink(state, action.portId).reduce(
+				(cumulativeState, link) => linkReducer(cumulativeState, removeLink(link.id)),
+				portOutLink(state, action.portId).reduce(
+					(cumulativeState, link) => linkReducer(cumulativeState, removeLink(link.id)),
+					state
+				)
+			)
+			.deleteIn(['ports', action.portId])
 			.deleteIn(['out', state.getIn(['ports', action.portId]).nodeId, action.portId])
-			.deleteIn(['in', state.getIn(['ports', action.portId]).nodeId, action.portId])
-			// TODO: SUCESSOR, PREDECESSOR CLEANING
-			.deleteIn([
-				'sucs',
-				state.getIn(['ports', state.getaction.portId]).nodeId,
-				state.getIn(['ports', action.portId]).nodeId,
-			]);
+			.deleteIn(['in', state.getIn(['ports', action.portId]).nodeId, action.portId]);
 	default:
 		return state;
 	}

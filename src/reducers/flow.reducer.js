@@ -10,8 +10,6 @@ import nodesReducer from './node.reducer';
 import linksReducer from './link.reducer';
 import portsReducer from './port.reducer';
 import nodeTypeReducer from './nodeType.reducer';
-import { getDetachedPorts } from '../selectors/portSelectors';
-import { getDetachedLinks } from '../selectors/linkSelectors';
 
 const defaultState = new Map({
 	nodes: new Map(),
@@ -104,50 +102,10 @@ export const calculatePortsPosition = (state, action) => {
 	return state;
 };
 
-/**
- * if any port parent node does not exist, the port will be destroyed
- *
- * @params {object} state react-flow-designer state
- *
- * @return {object} new state
- */
-const destroyDetachedPorts = (state) => {
-	const detachedPorts = getDetachedPorts(state);
-	let newState = state;
-	detachedPorts.forEach(port => {
-		newState = reducer(newState, {
-			type: 'FLOWDESIGNER_PORT_REMOVE',
-			portId: port.id,
-		});
-	});
-	return newState;
-};
 
-/**
- * if any link is not attached to two ports, it will be destroyed
- *
- * @params {object} state react-flow-designer state
- *
-* @return {object} new state
- */
-const destroyDetachedLinks = (state) => {
-	const detachedLinks = getDetachedLinks(state);
-	let newState = state;
-	detachedLinks.forEach(link => {
-		newState = reducer(newState, {
-			type: 'FLOWDESIGNER_LINK_REMOVE',
-			linkId: link.id,
-		});
-	});
-	return newState;
-};
 
 const flowDesignerReducer = (state, action) => {
 	let newState = reducer(state, action);
-	if (action.type !== 'FLOWDESIGNER_NODE_MOVE') {
-		newState = destroyDetachedPorts(newState, action, state);
-		newState = destroyDetachedLinks(newState, action, state);
-	}
 	newState = calculatePortsPosition(newState, action, state);
 	return newState;
 };

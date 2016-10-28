@@ -1,5 +1,8 @@
 import { Map } from 'immutable';
 import invariant from 'invariant';
+import { removePort } from '../actions/port.actions';
+import portReducer from './port.reducer';
+import { outPort, inPort } from '../selectors/portSelectors';
 
 import {
 	FLOWDESIGNER_NODE_ADD,
@@ -62,7 +65,14 @@ const nodeReducer = (state = defaultState, action) => {
 		if (!state.getIn(['nodes', action.nodeId])) {
 			invariant(false, `Can not remove node ${action.nodeId} since it doesn't exist`);
 		}
-		return state.deleteIn(['nodes', action.nodeId])
+		return inPort(state, action.nodeId).reduce(
+			(cumulativeState, port, key) => portReducer(cumulativeState, removePort(key)),
+			outPort(state, action.nodeId).reduce(
+				(cumulativeState, port, key) => portReducer(cumulativeState, removePort(key)),
+				state
+			)
+		)
+		.deleteIn(['nodes', action.nodeId])
 		.deleteIn(['out', action.nodeId])
 		.deleteIn(['in', action.nodeId])
 		.deleteIn(['sucs', action.nodeId])
