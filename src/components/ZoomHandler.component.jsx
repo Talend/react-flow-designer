@@ -21,7 +21,11 @@ export const ZoomHandler = React.createClass({
 		  this.props.setZoom(event.transform);
     },
     componentWillReceiveProps(nextProps){
-      this.selection.transition().duration(113).call(nextProps.transformToApply, d3.zoomIdentity);
+      if(nextProps.transformToApply){
+        if(nextProps.transformToApply !== this.props.transformToApply){
+          this.selection.transition().duration(113).call(nextProps.transformToApply, d3.zoomIdentity);
+        }
+      }
     },
     render() {
         return (
