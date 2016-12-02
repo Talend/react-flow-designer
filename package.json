@@ -46,7 +46,7 @@
     "babel-preset-es2015-native-modules": "6.9.2",
     "babel-preset-react": "6.16.0",
     "coveralls": "2.11.15",
-    "css-loader": "0.25.0",
+    "css-loader": "0.26.1",
     "enzyme": "2.6.0",
     "eslint": "3.11.1",
     "eslint-config-airbnb": "13.0.0",
