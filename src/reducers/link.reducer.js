@@ -14,51 +14,6 @@ import { LinkRecord } from '../constants/flowdesigner.model';
 
 const defaultState = new Map();
 
-/**
- * @param newNodeId String link source
- * @param state
- * @param nodeId String current children
- */
-function setPredecessors(newNodeId, state, nodeId) {
-	if (typeof newNodeId === 'string') {
-		const predecessors = state.getIn(['predecessors', newNodeId]).set(newNodeId, newNodeId);
-		return state
-			.getIn(['childrens', nodeId]).reduce((cumulativeState, childrenId) =>
-				cumulativeState.merge(setPredecessors(predecessors, state, childrenId)),
-					state,
-				)
-			.updateIn(['predecessors', nodeId], value => value.merge(predecessors));
-	}
-	return state
-		.getIn(['childrens', nodeId]).reduce((cumulativeState, childrenId) =>
-			cumulativeState.merge(setPredecessors(newNodeId, state, childrenId)),
-				state,
-			);
-}
-
-/**
- * @param newNodeId String link target
- * @param state
- * @param nodeId String current parent
- */
-function setSuccessors(newNodeId, state, nodeId) {
-	if (typeof newNodeId === 'string') {
-		const successors = state.getIn(['successors', newNodeId]).set(newNodeId, newNodeId);
-		return state
-		.getIn(['parents', nodeId]).reduce((cumulativeState, parentId) =>
-			cumulativeState.merge(setSuccessors(successors, state, parentId)),
-			state,
-		)
-		.updateIn(['successors', nodeId], value => value.merge(successors));
-	}
-	return state
-		.getIn(['parents', nodeId]).reduce((cumulativeState, parentId) =>
-			cumulativeState.merge(setSuccessors(newNodeId, state, parentId)),
-			state,
-		)
-		.updateIn(['successors', nodeId], value => value.merge(newNodeId));
-}
-
 export default function linkReducer(state = defaultState, action) {
 	switch (action.type) {
 	case FLOWDESIGNER_LINK_ADD:

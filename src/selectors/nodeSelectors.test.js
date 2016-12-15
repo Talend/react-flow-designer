@@ -226,11 +226,6 @@ describe('Testing node selectors', () => {
 			.set('id8', new Map({})),
 	});
 
-
-	it('get node with their attached ports', () => {
-		expect(Selectors.getNodesWithPorts(givenState)).toMatchSnapshot();
-	});
-
 	it('node1 should not have any predecessors', () => {
 		expect(Selectors.getPredecessors(givenState, 'id1')).toMatchSnapshot();
 	});
