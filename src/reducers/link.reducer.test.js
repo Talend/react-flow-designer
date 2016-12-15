@@ -63,20 +63,6 @@ describe('check linkreducer', () => {
 			)
 			.set('id2', new Map())
 			.set('id3', new Map()),
-		)
-		.set('predecessors', new Map()
-			.set('id1', new Map())
-			.set('id2', new Map()
-				.set('id1', 'id1'),
-			)
-			.set('id3', new Map()),
-		)
-		.set('successors', new Map()
-			.set('id1', new Map()
-				.set('id2', 'id2'),
-			)
-			.set('id2', new Map())
-			.set('id3', new Map()),
 		);
 
 	it('FLOWDESIGNER_LINK_ADD should add a new link to the state', () => {
@@ -119,7 +105,7 @@ describe('check linkreducer', () => {
 			linkId: 'id1',
 			attributes: { selected: false },
 		})).toMatchSnapshot()
-;	
+;
 });
 
 	it('FLOWDESIGNER_LINK_REMOVE_ATTR should remove a specific attributes from attr map', () => {

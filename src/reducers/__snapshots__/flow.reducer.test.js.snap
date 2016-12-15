@@ -8,8 +8,6 @@ Object {
   "out": Object {},
   "parents": Object {},
   "ports": Object {},
-  "predecessors": Object {},
-  "successors": Object {},
   "transform": Object {
     "k": 1,
     "x": 0,
@@ -51,12 +49,6 @@ Object {
     "nodeId": Object {},
   },
   "ports": Object {},
-  "predecessors": Object {
-    "nodeId": Object {},
-  },
-  "successors": Object {
-    "nodeId": Object {},
-  },
   "transform": Object {
     "k": 1,
     "x": 0,
@@ -76,8 +68,6 @@ Object {
   "out": Object {},
   "parents": Object {},
   "ports": Object {},
-  "predecessors": Object {},
-  "successors": Object {},
   "transform": Object {
     "k": 1,
     "x": 0,
@@ -97,8 +87,6 @@ Object {
   "out": Object {},
   "parents": Object {},
   "ports": Object {},
-  "predecessors": Object {},
-  "successors": Object {},
   "transform": Object {
     "k": 1,
     "x": 0,
@@ -118,8 +106,6 @@ Object {
   "out": Object {},
   "parents": Object {},
   "ports": Object {},
-  "predecessors": Object {},
-  "successors": Object {},
   "transform": Object {
     "k": 1,
     "x": 0,

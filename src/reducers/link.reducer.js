@@ -33,8 +33,7 @@ function setPredecessors(newNodeId, state, nodeId) {
 		.getIn(['childrens', nodeId]).reduce((cumulativeState, childrenId) =>
 			cumulativeState.merge(setPredecessors(newNodeId, state, childrenId)),
 				state,
-			)
-		.updateIn(['predecessors', nodeId], value => value.merge(newNodeId));
+			);
 }
 
 /**
@@ -92,8 +91,6 @@ export default function linkReducer(state = defaultState, action) {
 		.setIn(['parents', state.getIn(['ports', action.targetId]).nodeId, state.getIn(['ports', action.sourceId]).nodeId], state.getIn(['ports', action.sourceId]).nodeId)
 		.setIn(['out', state.getIn(['ports', action.sourceId]).nodeId, action.sourceId, action.linkId], action.linkId)
 		.setIn(['in', state.getIn(['ports', action.targetId]).nodeId, action.targetId, action.linkId], action.linkId)
-		.update(value => setPredecessors(value.getIn(['ports', action.sourceId]).nodeId, value, value.getIn(['ports', action.targetId]).nodeId))
-		.update(value => setSuccessors(value.getIn(['ports', action.targetId]).nodeId, value, value.getIn(['ports', action.sourceId]).nodeId));
 	case FLOWDESIGNER_LINK_SET_TARGET:
 		if (!state.getIn(['links', action.linkId])) {
 			invariant(
@@ -111,8 +108,6 @@ export default function linkReducer(state = defaultState, action) {
 		.setIn(['in', state.getIn(['ports', action.targetId]).nodeId, action.targetId, action.linkId], action.linkId)
 		.deleteIn(['childrens', state.getIn(['ports', state.getIn(['links', action.linkId]).sourceId]).nodeId, state.getIn(['ports', state.getIn(['links', action.linkId]).targetId]).nodeId])
 		.setIn(['childrens', state.getIn(['ports', state.getIn(['links', action.linkId]).sourceId]).nodeId, state.getIn(['ports', action.targetId]).nodeId])
-		.update(value => setPredecessors(value.getIn(['ports', state.getIn(['links', action.linkId]).sourceId]).nodeId, value, value.getIn(['ports', action.targetId]).nodeId))
-		.update(value => setSuccessors(value.getIn(['ports', action.targetId]).nodeId, value, value.getIn(['ports', state.getIn(['links', action.linkId]).sourceId]).nodeId));
 	case FLOWDESIGNER_LINK_SET_SOURCE:
 		if (!state.getIn(['links', action.linkId])) {
 			invariant(
@@ -131,8 +126,6 @@ export default function linkReducer(state = defaultState, action) {
 		.setIn(['out', state.getIn(['ports', action.sourceId]).nodeId, action.sourceId, action.linkId], action.linkId)
 		.deleteIn(['parents', state.getIn(['ports', state.getIn(['links', action.linkId]).targetId]).nodeId, state.getIn(['ports', state.getIn(['links', action.linkId]).sourceId]).nodeId])
 		.setIn(['parents', state.getIn(['ports', state.getIn(['links', action.linkId]).targetId]).nodeId, state.getIn(['ports', action.sourceId]).nodeId])
-		.update(value => setPredecessors(value.getIn(['ports', action.sourceId]).nodeId, value, value.getIn(['ports', state.getIn(['links', action.linkId]).targetId]).nodeId))
-		.update(value => setSuccessors(value.getIn(['ports', state.getIn(['links', action.linkId]).targetId]).nodeId, value, value.getIn(['ports', action.sourceId]).nodeId));
 	case FLOWDESIGNER_LINK_REMOVE:
 		if (!state.getIn(['links', action.linkId])) {
 			invariant(

@@ -21,8 +21,6 @@ export const defaultState = new Map({
 	in: new Map(),
 	childrens: new Map(),
 	parents: new Map(),
-	successors: new Map(),
-	predecessors: new Map(),
 	nodeTypes: new Map(),
 	transform: { k: 1, x: 0, y: 0 },
 	transformToApply: undefined,

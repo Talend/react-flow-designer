@@ -32,12 +32,6 @@ Object {
     "id": Object {},
   },
   "ports": Object {},
-  "predecessors": Object {
-    "id": Object {},
-  },
-  "successors": Object {
-    "id": Object {},
-  },
   "transform": Object {
     "k": 1,
     "x": 0,
@@ -79,12 +73,6 @@ Object {
     "id": Object {},
   },
   "ports": Object {},
-  "predecessors": Object {
-    "id": Object {},
-  },
-  "successors": Object {
-    "id": Object {},
-  },
   "transform": Object {
     "k": 1,
     "x": 0,
@@ -129,8 +117,6 @@ Object {
   "out": Object {},
   "parents": Object {},
   "ports": Object {},
-  "predecessors": Object {},
-  "successors": Object {},
   "transform": Object {
     "k": 1,
     "x": 0,
@@ -163,8 +149,6 @@ Object {
   "out": Object {},
   "parents": Object {},
   "ports": Object {},
-  "predecessors": Object {},
-  "successors": Object {},
   "transform": Object {
     "k": 1,
     "x": 0,
@@ -207,8 +191,6 @@ Object {
   "out": Object {},
   "parents": Object {},
   "ports": Object {},
-  "predecessors": Object {},
-  "successors": Object {},
   "transform": Object {
     "k": 1,
     "x": 0,
@@ -253,8 +235,6 @@ Object {
   "out": Object {},
   "parents": Object {},
   "ports": Object {},
-  "predecessors": Object {},
-  "successors": Object {},
   "transform": Object {
     "k": 1,
     "x": 0,
@@ -302,8 +282,6 @@ Object {
   "out": Object {},
   "parents": Object {},
   "ports": Object {},
-  "predecessors": Object {},
-  "successors": Object {},
   "transform": Object {
     "k": 1,
     "x": 0,

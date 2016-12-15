@@ -57,8 +57,6 @@ Object {
       "position": undefined,
     },
   },
-  "predecessors": Object {},
-  "successors": Object {},
   "transform": Object {
     "k": 1,
     "x": 0,
@@ -139,8 +137,6 @@ Object {
       "position": undefined,
     },
   },
-  "predecessors": Object {},
-  "successors": Object {},
   "transform": Object {
     "k": 1,
     "x": 0,
@@ -183,8 +179,6 @@ Object {
       },
     },
   },
-  "predecessors": Object {},
-  "successors": Object {},
   "transform": Object {
     "k": 1,
     "x": 0,
@@ -237,8 +231,6 @@ Object {
       },
     },
   },
-  "predecessors": Object {},
-  "successors": Object {},
   "transform": Object {
     "k": 1,
     "x": 0,
@@ -294,8 +286,6 @@ Object {
       },
     },
   },
-  "predecessors": Object {},
-  "successors": Object {},
   "transform": Object {
     "k": 1,
     "x": 0,
