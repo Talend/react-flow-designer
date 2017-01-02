@@ -41,7 +41,8 @@ export default function linkReducer(state = defaultState, action) {
 			sourceId: action.sourceId,
 			targetId: action.targetId,
 			linkType: action.linkType,
-			attributes: new Map(action.attributes),
+			data: new Map(action.data),
+			graphicalAttributes: new Map(action.graphicalAttributes),
 		}))
 		// parcourir l'ensemble des parents et set le composant cible en tant que sucessors '
 		.setIn(['childrens', state.getIn(['ports', action.sourceId]).nodeId, state.getIn(['ports', action.targetId]).nodeId], state.getIn(['ports', action.targetId]).nodeId)

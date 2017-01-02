@@ -29,8 +29,8 @@ Object {
   "nodeTypes": Object {},
   "nodes": Object {
     "nodeId": Object {
-      "data": undefined,
-      "graphicalAttributes": undefined,
+      "data": Object {},
+      "graphicalAttributes": Object {},
       "id": "nodeId",
       "nodeSize": Object {
         "height": 10,

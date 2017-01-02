@@ -32,7 +32,8 @@ const nodeReducer = (state = defaultState, action) => {
 			position: new PositionRecord(action.nodePosition),
 			nodeSize: new SizeRecord(action.nodeSize),
 			nodeType: action.nodeType,
-			attributes: new Map(action.attributes),
+			data: new Map(action.data),
+			graphicalAttributes: new Map(action.graphicalAttributes),
 		}))
 		.setIn(['out', action.nodeId], new Map())
 		.setIn(['in', action.nodeId], new Map())

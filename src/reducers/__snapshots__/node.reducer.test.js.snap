@@ -10,8 +10,10 @@ Object {
   "nodeTypes": Object {},
   "nodes": Object {
     "id": Object {
-      "data": undefined,
-      "graphicalAttributes": undefined,
+      "data": Object {},
+      "graphicalAttributes": Object {
+        "name": "test",
+      },
       "id": "id",
       "nodeSize": Object {
         "height": undefined,
@@ -52,8 +54,8 @@ Object {
   "nodeTypes": Object {},
   "nodes": Object {
     "id": Object {
-      "data": undefined,
-      "graphicalAttributes": undefined,
+      "data": Object {},
+      "graphicalAttributes": Object {},
       "id": "id",
       "nodeSize": Object {
         "height": undefined,
