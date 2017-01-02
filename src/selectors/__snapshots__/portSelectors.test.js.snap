@@ -38,7 +38,7 @@ Object {
 }
 `;
 
-exports[`getSinkPorts return a map with port id1 & id2 1`] = `
+exports[`getSinkPorts return a map with port id1 & id3 1`] = `
 Object {
   "id1": Object {
     "data": Object {

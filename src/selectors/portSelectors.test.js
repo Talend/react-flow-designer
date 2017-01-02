@@ -45,7 +45,7 @@ describe('getEmitterPorts', () => {
 });
 
 describe('getSinkPorts', () => {
-	it('return a map with port id1 & id2', () => {
+	it('return a map with port id1 & id3', () => {
 		expect(Selectors.getSinkPorts(givenState)).toMatchSnapshot();
 	});
 });
