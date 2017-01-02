@@ -9,8 +9,10 @@ import {
 	FLOWDESIGNER_NODE_MOVE,
 	FLOWDESIGNER_NODE_APPLY_MOVEMENT,
 	FLOWDESIGNER_NODE_MOVE_END,
-	FLOWDESIGNER_NODE_SET_ATTR,
-	FLOWDESIGNER_NODE_REMOVE_ATTR,
+	FLOWDESIGNER_NODE_SET_GRAPHICAL_ATTRIBUTES,
+	FLOWDESIGNER_NODE_REMOVE_GRAPHICAL_ATTRIBUTES,
+	FLOWDESIGNER_NODE_SET_DATA,
+	FLOWDESIGNER_NODE_REMOVE_DATA,
 	FLOWDESIGNER_NODE_SET_SIZE,
 	FLOWDESIGNER_NODE_REMOVE,
 } from '../constants/flowdesigner.constants';
@@ -62,16 +64,26 @@ const nodeReducer = (state = defaultState, action) => {
 				['nodes', action.nodeId, 'nodeSize'],
 				new SizeRecord(action.nodeSize),
 			);
-	case FLOWDESIGNER_NODE_SET_ATTR:
+	case FLOWDESIGNER_NODE_SET_GRAPHICAL_ATTRIBUTES:
 		if (!state.getIn(['nodes', action.nodeId])) {
-			invariant(false, `Can't set an attribute on non existing node ${action.nodeId}`);
+			invariant(false, `Can't set a graphical attribute on non existing node ${action.nodeId}`);
 		}
-		return state.mergeIn(['nodes', action.nodeId, 'attributes'], new Map(action.attributes));
-	case FLOWDESIGNER_NODE_REMOVE_ATTR:
+		return state.mergeIn(['nodes', action.nodeId, 'graphicalAttributes'], new Map(action.graphicalAttributes));
+	case FLOWDESIGNER_NODE_REMOVE_GRAPHICAL_ATTRIBUTES:
 		if (!state.getIn(['nodes', action.nodeId])) {
-			invariant(false, `Can't remove an attribute on non existing node ${action.nodeId}`);
+			invariant(false, `Can't remove a graphical attribute on non existing node ${action.nodeId}`);
 		}
-		return state.deleteIn(['nodes', action.nodeId, 'attributes', action.attributesKey]);
+		return state.deleteIn(['nodes', action.nodeId, 'graphicalAttributes', action.graphicalAttributesKey]);
+	case FLOWDESIGNER_NODE_SET_DATA:
+		if (!state.getIn(['nodes', action.nodeId])) {
+			invariant(false, `Can't set a data on non existing node ${action.nodeId}`);
+		}
+		return state.mergeIn(['nodes', action.nodeId, 'data'], new Map(action.data));
+	case FLOWDESIGNER_NODE_REMOVE_DATA:
+		if (!state.getIn(['nodes', action.nodeId])) {
+			invariant(false, `Can't remove a data on non existing node ${action.nodeId}`);
+		}
+		return state.deleteIn(['nodes', action.nodeId, 'data', action.dataKey]);
 	case FLOWDESIGNER_NODE_REMOVE:
 		if (!state.getIn(['nodes', action.nodeId])) {
 			invariant(false, `Can not remove node ${action.nodeId} since it doesn't exist`);
