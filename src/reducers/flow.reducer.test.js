@@ -8,19 +8,26 @@ import {
 	PortRecord,
 	SizeRecord,
 	PositionRecord,
+	NodeGraphicalAttributes,
 } from '../constants/flowdesigner.model';
 
-describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS is batching elements creation', () => {
+describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS', () => {
 	it('should batch one element creation', () => {
 		expect(reducer(defaultState, {
 			type: 'FLOWDESIGNER.FLOW_ADD_ELEMENTS',
 			listOfActionCreation: [
 				nodeActions.addNode(
 					'nodeId',
-					{ x: 10, y: 10 },
-					{ height: 10, width: 10 },
 					undefined,
-					{}
+					undefined,
+					undefined,
+					{
+						data: {},
+						graphicalAttributes: {
+							nodeSize: { height: 10, width: 10 },
+							position: { x: 10, y: 10 },
+						},
+					},
 				),
 			],
 		})).toMatchSnapshot();
@@ -32,17 +39,29 @@ describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS is batching elements creation', () => {
 			listOfActionCreation: [
 				nodeActions.addNode(
 					'nodeId',
-					{ x: 10, y: 10 },
-					{ height: 10, width: 10 },
 					undefined,
-					{}
+					undefined,
+					undefined,
+					{
+						data: {},
+						graphicalAttributes: {
+							nodeSize: { height: 10, width: 10 },
+							position: { x: 10, y: 10 },
+						},
+					},
 				),
 				nodeActions.addNode(
 					'node2',
-					{ x: 10, y: 10 },
-					{ height: 10, width: 10 },
 					undefined,
-					{}
+					undefined,
+					undefined,
+					{
+						data: {},
+						graphicalAttributes: {
+							nodeSize: { height: 10, width: 10 },
+							position: { x: 10, y: 10 },
+						},
+					},
 				),
 				portActions.addPort(
 					'nodeId',
@@ -60,17 +79,29 @@ describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS is batching elements creation', () => {
 			listOfActionCreation: [
 				nodeActions.addNode(
 					'nodeId',
-					{ x: 10, y: 10 },
-					{ height: 10, width: 10 },
 					undefined,
-					{}
+					undefined,
+					undefined,
+					{
+						data: {},
+						graphicalAttributes: {
+							nodeSize: { height: 10, width: 10 },
+							position: { x: 10, y: 10 },
+						},
+					},
 				),
 				nodeActions.addNode(
 					'node2',
-					{ x: 10, y: 10 },
-					{ height: 10, width: 10 },
 					undefined,
-					{}
+					undefined,
+					undefined,
+					{
+						data: {},
+						graphicalAttributes: {
+							nodeSize: { height: 10, width: 10 },
+							position: { x: 10, y: 10 },
+						},
+					},
 				),
 				portActions.addPort(
 					'node3',
@@ -91,17 +122,29 @@ describe('FLOWDESIGNER_FLOW_LOAD should reset old flow state and load news not t
 				listOfActionCreation: [
 					nodeActions.addNode(
 						'nodeId',
-						{ x: 10, y: 10 },
-						{ height: 10, width: 10 },
 						undefined,
-						{}
+						undefined,
+						undefined,
+						{
+							data: {},
+							graphicalAttributes: {
+								nodeSize: { height: 10, width: 10 },
+								position: { x: 10, y: 10 },
+							},
+						},
 					),
 					nodeActions.addNode(
 						'node2',
-						{ x: 10, y: 10 },
-						{ height: 10, width: 10 },
 						undefined,
-						{}
+						undefined,
+						undefined,
+						{
+							data: {},
+							graphicalAttributes: {
+								nodeSize: { height: 10, width: 10 },
+								position: { x: 10, y: 10 },
+							},
+						},
 					),
 					portActions.addPort(
 						'nodeId',
@@ -121,7 +164,7 @@ describe('FLOWDESIGNER_PAN_TO set a calculated transformation into transformToAp
 				type: 'FLOWDESIGNER_PAN_TO',
 				x: 400,
 				y: 400,
-			}
+			},
 		)).toMatchSnapshot();
 	});
 });
@@ -132,21 +175,21 @@ describe('calculatePortsPosition behavior', () => {
 		.set('nodes', new Map()
 			.set('42', new NodeRecord({
 				id: '42',
-				position: new PositionRecord({}),
-				nodeSize: new SizeRecord({}),
-				nodeType: '42',
-			}))
+				graphicalAttributes: new NodeGraphicalAttributes({
+					type: '42',
+				}),
+			})),
 		)
 		.set('ports', new Map()
 			.set('42', new PortRecord({
 				id: '42',
 				nodeId: '42',
-			}))
+			})),
 		)
 		.set('nodeTypes', new Map()
 			.set('42', new Map()
 				.set('component', {}),
-		)
+			),
 		);
 
 	it('should trigger only if NODE/PORT/FLOW action are dispatched', () => {

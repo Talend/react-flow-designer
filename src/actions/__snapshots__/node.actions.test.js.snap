@@ -2,17 +2,28 @@ exports[`Check that node action creators generate proper action objects and perf
 Array [
   Object {
     "data": Object {},
-    "graphicalAttributes": Object {},
+    "description": "description",
+    "graphicalAttributes": Object {
+      "nodePosition": Object {},
+      "nodeSize": Object {},
+      "type": "",
+    },
+    "label": "label",
     "nodeId": "id",
-    "nodePosition": Object {
-      "x": 75,
-      "y": 75,
+    "nodeType": Object {
+      "data": Object {},
+      "graphicalAttributes": Object {
+        "nodePosition": Object {
+          "x": 75,
+          "y": 75,
+        },
+        "nodeSize": Object {
+          "heigth": 50,
+          "width": 50,
+        },
+        "type": "nodeType",
+      },
     },
-    "nodeSize": Object {
-      "heigth": 50,
-      "width": 50,
-    },
-    "nodeType": "nodeType",
     "type": "FLOWDESIGNER_NODE_ADD",
   },
 ]

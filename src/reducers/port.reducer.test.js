@@ -33,7 +33,7 @@ describe('Check port reducer', () => {
 		})).toMatchSnapshot();
 	});
 
-	it('FLOWDESIGNER_PORT_ADDS to add multiple ports to port collection', () => {
+	it('FLOWDESIGNER_PORT_ADDS to add multiple ports (portId1, portId2) to port collection', () => {
 		expect(portReducer(initialState, {
 			type: 'FLOWDESIGNER_PORT_ADDS',
 			nodeId: 'nodeId',
@@ -49,7 +49,7 @@ describe('Check port reducer', () => {
 		})).toMatchSnapshot();
 	});
 
-	it('FLOWDESIGNER_PORT_SET_GRAPHICAL_ATTRIBUTES to merge a new attributes in attribute collection', () => {
+	it('FLOWDESIGNER_PORT_SET_GRAPHICAL_ATTRIBUTES to merge { selected: true } on port id1 graphicalAttribute map', () => {
 		expect(portReducer(initialState, {
 			type: 'FLOWDESIGNER_PORT_SET_GRAPHICAL_ATTRIBUTES',
 			portId: 'id1',
@@ -57,7 +57,7 @@ describe('Check port reducer', () => {
 		})).toMatchSnapshot();
 	});
 
-	it('FLOWDESIGNER_PORT_REMOVE_GRAPHICAL_ATTRIBUTES to remove attr from attr map', () => {
+	it('FLOWDESIGNER_PORT_REMOVE_GRAPHICAL_ATTRIBUTES to remove attr on port id1 graphicalAttribute map', () => {
 		expect(portReducer(initialState, {
 			type: 'FLOWDESIGNER_PORT_REMOVE_GRAPHICAL_ATTRIBUTES',
 			portId: 'id1',
@@ -65,7 +65,7 @@ describe('Check port reducer', () => {
 		})).toMatchSnapshot();
 	});
 
-	it('FLOWDESIGNER_PORT_SET_DATA to merge a new data in data map', () => {
+	it('FLOWDESIGNER_PORT_SET_DATA to merge { type: \'string\' } on port id1 data map', () => {
 		expect(portReducer(initialState, {
 			type: 'FLOWDESIGNER_PORT_SET_DATA',
 			portId: 'id1',
@@ -73,7 +73,7 @@ describe('Check port reducer', () => {
 		})).toMatchSnapshot();
 	});
 
-	it('FLOWDESIGNER_PORT_REMOVE_DATA on data map', () => {
+	it('FLOWDESIGNER_PORT_REMOVE_DATA remove type on port id1 on port data map', () => {
 		expect(portReducer(initialState, {
 			type: 'FLOWDESIGNER_PORT_REMOVE_DATA',
 			portId: 'id1',
@@ -81,7 +81,7 @@ describe('Check port reducer', () => {
 		})).toMatchSnapshot();
 	});
 
-	it('FLOWDESIGNER_PORT_REMOVE should remove port from ports collection', () => {
+	it('FLOWDESIGNER_PORT_REMOVE should remove port id1 from ports collection', () => {
 		expect(portReducer(initialState, {
 			type: 'FLOWDESIGNER_PORT_REMOVE',
 			portId: 'id1',

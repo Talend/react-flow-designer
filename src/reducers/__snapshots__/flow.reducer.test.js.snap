@@ -1,4 +1,4 @@
-exports[`FLOWDESIGNER_FLOW_ADD_ELEMENTS is batching elements creation should batch many elements creation 1`] = `
+exports[`FLOWDESIGNER_FLOW_ADD_ELEMENTS should batch many elements creation 1`] = `
 Object {
   "childrens": Object {},
   "in": Object {},
@@ -17,7 +17,7 @@ Object {
 }
 `;
 
-exports[`FLOWDESIGNER_FLOW_ADD_ELEMENTS is batching elements creation should batch one element creation 1`] = `
+exports[`FLOWDESIGNER_FLOW_ADD_ELEMENTS should batch one element creation 1`] = `
 Object {
   "childrens": Object {
     "nodeId": Object {},
@@ -30,17 +30,22 @@ Object {
   "nodes": Object {
     "nodeId": Object {
       "data": Object {},
-      "graphicalAttributes": Object {},
+      "description": undefined,
+      "graphicalAttributes": Object {
+        "nodeSize": Object {
+          "height": 10,
+          "width": 10,
+        },
+        "position": Object {
+          "x": 10,
+          "y": 10,
+        },
+        "properties": Object {},
+        "type": undefined,
+      },
       "id": "nodeId",
-      "nodeSize": Object {
-        "height": 10,
-        "width": 10,
-      },
-      "nodeType": undefined,
-      "position": Object {
-        "x": 10,
-        "y": 10,
-      },
+      "label": undefined,
+      "type": undefined,
     },
   },
   "out": Object {
@@ -59,7 +64,7 @@ Object {
 }
 `;
 
-exports[`FLOWDESIGNER_FLOW_ADD_ELEMENTS is batching elements creation should handle throwing sub reducer by returning old state 1`] = `
+exports[`FLOWDESIGNER_FLOW_ADD_ELEMENTS should handle throwing sub reducer by returning old state 1`] = `
 Object {
   "childrens": Object {},
   "in": Object {},

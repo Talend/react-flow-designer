@@ -17,7 +17,7 @@ import {
 	FLOWDESIGNER_NODE_REMOVE,
 } from '../constants/flowdesigner.constants';
 import {
-	NodeRecord, PositionRecord, SizeRecord,
+	NodeRecord, PositionRecord, SizeRecord, NodeGraphicalAttributes,
 } from '../constants/flowdesigner.model';
 
 const defaultState = new Map();
@@ -29,11 +29,11 @@ const nodeReducer = (state = defaultState, action) => {
 		}
 		return state.setIn(['nodes', action.nodeId], new NodeRecord({
 			id: action.nodeId,
-			position: new PositionRecord(action.nodePosition),
-			nodeSize: new SizeRecord(action.nodeSize),
-			nodeType: action.nodeType,
+			label: action.label,
+			description: action.description,
+			type: action.odeType,
 			data: new Map(action.data),
-			graphicalAttributes: new Map(action.graphicalAttributes),
+			graphicalAttributes: new NodeGraphicalAttributes(action.graphicalAttributes),
 		}))
 		.setIn(['out', action.nodeId], new Map())
 		.setIn(['in', action.nodeId], new Map())
@@ -44,16 +44,15 @@ const nodeReducer = (state = defaultState, action) => {
 			invariant(false, `Can't move node ${action.nodeId} since it doesn't exist`);
 		}
 		return state.setIn(
-				['nodes', action.nodeId, 'position'],
+				['nodes', action.nodeId, 'graphicalAttributes', 'position'],
 				new PositionRecord(action.nodePosition),
 			);
 	case FLOWDESIGNER_NODE_APPLY_MOVEMENT:
 		return state.update('nodes', nodes => nodes.map((node) => {
 			if (action.nodesId.find(id => id === node.id)) {
-				return node.set('position', node.position
-					.set('x', node.position.x + action.movement.x)
-					.set('y', node.position.y + action.movement.y),
-				);
+				return node
+					.setIn(['graphicalAttributes', 'position', 'x'], node.getIn(['graphicalAttributes', 'position', 'x']) + action.movement.x)
+					.setIn(['graphicalAttributes', 'position', 'y'], node.getIn(['graphicalAttributes', 'position', 'y']) + action.movement.y);
 			}
 			return node;
 		}));
@@ -62,7 +61,7 @@ const nodeReducer = (state = defaultState, action) => {
 			invariant(false, `Can't set size on node ${action.nodeId} since it doesn't exist`);
 		}
 		return state.setIn(
-				['nodes', action.nodeId, 'nodeSize'],
+				['nodes', action.nodeId, 'graphicalAttributes', 'nodeSize'],
 				new SizeRecord(action.nodeSize),
 			);
 	case FLOWDESIGNER_NODE_SET_GRAPHICAL_ATTRIBUTES:

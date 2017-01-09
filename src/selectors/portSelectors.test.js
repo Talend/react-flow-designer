@@ -39,7 +39,7 @@ const givenState = defaultState.set('links', new Map().set('id1', new LinkRecord
 );
 
 describe('getEmitterPorts', () => {
-	it('return a map with port id2', () => {
+	it('return a map with port id2 && id4', () => {
 		expect(Selectors.getEmitterPorts(givenState)).toMatchSnapshot();
 	});
 });

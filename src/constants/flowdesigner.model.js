@@ -1,4 +1,4 @@
-import { Record } from 'immutable';
+import { Record, Map } from 'immutable';
 
 export const NONE = 'NONE';
 export const SELECTED = 'SELECTED';
@@ -15,13 +15,20 @@ export const SizeRecord = new Record({
 	height: undefined,
 });
 
+export const NodeGraphicalAttributes = new Record({
+	position: new PositionRecord(),
+	nodeSize: new SizeRecord(),
+	type: undefined,
+	properties: new Map(),
+});
+
 export const NodeRecord = new Record({
 	id: undefined,
-	position: undefined,
-	nodeSize: undefined,
-	nodeType: undefined,
-	data: undefined,
-	graphicalAttributes: undefined,
+	label: undefined,
+	description: undefined,
+	type: undefined,
+	data: new Map(),
+	graphicalAttributes: new NodeGraphicalAttributes(),
 });
 
 export const LinkRecord = new Record({
@@ -29,8 +36,8 @@ export const LinkRecord = new Record({
 	sourceId: undefined,
 	targetId: undefined,
 	linkType: undefined,
-	data: undefined,
-	graphicalAttributes: undefined,
+	data: new Map(),
+	graphicalAttributes: new Map(),
 });
 
 export const PortRecord = new Record({
@@ -38,6 +45,8 @@ export const PortRecord = new Record({
 	nodeId: undefined,
 	portType: undefined,
 	position: undefined,
-	data: undefined,
-	graphicalAttributes: undefined,
+	data: new Map(),
+	graphicalAttributes: new Map({
+		type: undefined,
+	}),
 });
