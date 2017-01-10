@@ -27,9 +27,10 @@ const setPort = (state, port) => {
 		data: new Map(port.data),
 		graphicalAttributes: new Map(port.graphicalAttributes),
 	}));
-	if (port.data.get('type') === 'EMITTER') {
+	const portType = port.getIn(['graphicalAttributes', 'type']);
+	if (portType === 'EMITTER') {
 		return newState.setIn(['out', port.nodeId, port.id], new Map());
-	} else if (port.data.get('type') === 'SINK') {
+	} else if (portType === 'SINK') {
 		return newState.setIn(['in', port.nodeId, port.id], new Map());
 	}
 	invariant(false,
