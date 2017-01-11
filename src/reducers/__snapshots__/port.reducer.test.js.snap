@@ -56,10 +56,10 @@ Object {
       },
     },
     "portId": Object {
-      "data": Object {
+      "data": Object {},
+      "graphicalAttributes": Object {
         "type": "EMITTER",
       },
-      "graphicalAttributes": Object {},
       "id": "portId",
       "nodeId": "nodeId",
       "portType": "portType",
@@ -137,20 +137,20 @@ Object {
       },
     },
     "portId1": Object {
-      "data": Object {
+      "data": Object {},
+      "graphicalAttributes": Object {
         "type": "EMITTER",
       },
-      "graphicalAttributes": Object {},
       "id": "portId1",
       "nodeId": "nodeId",
       "portType": "portType",
       "position": undefined,
     },
     "portId2": Object {
-      "data": Object {
+      "data": Object {},
+      "graphicalAttributes": Object {
         "type": "SINK",
       },
-      "graphicalAttributes": Object {},
       "id": "portId2",
       "nodeId": "nodeId",
       "portType": "portType",

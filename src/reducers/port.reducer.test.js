@@ -28,8 +28,7 @@ describe('Check port reducer', () => {
 			nodeId: 'nodeId',
 			portId: 'portId',
 			portType: 'portType',
-			data: { type: 'EMITTER' },
-			attributes: { clicked: true },
+			graphicalAttributes: { type: 'EMITTER' },
 		})).toMatchSnapshot();
 	});
 
@@ -40,11 +39,11 @@ describe('Check port reducer', () => {
 			ports: [{
 				portId: 'portId1',
 				portType: 'portType',
-				data: { type: 'EMITTER' },
+				graphicalAttributes: { type: 'EMITTER' },
 			}, {
 				portId: 'portId2',
 				portType: 'portType',
-				data: { type: 'SINK' },
+				graphicalAttributes: { type: 'SINK' },
 			}],
 		})).toMatchSnapshot();
 	});

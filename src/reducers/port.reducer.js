@@ -27,7 +27,7 @@ const setPort = (state, port) => {
 		data: new Map(port.data),
 		graphicalAttributes: new Map(port.graphicalAttributes),
 	}));
-	const portType = port.getIn(['graphicalAttributes', 'type']);
+	const portType = port.graphicalAttributes.get('type');
 	if (portType === 'EMITTER') {
 		return newState.setIn(['out', port.nodeId, port.id], new Map());
 	} else if (portType === 'SINK') {
@@ -51,7 +51,7 @@ export default function portReducer(state = defaultState, action) {
 			nodeId: action.nodeId,
 			portType: action.portType,
 			data: new Map(action.data),
-			grahicalAttributes: new Map(action.grahicalAttributes),
+			graphicalAttributes: new Map(action.graphicalAttributes),
 		});
 	case FLOWDESIGNER_PORT_ADDS:
 		if (!state.getIn(['nodes', action.nodeId])) {
