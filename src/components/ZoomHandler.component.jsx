@@ -38,6 +38,11 @@ const ZoomHandler = React.createClass({
 	zoom: undefined,
 	selection: undefined,
 	render() {
+		const { transform } = this.props;
+		const childrens = React.Children.map(this.props.children, (children) => {
+			console.error('children', children);
+			return React.cloneElement(children.name, { transform });
+		});
 		return (
 			<g x="0" y="0" width="100%" height="100%">
 				<rect
@@ -45,8 +50,7 @@ const ZoomHandler = React.createClass({
 					style={{ fill: 'none', pointerEvents: 'all' }}
 					x="0" y="0" width="100%" height="100%"
 				/>
-				<Grid transform={this.state.transform} />
-				<g transform={this.state.transform}>{this.props.children}</g>
+				{childrens}
 			</g>
 		);
 	},

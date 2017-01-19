@@ -4,6 +4,7 @@ import { mapOf, orderedMapOf } from 'react-immutable-proptypes';
 import invariant from 'invariant';
 
 import { setZoom } from '../actions/flow.actions';
+import Grid from './grid/Grid.component';
 import ZoomHandler from './ZoomHandler.component';
 import { NodeType, PortType } from '../constants/flowdesigner.proptypes';
 import NodesRenderer from './node/NodesRenderer.component';
@@ -14,14 +15,13 @@ import { moveNodeTo, moveNodeToEnd } from '../actions/node.actions';
 import { setNodeTypes } from '../actions/nodeType.actions';
 
 
-
 export const FlowDesigner = React.createClass({
 	propTypes: {
 		children: PropTypes.node,
 		setNodeTypes: PropTypes.func.isRequired,
 		moveNodeTo: PropTypes.func.isRequired,
 		nodes: mapOf(
-			NodeType
+			NodeType,
 		).isRequired,
 		ports: orderedMapOf(PortType).isRequired,
 		links: mapOf(PropTypes.object).isRequired,
@@ -48,7 +48,7 @@ export const FlowDesigner = React.createClass({
 							[element.props.type]: {
 								component: element.props.component,
 							},
-						}
+						},
 					);
 					break;
 				case 'LinkType':
@@ -59,7 +59,7 @@ export const FlowDesigner = React.createClass({
 							[element.props.type]: {
 								component: element.props.component,
 							},
-						}
+						},
 					);
 					break;
 				case 'PortType':
@@ -70,13 +70,13 @@ export const FlowDesigner = React.createClass({
 							[element.props.type]: {
 								component: element.props.component,
 							},
-						}
-					)
+						},
+					);
 					break;
 				default:
 					invariant(
 					false,
-					`<${element.type.displayName} /> is an unknown component configuration`
+					`<${element.type.displayName} /> is an unknown component configuration`,
 				);
 				}
 			});
@@ -97,8 +97,8 @@ export const FlowDesigner = React.createClass({
 						<feGaussianBlur in="shadow" stdDeviation="3" />
 						<feOffset dx="0" dy="0" />
 						<feMerge>
-						<feMergeNode />
-						<feMergeNode in="SourceGraphic" />
+							<feMergeNode />
+							<feMergeNode in="SourceGraphic" />
 						</feMerge>
 					</filter>
 				</defs>
@@ -107,21 +107,24 @@ export const FlowDesigner = React.createClass({
 					transformToApply={this.props.transformToApply}
 					setZoom={this.props.setZoom}
 				>
-					<NodesRenderer
-						nodeTypeMap={this.state.nodeTypeMap}
-						moveNodeTo={this.props.moveNodeTo}
-						moveNodeToEnd={this.props.moveNodeToEnd}
-						nodes={this.props.nodes}
-					/>
-					<PortsRenderer
-						portTypeMap={this.state.portTypeMap}
-						ports={this.props.ports}
-					/>
-					<LinksRenderer
-						linkTypeMap={this.state.linkTypeMap}
-						links={this.props.links}
-						ports={this.props.ports}
-					/>
+					<Grid />
+					<g>
+						<NodesRenderer
+							nodeTypeMap={this.state.nodeTypeMap}
+							moveNodeTo={this.props.moveNodeTo}
+							moveNodeToEnd={this.props.moveNodeToEnd}
+							nodes={this.props.nodes}
+						/>
+						<PortsRenderer
+							portTypeMap={this.state.portTypeMap}
+							ports={this.props.ports}
+						/>
+						<LinksRenderer
+							linkTypeMap={this.state.linkTypeMap}
+							links={this.props.links}
+							ports={this.props.ports}
+						/>
+					</g>
 				</ZoomHandler>
 			</svg>
 		);
