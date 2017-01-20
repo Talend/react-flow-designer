@@ -2,8 +2,6 @@ import React, { PropTypes } from 'react';
 import { select, event } from 'd3-selection';
 import { zoom, zoomIdentity } from 'd3-zoom';
 
-import Grid from '../components/grid/Grid.component';
-
 const ZoomHandler = React.createClass({
 	propTypes: {
 		children: PropTypes.arrayOf(PropTypes.element).isRequired,
@@ -40,8 +38,7 @@ const ZoomHandler = React.createClass({
 	render() {
 		const { transform } = this.props;
 		const childrens = React.Children.map(this.props.children, (children) => {
-			console.error('children', children);
-			return React.cloneElement(children.name, { transform });
+			return React.cloneElement(children, { transform: transform });
 		});
 		return (
 			<g x="0" y="0" width="100%" height="100%">
