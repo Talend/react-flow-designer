@@ -36,7 +36,7 @@ const ZoomHandler = React.createClass({
 	zoom: undefined,
 	selection: undefined,
 	render() {
-		const { transform } = this.props;
+		const { transform } = this.state;
 		const childrens = React.Children.map(this.props.children, (children) => {
 			return React.cloneElement(children, { transform: transform });
 		});

@@ -50,7 +50,8 @@ const Grid = ({ transform, gridComponent }) => {
 			</g>
 		);
 	}
-	return <gridComponent transform={transform} />;
+	const GridComponent = gridComponent;
+	return (<GridComponent transform={transform} />);
 };
 
 Grid.propTypes = {

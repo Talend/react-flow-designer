@@ -25,6 +25,7 @@ export const FlowDesigner = React.createClass({
 		).isRequired,
 		ports: orderedMapOf(PortType).isRequired,
 		links: mapOf(PropTypes.object).isRequired,
+		gridComponent: PropTypes.element,
 	},
 	getInitialState() {
 		return {
@@ -107,7 +108,7 @@ export const FlowDesigner = React.createClass({
 					transformToApply={this.props.transformToApply}
 					setZoom={this.props.setZoom}
 				>
-					<Grid />
+					<Grid gridComponent={this.props.gridComponent} />
 					<g>
 						<NodesRenderer
 							nodeTypeMap={this.state.nodeTypeMap}
