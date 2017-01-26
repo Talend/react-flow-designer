@@ -1,5 +1,5 @@
 import invariant from 'invariant';
-import { Map } from 'immutable';
+import { Map, fromJS } from 'immutable';
 
 import {
 	FLOWDESIGNER_LINK_ADD,
@@ -12,7 +12,7 @@ import {
 	FLOWDESIGNER_LINK_REMOVE_DATA,
 } from '../constants/flowdesigner.constants';
 
-import { LinkRecord } from '../constants/flowdesigner.model';
+import { LinkRecord, LinkGraphicalAttributes } from '../constants/flowdesigner.model';
 
 const defaultState = new Map();
 
@@ -40,9 +40,9 @@ export default function linkReducer(state = defaultState, action) {
 			id: action.linkId,
 			sourceId: action.sourceId,
 			targetId: action.targetId,
-			linkType: action.linkType,
-			data: new Map(action.data),
-			graphicalAttributes: new Map(action.graphicalAttributes),
+			data: fromJS(action.data),
+			graphicalAttributes: new LinkGraphicalAttributes(action.graphicalAttributes)
+			.set('properties', new Map(action.graphicalAttributes.properties)),
 		}))
 		// parcourir l'ensemble des parents et set le composant cible en tant que sucessors '
 		.setIn(['childrens', state.getIn(['ports', action.sourceId]).nodeId, state.getIn(['ports', action.targetId]).nodeId], state.getIn(['ports', action.targetId]).nodeId)

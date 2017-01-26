@@ -150,7 +150,11 @@ describe('FLOWDESIGNER_FLOW_LOAD should reset old flow state and load news not t
 						'nodeId',
 						'portId',
 						undefined,
-						{},
+						{
+							graphicalAttributes: {
+								type: 'EMITTER',
+							},
+						},
 					),
 				],
 			})).toMatchSnapshot();
@@ -175,7 +179,7 @@ describe('calculatePortsPosition behavior', () => {
 		.set('nodes', new Map()
 			.set('42', new NodeRecord({
 				id: '42',
-				graphicalAttributes: new NodeGraphicalAttributes({
+				graphicalAttributes: new Map({
 					type: '42',
 				}),
 			})),

@@ -1,5 +1,5 @@
 import invariant from 'invariant';
-import { Map, OrderedMap } from 'immutable';
+import { Map, OrderedMap, fromJS } from 'immutable';
 import {
 	PortRecord,
 } from '../constants/flowdesigner.model';
@@ -23,19 +23,19 @@ const setPort = (state, port) => {
 	const newState = state.setIn(['ports', port.id], new PortRecord({
 		id: port.id,
 		nodeId: port.nodeId,
-		portType: port.portType,
-		data: new Map(port.data),
-		graphicalAttributes: new Map(port.graphicalAttributes),
+		data: fromJS(port.data),
+		graphicalAttributes: fromJS(port.graphicalAttributes),
 	}));
-	const portType = port.graphicalAttributes.get('type');
-	if (portType === 'EMITTER') {
+	const type = port.graphicalAttributes.getIn(['properties', 'type']);
+	if (type === 'EMITTER') {
 		return newState.setIn(['out', port.nodeId, port.id], new Map());
-	} else if (portType === 'SINK') {
+	} else if (type === 'SINK') {
 		return newState.setIn(['in', port.nodeId, port.id], new Map());
 	}
 	invariant(false,
-		`Can't set a new port ${port.id} if its data.type !== EMITTER || SINK,
-		given ${port.data.get('type')}`);
+		`Can't set a new port ${port.id} if its 
+		data.graphicalAttributes.properties.type !== EMITTER || SINK,
+		given ${port.graphicalAttributes.get('type')}`);
 	return state;
 };
 
@@ -49,9 +49,8 @@ export default function portReducer(state = defaultState, action) {
 		return setPort(state, {
 			id: action.portId,
 			nodeId: action.nodeId,
-			portType: action.portType,
-			data: new Map(action.data),
-			graphicalAttributes: new Map(action.graphicalAttributes),
+			data: fromJS(action.data),
+			graphicalAttributes: fromJS(action.graphicalAttributes),
 		});
 	case FLOWDESIGNER_PORT_ADDS:
 		if (!state.getIn(['nodes', action.nodeId])) {
@@ -63,9 +62,8 @@ export default function portReducer(state = defaultState, action) {
 					setPort(cumulatedState, {
 						id: port.portId,
 						nodeId: action.nodeId,
-						portType: port.portType,
-						data: new Map(port.data),
-						graphicalAttributes: new Map(port.graphicalAttributes),
+						data: fromJS(port.data),
+						graphicalAttributes: fromJS(port.graphicalAttributes),
 					})
 				, state);
 	case FLOWDESIGNER_PORT_SET_GRAPHICAL_ATTRIBUTES:
@@ -73,7 +71,7 @@ export default function portReducer(state = defaultState, action) {
 			invariant(false,
 					`Can't set an graphical attribute on non existing port ${action.portId}`);
 		}
-		return state.mergeIn(['ports', action.portId, 'graphicalAttributes'], new Map(action.graphicalAttributes));
+		return state.mergeIn(['ports', action.portId, 'graphicalAttributes'], fromJS(action.graphicalAttributes));
 	case FLOWDESIGNER_PORT_REMOVE_GRAPHICAL_ATTRIBUTES:
 		if (!state.getIn(['ports', action.portId])) {
 			invariant(false,
@@ -85,7 +83,7 @@ export default function portReducer(state = defaultState, action) {
 			invariant(false,
 					`Can't set a data on non existing port ${action.portId}`);
 		}
-		return state.mergeIn(['ports', action.portId, 'data'], new Map(action.data));
+		return state.mergeIn(['ports', action.portId, 'data'], fromJS(action.data));
 	case FLOWDESIGNER_PORT_REMOVE_DATA:
 		if (!state.getIn(['ports', action.portId])) {
 			invariant(false,

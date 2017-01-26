@@ -14,8 +14,9 @@ describe('<NodesRenderer />', () => {
 	it('renders correctly', () => {
 		const nodes = new Map().set('id', new NodeRecord({
 			id: 'id',
+			type: 'id',
 			graphicalAttributes: new NodeGraphicalAttributes({
-				type: 'id',
+				nodeType: 'id',
 			}),
 		}));
 		const nodeTypeMap = {

@@ -14,7 +14,7 @@ describe('<AbstractNode />', () => {
 	it('renders correctly', () => {
 		const node = new NodeRecord({
 			id: 'id',
-			graphicalAttributes: new NodeGraphicalAttributes({
+			graphicalAttributes: new Map({
 				position: new PositionRecord({ x: 100, y: 100 }),
 				nodeSize: new SizeRecord({ width: 125, height: 75 }),
 			}),

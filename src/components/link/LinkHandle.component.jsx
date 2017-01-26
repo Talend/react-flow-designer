@@ -35,14 +35,15 @@ const LinkHandle = React.createClass({
 		}
 	},
 	render() {
+		const position = this.props.position;
 		return (
-		  	<g
-		  		ref={(c) => this.handle = c}
-				transform={`translate(${this.props.position.x},${this.props.position.y})`}
+			<g
+				ref={(c) => this.handle = c}
+				transform={`translate(${position.get('x')},${position.get('y')})`}
 			>
 				{this.props.component}
 
-		  	</g>
+			</g>
 		);
 	},
 });

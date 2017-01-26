@@ -1,4 +1,4 @@
-import { Map } from 'immutable';
+import { Map, fromJS } from 'immutable';
 import invariant from 'invariant';
 import { removePort } from '../actions/port.actions';
 import portReducer from './port.reducer';
@@ -17,7 +17,8 @@ import {
 	FLOWDESIGNER_NODE_REMOVE,
 } from '../constants/flowdesigner.constants';
 import {
-	NodeRecord, PositionRecord, SizeRecord, NodeGraphicalAttributes,
+	NodeRecord, PositionRecord, SizeRecord, NodeGraphicalAttributes
+	,
 } from '../constants/flowdesigner.model';
 
 const defaultState = new Map();
@@ -29,11 +30,11 @@ const nodeReducer = (state = defaultState, action) => {
 		}
 		return state.setIn(['nodes', action.nodeId], new NodeRecord({
 			id: action.nodeId,
-			label: action.label,
-			description: action.description,
-			type: action.odeType,
-			data: new Map(action.data),
-			graphicalAttributes: new NodeGraphicalAttributes(action.graphicalAttributes),
+			type: action.nodeType,
+			data: fromJS(action.data),
+			graphicalAttributes: new NodeGraphicalAttributes(action.graphicalAttributes)
+				.set('nodeSize', new SizeRecord(action.graphicalAttributes.nodeSize))
+				.set('position', new PositionRecord(action.graphicalAttributes.position)),
 		}))
 		.setIn(['out', action.nodeId], new Map())
 		.setIn(['in', action.nodeId], new Map())

@@ -11,10 +11,12 @@ import {
 	FLOWDESIGNER_NODE_REMOVE,
 } from '../constants/flowdesigner.constants';
 
-const defaultGraphicalAttribtues = {
-	type: '',
+const defaultGraphicalAttributes = {
+	label: '',
+	nodeType: '',
 	nodePosition: {},
 	nodeSize: {},
+	properties: {},
 };
 
 /**
@@ -26,11 +28,9 @@ const defaultGraphicalAttribtues = {
  * @param {Object} attr
  * @return {Object}
  */
-export const addNode = (nodeId, label, description, nodeType, { data = {}, graphicalAttributes = defaultGraphicalAttribtues } = {}) => ({
+export const addNode = (nodeId, nodeType, { data = {}, graphicalAttributes = defaultGraphicalAttributes } = {}) => ({
 	type: FLOWDESIGNER_NODE_ADD,
 	nodeId,
-	label,
-	description,
 	nodeType,
 	data,
 	graphicalAttributes,

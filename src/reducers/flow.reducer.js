@@ -58,7 +58,7 @@ export const reducer = (state, action) => {
 			);
 		} catch (error) {
 			invariant(
-				true,
+				false,
 				`Something happenned preventing FLOWDESIGNER_FLOW_LOAD to be applied :${error}`,
 			);
 			return state;
@@ -103,13 +103,13 @@ export const calculatePortsPosition = (state, action) => {
 			nodes = state.get('nodes');
 		}
 		return nodes.reduce((cumulativeState, node) => {
-			const nodeType = node.getIn(['graphicalAttributes', 'type']);
+			const nodeType = node.getIn(['graphicalAttributes', 'nodeType']);
 			const ports = state.get('ports').filter(port => port.nodeId === node.id);
 			const calculatePortPosition = state.getIn(['nodeTypes', nodeType, 'component'])
 				.calculatePortPosition;
 			return cumulativeState.mergeIn(
 				['ports'],
-				calculatePortPosition(ports, node.position, node.nodeSize),
+				calculatePortPosition(ports, node.getIn(['graphicalAttributes', 'position']), node.getIn(['graphicalAttributes', 'nodeSize'])),
 			);
 		}, state);
 	}

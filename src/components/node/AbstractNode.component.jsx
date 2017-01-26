@@ -19,9 +19,9 @@ import { PositionRecord } from '../../constants/flowdesigner.model';
  */
 const calculatePortPosition = (ports, nodePosition, nodeSize) => {
 	let portsWithPosition = new Map();
-	const emitterPorts = ports.filter(port => port.getIn(['graphicalAttributes', 'type']) === 'EMITTER');
-	const sinkPorts = ports.filter(port => port.getIn(['graphicalAttributes', 'type']) === 'SINK');
-	const range = [nodePosition.y, nodePosition.y + nodeSize.height];
+	const emitterPorts = ports.filter(port => port.getIn(['graphicalAttributes', 'properties', 'type']) === 'EMITTER');
+	const sinkPorts = ports.filter(port => port.getIn(['graphicalAttributes', 'properties', 'type']) === 'SINK');
+	const range = [nodePosition.get('y'), nodePosition.get('y') + nodeSize.get('height')];
 	const scaleYEmitter = scaleLinear()
 		.domain([0, emitterPorts.size + 1])
 		.range(range);
@@ -33,18 +33,18 @@ const calculatePortPosition = (ports, nodePosition, nodeSize) => {
 	emitterPorts.forEach((port) => {
 		emitterNumber += 1;
 		const position = new PositionRecord({
-			x: nodePosition.x + nodeSize.width,
+			x: nodePosition.get('x') + nodeSize.get('width'),
 			y: scaleYEmitter(emitterNumber),
 		});
-		portsWithPosition = portsWithPosition.set(port.id, port.set('position', position));
+		portsWithPosition = portsWithPosition.set(port.id, port.setIn(['graphicalAttributes', 'position'], position));
 	});
 	sinkPorts.forEach((port) => {
 		sinkNumber += 1;
 		const position = new PositionRecord({
-			x: nodePosition.x,
+			x: nodePosition.get('x'),
 			y: scaleYSink(sinkNumber),
 		});
-		portsWithPosition = portsWithPosition.set(port.id, port.set('position', position));
+		portsWithPosition = portsWithPosition.set(port.id, port.setIn(['graphicalAttributes', 'position'], position));
 	});
 	return portsWithPosition;
 };

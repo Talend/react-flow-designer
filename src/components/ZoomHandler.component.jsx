@@ -30,10 +30,14 @@ const ZoomHandler = React.createClass({
 		}
 	},
 	onZoomEnd() {
-		this.props.setZoom(event.transform);
+		if (!isNaN(event.transform.k) && !isNaN(event.transform.x) && !isNaN(event.transform.y)) {
+			this.props.setZoom(event.transform);
+		}
 	},
 	onZoom() {
-		this.setState({ transform: event.transform });
+		if (!isNaN(event.transform.k) && !isNaN(event.transform.x) && !isNaN(event.transform.y)) {
+			this.setState({ transform: event.transform });
+		}
 	},
 	zoom: undefined,
 	selection: undefined,

@@ -18,14 +18,18 @@ export const SizeRecord = new Record({
 export const NodeGraphicalAttributes = new Record({
 	position: new PositionRecord(),
 	nodeSize: new SizeRecord(),
-	type: undefined,
+	nodeType: '',
+	label: '',
+	properties: new Map(),
+});
+
+export const LinkGraphicalAttributes = new Record({
+	linkType: '',
 	properties: new Map(),
 });
 
 export const NodeRecord = new Record({
 	id: undefined,
-	label: undefined,
-	description: undefined,
 	type: undefined,
 	data: new Map(),
 	graphicalAttributes: new NodeGraphicalAttributes(),
@@ -37,16 +41,16 @@ export const LinkRecord = new Record({
 	targetId: undefined,
 	linkType: undefined,
 	data: new Map(),
-	graphicalAttributes: new Map(),
+	graphicalAttributes: new LinkGraphicalAttributes(),
 });
 
 export const PortRecord = new Record({
 	id: undefined,
 	nodeId: undefined,
-	portType: undefined,
-	position: undefined,
 	data: new Map(),
 	graphicalAttributes: new Map({
 		type: undefined,
+		position: PositionRecord,
+		portType: undefined,
 	}),
 });

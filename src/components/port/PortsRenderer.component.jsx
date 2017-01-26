@@ -8,7 +8,7 @@ const PortsRenderer = React.createClass({
 		ports: orderedMapOf(PortType).isRequired,
 	},
 	renderPort(port) {
-		const type = port.getIn(['graphicalAttributes', 'type']);
+		const type = port.getIn(['graphicalAttributes', 'portType']);
 		const ConcretePort = this.props.portTypeMap[type].component;
 		return (<ConcretePort key={port.id} port={port} />);
 	},
