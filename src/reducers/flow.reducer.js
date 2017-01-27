@@ -66,7 +66,7 @@ export const reducer = (state, action) => {
 	case FLOWDESIGNER_FLOW_SET_ZOOM:
 		return state.set('transform', action.transform);
 	case FLOWDESIGNER_PAN_TO:
-		return state.update('transformToApply', value => (
+		return state.update('transformToApply', () => (
 			zoomIdentity
 				.translate(state.get('transform').x, state.get('transform').y)
 				.scale(state.get('transform').k)

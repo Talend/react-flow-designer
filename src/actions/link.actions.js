@@ -17,7 +17,12 @@ import {
  * @param {string} linkType
  * @param {Object} attr
  */
-export const addLink = (linkId, sourceId, targetId, { data = {}, graphicalAttributes = {} } = {}) => ({
+export const addLink = (
+	linkId,
+	sourceId,
+	targetId,
+	{ data = {}, graphicalAttributes = {} } = {},
+) => ({
 	type: FLOWDESIGNER_LINK_ADD,
 	linkId,
 	sourceId,

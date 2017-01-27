@@ -28,7 +28,11 @@ const defaultGraphicalAttributes = {
  * @param {Object} attr
  * @return {Object}
  */
-export const addNode = (nodeId, nodeType, { data = {}, graphicalAttributes = defaultGraphicalAttributes } = {}) => ({
+export const addNode = (
+	nodeId,
+	nodeType,
+	{ data = {}, graphicalAttributes = defaultGraphicalAttributes } = {},
+) => ({
 	type: FLOWDESIGNER_NODE_ADD,
 	nodeId,
 	nodeType,

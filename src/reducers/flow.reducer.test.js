@@ -6,9 +6,6 @@ import * as portActions from '../actions/port.actions';
 import {
 	NodeRecord,
 	PortRecord,
-	SizeRecord,
-	PositionRecord,
-	NodeGraphicalAttributes,
 } from '../constants/flowdesigner.model';
 
 describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS', () => {

@@ -105,7 +105,6 @@ describe('Check node reducer', () => {
 });
 
 describe('FLOWDESIGNER_NODE_APPLY_MOVEMENT', () => {
-
 	const initialState = defaultState.setIn(['nodes', 'id1'], new NodeRecord({
 		id: 'id1',
 		nodeType: 'type1',
