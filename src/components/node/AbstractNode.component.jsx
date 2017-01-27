@@ -64,12 +64,12 @@ export const AbstractNode = React.createClass({
 	statics: { calculatePortPosition },
 	componentDidMount() {
 		this.d3Node = select(this.nodeElement);
-		this.d3Node.data([this.props.node.position]);
+		this.d3Node.data([this.props.node.getIn(['graphicalAttributes', 'position'])]);
 		this.d3Node.call(
 			drag()
 				.on('start', this.onDragStart)
 				.on('drag', this.onDrag)
-				.on('end', this.onDragEnd)
+				.on('end', this.onDragEnd),
 		);
 	},
 	shouldComponentUpdate(nextProps) {
@@ -78,9 +78,9 @@ export const AbstractNode = React.createClass({
 	componentWillUnmount() {
 		this.d3Node.remove();
 	},
-	onClick(event) {
+	onClick(clickEvent) {
 		if (this.props.onClick) {
-			this.props.onClick(event);
+			this.props.onClick(clickEvent);
 		}
 	},
 	onDragStart() {
@@ -89,7 +89,7 @@ export const AbstractNode = React.createClass({
 		}
 	},
 	onDrag() {
-		this.d3Node.data([this.props.node.position]);
+		this.d3Node.data([this.props.node.getIn(['graphicalAttributes', 'position'])]);
 		this.props.moveNodeTo(this.props.node.id, event);
 		if (this.props.onDrag) {
 			this.props.onDrag(event);
