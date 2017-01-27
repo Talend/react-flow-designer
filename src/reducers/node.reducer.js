@@ -32,7 +32,7 @@ const nodeReducer = (state = defaultState, action) => {
 			id: action.nodeId,
 			type: action.nodeType,
 			data: fromJS(action.data),
-			graphicalAttributes: new NodeGraphicalAttributes(action.graphicalAttributes)
+			graphicalAttributes: new NodeGraphicalAttributes(fromJS(action.graphicalAttributes))
 				.set('nodeSize', new SizeRecord(action.graphicalAttributes.nodeSize))
 				.set('position', new PositionRecord(action.graphicalAttributes.position)),
 		}))
