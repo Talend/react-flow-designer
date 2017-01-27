@@ -10,22 +10,21 @@ Object {
   "nodeTypes": Object {},
   "nodes": Object {
     "id": Object {
-      "data": Object {},
-      "description": undefined,
+      "data": undefined,
       "graphicalAttributes": Object {
+        "label": "",
         "nodeSize": Object {
           "height": undefined,
           "width": undefined,
         },
+        "nodeType": "",
         "position": Object {
           "x": undefined,
           "y": undefined,
         },
         "properties": Object {},
-        "type": "MY_NODE_TYPE",
       },
       "id": "id",
-      "label": undefined,
       "type": undefined,
     },
   },
@@ -57,22 +56,21 @@ Object {
   "nodeTypes": Object {},
   "nodes": Object {
     "id": Object {
-      "data": Object {},
-      "description": undefined,
+      "data": undefined,
       "graphicalAttributes": Object {
+        "label": "",
         "nodeSize": Object {
           "height": undefined,
           "width": undefined,
         },
+        "nodeType": "",
         "position": Object {
           "x": 10,
           "y": 10,
         },
         "properties": Object {},
-        "type": undefined,
       },
       "id": "id",
-      "label": undefined,
       "type": undefined,
     },
   },
@@ -103,7 +101,6 @@ Object {
       "data": Object {
         "type": "test",
       },
-      "description": undefined,
       "graphicalAttributes": Object {
         "position": Object {
           "x": 10,
@@ -113,14 +110,12 @@ Object {
         "type": "type1",
       },
       "id": "id1",
-      "label": undefined,
       "type": "type1",
     },
     "id2": Object {
       "data": Object {
         "type": "test",
       },
-      "description": undefined,
       "graphicalAttributes": Object {
         "position": Object {
           "x": 50,
@@ -130,7 +125,6 @@ Object {
         "type": "type2",
       },
       "id": "id2",
-      "label": undefined,
       "type": "type2",
     },
   },
@@ -157,7 +151,6 @@ Object {
       "data": Object {
         "type": "test",
       },
-      "description": undefined,
       "graphicalAttributes": Object {
         "position": Object {
           "x": 10,
@@ -167,7 +160,6 @@ Object {
         "type": "type2",
       },
       "id": "id2",
-      "label": undefined,
       "type": "type2",
     },
   },
@@ -194,7 +186,6 @@ Object {
       "data": Object {
         "type": "test",
       },
-      "description": undefined,
       "graphicalAttributes": Object {
         "position": Object {
           "x": 10,
@@ -204,14 +195,12 @@ Object {
         "type": "type1",
       },
       "id": "id1",
-      "label": undefined,
       "type": "type1",
     },
     "id2": Object {
       "data": Object {
         "type": "test",
       },
-      "description": undefined,
       "graphicalAttributes": Object {
         "position": Object {
           "x": 10,
@@ -221,7 +210,6 @@ Object {
         "type": "type2",
       },
       "id": "id2",
-      "label": undefined,
       "type": "type2",
     },
   },
@@ -248,7 +236,6 @@ Object {
       "data": Object {
         "type": "test",
       },
-      "description": undefined,
       "graphicalAttributes": Object {
         "position": Object {
           "x": 10,
@@ -257,14 +244,12 @@ Object {
         "type": "type1",
       },
       "id": "id1",
-      "label": undefined,
       "type": "type1",
     },
     "id2": Object {
       "data": Object {
         "type": "test",
       },
-      "description": undefined,
       "graphicalAttributes": Object {
         "position": Object {
           "x": 10,
@@ -274,7 +259,6 @@ Object {
         "type": "type2",
       },
       "id": "id2",
-      "label": undefined,
       "type": "type2",
     },
   },
@@ -301,7 +285,6 @@ Object {
       "data": Object {
         "type": "string",
       },
-      "description": undefined,
       "graphicalAttributes": Object {
         "position": Object {
           "x": 10,
@@ -311,14 +294,12 @@ Object {
         "type": "type1",
       },
       "id": "id1",
-      "label": undefined,
       "type": "type1",
     },
     "id2": Object {
       "data": Object {
         "type": "test",
       },
-      "description": undefined,
       "graphicalAttributes": Object {
         "position": Object {
           "x": 10,
@@ -328,7 +309,6 @@ Object {
         "type": "type2",
       },
       "id": "id2",
-      "label": undefined,
       "type": "type2",
     },
   },
@@ -355,7 +335,6 @@ Object {
       "data": Object {
         "type": "test",
       },
-      "description": undefined,
       "graphicalAttributes": Object {
         "position": Object {
           "x": 10,
@@ -365,14 +344,12 @@ Object {
         "type": "type1",
       },
       "id": "id1",
-      "label": undefined,
       "type": "type1",
     },
     "id2": Object {
       "data": Object {
         "type": "test",
       },
-      "description": undefined,
       "graphicalAttributes": Object {
         "position": Object {
           "x": 10,
@@ -382,7 +359,6 @@ Object {
         "type": "type2",
       },
       "id": "id2",
-      "label": undefined,
       "type": "type2",
     },
   },
@@ -409,7 +385,6 @@ Object {
       "data": Object {
         "type": "test",
       },
-      "description": undefined,
       "graphicalAttributes": Object {
         "nodeSize": Object {
           "height": 200,
@@ -423,14 +398,12 @@ Object {
         "type": "type1",
       },
       "id": "id1",
-      "label": undefined,
       "type": "type1",
     },
     "id2": Object {
       "data": Object {
         "type": "test",
       },
-      "description": undefined,
       "graphicalAttributes": Object {
         "position": Object {
           "x": 10,
@@ -440,7 +413,6 @@ Object {
         "type": "type2",
       },
       "id": "id2",
-      "label": undefined,
       "type": "type2",
     },
   },
@@ -465,7 +437,6 @@ Object {
   "nodes": Object {
     "id1": Object {
       "data": Object {},
-      "description": undefined,
       "graphicalAttributes": Object {
         "position": Object {
           "x": NaN,
@@ -474,12 +445,10 @@ Object {
         "selected": true,
       },
       "id": "id1",
-      "label": undefined,
       "type": undefined,
     },
     "id2": Object {
       "data": Object {},
-      "description": undefined,
       "graphicalAttributes": Object {
         "position": Object {
           "x": NaN,
@@ -488,17 +457,14 @@ Object {
         "selected": false,
       },
       "id": "id2",
-      "label": undefined,
       "type": undefined,
     },
     "id3": Object {
       "data": Object {},
-      "description": undefined,
       "graphicalAttributes": Object {
         "selected": false,
       },
       "id": "id3",
-      "label": undefined,
       "type": undefined,
     },
   },

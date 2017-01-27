@@ -16,7 +16,9 @@ describe('<LinksRenderer />', () => {
 			id: 'id',
 			sourceId: 'port1',
 			targetId: 'port2',
-			linkType: 'id',
+			graphicalAttributes: new Map({
+				linkType: 'id',
+			}),
 		}));
 		const ports = new OrderedMap()
 		.set('port1', new PortRecord({

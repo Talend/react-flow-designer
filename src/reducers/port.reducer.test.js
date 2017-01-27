@@ -10,15 +10,15 @@ describe('Check port reducer', () => {
 			id: 'id1',
 			position: new PositionRecord({ x: 10, y: 10 }),
 			data: new Map({ type: 'test' }),
-			graphicalAttributes: new Map().set('attr', 'attr'),
+			graphicalAttributes: new Map({ type: 'test', position: new PositionRecord({ x: 10, y: 10 }) }),
 		}))
 		.set('id2', new PortRecord({
 			id: 'id2',
-			position: new PositionRecord({ x: 10, y: 10 }),
+			graphicalAttributes: new Map({ position: new PositionRecord({ x: 10, y: 10 }) }),
 		}))
 		.set('id3', new PortRecord({
 			id: 'id3',
-			position: new PositionRecord({ x: 10, y: 10 }),
+			graphicalAttributes: new Map({ position: new PositionRecord({ x: 10, y: 10 }) }),
 		})))
 		.set('nodes', new Map().set('nodeId', new Map())).set('links', new Map());
 
@@ -27,8 +27,7 @@ describe('Check port reducer', () => {
 			type: 'FLOWDESIGNER_PORT_ADD',
 			nodeId: 'nodeId',
 			portId: 'portId',
-			portType: 'portType',
-			graphicalAttributes: { type: 'EMITTER' },
+			graphicalAttributes: { portType: 'portType', properties: { type: 'EMITTER' } },
 		})).toMatchSnapshot();
 	});
 
@@ -38,12 +37,10 @@ describe('Check port reducer', () => {
 			nodeId: 'nodeId',
 			ports: [{
 				portId: 'portId1',
-				portType: 'portType',
-				graphicalAttributes: { type: 'EMITTER' },
+				graphicalAttributes: { portType: 'portType', properties: { type: 'EMITTER' } },
 			}, {
 				portId: 'portId2',
-				portType: 'portType',
-				graphicalAttributes: { type: 'SINK' },
+				graphicalAttributes: { portType: 'portType', properties: { type: 'SINK' } },
 			}],
 		})).toMatchSnapshot();
 	});

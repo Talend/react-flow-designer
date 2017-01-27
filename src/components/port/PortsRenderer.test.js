@@ -14,14 +14,14 @@ describe('<PortsRenderer />', () => {
 		const ports = new Map().set('id', new PortRecord({
 			id: 'id',
 			graphicalAttributes: new Map({
-				type: 'id',
+				portType: 'id',
 			}),
 		}));
 		const portTypeMap = {
 			id: { id: 'id', component: MockPort },
 		};
 		const tree = renderer.create(
-			<PortsRenderer ports={ports} portTypeMap={portTypeMap} />
+			<PortsRenderer ports={ports} portTypeMap={portTypeMap} />,
 		).toJSON();
 		expect(tree).toMatchSnapshot();
 	});

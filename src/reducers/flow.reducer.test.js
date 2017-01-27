@@ -123,8 +123,6 @@ describe('FLOWDESIGNER_FLOW_LOAD should reset old flow state and load news not t
 					nodeActions.addNode(
 						'nodeId',
 						undefined,
-						undefined,
-						undefined,
 						{
 							data: {},
 							graphicalAttributes: {
@@ -135,8 +133,6 @@ describe('FLOWDESIGNER_FLOW_LOAD should reset old flow state and load news not t
 					),
 					nodeActions.addNode(
 						'node2',
-						undefined,
-						undefined,
 						undefined,
 						{
 							data: {},
@@ -149,10 +145,11 @@ describe('FLOWDESIGNER_FLOW_LOAD should reset old flow state and load news not t
 					portActions.addPort(
 						'nodeId',
 						'portId',
-						undefined,
 						{
 							graphicalAttributes: {
-								type: 'EMITTER',
+								properties: {
+									type: 'EMITTER',
+								},
 							},
 						},
 					),
@@ -180,7 +177,7 @@ describe('calculatePortsPosition behavior', () => {
 			.set('42', new NodeRecord({
 				id: '42',
 				graphicalAttributes: new Map({
-					type: '42',
+					nodeType: '42',
 				}),
 			})),
 		)

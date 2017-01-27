@@ -42,7 +42,7 @@ export default function linkReducer(state = defaultState, action) {
 			targetId: action.targetId,
 			data: fromJS(action.data),
 			graphicalAttributes: new LinkGraphicalAttributes(action.graphicalAttributes)
-			.set('properties', new Map(action.graphicalAttributes.properties)),
+			.set('properties', fromJS(action.graphicalAttributes && action.graphicalAttributes.properties)),
 		}))
 		// parcourir l'ensemble des parents et set le composant cible en tant que sucessors '
 		.setIn(['childrens', state.getIn(['ports', action.sourceId]).nodeId, state.getIn(['ports', action.targetId]).nodeId], state.getIn(['ports', action.targetId]).nodeId)

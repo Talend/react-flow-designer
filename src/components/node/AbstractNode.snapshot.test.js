@@ -14,7 +14,7 @@ describe('<AbstractNode />', () => {
 	it('renders correctly', () => {
 		const node = new NodeRecord({
 			id: 'id',
-			graphicalAttributes: new Map({
+			graphicalAttributes: new NodeGraphicalAttributes({
 				position: new PositionRecord({ x: 100, y: 100 }),
 				nodeSize: new SizeRecord({ width: 125, height: 75 }),
 			}),
@@ -22,7 +22,7 @@ describe('<AbstractNode />', () => {
 		const tree = renderer.create(
 			<AbstractNode node={node}>
 				<rect />
-			</AbstractNode>
+			</AbstractNode>,
 		).toJSON();
 		expect(tree).toMatchSnapshot();
 	});

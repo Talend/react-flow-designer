@@ -19,51 +19,47 @@ Object {
         "type": "test",
       },
       "graphicalAttributes": Object {
-        "attr": "attr",
+        "position": Object {
+          "x": 10,
+          "y": 10,
+        },
+        "type": "test",
       },
       "id": "id1",
       "nodeId": undefined,
-      "portType": undefined,
-      "position": Object {
-        "x": 10,
-        "y": 10,
-      },
     },
     "id2": Object {
       "data": Object {},
       "graphicalAttributes": Object {
-        "type": undefined,
+        "position": Object {
+          "x": 10,
+          "y": 10,
+        },
       },
       "id": "id2",
       "nodeId": undefined,
-      "portType": undefined,
-      "position": Object {
-        "x": 10,
-        "y": 10,
-      },
     },
     "id3": Object {
       "data": Object {},
       "graphicalAttributes": Object {
-        "type": undefined,
+        "position": Object {
+          "x": 10,
+          "y": 10,
+        },
       },
       "id": "id3",
       "nodeId": undefined,
-      "portType": undefined,
-      "position": Object {
-        "x": 10,
-        "y": 10,
-      },
     },
     "portId": Object {
-      "data": Object {},
+      "data": undefined,
       "graphicalAttributes": Object {
-        "type": "EMITTER",
+        "portType": "portType",
+        "properties": Object {
+          "type": "EMITTER",
+        },
       },
       "id": "portId",
       "nodeId": "nodeId",
-      "portType": "portType",
-      "position": undefined,
     },
   },
   "transform": Object {
@@ -100,61 +96,58 @@ Object {
         "type": "test",
       },
       "graphicalAttributes": Object {
-        "attr": "attr",
+        "position": Object {
+          "x": 10,
+          "y": 10,
+        },
+        "type": "test",
       },
       "id": "id1",
       "nodeId": undefined,
-      "portType": undefined,
-      "position": Object {
-        "x": 10,
-        "y": 10,
-      },
     },
     "id2": Object {
       "data": Object {},
       "graphicalAttributes": Object {
-        "type": undefined,
+        "position": Object {
+          "x": 10,
+          "y": 10,
+        },
       },
       "id": "id2",
       "nodeId": undefined,
-      "portType": undefined,
-      "position": Object {
-        "x": 10,
-        "y": 10,
-      },
     },
     "id3": Object {
       "data": Object {},
       "graphicalAttributes": Object {
-        "type": undefined,
+        "position": Object {
+          "x": 10,
+          "y": 10,
+        },
       },
       "id": "id3",
       "nodeId": undefined,
-      "portType": undefined,
-      "position": Object {
-        "x": 10,
-        "y": 10,
-      },
     },
     "portId1": Object {
-      "data": Object {},
+      "data": undefined,
       "graphicalAttributes": Object {
-        "type": "EMITTER",
+        "portType": "portType",
+        "properties": Object {
+          "type": "EMITTER",
+        },
       },
       "id": "portId1",
       "nodeId": "nodeId",
-      "portType": "portType",
-      "position": undefined,
     },
     "portId2": Object {
-      "data": Object {},
+      "data": undefined,
       "graphicalAttributes": Object {
-        "type": "SINK",
+        "portType": "portType",
+        "properties": Object {
+          "type": "SINK",
+        },
       },
       "id": "portId2",
       "nodeId": "nodeId",
-      "portType": "portType",
-      "position": undefined,
     },
   },
   "transform": Object {
@@ -181,28 +174,24 @@ Object {
     "id2": Object {
       "data": Object {},
       "graphicalAttributes": Object {
-        "type": undefined,
+        "position": Object {
+          "x": 10,
+          "y": 10,
+        },
       },
       "id": "id2",
       "nodeId": undefined,
-      "portType": undefined,
-      "position": Object {
-        "x": 10,
-        "y": 10,
-      },
     },
     "id3": Object {
       "data": Object {},
       "graphicalAttributes": Object {
-        "type": undefined,
+        "position": Object {
+          "x": 10,
+          "y": 10,
+        },
       },
       "id": "id3",
       "nodeId": undefined,
-      "portType": undefined,
-      "position": Object {
-        "x": 10,
-        "y": 10,
-      },
     },
   },
   "transform": Object {
@@ -229,41 +218,36 @@ Object {
     "id1": Object {
       "data": Object {},
       "graphicalAttributes": Object {
-        "attr": "attr",
+        "position": Object {
+          "x": 10,
+          "y": 10,
+        },
+        "type": "test",
       },
       "id": "id1",
       "nodeId": undefined,
-      "portType": undefined,
-      "position": Object {
-        "x": 10,
-        "y": 10,
-      },
     },
     "id2": Object {
       "data": Object {},
       "graphicalAttributes": Object {
-        "type": undefined,
+        "position": Object {
+          "x": 10,
+          "y": 10,
+        },
       },
       "id": "id2",
       "nodeId": undefined,
-      "portType": undefined,
-      "position": Object {
-        "x": 10,
-        "y": 10,
-      },
     },
     "id3": Object {
       "data": Object {},
       "graphicalAttributes": Object {
-        "type": undefined,
+        "position": Object {
+          "x": 10,
+          "y": 10,
+        },
       },
       "id": "id3",
       "nodeId": undefined,
-      "portType": undefined,
-      "position": Object {
-        "x": 10,
-        "y": 10,
-      },
     },
   },
   "transform": Object {
@@ -291,40 +275,37 @@ Object {
       "data": Object {
         "type": "test",
       },
-      "graphicalAttributes": Object {},
+      "graphicalAttributes": Object {
+        "position": Object {
+          "x": 10,
+          "y": 10,
+        },
+        "type": "test",
+      },
       "id": "id1",
       "nodeId": undefined,
-      "portType": undefined,
-      "position": Object {
-        "x": 10,
-        "y": 10,
-      },
     },
     "id2": Object {
       "data": Object {},
       "graphicalAttributes": Object {
-        "type": undefined,
+        "position": Object {
+          "x": 10,
+          "y": 10,
+        },
       },
       "id": "id2",
       "nodeId": undefined,
-      "portType": undefined,
-      "position": Object {
-        "x": 10,
-        "y": 10,
-      },
     },
     "id3": Object {
       "data": Object {},
       "graphicalAttributes": Object {
-        "type": undefined,
+        "position": Object {
+          "x": 10,
+          "y": 10,
+        },
       },
       "id": "id3",
       "nodeId": undefined,
-      "portType": undefined,
-      "position": Object {
-        "x": 10,
-        "y": 10,
-      },
     },
   },
   "transform": Object {
@@ -353,41 +334,36 @@ Object {
         "type": "string",
       },
       "graphicalAttributes": Object {
-        "attr": "attr",
+        "position": Object {
+          "x": 10,
+          "y": 10,
+        },
+        "type": "test",
       },
       "id": "id1",
       "nodeId": undefined,
-      "portType": undefined,
-      "position": Object {
-        "x": 10,
-        "y": 10,
-      },
     },
     "id2": Object {
       "data": Object {},
       "graphicalAttributes": Object {
-        "type": undefined,
+        "position": Object {
+          "x": 10,
+          "y": 10,
+        },
       },
       "id": "id2",
       "nodeId": undefined,
-      "portType": undefined,
-      "position": Object {
-        "x": 10,
-        "y": 10,
-      },
     },
     "id3": Object {
       "data": Object {},
       "graphicalAttributes": Object {
-        "type": undefined,
+        "position": Object {
+          "x": 10,
+          "y": 10,
+        },
       },
       "id": "id3",
       "nodeId": undefined,
-      "portType": undefined,
-      "position": Object {
-        "x": 10,
-        "y": 10,
-      },
     },
   },
   "transform": Object {
@@ -416,42 +392,37 @@ Object {
         "type": "test",
       },
       "graphicalAttributes": Object {
-        "attr": "attr",
+        "position": Object {
+          "x": 10,
+          "y": 10,
+        },
         "selected": true,
+        "type": "test",
       },
       "id": "id1",
       "nodeId": undefined,
-      "portType": undefined,
-      "position": Object {
-        "x": 10,
-        "y": 10,
-      },
     },
     "id2": Object {
       "data": Object {},
       "graphicalAttributes": Object {
-        "type": undefined,
+        "position": Object {
+          "x": 10,
+          "y": 10,
+        },
       },
       "id": "id2",
       "nodeId": undefined,
-      "portType": undefined,
-      "position": Object {
-        "x": 10,
-        "y": 10,
-      },
     },
     "id3": Object {
       "data": Object {},
       "graphicalAttributes": Object {
-        "type": undefined,
+        "position": Object {
+          "x": 10,
+          "y": 10,
+        },
       },
       "id": "id3",
       "nodeId": undefined,
-      "portType": undefined,
-      "position": Object {
-        "x": 10,
-        "y": 10,
-      },
     },
   },
   "transform": Object {
