@@ -69,7 +69,7 @@ const nodeReducer = (state = defaultState, action) => {
 		if (!state.getIn(['nodes', action.nodeId])) {
 			invariant(false, `Can't set a graphical attribute on non existing node ${action.nodeId}`);
 		}
-		return state.mergeIn(['nodes', action.nodeId, 'graphicalAttributes'], new Map(action.graphicalAttributes));
+		return state.mergeIn(['nodes', action.nodeId, 'graphicalAttributes'], fromJS(action.graphicalAttributes));
 	case FLOWDESIGNER_NODE_REMOVE_GRAPHICAL_ATTRIBUTES:
 		if (!state.getIn(['nodes', action.nodeId])) {
 			invariant(false, `Can't remove a graphical attribute on non existing node ${action.nodeId}`);
@@ -79,7 +79,7 @@ const nodeReducer = (state = defaultState, action) => {
 		if (!state.getIn(['nodes', action.nodeId])) {
 			invariant(false, `Can't set a data on non existing node ${action.nodeId}`);
 		}
-		return state.mergeIn(['nodes', action.nodeId, 'data'], new Map(action.data));
+		return state.mergeIn(['nodes', action.nodeId, 'data'], fromJS(action.data));
 	case FLOWDESIGNER_NODE_REMOVE_DATA:
 		if (!state.getIn(['nodes', action.nodeId])) {
 			invariant(false, `Can't remove a data on non existing node ${action.nodeId}`);

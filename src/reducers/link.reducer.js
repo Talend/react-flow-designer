@@ -48,7 +48,7 @@ export default function linkReducer(state = defaultState, action) {
 		.setIn(['childrens', state.getIn(['ports', action.sourceId]).nodeId, state.getIn(['ports', action.targetId]).nodeId], state.getIn(['ports', action.targetId]).nodeId)
 		.setIn(['parents', state.getIn(['ports', action.targetId]).nodeId, state.getIn(['ports', action.sourceId]).nodeId], state.getIn(['ports', action.sourceId]).nodeId)
 		.setIn(['out', state.getIn(['ports', action.sourceId]).nodeId, action.sourceId, action.linkId], action.linkId)
-		.setIn(['in', state.getIn(['ports', action.targetId]).nodeId, action.targetId, action.linkId], action.linkId)
+		.setIn(['in', state.getIn(['ports', action.targetId]).nodeId, action.targetId, action.linkId], action.linkId);
 	case FLOWDESIGNER_LINK_SET_TARGET:
 		if (!state.getIn(['links', action.linkId])) {
 			invariant(
@@ -65,7 +65,7 @@ export default function linkReducer(state = defaultState, action) {
 		.deleteIn(['in', state.getIn(['ports', state.getIn(['links', action.linkId]).targetId]).nodeId, state.getIn(['links', action.linkId]).targetId, action.linkId])
 		.setIn(['in', state.getIn(['ports', action.targetId]).nodeId, action.targetId, action.linkId], action.linkId)
 		.deleteIn(['childrens', state.getIn(['ports', state.getIn(['links', action.linkId]).sourceId]).nodeId, state.getIn(['ports', state.getIn(['links', action.linkId]).targetId]).nodeId])
-		.setIn(['childrens', state.getIn(['ports', state.getIn(['links', action.linkId]).sourceId]).nodeId, state.getIn(['ports', action.targetId]).nodeId])
+		.setIn(['childrens', state.getIn(['ports', state.getIn(['links', action.linkId]).sourceId]).nodeId, state.getIn(['ports', action.targetId]).nodeId]);
 	case FLOWDESIGNER_LINK_SET_SOURCE:
 		if (!state.getIn(['links', action.linkId])) {
 			invariant(
@@ -83,7 +83,7 @@ export default function linkReducer(state = defaultState, action) {
 		.deleteIn(['out', state.getIn(['ports', state.getIn(['links', action.linkId]).sourceId]).nodeId, state.getIn(['links', action.linkId]).sourceId, action.linkId])
 		.setIn(['out', state.getIn(['ports', action.sourceId]).nodeId, action.sourceId, action.linkId], action.linkId)
 		.deleteIn(['parents', state.getIn(['ports', state.getIn(['links', action.linkId]).targetId]).nodeId, state.getIn(['ports', state.getIn(['links', action.linkId]).sourceId]).nodeId])
-		.setIn(['parents', state.getIn(['ports', state.getIn(['links', action.linkId]).targetId]).nodeId, state.getIn(['ports', action.sourceId]).nodeId])
+		.setIn(['parents', state.getIn(['ports', state.getIn(['links', action.linkId]).targetId]).nodeId, state.getIn(['ports', action.sourceId]).nodeId]);
 	case FLOWDESIGNER_LINK_REMOVE:
 		if (!state.getIn(['links', action.linkId])) {
 			invariant(
@@ -119,7 +119,7 @@ export default function linkReducer(state = defaultState, action) {
 					false,
 					`Can't set an attribute on non existing link ${action.linkId}`);
 		}
-		return state.mergeIn(['links', action.linkId, 'graphicalAttributes'], new Map(action.graphicalAttributes));
+		return state.mergeIn(['links', action.linkId, 'graphicalAttributes'], fromJS(action.graphicalAttributes));
 	case FLOWDESIGNER_LINK_REMOVE_GRAPHICAL_ATTRIBUTES:
 		if (!state.getIn(['links', action.linkId])) {
 			invariant(
@@ -134,7 +134,7 @@ export default function linkReducer(state = defaultState, action) {
 					false,
 					`Can't set an attribute on non existing link ${action.linkId}`);
 		}
-		return state.mergeIn(['links', action.linkId, 'data'], new Map(action.data));
+		return state.mergeIn(['links', action.linkId, 'data'], fromJS(action.data));
 	case FLOWDESIGNER_LINK_REMOVE_DATA:
 		if (!state.getIn(['links', action.linkId])) {
 			invariant(
