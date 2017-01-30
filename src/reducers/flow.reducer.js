@@ -58,7 +58,7 @@ export const reducer = (state, action) => {
 			);
 		} catch (error) {
 			invariant(
-				false,
+				true,
 				`Something happenned preventing FLOWDESIGNER_FLOW_LOAD to be applied :${error}`,
 			);
 			return state;
