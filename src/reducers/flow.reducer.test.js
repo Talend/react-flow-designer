@@ -37,8 +37,6 @@ describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS', () => {
 				nodeActions.addNode(
 					'nodeId',
 					undefined,
-					undefined,
-					undefined,
 					{
 						data: {},
 						graphicalAttributes: {
@@ -49,8 +47,6 @@ describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS', () => {
 				),
 				nodeActions.addNode(
 					'node2',
-					undefined,
-					undefined,
 					undefined,
 					{
 						data: {},
@@ -63,8 +59,13 @@ describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS', () => {
 				portActions.addPort(
 					'nodeId',
 					'portId',
-					undefined,
-					{},
+					{
+						graphicalAttributes: {
+							properties: {
+								type: 'EMITTER',
+							},
+						},
+					},
 				),
 			],
 		})).toMatchSnapshot();
@@ -77,8 +78,6 @@ describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS', () => {
 				nodeActions.addNode(
 					'nodeId',
 					undefined,
-					undefined,
-					undefined,
 					{
 						data: {},
 						graphicalAttributes: {
@@ -89,8 +88,6 @@ describe('FLOWDESIGNER_FLOW_ADD_ELEMENTS', () => {
 				),
 				nodeActions.addNode(
 					'node2',
-					undefined,
-					undefined,
 					undefined,
 					{
 						data: {},

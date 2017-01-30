@@ -8,7 +8,6 @@ describe('Check port reducer', () => {
 	const initialState = defaultState.set('ports', new OrderedMap()
 		.set('id1', new PortRecord({
 			id: 'id1',
-			position: new PositionRecord({ x: 10, y: 10 }),
 			data: new Map({ type: 'test' }),
 			graphicalAttributes: new Map({ type: 'test', position: new PositionRecord({ x: 10, y: 10 }) }),
 		}))

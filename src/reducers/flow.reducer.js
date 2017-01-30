@@ -109,7 +109,11 @@ export const calculatePortsPosition = (state, action) => {
 				.calculatePortPosition;
 			return cumulativeState.mergeIn(
 				['ports'],
-				calculatePortPosition(ports, node.getIn(['graphicalAttributes', 'position']), node.getIn(['graphicalAttributes', 'nodeSize'])),
+				calculatePortPosition(
+					ports,
+					node.getIn(['graphicalAttributes', 'position']),
+					node.getIn(['graphicalAttributes', 'nodeSize'])
+				),
 			);
 		}, state);
 	}

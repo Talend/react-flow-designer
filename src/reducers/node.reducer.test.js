@@ -17,7 +17,6 @@ describe('Check node reducer', () => {
 	})).setIn(['nodes', 'id2'], new NodeRecord({
 		id: 'id2',
 		type: 'type2',
-		position: new PositionRecord({ x: 10, y: 10 }),
 		data: new Map({ type: 'test' }),
 		graphicalAttributes: new Map({
 			type: 'type2',

@@ -118,7 +118,8 @@ export const AbstractNode = React.createClass({
 			<g>
 				<g
 					transform={transform}
-					ref={c => (this.nodeElement = c)} onClick={this.onClick}
+					ref={c => (this.nodeElement = c)}
+					onClick={this.onClick}
 				>
 					{this.renderContent()}
 				</g>
