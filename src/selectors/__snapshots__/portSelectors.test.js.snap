@@ -1,7 +1,9 @@
 exports[`getEmitterPorts return a map with port id2 && id4 1`] = `
 Object {
   "id2": Object {
-    "data": Object {},
+    "data": Object {
+      "properties": Object {},
+    },
     "graphicalAttributes": Object {
       "properties": Object {
         "type": "EMITTER",
@@ -11,7 +13,9 @@ Object {
     "nodeId": "nodeId1",
   },
   "id4": Object {
-    "data": Object {},
+    "data": Object {
+      "properties": Object {},
+    },
     "graphicalAttributes": Object {
       "properties": Object {
         "type": "EMITTER",
@@ -26,7 +30,9 @@ Object {
 exports[`getEmitterPortsForNode return a map with port id2 1`] = `
 Object {
   "id2": Object {
-    "data": Object {},
+    "data": Object {
+      "properties": Object {},
+    },
     "graphicalAttributes": Object {
       "properties": Object {
         "type": "EMITTER",
@@ -41,7 +47,9 @@ Object {
 exports[`getSinkPorts return a map with port id1 & id3 1`] = `
 Object {
   "id1": Object {
-    "data": Object {},
+    "data": Object {
+      "properties": Object {},
+    },
     "graphicalAttributes": Object {
       "properties": Object {
         "type": "SINK",
@@ -51,7 +59,9 @@ Object {
     "nodeId": "nodeId1",
   },
   "id3": Object {
-    "data": Object {},
+    "data": Object {
+      "properties": Object {},
+    },
     "graphicalAttributes": Object {
       "properties": Object {
         "type": "SINK",

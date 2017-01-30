@@ -10,14 +10,17 @@ Object {
   "nodeTypes": Object {},
   "nodes": Object {
     "id": Object {
-      "data": undefined,
+      "data": Object {
+        "properties": Object {},
+      },
       "graphicalAttributes": Object {
+        "description": "",
         "label": "",
         "nodeSize": Object {
           "height": undefined,
           "width": undefined,
         },
-        "nodeType": "",
+        "nodeType": undefined,
         "position": Object {
           "x": undefined,
           "y": undefined,
@@ -56,14 +59,17 @@ Object {
   "nodeTypes": Object {},
   "nodes": Object {
     "id": Object {
-      "data": undefined,
+      "data": Object {
+        "properties": Object {},
+      },
       "graphicalAttributes": Object {
+        "description": "",
         "label": "",
         "nodeSize": Object {
           "height": undefined,
           "width": undefined,
         },
-        "nodeType": "",
+        "nodeType": undefined,
         "position": Object {
           "x": 10,
           "y": 10,
@@ -436,7 +442,9 @@ Object {
   "nodeTypes": Object {},
   "nodes": Object {
     "id1": Object {
-      "data": Object {},
+      "data": Object {
+        "properties": Object {},
+      },
       "graphicalAttributes": Object {
         "position": Object {
           "x": NaN,
@@ -448,7 +456,9 @@ Object {
       "type": undefined,
     },
     "id2": Object {
-      "data": Object {},
+      "data": Object {
+        "properties": Object {},
+      },
       "graphicalAttributes": Object {
         "position": Object {
           "x": NaN,
@@ -460,7 +470,9 @@ Object {
       "type": undefined,
     },
     "id3": Object {
-      "data": Object {},
+      "data": Object {
+        "properties": Object {},
+      },
       "graphicalAttributes": Object {
         "selected": false,
       },

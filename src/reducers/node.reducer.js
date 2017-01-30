@@ -17,8 +17,7 @@ import {
 	FLOWDESIGNER_NODE_REMOVE,
 } from '../constants/flowdesigner.constants';
 import {
-	NodeRecord, PositionRecord, SizeRecord, NodeGraphicalAttributes
-	,
+	NodeRecord, PositionRecord, SizeRecord, NodeGraphicalAttributes, NodeData,
 } from '../constants/flowdesigner.model';
 
 const defaultState = new Map();
@@ -31,10 +30,12 @@ const nodeReducer = (state = defaultState, action) => {
 		return state.setIn(['nodes', action.nodeId], new NodeRecord({
 			id: action.nodeId,
 			type: action.nodeType,
-			data: fromJS(action.data),
+			data: new NodeData(action.data)
+				.set('properties', fromJS(action.data && action.data.properties) || new Map()),
 			graphicalAttributes: new NodeGraphicalAttributes(fromJS(action.graphicalAttributes))
 				.set('nodeSize', new SizeRecord(action.graphicalAttributes.nodeSize))
-				.set('position', new PositionRecord(action.graphicalAttributes.position)),
+				.set('position', new PositionRecord(action.graphicalAttributes.position))
+				.set('properties', fromJS(action.graphicalAttributes.properties || new Map())),
 		}))
 		.setIn(['out', action.nodeId], new Map())
 		.setIn(['in', action.nodeId], new Map())

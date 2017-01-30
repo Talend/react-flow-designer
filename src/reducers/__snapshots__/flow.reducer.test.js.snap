@@ -12,14 +12,17 @@ Object {
   "nodeTypes": Object {},
   "nodes": Object {
     "node2": Object {
-      "data": Object {},
+      "data": Object {
+        "properties": Object {},
+      },
       "graphicalAttributes": Object {
+        "description": "",
         "label": "",
         "nodeSize": Object {
           "height": 10,
           "width": 10,
         },
-        "nodeType": "",
+        "nodeType": undefined,
         "position": Object {
           "x": 10,
           "y": 10,
@@ -30,14 +33,17 @@ Object {
       "type": undefined,
     },
     "nodeId": Object {
-      "data": Object {},
+      "data": Object {
+        "properties": Object {},
+      },
       "graphicalAttributes": Object {
+        "description": "",
         "label": "",
         "nodeSize": Object {
           "height": 10,
           "width": 10,
         },
-        "nodeType": "",
+        "nodeType": undefined,
         "position": Object {
           "x": 10,
           "y": 10,
@@ -91,8 +97,11 @@ Object {
   "nodeTypes": Object {},
   "nodes": Object {
     "nodeId": Object {
-      "data": Object {},
+      "data": Object {
+        "properties": Object {},
+      },
       "graphicalAttributes": Object {
+        "description": "",
         "label": "",
         "nodeSize": Object {
           "height": undefined,
@@ -158,14 +167,17 @@ Object {
   "nodeTypes": Object {},
   "nodes": Object {
     "node2": Object {
-      "data": Object {},
+      "data": Object {
+        "properties": Object {},
+      },
       "graphicalAttributes": Object {
+        "description": "",
         "label": "",
         "nodeSize": Object {
           "height": 10,
           "width": 10,
         },
-        "nodeType": "",
+        "nodeType": undefined,
         "position": Object {
           "x": 10,
           "y": 10,
@@ -176,14 +188,17 @@ Object {
       "type": undefined,
     },
     "nodeId": Object {
-      "data": Object {},
+      "data": Object {
+        "properties": Object {},
+      },
       "graphicalAttributes": Object {
+        "description": "",
         "label": "",
         "nodeSize": Object {
           "height": 10,
           "width": 10,
         },
-        "nodeType": "",
+        "nodeType": undefined,
         "position": Object {
           "x": 10,
           "y": 10,
