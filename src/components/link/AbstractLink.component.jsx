@@ -45,7 +45,7 @@ const AbstractLink = React.createClass({
 			nextProps.target !== this.props.target ||
 			nextProps.targetHandlePosition !== this.props.targetHandlePosition;
 	},
-	renderLinkSourcehandle() {
+	renderLinkSourceHandle() {
 		if (this.props.linkSourceHandleComponent) {
 			return (<LinkHandle
 				component={this.props.linkSourceHandleComponent}
@@ -77,7 +77,7 @@ const AbstractLink = React.createClass({
 		return (
 			<g>
 				{newChildren}
-				{this.renderLinkSourcehandle()}
+				{this.renderLinkSourceHandle()}
 				{this.renderLinkTargetHandle()}
 			</g>
 		);
