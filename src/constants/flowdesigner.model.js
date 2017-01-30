@@ -39,7 +39,6 @@ export const LinkRecord = new Record({
 	id: undefined,
 	sourceId: undefined,
 	targetId: undefined,
-	linkType: undefined,
 	data: new Map(),
 	graphicalAttributes: new LinkGraphicalAttributes(),
 });
