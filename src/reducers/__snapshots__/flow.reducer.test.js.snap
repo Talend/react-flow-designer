@@ -66,8 +66,16 @@ Object {
   },
   "ports": Object {
     "portId": Object {
-      "data": Object {},
+      "data": Object {
+        "flowType": undefined,
+        "properties": Object {},
+      },
       "graphicalAttributes": Object {
+        "portType": undefined,
+        "position": Object {
+          "x": undefined,
+          "y": undefined,
+        },
         "properties": Object {
           "type": "EMITTER",
         },
@@ -221,8 +229,16 @@ Object {
   },
   "ports": Object {
     "portId": Object {
-      "data": Object {},
+      "data": Object {
+        "flowType": undefined,
+        "properties": Object {},
+      },
       "graphicalAttributes": Object {
+        "portType": undefined,
+        "position": Object {
+          "x": undefined,
+          "y": undefined,
+        },
         "properties": Object {
           "type": "EMITTER",
         },

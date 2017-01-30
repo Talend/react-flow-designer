@@ -1,7 +1,7 @@
 import invariant from 'invariant';
 import { Map, OrderedMap, fromJS } from 'immutable';
 import {
-	PortRecord,
+	PortRecord, PortData, PortGraphicalAttributes, PositionRecord,
 } from '../constants/flowdesigner.model';
 import { removeLink } from '../actions/link.actions';
 import linkReducer from './link.reducer';
@@ -23,10 +23,13 @@ const setPort = (state, port) => {
 	const newState = state.setIn(['ports', port.id], new PortRecord({
 		id: port.id,
 		nodeId: port.nodeId,
-		data: fromJS(port.data),
-		graphicalAttributes: fromJS(port.graphicalAttributes),
+		data: new PortData(port.data)
+			.set('properties', fromJS(port.data && port.data.properties) || new Map()),
+		graphicalAttributes: new PortGraphicalAttributes(port.graphicalAttributes)
+			.set('position', new PositionRecord(port.graphicalAttributes.position))
+			.set('properties', fromJS(port.graphicalAttributes && port.graphicalAttributes.properties) || new Map()),
 	}));
-	const type = port.graphicalAttributes.getIn(['properties', 'type']);
+	const type = port.graphicalAttributes.properties.type;
 	if (type === 'EMITTER') {
 		return newState.setIn(['out', port.nodeId, port.id], new Map());
 	} else if (type === 'SINK') {
@@ -49,8 +52,8 @@ export default function portReducer(state = defaultState, action) {
 		return setPort(state, {
 			id: action.portId,
 			nodeId: action.nodeId,
-			data: fromJS(action.data),
-			graphicalAttributes: fromJS(action.graphicalAttributes),
+			data: action.data,
+			graphicalAttributes: action.graphicalAttributes,
 		});
 	case FLOWDESIGNER_PORT_ADDS:
 		if (!state.getIn(['nodes', action.nodeId])) {
@@ -62,8 +65,8 @@ export default function portReducer(state = defaultState, action) {
 					setPort(cumulatedState, {
 						id: port.portId,
 						nodeId: action.nodeId,
-						data: fromJS(port.data),
-						graphicalAttributes: fromJS(port.graphicalAttributes),
+						data: port.data,
+						graphicalAttributes: port.graphicalAttributes,
 					})
 				, state);
 	case FLOWDESIGNER_PORT_SET_GRAPHICAL_ATTRIBUTES:

@@ -45,6 +45,7 @@ export const PortGraphicalAttributes = new Record({
 
 export const PortData = new Record({
 	properties: new Map(),
+	flowType: undefined,
 });
 
 export const NodeRecord = new Record({

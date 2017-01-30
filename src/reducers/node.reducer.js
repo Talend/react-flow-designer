@@ -35,7 +35,7 @@ const nodeReducer = (state = defaultState, action) => {
 			graphicalAttributes: new NodeGraphicalAttributes(fromJS(action.graphicalAttributes))
 				.set('nodeSize', new SizeRecord(action.graphicalAttributes.nodeSize))
 				.set('position', new PositionRecord(action.graphicalAttributes.position))
-				.set('properties', fromJS(action.graphicalAttributes.properties || new Map())),
+				.set('properties', fromJS(action.graphicalAttributes.properties) || new Map()),
 		}))
 		.setIn(['out', action.nodeId], new Map())
 		.setIn(['in', action.nodeId], new Map())

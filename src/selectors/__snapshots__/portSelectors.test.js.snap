@@ -2,6 +2,7 @@ exports[`getEmitterPorts return a map with port id2 && id4 1`] = `
 Object {
   "id2": Object {
     "data": Object {
+      "flowType": undefined,
       "properties": Object {},
     },
     "graphicalAttributes": Object {
@@ -14,6 +15,7 @@ Object {
   },
   "id4": Object {
     "data": Object {
+      "flowType": undefined,
       "properties": Object {},
     },
     "graphicalAttributes": Object {
@@ -31,6 +33,7 @@ exports[`getEmitterPortsForNode return a map with port id2 1`] = `
 Object {
   "id2": Object {
     "data": Object {
+      "flowType": undefined,
       "properties": Object {},
     },
     "graphicalAttributes": Object {
@@ -48,6 +51,7 @@ exports[`getSinkPorts return a map with port id1 & id3 1`] = `
 Object {
   "id1": Object {
     "data": Object {
+      "flowType": undefined,
       "properties": Object {},
     },
     "graphicalAttributes": Object {
@@ -60,6 +64,7 @@ Object {
   },
   "id3": Object {
     "data": Object {
+      "flowType": undefined,
       "properties": Object {},
     },
     "graphicalAttributes": Object {

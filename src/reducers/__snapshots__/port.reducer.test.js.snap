@@ -30,6 +30,7 @@ Object {
     },
     "id2": Object {
       "data": Object {
+        "flowType": undefined,
         "properties": Object {},
       },
       "graphicalAttributes": Object {
@@ -43,6 +44,7 @@ Object {
     },
     "id3": Object {
       "data": Object {
+        "flowType": undefined,
         "properties": Object {},
       },
       "graphicalAttributes": Object {
@@ -55,9 +57,16 @@ Object {
       "nodeId": undefined,
     },
     "portId": Object {
-      "data": undefined,
+      "data": Object {
+        "flowType": undefined,
+        "properties": Object {},
+      },
       "graphicalAttributes": Object {
         "portType": "portType",
+        "position": Object {
+          "x": undefined,
+          "y": undefined,
+        },
         "properties": Object {
           "type": "EMITTER",
         },
@@ -111,6 +120,7 @@ Object {
     },
     "id2": Object {
       "data": Object {
+        "flowType": undefined,
         "properties": Object {},
       },
       "graphicalAttributes": Object {
@@ -124,6 +134,7 @@ Object {
     },
     "id3": Object {
       "data": Object {
+        "flowType": undefined,
         "properties": Object {},
       },
       "graphicalAttributes": Object {
@@ -136,9 +147,16 @@ Object {
       "nodeId": undefined,
     },
     "portId1": Object {
-      "data": undefined,
+      "data": Object {
+        "flowType": undefined,
+        "properties": Object {},
+      },
       "graphicalAttributes": Object {
         "portType": "portType",
+        "position": Object {
+          "x": undefined,
+          "y": undefined,
+        },
         "properties": Object {
           "type": "EMITTER",
         },
@@ -147,9 +165,16 @@ Object {
       "nodeId": "nodeId",
     },
     "portId2": Object {
-      "data": undefined,
+      "data": Object {
+        "flowType": undefined,
+        "properties": Object {},
+      },
       "graphicalAttributes": Object {
         "portType": "portType",
+        "position": Object {
+          "x": undefined,
+          "y": undefined,
+        },
         "properties": Object {
           "type": "SINK",
         },
@@ -181,6 +206,7 @@ Object {
   "ports": Object {
     "id2": Object {
       "data": Object {
+        "flowType": undefined,
         "properties": Object {},
       },
       "graphicalAttributes": Object {
@@ -194,6 +220,7 @@ Object {
     },
     "id3": Object {
       "data": Object {
+        "flowType": undefined,
         "properties": Object {},
       },
       "graphicalAttributes": Object {
@@ -241,6 +268,7 @@ Object {
     },
     "id2": Object {
       "data": Object {
+        "flowType": undefined,
         "properties": Object {},
       },
       "graphicalAttributes": Object {
@@ -254,6 +282,7 @@ Object {
     },
     "id3": Object {
       "data": Object {
+        "flowType": undefined,
         "properties": Object {},
       },
       "graphicalAttributes": Object {
@@ -303,6 +332,7 @@ Object {
     },
     "id2": Object {
       "data": Object {
+        "flowType": undefined,
         "properties": Object {},
       },
       "graphicalAttributes": Object {
@@ -316,6 +346,7 @@ Object {
     },
     "id3": Object {
       "data": Object {
+        "flowType": undefined,
         "properties": Object {},
       },
       "graphicalAttributes": Object {
@@ -365,6 +396,7 @@ Object {
     },
     "id2": Object {
       "data": Object {
+        "flowType": undefined,
         "properties": Object {},
       },
       "graphicalAttributes": Object {
@@ -378,6 +410,7 @@ Object {
     },
     "id3": Object {
       "data": Object {
+        "flowType": undefined,
         "properties": Object {},
       },
       "graphicalAttributes": Object {
@@ -428,6 +461,7 @@ Object {
     },
     "id2": Object {
       "data": Object {
+        "flowType": undefined,
         "properties": Object {},
       },
       "graphicalAttributes": Object {
@@ -441,6 +475,7 @@ Object {
     },
     "id3": Object {
       "data": Object {
+        "flowType": undefined,
         "properties": Object {},
       },
       "graphicalAttributes": Object {
