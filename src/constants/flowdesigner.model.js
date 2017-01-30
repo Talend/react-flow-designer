@@ -49,7 +49,6 @@ export const PortRecord = new Record({
 	nodeId: undefined,
 	data: new Map(),
 	graphicalAttributes: new Map({
-		type: undefined,
 		position: PositionRecord,
 		portType: undefined,
 	}),

@@ -116,7 +116,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id1",
       "nodeId": "id1",
@@ -126,7 +125,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id2",
       "nodeId": "id2",
@@ -136,7 +134,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id3",
       "nodeId": "id2",
@@ -146,7 +143,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id4",
       "nodeId": "id1",
@@ -156,7 +152,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id5",
       "nodeId": "id3",
@@ -166,7 +161,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id6",
       "nodeId": undefined,
@@ -324,7 +318,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id1",
       "nodeId": "id1",
@@ -334,7 +327,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id2",
       "nodeId": "id2",
@@ -344,7 +336,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id3",
       "nodeId": "id2",
@@ -354,7 +345,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id4",
       "nodeId": "id1",
@@ -364,7 +354,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id5",
       "nodeId": "id3",
@@ -374,7 +363,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id6",
       "nodeId": undefined,
@@ -467,7 +455,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id1",
       "nodeId": "id1",
@@ -477,7 +464,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id2",
       "nodeId": "id2",
@@ -487,7 +473,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id3",
       "nodeId": "id2",
@@ -497,7 +482,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id4",
       "nodeId": "id1",
@@ -507,7 +491,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id5",
       "nodeId": "id3",
@@ -517,7 +500,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id6",
       "nodeId": undefined,
@@ -627,7 +609,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id1",
       "nodeId": "id1",
@@ -637,7 +618,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id2",
       "nodeId": "id2",
@@ -647,7 +627,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id3",
       "nodeId": "id2",
@@ -657,7 +636,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id4",
       "nodeId": "id1",
@@ -667,7 +645,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id5",
       "nodeId": "id3",
@@ -677,7 +654,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id6",
       "nodeId": undefined,
@@ -785,7 +761,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id1",
       "nodeId": "id1",
@@ -795,7 +770,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id2",
       "nodeId": "id2",
@@ -805,7 +779,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id3",
       "nodeId": "id2",
@@ -815,7 +788,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id4",
       "nodeId": "id1",
@@ -825,7 +797,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id5",
       "nodeId": "id3",
@@ -835,7 +806,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id6",
       "nodeId": undefined,
@@ -946,7 +916,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id1",
       "nodeId": "id1",
@@ -956,7 +925,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id2",
       "nodeId": "id2",
@@ -966,7 +934,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id3",
       "nodeId": "id2",
@@ -976,7 +943,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id4",
       "nodeId": "id1",
@@ -986,7 +952,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id5",
       "nodeId": "id3",
@@ -996,7 +961,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id6",
       "nodeId": undefined,
@@ -1107,7 +1071,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id1",
       "nodeId": "id1",
@@ -1117,7 +1080,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id2",
       "nodeId": "id2",
@@ -1127,7 +1089,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id3",
       "nodeId": "id2",
@@ -1137,7 +1098,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id4",
       "nodeId": "id1",
@@ -1147,7 +1107,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id5",
       "nodeId": "id3",
@@ -1157,7 +1116,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id6",
       "nodeId": undefined,
@@ -1273,7 +1231,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id1",
       "nodeId": "id1",
@@ -1283,7 +1240,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id2",
       "nodeId": "id2",
@@ -1293,7 +1249,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id3",
       "nodeId": "id2",
@@ -1303,7 +1258,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id4",
       "nodeId": "id1",
@@ -1313,7 +1267,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id5",
       "nodeId": "id3",
@@ -1323,7 +1276,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id6",
       "nodeId": undefined,
@@ -1439,7 +1391,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id1",
       "nodeId": "id1",
@@ -1449,7 +1400,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id2",
       "nodeId": "id2",
@@ -1459,7 +1409,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id3",
       "nodeId": "id2",
@@ -1469,7 +1418,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id4",
       "nodeId": "id1",
@@ -1479,7 +1427,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id5",
       "nodeId": "id3",
@@ -1489,7 +1436,6 @@ Object {
       "graphicalAttributes": Object {
         "portType": undefined,
         "position": [Function],
-        "type": undefined,
       },
       "id": "id6",
       "nodeId": undefined,
