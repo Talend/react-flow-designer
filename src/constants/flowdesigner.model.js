@@ -89,4 +89,7 @@ export const PortRecord = new Record({
 	getPortDirection() {
 		return this.getIn(['graphicalAttributes', 'properties', 'type']);
 	},
+	getPortFlowType() {
+		return this.getIn(['data', 'flowType']);
+	},
 });

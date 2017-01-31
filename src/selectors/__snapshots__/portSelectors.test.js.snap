@@ -5,6 +5,8 @@ Object {
       "flowType": undefined,
       "properties": Object {},
     },
+    "getPortDirection": [Function],
+    "getPortFlowType": [Function],
     "getPortType": [Function],
     "getPosition": [Function],
     "graphicalAttributes": Object {
@@ -20,6 +22,8 @@ Object {
       "flowType": undefined,
       "properties": Object {},
     },
+    "getPortDirection": [Function],
+    "getPortFlowType": [Function],
     "getPortType": [Function],
     "getPosition": [Function],
     "graphicalAttributes": Object {
@@ -40,6 +44,8 @@ Object {
       "flowType": undefined,
       "properties": Object {},
     },
+    "getPortDirection": [Function],
+    "getPortFlowType": [Function],
     "getPortType": [Function],
     "getPosition": [Function],
     "graphicalAttributes": Object {
@@ -60,6 +66,8 @@ Object {
       "flowType": undefined,
       "properties": Object {},
     },
+    "getPortDirection": [Function],
+    "getPortFlowType": [Function],
     "getPortType": [Function],
     "getPosition": [Function],
     "graphicalAttributes": Object {
@@ -75,6 +83,8 @@ Object {
       "flowType": undefined,
       "properties": Object {},
     },
+    "getPortDirection": [Function],
+    "getPortFlowType": [Function],
     "getPortType": [Function],
     "getPosition": [Function],
     "graphicalAttributes": Object {
