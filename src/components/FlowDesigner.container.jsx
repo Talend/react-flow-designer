@@ -20,9 +20,7 @@ export const FlowDesigner = React.createClass({
 		children: PropTypes.node,
 		setNodeTypes: PropTypes.func.isRequired,
 		moveNodeTo: PropTypes.func.isRequired,
-		nodes: mapOf(
-			NodeType,
-		).isRequired,
+		nodes: mapOf(NodeType).isRequired,
 		ports: orderedMapOf(PortType).isRequired,
 		links: mapOf(PropTypes.object).isRequired,
 		reduxMountPoint: PropTypes.string.isRequired,
