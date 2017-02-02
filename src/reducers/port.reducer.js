@@ -1,5 +1,10 @@
+/* @flow */
+
 import invariant from 'invariant';
 import { Map, OrderedMap, fromJS } from 'immutable';
+
+import type { Action, Port } from '../flow-typed';
+
 import {
 	PortRecord, PortData, PortGraphicalAttributes, PositionRecord,
 } from '../constants/flowdesigner.model';
@@ -19,7 +24,7 @@ import {
 
 const defaultState = new OrderedMap();
 
-const setPort = (state, port) => {
+const setPort = (state, port: Port) => {
 	const newState = state.setIn(['ports', port.id], new PortRecord({
 		id: port.id,
 		nodeId: port.nodeId,
@@ -42,7 +47,7 @@ const setPort = (state, port) => {
 	return state;
 };
 
-export default function portReducer(state = defaultState, action) {
+export default function portReducer(state = defaultState, action: Action) {
 	switch (action.type) {
 	case FLOWDESIGNER_PORT_ADD:
 		if (!state.getIn(['nodes', action.nodeId])) {

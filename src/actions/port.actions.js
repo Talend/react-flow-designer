@@ -1,3 +1,7 @@
+/* @flow */
+
+import type { Action, PortGraphicalAttributes, PortData, Port } from '../flow-typed';
+
 import {
 	FLOWDESIGNER_PORT_ADD,
 	FLOWDESIGNER_PORT_ADDS,
@@ -14,7 +18,7 @@ import {
  * @param {string} portType
  * @param {Object} attributes
  */
-export const addPort = (nodeId, portId, { data = {}, graphicalAttributes = {} } = {}) => ({
+export const addPort = (nodeId: string, portId: string, { data, graphicalAttributes }: {data: PortData, graphicalAttributes: PortGraphicalAttributes}): Action => ({
 	type: FLOWDESIGNER_PORT_ADD,
 	nodeId,
 	portId,
@@ -22,7 +26,7 @@ export const addPort = (nodeId, portId, { data = {}, graphicalAttributes = {} } 
 	graphicalAttributes,
 });
 
-export const addPorts = (nodeId, ports) => ({
+export const addPorts = (nodeId: string, ports: Array<Port>): Action => ({
 	type: FLOWDESIGNER_PORT_ADDS,
 	nodeId,
 	ports,
@@ -33,7 +37,7 @@ export const addPorts = (nodeId, ports) => ({
  * @param {string} portId
  * @param {Object} graphicalAttributes
  */
-export const setPortGraphicalAttribute = (portId, graphicalAttributes) => ({
+export const setPortGraphicalAttribute = (portId: string, graphicalAttributes: {}): Action => ({
 	type: FLOWDESIGNER_PORT_SET_GRAPHICAL_ATTRIBUTES,
 	portId,
 	graphicalAttributes,
@@ -44,7 +48,7 @@ export const setPortGraphicalAttribute = (portId, graphicalAttributes) => ({
  * @param {string} portId
  * @param {string} graphicalAttributesKey - the key of the attribute to be removed
  */
-export const removePortGraphicalAttribute = (portId, graphicalAttributesKey) => ({
+export const removePortGraphicalAttribute = (portId: string, graphicalAttributesKey: string): Action => ({
 	type: FLOWDESIGNER_PORT_REMOVE_GRAPHICAL_ATTRIBUTES,
 	portId,
 	graphicalAttributesKey,
@@ -55,7 +59,7 @@ export const removePortGraphicalAttribute = (portId, graphicalAttributesKey) => 
  * @param {string} portId
  * @param {Object} graphicalAttributes
  */
-export const setPortdata = (portId, data) => ({
+export const setPortdata = (portId: string, data: {}): Action => ({
 	type: FLOWDESIGNER_PORT_SET_DATA,
 	portId,
 	data,
@@ -66,7 +70,7 @@ export const setPortdata = (portId, data) => ({
  * @param {string} portId
  * @param {string} datasKey - the key of the attribute to be removed
  */
-export const removePortData = (portId, dataKey) => ({
+export const removePortData = (portId: string, dataKey: string): Action => ({
 	type: FLOWDESIGNER_PORT_REMOVE_DATA,
 	portId,
 	dataKey,
@@ -76,7 +80,7 @@ export const removePortData = (portId, dataKey) => ({
  * return an action to remove port and all attached links
  * @param {string} portId
  */
-export const removePort = portId => ({
+export const removePort = (portId: string): Action => ({
 	type: FLOWDESIGNER_PORT_REMOVE,
 	portId,
 });
