@@ -59,7 +59,7 @@ class AbstractLink extends React.Component {
 			return (<LinkHandle
 				component={this.props.linkSourceHandleComponent}
 				onDrag={this.props.onSourceDrag} onDragEnd={this.props.onSourceDragEnd}
-				position={this.props.sourceHandlePosition || this.props.source.getIn(['graphicalAttributes', 'position'])}
+				position={this.props.sourceHandlePosition || this.props.source.getPosition()}
 			/>);
 		}
 		return null;
@@ -70,7 +70,7 @@ class AbstractLink extends React.Component {
 			return (<LinkHandle
 				component={this.props.linkTargetHandleComponent}
 				onDrag={this.props.onTargetDrag} onDragEnd={this.props.onTargetDragEnd}
-				position={this.props.targetHandlePosition || this.props.target.getIn(['graphicalAttributes', 'position'])}
+				position={this.props.targetHandlePosition || this.props.target.getPosition()}
 			/>);
 		}
 		return null;
@@ -79,8 +79,8 @@ class AbstractLink extends React.Component {
 	render() {
 		const pathCalculationMethod = this.props.calculatePath || self.calculatePath;
 		const { path, xInterpolate, yInterpolate } = pathCalculationMethod(
-			this.props.source.getIn(['graphicalAttributes', 'position']),
-			this.props.targetHandlePosition || this.props.target.getIn(['graphicalAttributes', 'position']),
+			this.props.source.getPosition(),
+			this.props.targetHandlePosition || this.props.target.getPosition(),
 		);
 		const newChildren = React.Children.map(this.props.children, child => (
 				React.cloneElement(child, { d: path, xInterpolate, yInterpolate })

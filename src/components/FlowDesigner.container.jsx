@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { mapOf, orderedMapOf } from 'react-immutable-proptypes';
 import invariant from 'invariant';
+import get from 'lodash/get';
 
 import { setZoom } from '../actions/flow.actions';
 import ZoomHandler from './ZoomHandler.component';
@@ -22,6 +23,7 @@ export class FlowDesigner extends React.Component {
 		nodes: mapOf(NodeType).isRequired,
 		ports: orderedMapOf(PortType).isRequired,
 		links: mapOf(PropTypes.object).isRequired,
+    reduxMountPoint: PropTypes.string.isRequired,
 	}
 
 	constructor(props) {
@@ -130,12 +132,12 @@ export class FlowDesigner extends React.Component {
 	}
 }
 
-const mapStateToProps = state => ({
-	nodes: state.flowDesigner.get('nodes'),
-	links: state.flowDesigner.get('links'),
-	ports: state.flowDesigner.get('ports'),
-	transform: state.flowDesigner.get('transform'),
-	transformToApply: state.flowDesigner.get('transformToApply'),
+const mapStateToProps = (state, ownProps) => ({
+	nodes: get(state, ownProps.reduxMountPoint).get('nodes'),
+	links: get(state, ownProps.reduxMountPoint).get('links'),
+	ports: get(state, ownProps.reduxMountPoint).get('ports'),
+	transform: get(state, ownProps.reduxMountPoint).get('transform'),
+	transformToApply: get(state, ownProps.reduxMountPoint).get('transformToApply'),
 });
 
 

@@ -18,7 +18,7 @@ class NodesRenderer extends React.Component {
 	}
 
 	renderNode(node) {
-		const type = node.getIn(['graphicalAttributes', 'nodeType']);
+		const type = node.getNodeType();
 		const ConcreteComponent = this.props.nodeTypeMap[type].component;
 		if (!ConcreteComponent) {
 			invariant(
