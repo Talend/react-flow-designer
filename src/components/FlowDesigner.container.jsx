@@ -14,24 +14,25 @@ import { moveNodeTo, moveNodeToEnd } from '../actions/node.actions';
 import { setNodeTypes } from '../actions/nodeType.actions';
 
 
-
-export const FlowDesigner = React.createClass({
-	propTypes: {
+export class FlowDesigner extends React.Component {
+	static propTypes = {
 		children: PropTypes.node,
 		setNodeTypes: PropTypes.func.isRequired,
 		moveNodeTo: PropTypes.func.isRequired,
-		nodes: mapOf(
-			NodeType
-		).isRequired,
+		nodes: mapOf(NodeType).isRequired,
 		ports: orderedMapOf(PortType).isRequired,
 		links: mapOf(PropTypes.object).isRequired,
-	},
-	getInitialState() {
-		return {
+	}
+
+	constructor(props) {
+		super(props);
+		this.state = {
 			nodeTypeMap: {},
 			linkTypeMap: {},
+			portTypeMap: {},
 		};
-	},
+	}
+
 	componentWillMount() {
 		const { children } = this.props;
 		let nodeTypeMap = {};
@@ -48,7 +49,7 @@ export const FlowDesigner = React.createClass({
 							[element.props.type]: {
 								component: element.props.component,
 							},
-						}
+						},
 					);
 					break;
 				case 'LinkType':
@@ -59,7 +60,7 @@ export const FlowDesigner = React.createClass({
 							[element.props.type]: {
 								component: element.props.component,
 							},
-						}
+						},
 					);
 					break;
 				case 'PortType':
@@ -70,13 +71,13 @@ export const FlowDesigner = React.createClass({
 							[element.props.type]: {
 								component: element.props.component,
 							},
-						}
-					)
+						},
+					);
 					break;
 				default:
 					invariant(
 					false,
-					`<${element.type.displayName} /> is an unknown component configuration`
+					`<${element.type.displayName} /> is an unknown component configuration`,
 				);
 				}
 			});
@@ -86,7 +87,8 @@ export const FlowDesigner = React.createClass({
 
 		this.props.setNodeTypes(nodeTypeMap);
 		this.setState({ nodeTypeMap, linkTypeMap, portTypeMap });
-	},
+	}
+
 	render() {
 		return (
 			<svg onClick={this.props.onClick} ref={c => (this.node = c)} width="100%">
@@ -97,8 +99,8 @@ export const FlowDesigner = React.createClass({
 						<feGaussianBlur in="shadow" stdDeviation="3" />
 						<feOffset dx="0" dy="0" />
 						<feMerge>
-						<feMergeNode />
-						<feMergeNode in="SourceGraphic" />
+							<feMergeNode />
+							<feMergeNode in="SourceGraphic" />
 						</feMerge>
 					</filter>
 				</defs>
@@ -125,8 +127,8 @@ export const FlowDesigner = React.createClass({
 				</ZoomHandler>
 			</svg>
 		);
-	},
-});
+	}
+}
 
 const mapStateToProps = state => ({
 	nodes: state.flowDesigner.get('nodes'),
