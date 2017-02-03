@@ -60,7 +60,8 @@ export default function portReducer(state: OrderedMap<string, PortRecord> = defa
 			data: action.data,
 			graphicalAttributes: action.graphicalAttributes,
 		});
-	case FLOWDESIGNER_PORT_ADDS:
+	case FLOWDESIGNER_PORT_ADDS: {
+		const localAction = action;
 		if (!state.getIn(['nodes', action.nodeId])) {
 			invariant(false,
 					`Can't set a new ports on non existing node ${action.nodeId}`);
@@ -69,11 +70,12 @@ export default function portReducer(state: OrderedMap<string, PortRecord> = defa
 				(cumulatedState, port) =>
 					setPort(cumulatedState, {
 						id: port.portId,
-						nodeId: action.nodeId,
+						nodeId: localAction.nodeId,
 						data: port.data,
 						graphicalAttributes: port.graphicalAttributes,
 					})
 				, state);
+	}
 	case FLOWDESIGNER_PORT_SET_GRAPHICAL_ATTRIBUTES:
 		if (!state.getIn(['ports', action.portId])) {
 			invariant(false,
