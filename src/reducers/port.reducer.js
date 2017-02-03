@@ -3,7 +3,7 @@
 import invariant from 'invariant';
 import { Map, OrderedMap, fromJS } from 'immutable';
 
-import type { Action, Port } from '../flow-typed';
+import type { PortAction, Port } from '../flow-typed';
 
 import {
 	PortRecord, PortData, PortGraphicalAttributes, PositionRecord,
@@ -40,14 +40,14 @@ const setPort = (state, port: Port) => {
 	} else if (type === 'SINK') {
 		return newState.setIn(['in', port.nodeId, port.id], new Map());
 	}
-	invariant(false,
+	invariant(true,
 		`Can't set a new port ${port.id} if its 
 		data.graphicalAttributes.properties.type !== EMITTER || SINK,
-		given ${port.graphicalAttributes.get('type')}`);
+		given ${port.graphicalAttributes.properties.type}`);
 	return state;
 };
 
-export default function portReducer(state = defaultState, action: Action) {
+export default function portReducer(state: OrderedMap<string, PortRecord> = defaultState, action: PortAction) {
 	switch (action.type) {
 	case FLOWDESIGNER_PORT_ADD:
 		if (!state.getIn(['nodes', action.nodeId])) {
@@ -106,7 +106,7 @@ export default function portReducer(state = defaultState, action: Action) {
 					`Can't remove a data on non existing port ${action.portId}`);
 		}
 		return state.deleteIn(['ports', action.portId, 'data', 'properties', action.dataKey]);
-	case FLOWDESIGNER_PORT_REMOVE:
+	case FLOWDESIGNER_PORT_REMOVE: {
 		if (!state.getIn(['ports', action.portId])) {
 			invariant(false,
 					`Can not remove port ${action.portId} since it doesn't exist`);
@@ -119,8 +119,9 @@ export default function portReducer(state = defaultState, action: Action) {
 				),
 			)
 			.deleteIn(['ports', action.portId])
-			.deleteIn(['out', state.getIn(['ports', action.portId]).nodeId, action.portId])
-			.deleteIn(['in', state.getIn(['ports', action.portId]).nodeId, action.portId]);
+			.deleteIn(['out', state.getIn(['ports', action.portId, 'nodeId']), action.portId])
+			.deleteIn(['in', state.getIn(['ports', action.portId, 'nodeId']), action.portId]);
+	}
 	default:
 		return state;
 	}
