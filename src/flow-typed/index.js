@@ -3,6 +3,8 @@ import { FLOWDESIGNER_PORT_ADD } from '../constants/flowdesigner.constants';
 
 import type { Record } from 'immutable';
 
+export type Id = string;
+
 export type Position = {
     x: number,
     y: number,
@@ -18,13 +20,6 @@ export type Size = {
 export type Action = {
     type: string
 }
-
-// need to experiment on switch case
-export type PortAction = {
-    type: 'FLOWDESIGNER_PORT_ADD',
-    +portId: string
-}
-
 
 export type PortGraphicalAttributes = {
     portType: string,
@@ -47,3 +42,20 @@ export type Port = {
 }
 
 export type PortRecord = Record<Port>;
+
+// need to experiment on switch case
+export type PortAction = {
+    type: 'FLOWDESIGNER_PORT_ADD',
+    portId: Id,
+    nodeId: Id,
+    data: PortData,
+    graphicalAttributes: PortGraphicalAttributes
+} | {
+    type: 'FLOWDESIGNER_PORT_ADDS',
+    nodeId: Id,
+    ports: Array<Port>
+} | {
+    type: 'FLOWDESIGNER_PORT_SET_GRAPHICAL_ATTRIBUTES',
+    portId: Id,
+    graphicalAttributes: PortGraphicalAttributes
+}

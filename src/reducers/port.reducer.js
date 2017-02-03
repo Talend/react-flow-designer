@@ -63,7 +63,7 @@ export default function portReducer(state: OrderedMap<string, PortRecord> = defa
 	case FLOWDESIGNER_PORT_ADDS:
 		if (!state.getIn(['nodes', action.nodeId])) {
 			invariant(false,
-					`Can't set a new port ${action.portId} on non existing node ${action.nodeId}`);
+					`Can't set a new ports on non existing node ${action.nodeId}`);
 		}
 		return action.ports.reduce(
 				(cumulatedState, port) =>
