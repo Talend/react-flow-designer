@@ -64,7 +64,7 @@ class AbstractLink extends React.Component {
 		}
 		return null;
 	}
-
+  
 	renderLinkTargetHandle() {
 		if (this.props.linkTargetHandleComponent) {
 			return (<LinkHandle
