@@ -23,7 +23,7 @@ export class FlowDesigner extends React.Component {
 		nodes: mapOf(NodeType).isRequired,
 		ports: orderedMapOf(PortType).isRequired,
 		links: mapOf(PropTypes.object).isRequired,
-    reduxMountPoint: PropTypes.string.isRequired,
+		reduxMountPoint: PropTypes.string.isRequired,
 	}
 
 	constructor(props) {

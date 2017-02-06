@@ -21,8 +21,8 @@ class ZoomHandler extends React.Component {
 
 	};
 
-	selection = undefined;
-	zoom = undefined;
+	zoom;
+	selection;
 
 	constructor(props) {
 		super(props);
