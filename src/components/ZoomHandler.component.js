@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { select, event } from 'd3-selection';
-import { zoom, zoomIdentity } from 'd3-zoom';
+import { zoom as d3ZoomFactory, zoomIdentity } from 'd3-zoom';
 
 import Grid from '../components/grid/Grid.component';
 
@@ -36,7 +36,7 @@ class ZoomHandler extends React.Component {
 
 	componentDidMount() {
 		this.selection = select(this.zoomCatcher);
-		this.zoom = zoom()
+		this.zoom = d3ZoomFactory()
 			.scaleExtent([1 / 4, 2])
 			.on('zoom', this.onZoom)
 			.on('end', this.onZoomEnd);
