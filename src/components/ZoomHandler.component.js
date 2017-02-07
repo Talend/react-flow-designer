@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { select, event } from 'd3-selection';
-import { zoom as d3ZoomFactory, zoomIdentity } from 'd3-zoom';
-
+import { zoom as d3ZoomFactory } from 'd3-zoom';
 
 class ZoomHandler extends React.Component {
 	static propTypes = {
@@ -63,9 +62,10 @@ class ZoomHandler extends React.Component {
 
 	render() {
 		const { transform } = this.state;
-		const childrens = React.Children.map(this.props.children, (children) => {
-			return React.cloneElement(children, { transform: transform });
-		});
+		const childrens = React.Children.map(
+			this.props.children,
+			children => React.cloneElement(children, { transform }),
+		);
 		return (
 			<g x="0" y="0" width="100%" height="100%">
 				<rect

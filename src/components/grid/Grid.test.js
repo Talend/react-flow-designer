@@ -13,7 +13,9 @@ describe('Grid.component', () => {
 		function component() {
 			return <g />;
 		}
-		const tree = renderer.create(<Grid transform={{ k: 1, x: 0, y: 0 }} gridComponent={component} />);
+		const tree = renderer.create(
+			<Grid transform={{ k: 1, x: 0, y: 0 }} gridComponent={component} />,
+		);
 		expect(tree).toMatchSnapshot();
 	});
 });
