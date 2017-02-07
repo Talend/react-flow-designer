@@ -21,11 +21,13 @@ import {
  * @param {Object} attr
  * @return {Object}
  */
-export const addNode = (nodeId, nodePosition, nodeSize, nodeType, { data = {}, graphicalAttributes = {} } = {}) => ({
+export const addNode = (
+	nodeId,
+	nodeType,
+	{ data = {}, graphicalAttributes = {} } = {},
+) => ({
 	type: FLOWDESIGNER_NODE_ADD,
 	nodeId,
-	nodePosition,
-	nodeSize,
 	nodeType,
 	data,
 	graphicalAttributes,

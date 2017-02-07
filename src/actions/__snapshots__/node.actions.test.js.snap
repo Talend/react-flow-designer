@@ -4,15 +4,7 @@ Array [
     "data": Object {},
     "graphicalAttributes": Object {},
     "nodeId": "id",
-    "nodePosition": Object {
-      "x": 75,
-      "y": 75,
-    },
-    "nodeSize": Object {
-      "heigth": 50,
-      "width": 50,
-    },
-    "nodeType": "nodeType",
+    "nodeType": "label",
     "type": "FLOWDESIGNER_NODE_ADD",
   },
 ]

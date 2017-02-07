@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { mapOf, orderedMapOf } from 'react-immutable-proptypes';
 import invariant from 'invariant';
+import get from 'lodash/get';
 
 import { setZoom } from '../actions/flow.actions';
 import Grid from './grid/Grid.component';
@@ -14,25 +15,27 @@ import PortsRenderer from './port/PortsRenderer.component';
 import { moveNodeTo, moveNodeToEnd } from '../actions/node.actions';
 import { setNodeTypes } from '../actions/nodeType.actions';
 
-
-export const FlowDesigner = React.createClass({
-	propTypes: {
+export class FlowDesigner extends React.Component {
+	static propTypes = {
 		children: PropTypes.node,
 		setNodeTypes: PropTypes.func.isRequired,
 		moveNodeTo: PropTypes.func.isRequired,
-		nodes: mapOf(
-			NodeType,
-		).isRequired,
+		nodes: mapOf(NodeType).isRequired,
 		ports: orderedMapOf(PortType).isRequired,
 		links: mapOf(PropTypes.object).isRequired,
+		reduxMountPoint: PropTypes.string.isRequired,
 		gridComponent: PropTypes.element,
-	},
-	getInitialState() {
-		return {
+	}
+
+	constructor(props) {
+		super(props);
+		this.state = {
 			nodeTypeMap: {},
 			linkTypeMap: {},
+			portTypeMap: {},
 		};
-	},
+	}
+
 	componentWillMount() {
 		const { children } = this.props;
 		let nodeTypeMap = {};
@@ -87,7 +90,8 @@ export const FlowDesigner = React.createClass({
 
 		this.props.setNodeTypes(nodeTypeMap);
 		this.setState({ nodeTypeMap, linkTypeMap, portTypeMap });
-	},
+	}
+
 	render() {
 		return (
 			<svg onClick={this.props.onClick} ref={c => (this.node = c)} width="100%">
@@ -129,15 +133,15 @@ export const FlowDesigner = React.createClass({
 				</ZoomHandler>
 			</svg>
 		);
-	},
-});
+	}
+}
 
-const mapStateToProps = state => ({
-	nodes: state.flowDesigner.get('nodes'),
-	links: state.flowDesigner.get('links'),
-	ports: state.flowDesigner.get('ports'),
-	transform: state.flowDesigner.get('transform'),
-	transformToApply: state.flowDesigner.get('transformToApply'),
+const mapStateToProps = (state, ownProps) => ({
+	nodes: get(state, ownProps.reduxMountPoint).get('nodes'),
+	links: get(state, ownProps.reduxMountPoint).get('links'),
+	ports: get(state, ownProps.reduxMountPoint).get('ports'),
+	transform: get(state, ownProps.reduxMountPoint).get('transform'),
+	transformToApply: get(state, ownProps.reduxMountPoint).get('transformToApply'),
 });
 
 

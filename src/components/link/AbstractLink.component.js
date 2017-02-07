@@ -22,8 +22,8 @@ const calculatePath = (sourcePosition, targetPosition) => {
 	return { path, xInterpolate, yInterpolate };
 };
 
-const AbstractLink = React.createClass({
-	propTypes: {
+class AbstractLink extends React.Component {
+	static propTypes = {
 		source: PortType.isRequired,
 		target: PortType.isRequired,
 		markerSource: PropTypes.element,
@@ -38,50 +38,61 @@ const AbstractLink = React.createClass({
 		onTargetDrag: PropTypes.func,
 		onTargetDragEnd: PropTypes.func,
 		children: PropTypes.node,
-	},
-	statics: calculatePath,
+		linkSourceHandleComponent: PropTypes.element,
+		sourceHandlePosition: PropTypes.shape({
+			x: PropTypes.number.isRequired,
+			y: PropTypes.number.isRequired,
+		}),
+		linkTargetHandleComponent: PropTypes.element,
+	}
+
+	static calculatePath = calculatePath;
+
 	shouldComponentUpdate(nextProps) {
 		return nextProps.source !== this.props.source ||
 			nextProps.target !== this.props.target ||
 			nextProps.targetHandlePosition !== this.props.targetHandlePosition;
-	},
-	renderLinkSourcehandle(){
-		if(this.props.linkSourceHandleComponent){
-			return <LinkHandle
+	}
+
+	renderLinkSourceHandle() {
+		if (this.props.linkSourceHandleComponent) {
+			return (<LinkHandle
 				component={this.props.linkSourceHandleComponent}
 				onDrag={this.props.onSourceDrag} onDragEnd={this.props.onSourceDragEnd}
-				position={this.props.sourceHandlePosition || this.props.source.position}
-			/>
+				position={this.props.sourceHandlePosition || this.props.source.getPosition()}
+			/>);
 		}
 		return null;
-	},
-	renderLinkTargetHandle(){
-		if(this.props.linkTargetHandleComponent){
-			return <LinkHandle
+	}
+  
+	renderLinkTargetHandle() {
+		if (this.props.linkTargetHandleComponent) {
+			return (<LinkHandle
 				component={this.props.linkTargetHandleComponent}
 				onDrag={this.props.onTargetDrag} onDragEnd={this.props.onTargetDragEnd}
-				position={this.props.targetHandlePosition || this.props.target.position}
-			/>
+				position={this.props.targetHandlePosition || this.props.target.getPosition()}
+			/>);
 		}
 		return null;
-	},
+	}
+
 	render() {
-		const pathCalculationMethod = this.props.calculatePath || calculatePath;
+		const pathCalculationMethod = this.props.calculatePath || self.calculatePath;
 		const { path, xInterpolate, yInterpolate } = pathCalculationMethod(
-			this.props.source.position,
-			this.props.targetHandlePosition || this.props.target.position
+			this.props.source.getPosition(),
+			this.props.targetHandlePosition || this.props.target.getPosition(),
 		);
 		const newChildren = React.Children.map(this.props.children, child => (
 				React.cloneElement(child, { d: path, xInterpolate, yInterpolate })
 			));
 		return (
-		  <g>
-			{newChildren}
-			{this.renderLinkSourcehandle()}
-			{this.renderLinkTargetHandle()}
-		  </g>
+			<g>
+				{newChildren}
+				{this.renderLinkSourceHandle()}
+				{this.renderLinkTargetHandle()}
+			</g>
 		);
-	},
-});
+	}
+}
 
 export default AbstractLink;

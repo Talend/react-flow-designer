@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies, react/jsx-filename-extension */
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { Map } from 'immutable';
@@ -24,7 +23,7 @@ describe('<FlowDesigner /> renders correctly', () => {
 			>
 				<NodeType type="test" component={NodeType} />
 				<NodeType type="test2" component={NodeType} />
-			</FlowDesigner>
+			</FlowDesigner>,
 		).toJSON();
 		expect(tree).toMatchSnapshot();
 	});

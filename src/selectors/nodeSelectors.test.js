@@ -7,7 +7,6 @@ import {
 } from '../constants/flowdesigner.model';
 
 describe('Testing node selectors', () => {
-
 	const node1 = new NodeRecord({
 		id: 'id1',
 	});
@@ -249,5 +248,4 @@ describe('Testing node selectors', () => {
 	it('node4 should have node6, node7, node8 as successors', () => {
 		expect(Selectors.getSuccessors(givenState, 'id4')).toMatchSnapshot();
 	});
-
 });

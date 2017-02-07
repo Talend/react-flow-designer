@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies, react/jsx-filename-extension */
 import React from 'react';
 import renderer from 'react-test-renderer';
 
@@ -10,7 +9,7 @@ describe('<ZoomHandler /> renders correctly', () => {
 		const tree = renderer.create(
 			<ZoomHandler transform={{ x: 0, y: 0, k: 1 }}>
 				<rect />
-			</ZoomHandler>
+			</ZoomHandler>,
 		).toJSON();
 		expect(tree).toMatchSnapshot();
 	});
