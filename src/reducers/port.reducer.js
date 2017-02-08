@@ -1,5 +1,10 @@
+/* @flow */
+
 import invariant from 'invariant';
 import { Map, OrderedMap, fromJS } from 'immutable';
+
+import type { PortAction, Port } from '../flow-typed';
+
 import {
 	PortRecord, PortData, PortGraphicalAttributes, PositionRecord,
 } from '../constants/flowdesigner.model';
@@ -19,7 +24,7 @@ import {
 
 const defaultState = new OrderedMap();
 
-function setPort(state, port) {
+function setPort(state, port: Port) {
 	const newState = state.setIn(['ports', port.id], new PortRecord({
 		id: port.id,
 		nodeId: port.nodeId,
@@ -35,14 +40,14 @@ function setPort(state, port) {
 	} else if (type === 'SINK') {
 		return newState.setIn(['in', port.nodeId, port.id], new Map());
 	}
-	invariant(false,
-		`Can't set a new port ${port.id} if its
+	invariant(true,
+		`Can't set a new port ${port.id} if it
 		data.graphicalAttributes.properties.type !== EMITTER || SINK,
-		given ${port.graphicalAttributes.get('type')}`);
+		given ${port.graphicalAttributes.properties.type}`);
 	return state;
 }
 
-export default function portReducer(state = defaultState, action) {
+export default function portReducer(state: OrderedMap<string, PortRecord> = defaultState, action: PortAction) {
 	switch (action.type) {
 	case FLOWDESIGNER_PORT_ADD:
 		if (!state.getIn(['nodes', action.nodeId])) {
@@ -55,20 +60,22 @@ export default function portReducer(state = defaultState, action) {
 			data: action.data,
 			graphicalAttributes: action.graphicalAttributes,
 		});
-	case FLOWDESIGNER_PORT_ADDS:
+	case FLOWDESIGNER_PORT_ADDS: {
+		const localAction = action;
 		if (!state.getIn(['nodes', action.nodeId])) {
 			invariant(false,
-					`Can't set a new port ${action.portId} on non existing node ${action.nodeId}`);
+					`Can't set a new ports on non existing node ${action.nodeId}`);
 		}
 		return action.ports.reduce(
 				(cumulatedState, port) =>
 					setPort(cumulatedState, {
 						id: port.portId,
-						nodeId: action.nodeId,
+						nodeId: localAction.nodeId,
 						data: port.data,
 						graphicalAttributes: port.graphicalAttributes,
 					})
 				, state);
+	}
 	case FLOWDESIGNER_PORT_SET_GRAPHICAL_ATTRIBUTES:
 		if (!state.getIn(['ports', action.portId])) {
 			invariant(false,
@@ -101,7 +108,7 @@ export default function portReducer(state = defaultState, action) {
 					`Can't remove a data on non existing port ${action.portId}`);
 		}
 		return state.deleteIn(['ports', action.portId, 'data', 'properties', action.dataKey]);
-	case FLOWDESIGNER_PORT_REMOVE:
+	case FLOWDESIGNER_PORT_REMOVE: {
 		if (!state.getIn(['ports', action.portId])) {
 			invariant(false,
 					`Can not remove port ${action.portId} since it doesn't exist`);
@@ -114,8 +121,9 @@ export default function portReducer(state = defaultState, action) {
 				),
 			)
 			.deleteIn(['ports', action.portId])
-			.deleteIn(['out', state.getIn(['ports', action.portId]).nodeId, action.portId])
-			.deleteIn(['in', state.getIn(['ports', action.portId]).nodeId, action.portId]);
+			.deleteIn(['out', state.getIn(['ports', action.portId, 'nodeId']), action.portId])
+			.deleteIn(['in', state.getIn(['ports', action.portId, 'nodeId']), action.portId]);
+	}
 	default:
 		return state;
 	}
