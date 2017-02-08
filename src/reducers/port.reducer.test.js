@@ -1,3 +1,4 @@
+/* @flow */
 import { Map, OrderedMap } from 'immutable';
 
 import { defaultState } from './flow.reducer';
@@ -26,7 +27,8 @@ describe('Check port reducer', () => {
 			type: 'FLOWDESIGNER_PORT_ADD',
 			nodeId: 'nodeId',
 			portId: 'portId',
-			graphicalAttributes: { portType: 'portType', properties: { type: 'EMITTER' } },
+			data: {	flowType: 'string',	properties: {} },
+			graphicalAttributes: { portType: 'portType', properties: { type: 'EMITTER', index: 1 } },
 		})).toMatchSnapshot();
 	});
 
@@ -35,10 +37,14 @@ describe('Check port reducer', () => {
 			type: 'FLOWDESIGNER_PORT_ADDS',
 			nodeId: 'nodeId',
 			ports: [{
-				portId: 'portId1',
+				id: 'portId1',
+				nodeId: 'nodeId',
+				data: {	flowType: 'string',	properties: {} },
 				graphicalAttributes: { portType: 'portType', properties: { type: 'EMITTER' } },
 			}, {
-				portId: 'portId2',
+				id: 'portId2',
+				nodeId: 'nodeId',
+				data: {	flowType: 'string',	properties: {} },
 				graphicalAttributes: { portType: 'portType', properties: { type: 'SINK' } },
 			}],
 		})).toMatchSnapshot();

@@ -1,5 +1,3 @@
-/* @flow */
-
 import React, { PropTypes } from 'react';
 
 import { line, curveBasis } from 'd3-shape';

@@ -2,7 +2,7 @@
 
 import { Record, Map } from 'immutable';
 
-import type { Position, Size } from '../flow-typed';
+import type { Position, Size, PortDirection, PortRecordType } from '../flow-typed';
 
 export const NONE = 'NONE';
 export const SELECTED = 'SELECTED';
@@ -90,10 +90,16 @@ export const PortRecord = Record({
 	getPortType(): string {
 		return this.getIn(['graphicalAttributes', 'portType']);
 	},
-	getPortDirection(): string {
+	getPortDirection(): PortDirection {
 		return this.getIn(['graphicalAttributes', 'properties', 'type']);
 	},
 	getPortFlowType(): string {
 		return this.getIn(['data', 'flowType']);
+	},
+	getIndex(): number {
+		return this.getIn(['graphicalAttributes', 'properties', 'index']);
+	},
+	setIndex(index: number): PortRecordType {
+		return this.setIn(['graphicalAttributes', 'properties', 'index'], index);
 	},
 });

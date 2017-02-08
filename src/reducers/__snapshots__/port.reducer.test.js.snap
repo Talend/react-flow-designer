@@ -18,6 +18,7 @@ Object {
       "data": Object {
         "type": "test",
       },
+      "getIndex": [Function],
       "getPortDirection": [Function],
       "getPortFlowType": [Function],
       "getPortType": [Function],
@@ -31,12 +32,14 @@ Object {
       },
       "id": "id1",
       "nodeId": undefined,
+      "setIndex": [Function],
     },
     "id2": Object {
       "data": Object {
         "flowType": undefined,
         "properties": Object {},
       },
+      "getIndex": [Function],
       "getPortDirection": [Function],
       "getPortFlowType": [Function],
       "getPortType": [Function],
@@ -49,12 +52,14 @@ Object {
       },
       "id": "id2",
       "nodeId": undefined,
+      "setIndex": [Function],
     },
     "id3": Object {
       "data": Object {
         "flowType": undefined,
         "properties": Object {},
       },
+      "getIndex": [Function],
       "getPortDirection": [Function],
       "getPortFlowType": [Function],
       "getPortType": [Function],
@@ -67,12 +72,14 @@ Object {
       },
       "id": "id3",
       "nodeId": undefined,
+      "setIndex": [Function],
     },
     "portId": Object {
       "data": Object {
-        "flowType": undefined,
+        "flowType": "string",
         "properties": Object {},
       },
+      "getIndex": [Function],
       "getPortDirection": [Function],
       "getPortFlowType": [Function],
       "getPortType": [Function],
@@ -84,11 +91,13 @@ Object {
           "y": undefined,
         },
         "properties": Object {
+          "index": 1,
           "type": "EMITTER",
         },
       },
       "id": "portId",
       "nodeId": "nodeId",
+      "setIndex": [Function],
     },
   },
   "transform": Object {
@@ -124,6 +133,7 @@ Object {
       "data": Object {
         "type": "test",
       },
+      "getIndex": [Function],
       "getPortDirection": [Function],
       "getPortFlowType": [Function],
       "getPortType": [Function],
@@ -137,12 +147,14 @@ Object {
       },
       "id": "id1",
       "nodeId": undefined,
+      "setIndex": [Function],
     },
     "id2": Object {
       "data": Object {
         "flowType": undefined,
         "properties": Object {},
       },
+      "getIndex": [Function],
       "getPortDirection": [Function],
       "getPortFlowType": [Function],
       "getPortType": [Function],
@@ -155,12 +167,14 @@ Object {
       },
       "id": "id2",
       "nodeId": undefined,
+      "setIndex": [Function],
     },
     "id3": Object {
       "data": Object {
         "flowType": undefined,
         "properties": Object {},
       },
+      "getIndex": [Function],
       "getPortDirection": [Function],
       "getPortFlowType": [Function],
       "getPortType": [Function],
@@ -173,12 +187,14 @@ Object {
       },
       "id": "id3",
       "nodeId": undefined,
+      "setIndex": [Function],
     },
     "portId1": Object {
       "data": Object {
-        "flowType": undefined,
+        "flowType": "string",
         "properties": Object {},
       },
+      "getIndex": [Function],
       "getPortDirection": [Function],
       "getPortFlowType": [Function],
       "getPortType": [Function],
@@ -190,17 +206,20 @@ Object {
           "y": undefined,
         },
         "properties": Object {
+          "index": undefined,
           "type": "EMITTER",
         },
       },
       "id": "portId1",
       "nodeId": "nodeId",
+      "setIndex": [Function],
     },
     "portId2": Object {
       "data": Object {
-        "flowType": undefined,
+        "flowType": "string",
         "properties": Object {},
       },
+      "getIndex": [Function],
       "getPortDirection": [Function],
       "getPortFlowType": [Function],
       "getPortType": [Function],
@@ -212,11 +231,13 @@ Object {
           "y": undefined,
         },
         "properties": Object {
+          "index": undefined,
           "type": "SINK",
         },
       },
       "id": "portId2",
       "nodeId": "nodeId",
+      "setIndex": [Function],
     },
   },
   "transform": Object {
@@ -302,6 +323,7 @@ Object {
       "data": Object {
         "type": "test",
       },
+      "getIndex": [Function],
       "getPortDirection": [Function],
       "getPortFlowType": [Function],
       "getPortType": [Function],
@@ -315,12 +337,14 @@ Object {
       },
       "id": "id1",
       "nodeId": undefined,
+      "setIndex": [Function],
     },
     "id2": Object {
       "data": Object {
         "flowType": undefined,
         "properties": Object {},
       },
+      "getIndex": [Function],
       "getPortDirection": [Function],
       "getPortFlowType": [Function],
       "getPortType": [Function],
@@ -333,12 +357,14 @@ Object {
       },
       "id": "id2",
       "nodeId": undefined,
+      "setIndex": [Function],
     },
     "id3": Object {
       "data": Object {
         "flowType": undefined,
         "properties": Object {},
       },
+      "getIndex": [Function],
       "getPortDirection": [Function],
       "getPortFlowType": [Function],
       "getPortType": [Function],
@@ -351,6 +377,7 @@ Object {
       },
       "id": "id3",
       "nodeId": undefined,
+      "setIndex": [Function],
     },
   },
   "transform": Object {
@@ -378,6 +405,7 @@ Object {
       "data": Object {
         "type": "test",
       },
+      "getIndex": [Function],
       "getPortDirection": [Function],
       "getPortFlowType": [Function],
       "getPortType": [Function],
@@ -391,12 +419,14 @@ Object {
       },
       "id": "id1",
       "nodeId": undefined,
+      "setIndex": [Function],
     },
     "id2": Object {
       "data": Object {
         "flowType": undefined,
         "properties": Object {},
       },
+      "getIndex": [Function],
       "getPortDirection": [Function],
       "getPortFlowType": [Function],
       "getPortType": [Function],
@@ -409,12 +439,14 @@ Object {
       },
       "id": "id2",
       "nodeId": undefined,
+      "setIndex": [Function],
     },
     "id3": Object {
       "data": Object {
         "flowType": undefined,
         "properties": Object {},
       },
+      "getIndex": [Function],
       "getPortDirection": [Function],
       "getPortFlowType": [Function],
       "getPortType": [Function],
@@ -427,6 +459,7 @@ Object {
       },
       "id": "id3",
       "nodeId": undefined,
+      "setIndex": [Function],
     },
   },
   "transform": Object {
@@ -454,6 +487,7 @@ Object {
       "data": Object {
         "type": "string",
       },
+      "getIndex": [Function],
       "getPortDirection": [Function],
       "getPortFlowType": [Function],
       "getPortType": [Function],
@@ -467,12 +501,14 @@ Object {
       },
       "id": "id1",
       "nodeId": undefined,
+      "setIndex": [Function],
     },
     "id2": Object {
       "data": Object {
         "flowType": undefined,
         "properties": Object {},
       },
+      "getIndex": [Function],
       "getPortDirection": [Function],
       "getPortFlowType": [Function],
       "getPortType": [Function],
@@ -485,12 +521,14 @@ Object {
       },
       "id": "id2",
       "nodeId": undefined,
+      "setIndex": [Function],
     },
     "id3": Object {
       "data": Object {
         "flowType": undefined,
         "properties": Object {},
       },
+      "getIndex": [Function],
       "getPortDirection": [Function],
       "getPortFlowType": [Function],
       "getPortType": [Function],
@@ -503,6 +541,7 @@ Object {
       },
       "id": "id3",
       "nodeId": undefined,
+      "setIndex": [Function],
     },
   },
   "transform": Object {
@@ -530,6 +569,7 @@ Object {
       "data": Object {
         "type": "test",
       },
+      "getIndex": [Function],
       "getPortDirection": [Function],
       "getPortFlowType": [Function],
       "getPortType": [Function],
@@ -544,12 +584,14 @@ Object {
       },
       "id": "id1",
       "nodeId": undefined,
+      "setIndex": [Function],
     },
     "id2": Object {
       "data": Object {
         "flowType": undefined,
         "properties": Object {},
       },
+      "getIndex": [Function],
       "getPortDirection": [Function],
       "getPortFlowType": [Function],
       "getPortType": [Function],
@@ -562,12 +604,14 @@ Object {
       },
       "id": "id2",
       "nodeId": undefined,
+      "setIndex": [Function],
     },
     "id3": Object {
       "data": Object {
         "flowType": undefined,
         "properties": Object {},
       },
+      "getIndex": [Function],
       "getPortDirection": [Function],
       "getPortFlowType": [Function],
       "getPortType": [Function],
@@ -580,6 +624,7 @@ Object {
       },
       "id": "id3",
       "nodeId": undefined,
+      "setIndex": [Function],
     },
   },
   "transform": Object {

@@ -1,3 +1,5 @@
+
+/* @flow */
 /* eslint-disable import/no-extraneous-dependencies */
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
@@ -22,8 +24,17 @@ describe('Check that port action creators generate proper' +
 			portActions.addPort(
 				'nodeId',
 				'portId',
-				'portType',
-				{ graphicalAttributes: { selected: true } },
+				{
+					graphicalAttributes: {
+						portType: 'test',
+						properties: {
+							type: 'SINK',
+						},
+					},
+					data: {
+						flowType: 'string',
+					},
+				},
 			),
 		);
 		expect(store.getActions()).toMatchSnapshot();

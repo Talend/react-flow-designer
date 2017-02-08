@@ -1,61 +1,107 @@
 /* @flow */
-import type { Record } from 'immutable';
+import type { Record, Map } from 'immutable';
+
+/** $BASIC */
 
 export type Id = string;
 
 export type Position = {
-    x: number,
-    y: number,
+	x: number,
+	y: number,
 }
 
-export type PositionRecord = Record<Position>;
-
 export type Size = {
-    width: number,
-    height: number,
+	width: number,
+	height: number,
 }
 
 export type Action = {
-    type: string
+	type: string
 }
 
+export type PortDirection = 'SINK' | 'EMITTER';
+
 export type PortGraphicalAttributes = {
-    portType: string,
-    position?: Position,
-    properties: {
-        type: string
-    } & any
+	portType: string,
+	position?: Position,
+	properties: {
+		type: PortDirection,
+		index?: number
+	} & any
 }
 
 export type PortData = {
-    flowType: string,
-    properties: {}
+	flowType: string,
+	properties?: {}
 }
 
 export type Port = {
-    id: string,
-    nodeId: string,
-    data: PortData,
-    graphicalAttributes: PortGraphicalAttributes
+	id: Id,
+	nodeId: string,
+	data: PortData,
+	graphicalAttributes: PortGraphicalAttributes
 }
 
-export type PortRecord = Record<Port>;
+/** $RECORDS */
+export type PositionRecord = Record<Position> & Position;
 
-// need to experiment on switch case
-export type PortAction = {
-    type: 'FLOWDESIGNER_PORT_ADD',
-    nodeId: Id,
-    portId: Id,
-    data: PortData,
-    graphicalAttributes: PortGraphicalAttributes
+export type PortRecordType = Record<Port>
+& {
+	getPosition: () => Position,
+	getPortType: () => string,
+	getPortDirection: () => PortDirection,
+	getPortFlowType: () => string,
+	getIndex: () => number,
+	setIndex: (number) => PortRecordType,
+}
+& Port;
+
+// TODO add record
+export type NodeRecordType = Record<*>
+& {
+	getPosition: () => Position,
+	getSize: () => Size,
+	getNodeType: () => string,
+};
+
+export type LinkRecordType = Record<*>
+& {
+	getLinkType: () => string,
+};
+
+/** $STATE */
+
+
+
+export type PortRecordMap = Map<Id, PortRecordType>;
+
+type getStateNodes = (['nodes', Id]) => NodeRecordType;
+type getStatePorts = (['ports', Id]) => PortRecordType;
+type getStateLinks = (['links', Id]) => Record<*>;
+
+export type State = Map<string, Map<Id, any>> & {
+	+getIn: getStateNodes | getStatePorts | getStateLinks
+};
+
+
+/** $ACTIONS */
+export type PortActionAdd = {
+	type: 'FLOWDESIGNER_PORT_ADD',
+	nodeId: Id,
+	portId: Id,
+	data: PortData,
+	graphicalAttributes: PortGraphicalAttributes
+}
+
+export type PortAction = PortActionAdd
+| {
+	type: 'FLOWDESIGNER_PORT_ADDS',
+	nodeId: Id,
+	ports: Array<Port>
 } | {
-    type: 'FLOWDESIGNER_PORT_ADDS',
-    nodeId: Id,
-    ports: Array<Port>
-} | {
-    type: 'FLOWDESIGNER_PORT_SET_GRAPHICAL_ATTRIBUTES',
-    portId: Id,
-    graphicalAttributes: PortGraphicalAttributes
+	type: 'FLOWDESIGNER_PORT_SET_GRAPHICAL_ATTRIBUTES',
+	portId: Id,
+	graphicalAttributes: {}
 } | {
 	type: 'FLOWDESIGNER_PORT_REMOVE_GRAPHICAL_ATTRIBUTES',
 	portId: Id,

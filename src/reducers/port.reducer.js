@@ -1,9 +1,9 @@
 /* @flow */
 
 import invariant from 'invariant';
-import { Map, OrderedMap, fromJS } from 'immutable';
+import { Map, fromJS } from 'immutable';
 
-import type { PortAction, Port } from '../flow-typed';
+import type { Id, PortAction, Port, PortDirection, PortRecordType, State } from '../flow-typed';
 
 import {
 	PortRecord, PortData, PortGraphicalAttributes, PositionRecord,
@@ -22,9 +22,36 @@ import {
 	FLOWDESIGNER_PORT_REMOVE,
 } from '../constants/flowdesigner.constants';
 
-const defaultState = new OrderedMap();
+function filterPortsByNode(ports: Map<Id, PortRecordType>, nodeId: Id) : Map<Id, PortRecordType> {
+	return ports.filter((port: PortRecordType) => port.nodeId === nodeId);
+}
 
-function setPort(state, port: Port) {
+function filterPortsByDirection(ports: Map<Id, PortRecordType>, direction: PortDirection) : Map<Id, PortRecordType> {
+	return ports.filter((port: PortRecordType) => port.getPortDirection() === direction);
+}
+
+function getPortIndex(ports: Map<Id, PortRecordType>, port: Port): number {
+	return filterPortsByDirection(filterPortsByNode(ports, port.nodeId), port.graphicalAttributes.properties.type).size;
+}
+
+function indexPortMap(ports: Map<Id, PortRecordType>): Map<Id, PortRecordType> {
+	let i = 0;
+	return ports.sort((a, b) => {
+		if (a.getIndex() < b.getIndex()) {
+			return -1;
+		}
+		if (a.getIndex() > b.getIndex())	{
+			return 1;
+		}
+		return 0;
+	}).map((port) => {
+		i += 1;
+		return port.setIndex(i);
+	});
+}
+
+function setPort(state: State, port: Port) {
+	const index: number = port.graphicalAttributes.properties.index && getPortIndex(state.get('ports'), port);
 	const newState = state.setIn(['ports', port.id], new PortRecord({
 		id: port.id,
 		nodeId: port.nodeId,
@@ -32,7 +59,7 @@ function setPort(state, port: Port) {
 			.set('properties', fromJS(port.data && port.data.properties) || new Map()),
 		graphicalAttributes: new PortGraphicalAttributes(port.graphicalAttributes)
 			.set('position', new PositionRecord(port.graphicalAttributes.position))
-			.set('properties', fromJS(port.graphicalAttributes && port.graphicalAttributes.properties) || new Map()),
+			.set('properties', fromJS(port.graphicalAttributes && { index, ...port.graphicalAttributes.properties }) || new Map()),
 	}));
 	const type = port.graphicalAttributes.properties.type;
 	if (type === 'EMITTER') {
@@ -47,7 +74,7 @@ function setPort(state, port: Port) {
 	return state;
 }
 
-export default function portReducer(state: OrderedMap<string, PortRecord> = defaultState, action: PortAction) {
+export default function portReducer(state: State, action: PortAction): State {
 	switch (action.type) {
 	case FLOWDESIGNER_PORT_ADD:
 		if (!state.getIn(['nodes', action.nodeId])) {
@@ -69,7 +96,7 @@ export default function portReducer(state: OrderedMap<string, PortRecord> = defa
 		return action.ports.reduce(
 				(cumulatedState, port) =>
 					setPort(cumulatedState, {
-						id: port.portId,
+						id: port.id,
 						nodeId: localAction.nodeId,
 						data: port.data,
 						graphicalAttributes: port.graphicalAttributes,
@@ -113,16 +140,21 @@ export default function portReducer(state: OrderedMap<string, PortRecord> = defa
 			invariant(false,
 					`Can not remove port ${action.portId} since it doesn't exist`);
 		}
-		return portInLink(state, action.portId).reduce(
+		const port: ?PortRecordType = state.getIn(['ports', action.portId]);
+		if (port) {
+			return portInLink(state, action.portId).reduce(
 				(cumulativeState, link) => linkReducer(cumulativeState, removeLink(link.id)),
 				portOutLink(state, action.portId).reduce(
 					(cumulativeState, link) => linkReducer(cumulativeState, removeLink(link.id)),
 					state,
 				),
 			)
+			.merge(indexPortMap(filterPortsByDirection(filterPortsByNode(state.get('ports'), port.nodeId), port.getPortDirection())))
 			.deleteIn(['ports', action.portId])
 			.deleteIn(['out', state.getIn(['ports', action.portId, 'nodeId']), action.portId])
 			.deleteIn(['in', state.getIn(['ports', action.portId, 'nodeId']), action.portId]);
+		}
+		return state;
 	}
 	default:
 		return state;

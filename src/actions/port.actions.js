@@ -1,6 +1,6 @@
 /* @flow */
 
-import type { PortGraphicalAttributes, Port, PortData, PortAction } from '../flow-typed';
+import type { PortGraphicalAttributes, Port, PortData, PortAction, PortActionAdd } from '../flow-typed';
 
 /**
  * return an action to create a new port
@@ -9,7 +9,7 @@ import type { PortGraphicalAttributes, Port, PortData, PortAction } from '../flo
  * @param {string} portType
  * @param {Object} attributes
  */
-export function addPort(nodeId: string, portId: string, { data, graphicalAttributes }: {data: PortData, graphicalAttributes: PortGraphicalAttributes}): PortAction {
+export function addPort(nodeId: string, portId: string, { data, graphicalAttributes }: {data: PortData, graphicalAttributes: PortGraphicalAttributes}): PortActionAdd {
 	return {
 		type: 'FLOWDESIGNER_PORT_ADD',
 		nodeId,
@@ -30,7 +30,7 @@ export const addPorts = (nodeId: string, ports: Array<Port>): PortAction => ({
  * @param {string} portId
  * @param {Object} graphicalAttributes
  */
-export const setPortGraphicalAttribute = (portId: string, graphicalAttributes: PortGraphicalAttributes): PortAction => ({
+export const setPortGraphicalAttribute = (portId: string, graphicalAttributes: {}): PortAction => ({
 	type: 'FLOWDESIGNER_PORT_SET_GRAPHICAL_ATTRIBUTES',
 	portId,
 	graphicalAttributes,
