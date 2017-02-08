@@ -3,12 +3,18 @@ import invariant from 'invariant';
 import { mapOf } from 'react-immutable-proptypes';
 import { LinkType, PortType } from '../../constants/flowdesigner.proptypes';
 
-const LinksRender = React.createClass({
-	propTypes: {
+class LinksRender extends React.Component {
+	static propTypes = {
 		links: mapOf(LinkType).isRequired,
 		ports: mapOf(PortType).isRequired,
-		linkTypeMap: PropTypes.object.isRequired,
-	},
+		linkTypeMap: PropTypes.object.isRequired,  // eslint-disable-line react/forbid-prop-types
+	}
+
+	constructor(props) {
+		super(props);
+		this.renderLink = this.renderLink.bind(this);
+	}
+
 	renderLink(link) {
 		const ConcreteLink = this.props.linkTypeMap[link.getLinkType()].component;
 		const source = this.props.ports.get(link.sourceId);
@@ -16,21 +22,23 @@ const LinksRender = React.createClass({
 		if (!ConcreteLink) {
 			invariant(
 				false,
-				`<LinksRenderer />  the defined link type in your graph model hasn\'t been mapped into
-				the dataflow configuration, check LinkType documentation`
+				`<LinksRenderer /> the defined link type in your graph model
+				hasn't been mapped into the dataflow configuration,
+				check LinkType documentation`,
 			);
 		}
 		return (
 			<ConcreteLink link={link} source={source} target={target} key={link.id} />
 		);
-	},
+	}
+
 	render() {
 		return (
 			<g>
 				{this.props.links.map(this.renderLink)}
 			</g>
 		);
-	},
-});
+	}
+}
 
 export default LinksRender;

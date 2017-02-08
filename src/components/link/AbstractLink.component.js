@@ -9,10 +9,12 @@ import LinkHandle from './LinkHandle.component';
 import { PortType } from '../../constants/flowdesigner.proptypes';
 import type { Position } from '../../flow-typed';
 
-const concreteLine = line().x(d => d.x).y(d => d.y)
-			.curve(curveBasis);
+const concreteLine = line()
+	.x(d => d.x)
+	.y(d => d.y)
+	.curve(curveBasis);
 
-const calculatePath = (sourcePosition: Position, targetPosition: Position) => {
+function calculatePath(sourcePosition: Position, targetPosition: Position) {
 	const pathCoords = [];
 	pathCoords[0] = targetPosition;
 	pathCoords[1] = sourcePosition;
@@ -20,14 +22,12 @@ const calculatePath = (sourcePosition: Position, targetPosition: Position) => {
 	const yInterpolate = interpolateBasis([targetPosition.y, pathCoords[1].y]);
 	const path = concreteLine(pathCoords);
 	return { path, xInterpolate, yInterpolate };
-};
+}
 
-const AbstractLink = React.createClass({
-	propTypes: {
+class AbstractLink extends React.Component {
+	static propTypes = {
 		source: PortType.isRequired,
 		target: PortType.isRequired,
-		markerSource: PropTypes.element,
-		markedTarget: PropTypes.element,
 		targetHandlePosition: PropTypes.shape({
 			x: PropTypes.number.isRequired,
 			y: PropTypes.number.isRequired,
@@ -38,35 +38,52 @@ const AbstractLink = React.createClass({
 		onTargetDrag: PropTypes.func,
 		onTargetDragEnd: PropTypes.func,
 		children: PropTypes.node,
-	},
-	statics: calculatePath,
+		linkSourceHandleComponent: PropTypes.element,
+		sourceHandlePosition: PropTypes.shape({
+			x: PropTypes.number.isRequired,
+			y: PropTypes.number.isRequired,
+		}),
+		linkTargetHandleComponent: PropTypes.element,
+	}
+
+	static calculatePath = calculatePath;
+
 	shouldComponentUpdate(nextProps) {
 		return nextProps.source !== this.props.source ||
 			nextProps.target !== this.props.target ||
 			nextProps.targetHandlePosition !== this.props.targetHandlePosition;
-	},
+	}
+
 	renderLinkSourceHandle() {
 		if (this.props.linkSourceHandleComponent) {
-			return (<LinkHandle
-				component={this.props.linkSourceHandleComponent}
-				onDrag={this.props.onSourceDrag} onDragEnd={this.props.onSourceDragEnd}
-				position={this.props.sourceHandlePosition || this.props.source.getPosition()}
-			/>);
+			return (
+				<LinkHandle
+					component={this.props.linkSourceHandleComponent}
+					onDrag={this.props.onSourceDrag}
+					onDragEnd={this.props.onSourceDragEnd}
+					position={this.props.sourceHandlePosition || this.props.source.getPosition()}
+				/>
+			);
 		}
 		return null;
-	},
+	}
+
 	renderLinkTargetHandle() {
 		if (this.props.linkTargetHandleComponent) {
-			return (<LinkHandle
-				component={this.props.linkTargetHandleComponent}
-				onDrag={this.props.onTargetDrag} onDragEnd={this.props.onTargetDragEnd}
-				position={this.props.targetHandlePosition || this.props.target.getPosition()}
-			/>);
+			return (
+				<LinkHandle
+					component={this.props.linkTargetHandleComponent}
+					onDrag={this.props.onTargetDrag}
+					onDragEnd={this.props.onTargetDragEnd}
+					position={this.props.targetHandlePosition || this.props.target.getPosition()}
+				/>
+			);
 		}
 		return null;
-	},
+	}
+
 	render() {
-		const pathCalculationMethod = this.props.calculatePath || calculatePath;
+		const pathCalculationMethod = this.props.calculatePath || self.calculatePath;
 		const { path, xInterpolate, yInterpolate } = pathCalculationMethod(
 			this.props.source.getPosition(),
 			this.props.targetHandlePosition || this.props.target.getPosition(),
@@ -81,7 +98,7 @@ const AbstractLink = React.createClass({
 				{this.renderLinkTargetHandle()}
 			</g>
 		);
-	},
-});
+	}
+}
 
 export default AbstractLink;

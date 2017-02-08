@@ -5,6 +5,7 @@ import invariant from 'invariant';
 import get from 'lodash/get';
 
 import { setZoom } from '../actions/flow.actions';
+import Grid from './grid/Grid.component';
 import ZoomHandler from './ZoomHandler.component';
 import { NodeType, PortType } from '../constants/flowdesigner.proptypes';
 import NodesRenderer from './node/NodesRenderer.component';
@@ -14,23 +15,32 @@ import PortsRenderer from './port/PortsRenderer.component';
 import { moveNodeTo, moveNodeToEnd } from '../actions/node.actions';
 import { setNodeTypes } from '../actions/nodeType.actions';
 
-
-export const FlowDesigner = React.createClass({
-	propTypes: {
+export class FlowDesigner extends React.Component {
+	static propTypes = {
 		children: PropTypes.node,
 		setNodeTypes: PropTypes.func.isRequired,
 		moveNodeTo: PropTypes.func.isRequired,
+		moveNodeToEnd: PropTypes.func,
 		nodes: mapOf(NodeType).isRequired,
 		ports: orderedMapOf(PortType).isRequired,
 		links: mapOf(PropTypes.object).isRequired,
 		reduxMountPoint: PropTypes.string.isRequired,
-	},
-	getInitialState() {
-		return {
+		onClick: PropTypes.func,
+		transform: ZoomHandler.propTypes.transform,
+		transformToApply: ZoomHandler.propTypes.transformToApply,
+		setZoom: ZoomHandler.propTypes.setZoom,
+		gridComponent: PropTypes.element,
+	}
+
+	constructor(props) {
+		super(props);
+		this.state = {
 			nodeTypeMap: {},
 			linkTypeMap: {},
+			portTypeMap: {},
 		};
-	},
+	}
+
 	componentWillMount() {
 		const { children } = this.props;
 		let nodeTypeMap = {};
@@ -85,10 +95,15 @@ export const FlowDesigner = React.createClass({
 
 		this.props.setNodeTypes(nodeTypeMap);
 		this.setState({ nodeTypeMap, linkTypeMap, portTypeMap });
-	},
+	}
+
 	render() {
 		return (
-			<svg onClick={this.props.onClick} ref={c => (this.node = c)} width="100%">
+			<svg
+				onClick={this.props.onClick}
+				ref={c => (this.node = c)}
+				width="100%"
+			>
 				<defs>
 					<filter id="blur-filter" width="1.5" height="1.5" x="-.25" y="-.25">
 						<feFlood floodColor="#01A7CF" result="COLOR" />
@@ -106,26 +121,29 @@ export const FlowDesigner = React.createClass({
 					transformToApply={this.props.transformToApply}
 					setZoom={this.props.setZoom}
 				>
-					<NodesRenderer
-						nodeTypeMap={this.state.nodeTypeMap}
-						moveNodeTo={this.props.moveNodeTo}
-						moveNodeToEnd={this.props.moveNodeToEnd}
-						nodes={this.props.nodes}
-					/>
-					<PortsRenderer
-						portTypeMap={this.state.portTypeMap}
-						ports={this.props.ports}
-					/>
-					<LinksRenderer
-						linkTypeMap={this.state.linkTypeMap}
-						links={this.props.links}
-						ports={this.props.ports}
-					/>
+					<Grid gridComponent={this.props.gridComponent} />
+					<g>
+						<NodesRenderer
+							nodeTypeMap={this.state.nodeTypeMap}
+							moveNodeTo={this.props.moveNodeTo}
+							moveNodeToEnd={this.props.moveNodeToEnd}
+							nodes={this.props.nodes}
+						/>
+						<PortsRenderer
+							portTypeMap={this.state.portTypeMap}
+							ports={this.props.ports}
+						/>
+						<LinksRenderer
+							linkTypeMap={this.state.linkTypeMap}
+							links={this.props.links}
+							ports={this.props.ports}
+						/>
+					</g>
 				</ZoomHandler>
 			</svg>
 		);
-	},
-});
+	}
+}
 
 const mapStateToProps = (state, ownProps) => ({
 	nodes: get(state, ownProps.reduxMountPoint).get('nodes'),
