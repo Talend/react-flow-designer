@@ -2,13 +2,11 @@
 /* @flow */
 /* eslint-disable import/no-extraneous-dependencies */
 import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
 import { Map } from 'immutable';
 
 import * as portActions from './port.actions';
 
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
+const mockStore = configureMockStore();
 
 describe('Check that port action creators generate proper' +
 	' action objects and perform checking', () => {
