@@ -10,8 +10,8 @@ Array [
         "type": "SINK",
       },
     },
+    "id": "portId",
     "nodeId": "nodeId",
-    "portId": "portId",
     "type": "FLOWDESIGNER_PORT_ADD",
   },
 ]

@@ -88,7 +88,7 @@ Object {
           "y": undefined,
         },
         "properties": Object {
-          "index": undefined,
+          "index": 0,
           "type": "EMITTER",
         },
       },
@@ -267,7 +267,7 @@ Object {
           "y": undefined,
         },
         "properties": Object {
-          "index": undefined,
+          "index": 0,
           "type": "EMITTER",
         },
       },

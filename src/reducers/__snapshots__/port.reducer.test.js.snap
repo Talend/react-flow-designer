@@ -51,7 +51,7 @@ Object {
         },
       },
       "id": "id2",
-      "nodeId": undefined,
+      "nodeId": "test",
       "setIndex": [Function],
     },
     "id3": Object {
@@ -115,6 +115,7 @@ Object {
   "in": Object {
     "nodeId": Object {
       "portId2": Object {},
+      "portId3": Object {},
     },
   },
   "links": Object {},
@@ -166,7 +167,7 @@ Object {
         },
       },
       "id": "id2",
-      "nodeId": undefined,
+      "nodeId": "test",
       "setIndex": [Function],
     },
     "id3": Object {
@@ -206,7 +207,7 @@ Object {
           "y": undefined,
         },
         "properties": Object {
-          "index": undefined,
+          "index": 0,
           "type": "EMITTER",
         },
       },
@@ -231,11 +232,36 @@ Object {
           "y": undefined,
         },
         "properties": Object {
-          "index": undefined,
+          "index": 0,
           "type": "SINK",
         },
       },
       "id": "portId2",
+      "nodeId": "nodeId",
+      "setIndex": [Function],
+    },
+    "portId3": Object {
+      "data": Object {
+        "flowType": "string",
+        "properties": Object {},
+      },
+      "getIndex": [Function],
+      "getPortDirection": [Function],
+      "getPortFlowType": [Function],
+      "getPortType": [Function],
+      "getPosition": [Function],
+      "graphicalAttributes": Object {
+        "portType": "portType",
+        "position": Object {
+          "x": undefined,
+          "y": undefined,
+        },
+        "properties": Object {
+          "index": 1,
+          "type": "SINK",
+        },
+      },
+      "id": "portId3",
       "nodeId": "nodeId",
       "setIndex": [Function],
     },
@@ -297,7 +323,7 @@ Object {
           "y": 10,
         },
         "properties": Object {
-          "index": 1,
+          "index": 0,
         },
       },
       "id": "id3",
@@ -376,95 +402,6 @@ Object {
 }
 `;
 
-exports[`Check port reducer FLOWDESIGNER_PORT_REMOVE should remove port id1 from ports collection 1`] = `
-Object {
-  "childrens": Object {},
-  "in": Object {},
-  "links": Object {},
-  "nodeTypes": Object {},
-  "nodes": Object {
-    "nodeId": Object {},
-  },
-  "out": Object {},
-  "parents": Object {},
-  "ports": Object {
-    "id2": Object {
-      "data": Object {
-        "flowType": undefined,
-        "properties": Object {},
-      },
-      "getIndex": [Function],
-      "getPortDirection": [Function],
-      "getPortFlowType": [Function],
-      "getPortType": [Function],
-      "getPosition": [Function],
-      "graphicalAttributes": Object {
-        "position": Object {
-          "x": 10,
-          "y": 10,
-        },
-        "properties": Object {
-          "index": 1,
-        },
-      },
-      "id": "id2",
-      "nodeId": undefined,
-      "setIndex": [Function],
-    },
-    "id3": Object {
-      "data": Object {
-        "flowType": undefined,
-        "properties": Object {},
-      },
-      "getIndex": [Function],
-      "getPortDirection": [Function],
-      "getPortFlowType": [Function],
-      "getPortType": [Function],
-      "getPosition": [Function],
-      "graphicalAttributes": Object {
-        "position": Object {
-          "x": 10,
-          "y": 10,
-        },
-        "properties": Object {
-          "index": 2,
-        },
-      },
-      "id": "id3",
-      "nodeId": undefined,
-      "setIndex": [Function],
-    },
-  },
-  "transform": Object {
-    "k": 1,
-    "x": 0,
-    "y": 0,
-  },
-  "transformToApply": undefined,
-}
-`;
-
-exports[`Check port reducer FLOWDESIGNER_PORT_REMOVE should remove port id2 from ports collection 1`] = `
-Object {
-  "childrens": Object {},
-  "in": Object {},
-  "links": Object {},
-  "nodeTypes": Object {},
-  "nodes": Object {
-    "nodeId": Object {},
-  },
-  "out": Object {},
-  "parents": Object {},
-  "ports": Object {},
-  "transform": Object {
-    "k": 1,
-    "x": 0,
-    "y": 0,
-  },
-  "transformToApply": undefined,
-}
-`;
-
 exports[`Check port reducer FLOWDESIGNER_PORT_REMOVE_DATA remove type on port id1 on port data map 1`] = `
 Object {
   "childrens": Object {},
@@ -514,7 +451,7 @@ Object {
         },
       },
       "id": "id2",
-      "nodeId": undefined,
+      "nodeId": "test",
       "setIndex": [Function],
     },
     "id3": Object {
@@ -596,7 +533,7 @@ Object {
         },
       },
       "id": "id2",
-      "nodeId": undefined,
+      "nodeId": "test",
       "setIndex": [Function],
     },
     "id3": Object {
@@ -678,7 +615,7 @@ Object {
         },
       },
       "id": "id2",
-      "nodeId": undefined,
+      "nodeId": "test",
       "setIndex": [Function],
     },
     "id3": Object {
@@ -761,7 +698,7 @@ Object {
         },
       },
       "id": "id2",
-      "nodeId": undefined,
+      "nodeId": "test",
       "setIndex": [Function],
     },
     "id3": Object {
