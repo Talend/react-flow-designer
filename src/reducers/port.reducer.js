@@ -3,7 +3,7 @@
 import invariant from 'invariant';
 import { Map, fromJS } from 'immutable';
 
-import type { Id, PortAction, Port, PortDirection, PortRecordType, State } from '../flow-typed';
+import type { Id, PortAction, Port, PortDirection, PortRecordType, PortRecordMap, State } from '../flow-typed';
 
 import {
 	PortRecord, PortData, PortGraphicalAttributes, PositionRecord,
@@ -22,19 +22,34 @@ import {
 	FLOWDESIGNER_PORT_REMOVE,
 } from '../constants/flowdesigner.constants';
 
-function filterPortsByNode(ports: Map<Id, PortRecordType>, nodeId: Id) : Map<Id, PortRecordType> {
+
+/**
+ * get ports attached to a node
+ */
+function filterPortsByNode(ports: PortRecordMap, nodeId: Id) : PortRecordMap {
 	return ports.filter((port: PortRecordType) => port.nodeId === nodeId);
 }
 
-function filterPortsByDirection(ports: Map<Id, PortRecordType>, direction: PortDirection) : Map<Id, PortRecordType> {
+/**
+ * get ports of direction EMITTER or SINK
+ */
+function filterPortsByDirection(ports: PortRecordMap, direction: PortDirection) : PortRecordMap {
 	return ports.filter((port: PortRecordType) => port.getPortDirection() === direction);
 }
 
-function getPortIndex(ports: Map<Id, PortRecordType>, port: Port): number {
-	return filterPortsByDirection(filterPortsByNode(ports, port.nodeId), port.graphicalAttributes.properties.type).size;
+/**
+ * for a new port calculate its index by retrieving all its siblings
+ */
+function calculateNewPortIndex(ports: PortRecordMap, port: Port): number {
+	return filterPortsByDirection(
+		filterPortsByNode(
+			ports, port.nodeId,
+		),
+		port.graphicalAttributes.properties.type,
+	).size;
 }
 
-function indexPortMap(ports: Map<Id, PortRecordType>): Map<Id, PortRecordType> {
+function indexPortMap(ports: PortRecordMap): PortRecordMap {
 	let i = 0;
 	return ports.sort((a, b) => {
 		if (a.getIndex() < b.getIndex()) {
@@ -46,12 +61,12 @@ function indexPortMap(ports: Map<Id, PortRecordType>): Map<Id, PortRecordType> {
 		return 0;
 	}).map((port) => {
 		i += 1;
-		return port.setIndex(i);
+		return port.setIndex(i - 1);
 	});
 }
 
 function setPort(state: State, port: Port) {
-	const index: number = port.graphicalAttributes.properties.index && getPortIndex(state.get('ports'), port);
+	const index: number = port.graphicalAttributes.properties.index || calculateNewPortIndex(state.get('ports'), port);
 	const newState = state.setIn(['ports', port.id], new PortRecord({
 		id: port.id,
 		nodeId: port.nodeId,
@@ -79,10 +94,10 @@ export default function portReducer(state: State, action: PortAction): State {
 	case FLOWDESIGNER_PORT_ADD:
 		if (!state.getIn(['nodes', action.nodeId])) {
 			invariant(false,
-					`Can't set a new port ${action.portId} on non existing node ${action.nodeId}`);
+					`Can't set a new port ${action.id} on non existing node ${action.nodeId}`);
 		}
 		return setPort(state, {
-			id: action.portId,
+			id: action.id,
 			nodeId: action.nodeId,
 			data: action.data,
 			graphicalAttributes: action.graphicalAttributes,
@@ -142,17 +157,17 @@ export default function portReducer(state: State, action: PortAction): State {
 		}
 		const port: ?PortRecordType = state.getIn(['ports', action.portId]);
 		if (port) {
-			return portInLink(state, action.portId).reduce(
+			const newState = portInLink(state, action.portId).reduce(
 				(cumulativeState, link) => linkReducer(cumulativeState, removeLink(link.id)),
 				portOutLink(state, action.portId).reduce(
 					(cumulativeState, link) => linkReducer(cumulativeState, removeLink(link.id)),
 					state,
 				),
 			)
-			.merge(indexPortMap(filterPortsByDirection(filterPortsByNode(state.get('ports'), port.nodeId), port.getPortDirection())))
 			.deleteIn(['ports', action.portId])
 			.deleteIn(['out', state.getIn(['ports', action.portId, 'nodeId']), action.portId])
 			.deleteIn(['in', state.getIn(['ports', action.portId, 'nodeId']), action.portId]);
+			return newState.mergeDeep({ ports: indexPortMap(filterPortsByDirection(filterPortsByNode(newState.get('ports'), port.nodeId), port.getPortDirection())) });
 		}
 		return state;
 	}

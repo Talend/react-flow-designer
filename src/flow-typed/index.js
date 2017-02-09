@@ -52,7 +52,7 @@ export type PortRecordType = Record<Port>
 	getPortDirection: () => PortDirection,
 	getPortFlowType: () => string,
 	getIndex: () => number,
-	setIndex: (number) => PortRecordType,
+	setIndex: (index: number) => PortRecordType,
 }
 & Port;
 
@@ -75,9 +75,9 @@ export type LinkRecordType = Record<*>
 
 export type PortRecordMap = Map<Id, PortRecordType>;
 
-type getStateNodes = (['nodes', Id]) => NodeRecordType;
-type getStatePorts = (['ports', Id]) => PortRecordType;
-type getStateLinks = (['links', Id]) => Record<*>;
+type getStateNodes = (selector: ['nodes', Id]) => NodeRecordType;
+type getStatePorts = (selector: ['ports', Id]) => PortRecordType;
+type getStateLinks = (selector: ['links', Id]) => Record<*>;
 
 export type State = Map<string, Map<Id, any>> & {
 	+getIn: getStateNodes | getStatePorts | getStateLinks
@@ -88,7 +88,7 @@ export type State = Map<string, Map<Id, any>> & {
 export type PortActionAdd = {
 	type: 'FLOWDESIGNER_PORT_ADD',
 	nodeId: Id,
-	portId: Id,
+	id: Id,
 	data: PortData,
 	graphicalAttributes: PortGraphicalAttributes
 }

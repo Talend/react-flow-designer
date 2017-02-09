@@ -1,4 +1,4 @@
-import { Map, OrderedMap } from 'immutable';
+import { Map } from 'immutable';
 import invariant from 'invariant';
 import { zoomIdentity } from 'd3-zoom';
 import {
@@ -16,7 +16,7 @@ import nodeTypeReducer from './nodeType.reducer';
 export const defaultState = new Map({
 	nodes: new Map(),
 	links: new Map(),
-	ports: new OrderedMap(),
+	ports: new Map(),
 	out: new Map(),
 	in: new Map(),
 	childrens: new Map(),

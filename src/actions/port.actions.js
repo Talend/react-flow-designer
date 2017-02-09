@@ -9,11 +9,11 @@ import type { PortGraphicalAttributes, Port, PortData, PortAction, PortActionAdd
  * @param {string} portType
  * @param {Object} attributes
  */
-export function addPort(nodeId: string, portId: string, { data, graphicalAttributes }: {data: PortData, graphicalAttributes: PortGraphicalAttributes}): PortActionAdd {
+export function addPort(nodeId: string, id: string, { data, graphicalAttributes }: {data: PortData, graphicalAttributes: PortGraphicalAttributes}): PortActionAdd {
 	return {
 		type: 'FLOWDESIGNER_PORT_ADD',
 		nodeId,
-		portId,
+		id,
 		data,
 		graphicalAttributes,
 	};
