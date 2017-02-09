@@ -66,7 +66,8 @@ function indexPortMap(ports: PortRecordMap): PortRecordMap {
 }
 
 function setPort(state: State, port: Port) {
-	const index: number = port.graphicalAttributes.properties.index || calculateNewPortIndex(state.get('ports'), port);
+	const index: number = port.graphicalAttributes.properties.index
+		|| calculateNewPortIndex(state.get('ports'), port);
 	const newState = state.setIn(['ports', port.id], new PortRecord({
 		id: port.id,
 		nodeId: port.nodeId,
@@ -74,7 +75,11 @@ function setPort(state: State, port: Port) {
 			.set('properties', fromJS(port.data && port.data.properties) || new Map()),
 		graphicalAttributes: new PortGraphicalAttributes(port.graphicalAttributes)
 			.set('position', new PositionRecord(port.graphicalAttributes.position))
-			.set('properties', fromJS(port.graphicalAttributes && { index, ...port.graphicalAttributes.properties }) || new Map()),
+			.set(
+				'properties',
+				fromJS(port.graphicalAttributes && { index, ...port.graphicalAttributes.properties })
+				|| new Map(),
+			),
 	}));
 	const type = port.graphicalAttributes.properties.type;
 	if (type === 'EMITTER') {
