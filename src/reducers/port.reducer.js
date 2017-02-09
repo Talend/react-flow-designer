@@ -55,7 +55,7 @@ function indexPortMap(ports: PortRecordMap): PortRecordMap {
 		if (a.getIndex() < b.getIndex()) {
 			return -1;
 		}
-		if (a.getIndex() > b.getIndex())	{
+		if (a.getIndex() > b.getIndex()) {
 			return 1;
 		}
 		return 0;

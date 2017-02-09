@@ -35,7 +35,7 @@ function calculatePortPosition(ports, nodePosition, nodeSize) {
 		if (a.getIndex() < b.getIndex()) {
 			return -1;
 		}
-		if (a.getIndex() > b.getIndex())	{
+		if (a.getIndex() > b.getIndex()) {
 			return 1;
 		}
 		return 0;
@@ -51,7 +51,7 @@ function calculatePortPosition(ports, nodePosition, nodeSize) {
 		if (a.getIndex() < b.getIndex()) {
 			return -1;
 		}
-		if (a.getIndex() > b.getIndex())	{
+		if (a.getIndex() > b.getIndex()) {
 			return 1;
 		}
 		return 0;
