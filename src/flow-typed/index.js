@@ -71,8 +71,6 @@ export type LinkRecordType = Record<*>
 
 /** $STATE */
 
-
-
 export type PortRecordMap = Map<Id, PortRecordType>;
 
 type getStateNodes = (selector: ['nodes', Id]) => NodeRecordType;
@@ -82,7 +80,6 @@ type getStateLinks = (selector: ['links', Id]) => Record<*>;
 export type State = Map<string, Map<Id, any>> & {
 	+getIn: getStateNodes | getStatePorts | getStateLinks
 };
-
 
 /** $ACTIONS */
 export type PortActionAdd = {

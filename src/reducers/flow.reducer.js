@@ -29,7 +29,7 @@ export const defaultState = new Map({
 function combinedReducer(state = defaultState, action) {
 	return [nodesReducer, linksReducer, portsReducer, nodeTypeReducer]
 	.reduce(
-		(cumulatedState, reducer) => reducer(cumulatedState, action),
+		(cumulatedState, subReducer) => subReducer(cumulatedState, action),
 		state,
 	);
 }
