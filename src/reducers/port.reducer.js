@@ -167,7 +167,14 @@ export default function portReducer(state: State, action: PortAction): State {
 			.deleteIn(['ports', action.portId])
 			.deleteIn(['out', state.getIn(['ports', action.portId, 'nodeId']), action.portId])
 			.deleteIn(['in', state.getIn(['ports', action.portId, 'nodeId']), action.portId]);
-			return newState.mergeDeep({ ports: indexPortMap(filterPortsByDirection(filterPortsByNode(newState.get('ports'), port.nodeId), port.getPortDirection())) });
+			return newState.mergeDeep({
+				ports: indexPortMap(
+					filterPortsByDirection(
+						filterPortsByNode(newState.get('ports'), port.nodeId),
+						port.getPortDirection(),
+					),
+				),
+			});
 		}
 		return state;
 	}
