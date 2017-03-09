@@ -5,6 +5,7 @@ import { Map, fromJS } from 'immutable';
 
 import type { Id, PortAction, Port, PortDirection, PortRecordType, PortRecordMap, State } from '../flow-typed';
 
+
 import {
 	PortRecord, PortData, PortGraphicalAttributes, PositionRecord,
 } from '../constants/flowdesigner.model';
@@ -20,6 +21,8 @@ import {
 	FLOWDESIGNER_PORT_SET_DATA,
 	FLOWDESIGNER_PORT_REMOVE_DATA,
 	FLOWDESIGNER_PORT_REMOVE,
+	PORT_SINK,
+	PORT_SOURCE,
 } from '../constants/flowdesigner.constants';
 
 
@@ -82,9 +85,9 @@ function setPort(state: State, port: Port) {
 			),
 	}));
 	const type = port.graphicalAttributes.properties.type;
-	if (type === 'EMITTER') {
+	if (type === PORT_SOURCE) {
 		return newState.setIn(['out', port.nodeId, port.id], new Map());
-	} else if (type === 'SINK') {
+	} else if (type === PORT_SINK) {
 		return newState.setIn(['in', port.nodeId, port.id], new Map());
 	}
 	invariant(true,
