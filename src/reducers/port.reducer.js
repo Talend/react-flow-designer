@@ -5,7 +5,6 @@ import { Map, fromJS } from 'immutable';
 
 import type { Id, PortAction, Port, PortDirection, PortRecordType, PortRecordMap, State } from '../flow-typed';
 
-
 import {
 	PortRecord, PortData, PortGraphicalAttributes, PositionRecord,
 } from '../constants/flowdesigner.model';
