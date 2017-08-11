@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-import { select, event } from 'd3-selection';
+import { select, event as currentEvent } from 'd3-selection';
 import { drag } from 'd3-drag';
 
 class LinkHandle extends React.Component {
@@ -12,7 +12,7 @@ class LinkHandle extends React.Component {
 		onDrag: PropTypes.func,
 		onDragEnd: PropTypes.func,
 		component: PropTypes.element.isRequired,
-	}
+	};
 
 	constructor(props) {
 		super(props);
@@ -22,11 +22,7 @@ class LinkHandle extends React.Component {
 
 	componentDidMount() {
 		this.d3Handle = select(this.handle);
-		this.d3Handle.call(
-			drag()
-				.on('drag', this.drag)
-				.on('end', this.dragEnd),
-		);
+		this.d3Handle.call(drag().on('drag', this.drag).on('end', this.dragEnd));
 	}
 
 	componentWillUnmount() {
@@ -35,13 +31,13 @@ class LinkHandle extends React.Component {
 
 	drag() {
 		if (this.props.onDrag) {
-			this.props.onDrag(event);
+			this.props.onDrag(currentEvent);
 		}
 	}
 
 	dragEnd() {
 		if (this.props.onDragEnd) {
-			this.props.onDragEnd(event);
+			this.props.onDragEnd(currentEvent);
 		}
 	}
 
@@ -49,7 +45,9 @@ class LinkHandle extends React.Component {
 		const position = this.props.position;
 		return (
 			<g
-				ref={(c) => { this.handle = c; }}
+				ref={(c) => {
+					this.handle = c;
+				}}
 				transform={`translate(${position.get('x')},${position.get('y')})`}
 			>
 				{this.props.component}
