@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { select, event } from 'd3-selection';
+import { select, event as currentEvent } from 'd3-selection';
 import { drag } from 'd3-drag';
 import { scaleLinear } from 'd3-scale';
 import { Map } from 'immutable';
@@ -21,52 +21,61 @@ ex: <AbstractNode><rect /></AbstractNode>`;
  */
 function calculatePortPosition(ports, nodePosition, nodeSize) {
 	let portsWithPosition = new Map();
-	const emitterPorts = ports.filter(port => port.getIn(['graphicalAttributes', 'properties', 'type']) === PORT_SOURCE);
-	const sinkPorts = ports.filter(port => port.getIn(['graphicalAttributes', 'properties', 'type']) === PORT_SINK);
+	const emitterPorts = ports.filter(
+		port => port.getIn(['graphicalAttributes', 'properties', 'type']) === PORT_SOURCE,
+	);
+	const sinkPorts = ports.filter(
+		port => port.getIn(['graphicalAttributes', 'properties', 'type']) === PORT_SINK,
+	);
 	const range = [nodePosition.get('y'), nodePosition.get('y') + nodeSize.get('height')];
-	const scaleYEmitter = scaleLinear()
-		.domain([0, emitterPorts.size + 1])
-		.range(range);
-	const scaleYSink = scaleLinear()
-		.domain([0, sinkPorts.size + 1])
-		.range(range);
+	const scaleYEmitter = scaleLinear().domain([0, emitterPorts.size + 1]).range(range);
+	const scaleYSink = scaleLinear().domain([0, sinkPorts.size + 1]).range(range);
 	let emitterNumber = 0;
 	let sinkNumber = 0;
-	emitterPorts.sort((a, b) => {
-		if (a.getIndex() < b.getIndex()) {
-			return -1;
-		}
-		if (a.getIndex() > b.getIndex()) {
-			return 1;
-		}
-		return 0;
-	}).forEach((port) => {
-		emitterNumber += 1;
-		const position = new PositionRecord({
-			x: nodePosition.get('x') + nodeSize.get('width'),
-			y: scaleYEmitter(emitterNumber),
+	emitterPorts
+		.sort((a, b) => {
+			if (a.getIndex() < b.getIndex()) {
+				return -1;
+			}
+			if (a.getIndex() > b.getIndex()) {
+				return 1;
+			}
+			return 0;
+		})
+		.forEach((port) => {
+			emitterNumber += 1;
+			const position = new PositionRecord({
+				x: nodePosition.get('x') + nodeSize.get('width'),
+				y: scaleYEmitter(emitterNumber),
+			});
+			portsWithPosition = portsWithPosition.set(
+				port.id,
+				port.setIn(['graphicalAttributes', 'position'], position),
+			);
 		});
-		portsWithPosition = portsWithPosition.set(port.id, port.setIn(['graphicalAttributes', 'position'], position));
-	});
-	sinkPorts.sort((a, b) => {
-		if (a.getIndex() < b.getIndex()) {
-			return -1;
-		}
-		if (a.getIndex() > b.getIndex()) {
-			return 1;
-		}
-		return 0;
-	}).forEach((port) => {
-		sinkNumber += 1;
-		const position = new PositionRecord({
-			x: nodePosition.get('x'),
-			y: scaleYSink(sinkNumber),
+	sinkPorts
+		.sort((a, b) => {
+			if (a.getIndex() < b.getIndex()) {
+				return -1;
+			}
+			if (a.getIndex() > b.getIndex()) {
+				return 1;
+			}
+			return 0;
+		})
+		.forEach((port) => {
+			sinkNumber += 1;
+			const position = new PositionRecord({
+				x: nodePosition.get('x'),
+				y: scaleYSink(sinkNumber),
+			});
+			portsWithPosition = portsWithPosition.set(
+				port.id,
+				port.setIn(['graphicalAttributes', 'position'], position),
+			);
 		});
-		portsWithPosition = portsWithPosition.set(port.id, port.setIn(['graphicalAttributes', 'position'], position));
-	});
 	return portsWithPosition;
 }
-
 
 class AbstractNode extends React.Component {
 	static propTypes = {
@@ -95,10 +104,7 @@ class AbstractNode extends React.Component {
 		this.d3Node = select(this.nodeElement);
 		this.d3Node.data([this.props.node.getPosition()]);
 		this.d3Node.call(
-			drag()
-				.on('start', this.onDragStart)
-				.on('drag', this.onDrag)
-				.on('end', this.onDragEnd),
+			drag().on('start', this.onDragStart).on('drag', this.onDrag).on('end', this.onDragEnd),
 		);
 	}
 
@@ -118,22 +124,22 @@ class AbstractNode extends React.Component {
 
 	onDragStart() {
 		if (this.props.onDragStart) {
-			this.props.onDragStart(event);
+			this.props.onDragStart(currentEvent);
 		}
 	}
 
 	onDrag() {
 		this.d3Node.data([this.props.node.getPosition()]);
-		this.props.moveNodeTo(this.props.node.id, event);
+		this.props.moveNodeTo(this.props.node.id, currentEvent);
 		if (this.props.onDrag) {
-			this.props.onDrag(event);
+			this.props.onDrag(currentEvent);
 		}
 	}
 
 	onDragEnd() {
-		this.props.moveNodeToEnd(this.props.node.id, event);
+		this.props.moveNodeToEnd(this.props.node.id, currentEvent);
 		if (this.props.onDragEnd) {
-			this.props.onDragEnd(event);
+			this.props.onDragEnd(currentEvent);
 		}
 	}
 
@@ -151,11 +157,7 @@ class AbstractNode extends React.Component {
 		const transform = `translate(${x}, ${y})`;
 		return (
 			<g>
-				<g
-					transform={transform}
-					ref={c => (this.nodeElement = c)}
-					onClick={this.onClick}
-				>
+				<g transform={transform} ref={c => (this.nodeElement = c)} onClick={this.onClick}>
 					{this.renderContent()}
 				</g>
 			</g>

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { select, event } from 'd3-selection';
+import { select, event as currentEvent } from 'd3-selection';
 
 import { PortType } from '../../constants/flowdesigner.proptypes';
 
@@ -8,13 +8,12 @@ class AbstractPort extends React.Component {
 		port: PortType,
 		onClick: PropTypes.func,
 		children: PropTypes.element,
-	}
+	};
 
 	constructor(props) {
 		super(props);
 		this.onClick = this.onClick.bind(this);
 	}
-
 
 	componentDidMount() {
 		this.d3Node = select(this.node);
@@ -27,7 +26,7 @@ class AbstractPort extends React.Component {
 
 	onClick() {
 		if (this.props.onClick) {
-			this.props.onClick(event);
+			this.props.onClick(currentEvent);
 		}
 	}
 
@@ -35,7 +34,10 @@ class AbstractPort extends React.Component {
 		const position = this.props.port.getPosition();
 		return (
 			<g>
-				<g ref={c => (this.node = c)} transform={`translate(${position.get('x')},${position.get('y')})`}>
+				<g
+					ref={c => (this.node = c)}
+					transform={`translate(${position.get('x')},${position.get('y')})`}
+				>
 					{this.props.children}
 				</g>
 			</g>
