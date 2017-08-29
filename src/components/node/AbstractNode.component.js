@@ -127,7 +127,12 @@ class AbstractNode extends React.Component {
 
 	onDrag() {
 		this.d3Node.data([this.props.node.getPosition()]);
-		const position = { x: event.x, y: event.y };
+		const position = {
+			x: event.x,
+			y: event.y,
+			movementX: event.sourceEvent.movementX,
+			movementY: event.sourceEvent.movementY,
+		};
 		this.props.moveNodeTo(this.props.node.id, position);
 		if (this.props.onDrag) {
 			this.props.onDrag(position);
