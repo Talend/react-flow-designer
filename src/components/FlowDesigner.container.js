@@ -21,7 +21,7 @@ export class FlowDesigner extends React.Component {
 		children: PropTypes.node,
 		setNodeTypes: PropTypes.func.isRequired,
 		moveNodeTo: PropTypes.func.isRequired,
-		moveNodeToEnd: PropTypes.func,
+		moveNodeToEnd: PropTypes.func.isRequired,
 		nodes: mapOf(NodeType).isRequired,
 		ports: mapOf(PortType).isRequired,
 		links: mapOf(PropTypes.object).isRequired,

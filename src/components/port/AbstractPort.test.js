@@ -9,6 +9,7 @@ describe('<AbstractPort /> renders correctly', () => {
 	it('<AbstractPort /> renders correctly', () => {
 		const port = new PortRecord({
 			id: 'idPort',
+			nodeId: 'nodeId',
 			graphicalAttributes: new PortGraphicalAttributes({
 				position: new PositionRecord({
 					x: 100,

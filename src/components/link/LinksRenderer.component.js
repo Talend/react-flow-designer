@@ -36,7 +36,7 @@ class LinksRender extends React.Component {
 	render() {
 		return (
 			<g>
-				{this.props.links.map(this.renderLink)}
+				{this.props.links.valueSeq().map(this.renderLink)}
 			</g>
 		);
 	}

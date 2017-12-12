@@ -9,6 +9,7 @@ describe('<ZoomHandler /> renders correctly', () => {
 		const tree = renderer.create(
 			<ZoomHandler transform={{ x: 0, y: 0, k: 1 }}>
 				<rect />
+				<rect />
 			</ZoomHandler>,
 		).toJSON();
 		expect(tree).toMatchSnapshot();

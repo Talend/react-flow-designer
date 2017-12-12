@@ -24,7 +24,7 @@ class PortsRenderer extends React.Component {
 	render() {
 		return (
 			<g>
-				{this.props.ports.map(this.renderPort)}
+				{this.props.ports.valueSeq().map(this.renderPort)}
 			</g>
 		);
 	}

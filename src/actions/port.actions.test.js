@@ -14,8 +14,8 @@ describe('Check that port action creators generate proper' +
 	it('addPort', () => {
 		const store = mockStore({
 			flowDesigner: {
-				nodes: new Map({ nodeId: { id: 'nodeId', nodeType: 'type' } }),
-				ports: new Map(),
+				nodes: Map({ nodeId: { id: 'nodeId', nodeType: 'type' } }),
+				ports: Map(),
 			},
 		});
 
@@ -43,7 +43,7 @@ describe('Check that port action creators generate proper' +
 	it('setPortGraphicalAttribute', () => {
 		const store = mockStore({
 			flowDesigner: {
-				ports: new Map({ id: { id: 'portId', portType: 'type' } }),
+				ports: Map({ id: { id: 'portId', portType: 'type' } }),
 			},
 		});
 
@@ -55,7 +55,7 @@ describe('Check that port action creators generate proper' +
 	it('removePortAttribute', () => {
 		const store = mockStore({
 			flowDesigner: {
-				ports: new Map({ id: { id: 'portId' } }),
+				ports: Map({ id: { id: 'portId' } }),
 			},
 		});
 
@@ -67,7 +67,7 @@ describe('Check that port action creators generate proper' +
 	it('setPortData', () => {
 		const store = mockStore({
 			flowDesigner: {
-				ports: new Map({ id: { id: 'portId', portType: 'type' } }),
+				ports: Map({ id: { id: 'portId', portType: 'type' } }),
 			},
 		});
 
@@ -79,7 +79,7 @@ describe('Check that port action creators generate proper' +
 	it('removePortData', () => {
 		const store = mockStore({
 			flowDesigner: {
-				ports: new Map({ id: { id: 'portId' }, data: new Map({ type: 'test' }) }),
+				ports: Map({ id: { id: 'portId' }, data: Map({ type: 'test' }) }),
 			},
 		});
 
@@ -91,7 +91,7 @@ describe('Check that port action creators generate proper' +
 	it('removePort', () => {
 		const store = mockStore({
 			flowDesigner: {
-				ports: new Map({ portId: { id: 'portId' } }),
+				ports: ({ portId: { id: 'portId' } }),
 			},
 		});
 

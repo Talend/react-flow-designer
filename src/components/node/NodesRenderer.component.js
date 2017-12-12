@@ -43,7 +43,7 @@ class NodesRenderer extends React.Component {
 	render() {
 		return (
 			<g>
-				{this.props.nodes.map(this.renderNode)}
+				{this.props.nodes.valueSeq().map(this.renderNode)}
 			</g>
 		);
 	}

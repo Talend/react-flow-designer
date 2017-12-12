@@ -10,17 +10,17 @@ describe('Check port reducer', () => {
 	const initialState = defaultState.set('ports', new OrderedMap()
 		.set('id1', new PortRecord({
 			id: 'id1',
-			data: new Map({ type: 'test' }),
-			graphicalAttributes: new Map({ type: 'test', position: new PositionRecord({ x: 10, y: 10 }) }),
+			data: Map({ type: 'test' }),
+			graphicalAttributes: Map({ type: 'test', position: new PositionRecord({ x: 10, y: 10 }) }),
 		}))
 		.set('id2', new PortRecord({
 			id: 'id2',
 			nodeId: 'test',
-			graphicalAttributes: new Map({ position: new PositionRecord({ x: 10, y: 10 }) }),
+			graphicalAttributes: Map({ position: new PositionRecord({ x: 10, y: 10 }) }),
 		}))
 		.set('id3', new PortRecord({
 			id: 'id3',
-			graphicalAttributes: new Map({ position: new PositionRecord({ x: 10, y: 10 }) }),
+			graphicalAttributes: Map({ position: new PositionRecord({ x: 10, y: 10 }) }),
 		})))
 		.set('nodes', new Map().set('nodeId', new Map())).set('links', new Map());
 
