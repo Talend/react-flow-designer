@@ -8,6 +8,8 @@ describe('Testing <NodeType>', () => {
 	it('should log an error if rendered', () => {
 		expect(() => {
 			shallow(<NodeType type="string" component={mockComponent} />);
-		}).toThrowError('<NodeType> elements are for DataFlow configuration only and should not be rendered');
+		}).toThrowError(
+			'<NodeType> elements are for DataFlow configuration only and should not be rendered',
+		);
 	});
 });
