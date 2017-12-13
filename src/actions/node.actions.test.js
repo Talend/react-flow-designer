@@ -9,7 +9,7 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe(
-	'Check that node action creators generate proper' + ' action objects and perform checking',
+	'Check that node action creators generate proper action objects and perform checking',
 	() => {
 		it('addNode generate action with 0 configuration', () => {
 			const store = mockStore({

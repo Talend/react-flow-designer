@@ -9,7 +9,7 @@ import { PORT_SINK } from '../constants/flowdesigner.constants';
 const mockStore = configureMockStore();
 
 describe(
-	'Check that port action creators generate proper' + ' action objects and perform checking',
+	'Check that port action creators generate proper action objects and perform checking',
 	() => {
 		it('addPort', () => {
 			const store = mockStore({
