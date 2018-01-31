@@ -101,7 +101,7 @@ const nodeReducer = (state = defaultState, action) => {
 			if (!state.getIn(['nodes', action.nodeId])) {
 				invariant(
 					false,
-					`Can't set nodeType on node ${action.nodeid} since it doesn't exist`,
+					`Can't set node.type on node ${action.nodeid} since it doesn't exist`,
 				);
 			}
 			return state.setIn(['nodes', action.nodeId, 'type'], action.nodeType);

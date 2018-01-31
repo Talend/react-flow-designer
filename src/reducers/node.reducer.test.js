@@ -87,13 +87,15 @@ describe('Check node reducer', () => {
 	it('FLOWDESIGNER_NODE_SET_TYPE update node type', () => {
 		const nodeId = 'id1';
 		const nodeType = 'nodetype';
-		
-		expect(nodeReducer(initialState, {
-			type: FLOWDESIGNER_NODE_SET_TYPE,
-			nodeId,
-			nodeType,
-		})).toMatchSnapshot();
-	})
+
+		expect(
+			nodeReducer(initialState, {
+				type: FLOWDESIGNER_NODE_SET_TYPE,
+				nodeId,
+				nodeType,
+			}),
+		).toMatchSnapshot();
+	});
 
 	it('FLOWDESIGNER_NODE_SET_GRAPHICAL_ATTRIBUTES should add { selected: false } attribute to node graphicalAttributes map', () => {
 		expect(

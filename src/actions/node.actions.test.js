@@ -23,7 +23,7 @@ describe('Check that node action creators generate proper action objects and per
 				graphicalAttributes: {
 					nodePosition: { x: 75, y: 75 },
 					nodeSize: { width: 50, heigth: 50 },
-					type: 'nodeType',
+					nodeType: 'nodeType',
 				},
 			}),
 		);
@@ -52,7 +52,7 @@ describe('Check that node action creators generate proper action objects and per
 	it('setNodeSize', () => {
 		const store = mockStore({
 			flowDesigner: {
-				nodes: new Map({ nodeId: { id: 'nodeId', nodeType: 'type' } }),
+				nodes: new Map({ nodeId: { id: 'nodeId', type: 'type' } }),
 			},
 		});
 
