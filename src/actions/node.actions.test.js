@@ -130,7 +130,7 @@ describe('Check that node action creators generate proper action objects and per
 	it('removeNode', () => {
 		const store = mockStore({
 			flowDesigner: {
-				nodes: new Map({ id: { id: 'nodeId', nodeType: 'type' } }),
+				nodes: new Map({ id: { id: 'nodeId', type: 'type' } }),
 			},
 		});
 
