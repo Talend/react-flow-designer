@@ -65,7 +65,7 @@ describe('Check that node action creators generate proper action objects and per
 		const nodeType = 'newNodeType';
 		const store = mockStore({
 			flowDesigner: {
-				nodes: new Map({ nodeId: { id: nodeId, nodeType: 'type' } }),
+				nodes: new Map({ nodeId: { id: nodeId, type: 'type' } }),
 			},
 		});
 
@@ -80,7 +80,7 @@ describe('Check that node action creators generate proper action objects and per
 	it('setNodeGraphicalAttributes', () => {
 		const store = mockStore({
 			flowDesigner: {
-				nodes: new Map({ id: { id: 'nodeId', nodeType: 'type' } }),
+				nodes: new Map({ id: { id: 'nodeId', type: 'type' } }),
 			},
 		});
 
@@ -92,7 +92,7 @@ describe('Check that node action creators generate proper action objects and per
 	it('removeNodeGraphicalAttribute', () => {
 		const store = mockStore({
 			flowDesigner: {
-				nodes: new Map({ id: { id: 'nodeId', nodeType: 'type' } }),
+				nodes: new Map({ id: { id: 'nodeId', type: 'type' } }),
 			},
 		});
 
@@ -104,7 +104,7 @@ describe('Check that node action creators generate proper action objects and per
 	it('setNodeData', () => {
 		const store = mockStore({
 			flowDesigner: {
-				nodes: new Map({ id: { id: 'nodeId', nodeType: 'type' } }),
+				nodes: new Map({ id: { id: 'nodeId', type: 'type' } }),
 			},
 		});
 
@@ -117,7 +117,7 @@ describe('Check that node action creators generate proper action objects and per
 		const store = mockStore({
 			flowDesigner: {
 				nodes: new Map({
-					id: { id: 'nodeId', nodeType: 'type', data: new Map({ type: 'test' }) },
+					id: { id: 'nodeId', nodeType: 'type', data: new Map({ testProperties: 'testProperties' }) },
 				}),
 			},
 		});
