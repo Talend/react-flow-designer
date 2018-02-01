@@ -34,7 +34,7 @@ describe('Check that node action creators generate proper action objects and per
 	it('moveNode generate a proper action object witch nodeId and nodePosition parameter', () => {
 		const store = mockStore({
 			flowDesigner: {
-				nodes: new Map({ nodeId: { id: 'nodeId', nodeType: 'type' } }),
+				nodes: new Map({ nodeId: { id: 'nodeId', type: 'type' } }),
 				nodeTypes: new Map({
 					type: new Map({
 						component: { calculatePortPosition: () => ({}) },
@@ -117,7 +117,7 @@ describe('Check that node action creators generate proper action objects and per
 		const store = mockStore({
 			flowDesigner: {
 				nodes: new Map({
-					id: { id: 'nodeId', nodeType: 'type', data: new Map({ testProperties: 'testProperties' }) },
+					id: { id: 'nodeId', type: 'type', data: new Map({ testProperties: 'testProperties' }) },
 				}),
 			},
 		});
