@@ -2,6 +2,7 @@ import curry from 'lodash/curry';
 import flow from 'lodash/flow';
 import Immutable from 'immutable';
 import { PortRecord, PositionRecord } from '../constants/flowdesigner.model';
+import { PORT_SOURCE, PORT_SINK } from '../constants/flowdesigner.constants';
 
 const positionSelector = ['graphicalAttributes', 'position'];
 const componentTypeSelector = ['graphicalAttributes', 'portType'];
@@ -22,7 +23,7 @@ export function isPositionRecord(position, doThrow) {
  * Test if the first parameter is a PortRecord
  * @param {*} port
  * @param {bool} doThrow - throw if not a port
- * @return {bool}
+ * @returns {bool}
  * @throws
  */
 export function isPortRecord(port, doThrow = false) {
@@ -38,15 +39,20 @@ export function isPortRecord(port, doThrow = false) {
 /**
  * Test if the first parameter is a PortRecord, throw if not
  * @param {*} port
- * @return {bool}
+ * @returns {bool}
  * @throws
  */
 export function isPortRecordElseThrow(port) {
 	return isPortRecord(port, true);
 }
 
+/**
+ * Check if the typologie is one of the two accepted value
+ * @param {*} typology
+ * @param {bool} doThrow
+ */
 export function isTypology(typology, doThrow) {
-	if (typology === 'SOURCE' || typology === 'SINK') {
+	if (typology === PORT_SOURCE || typology === PORT_SINK) {
 		return true;
 	}
 	if (doThrow) {
@@ -55,6 +61,10 @@ export function isTypology(typology, doThrow) {
 	return false;
 }
 
+/**
+ * @param {PortRecord} port
+ * @returns {string}
+ */
 export function getId(port) {
 	const whatver = isPortRecordElseThrow(port);
 	if (whatver) {
@@ -63,6 +73,11 @@ export function getId(port) {
 	return false;
 }
 
+/**
+ * @param {string}
+ * @param {PortRecord}
+ * @returns {PortRecord}
+ */
 const setId = curry((id, port) => {
 	if (isPortRecord(port) && typeof id === 'string') {
 		return port.set('id', id);
@@ -70,6 +85,10 @@ const setId = curry((id, port) => {
 	throw new Error(`id should be a string was given ${id.toString()}`);
 });
 
+/**
+ * @param {PortRecord} port
+ * @returns {string}
+ */
 export function getNodeId(port) {
 	if (isPortRecord(port, true)) {
 		return port.get('nodeId');
@@ -77,6 +96,11 @@ export function getNodeId(port) {
 	return false;
 }
 
+/**
+ * @param {string} nodeId
+ * @param {PortRecord} port
+ * @returns {PortRecord}
+ */
 export const setNodeId = curry((nodeId, port) => {
 	if (isPortRecord(port, true) && typeof nodeId === 'string') {
 		return port.set('nodeId', nodeId);
@@ -84,6 +108,10 @@ export const setNodeId = curry((nodeId, port) => {
 	throw new Error(`nodeId should be a string was given ${nodeId.toString()}`);
 });
 
+/**
+ * @param {PortRecord} port
+ * @returns {PositionRecord}
+ */
 export function getPosition(port) {
 	if (isPortRecord(port, true)) {
 		return port.getIn(positionSelector);
@@ -91,6 +119,11 @@ export function getPosition(port) {
 	return false;
 }
 
+/**
+ * @param {PositionRecord} position
+ * @param {PortRecord} port
+ * @returns {Port}
+ */
 export const setPosition = curry((position, port) => {
 	if (isPortRecord(port, true) && isPositionRecord(position, true)) {
 		return port.setIn(positionSelector, position);
@@ -98,6 +131,10 @@ export const setPosition = curry((position, port) => {
 	return false;
 });
 
+/**
+ * @param {PortRecord} port
+ * @returns {string}
+ */
 export function getComponentType(port) {
 	if (isPortRecord(port, true)) {
 		return port.getIn(componentTypeSelector);
@@ -105,6 +142,11 @@ export function getComponentType(port) {
 	return false;
 }
 
+/**
+ * @param {string} componentType
+ * @param {PortRecord} port
+ * @returns {PortRecord}
+ */
 export const setComponentType = curry((componentType, port) => {
 	if (isPortRecord(port, true) && typeof componentType === 'string') {
 		return port.setIn(componentTypeSelector, componentType);
@@ -112,24 +154,47 @@ export const setComponentType = curry((componentType, port) => {
 	throw new Error(`componentType should be a string was given ${componentType.toString()}`);
 });
 
+/**
+ * @param {PortRecord} port
+ * @returns {String}
+ */
 export function getTypology(port) {
 	if (isPortRecord(port, true)) {
 		return port.getIn(portTopologySelector);
 	}
 	return false;
 }
-export const setTypology = curry((flowType, port) => {
-	if (isPortRecord(port, true && isTypology(flowType))) {
-		return port.setIn(portTopologySelector, flowType);
+
+/**
+ * @param {string} typology
+ * @param {PortRecord} port
+ * @returns {PortRecord}
+ */
+export const setTypology = curry((typology, port) => {
+	if (isPortRecord(port, true && isTypology(typology))) {
+		return port.setIn(portTopologySelector, typology);
 	}
 	return false;
 });
+
+/**
+ * Index is set per port type and per node,
+ * so the renderer can order ports visually
+ * @param {PortRecord} port
+ * @returns {number}
+ */
 export function getIndex(port) {
 	if (isPortRecord(port, true)) {
 		return port.getIn(indexSelector);
 	}
 	return false;
 }
+
+/**
+ * @param {number} index
+ * @param {PortRecord} port
+ * @returns {PortRecord}
+ */
 export const setIndex = curry((index, port) => {
 	if (isPortRecord(port, true) && typeof index === 'number') {
 		return port.setIn(indexSelector, index);
@@ -137,6 +202,11 @@ export const setIndex = curry((index, port) => {
 	throw new Error(`index should be a number was given ${index.toString()}`);
 });
 
+
+/**
+ * @param {PortRecord} port
+ * @returns {Immutable.Map<String, *>}
+ */
 export function getData(port) {
 	if (isPortRecord(port)) {
 		return port.get('data');
@@ -144,6 +214,12 @@ export function getData(port) {
 	return false;
 }
 
+/**
+ * beware set data overwritte current data
+ * @param {Immutable.Map<String, *>}
+ * @param {PortRecord} port
+ * @param {PortRecord}
+ */
 export const setData = curry((map, port) => {
 	if (isPortRecord(port) && Immutable.Map.isMap(map)) {
 		return port.set('data', map);
@@ -151,6 +227,15 @@ export const setData = curry((map, port) => {
 	throw new Error(`data should be a Immutable.Map go ${map.toString()}`);
 });
 
+/**
+ * minimal port creation factory, additionnals information can be set trought
+ * the above set* functions
+ * @param {string} id
+ * @param {string} nodeId
+ * @param {number} index
+ * @param {string} typology
+ * @returns {PortRecord}
+ */
 export const createPortRecord = curry((id, nodeId, index, typology) => {
 	const create = flow([setId(id), setNodeId(nodeId), setIndex(index), setTypology(typology)]);
 	return create(new PortRecord());
