@@ -1,5 +1,6 @@
 import curry from 'lodash/curry';
 import flow from 'lodash/flow';
+import Immutable from 'immutable';
 import { PortRecord, PositionRecord } from '../constants/flowdesigner.model';
 
 const positionSelector = ['graphicalAttributes', 'position'];
@@ -111,7 +112,7 @@ export const setComponentType = curry((componentType, port) => {
 	throw new Error(`componentType should be a string was given ${componentType.toString()}`);
 });
 
-export function geTypology(port) {
+export function getTypology(port) {
 	if (isPortRecord(port, true)) {
 		return port.getIn(portTopologySelector);
 	}
@@ -144,7 +145,7 @@ export function getData(port) {
 }
 
 export const setData = curry((map, port) => {
-	if (isPortRecord(port) && Map.isMap(map)) {
+	if (isPortRecord(port) && Immutable.Map.isMap(map)) {
 		return port.set('data', map);
 	}
 	throw new Error(`data should be a Immutable.Map go ${map.toString()}`);
