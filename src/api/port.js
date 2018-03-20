@@ -9,7 +9,7 @@ const componentTypeSelector = ['graphicalAttributes', 'portType'];
 const portTopologySelector = ['graphicalAttributes', 'properties', 'type'];
 const indexSelector = ['graphicalAttributes', 'properties', 'index'];
 
-export function isPositionRecord(position, doThrow) {
+export function isPositionRecord(position, doThrow = true) {
 	if (position && position instanceof PositionRecord) {
 		return true;
 	}
@@ -47,11 +47,11 @@ export function isPortRecordElseThrow(port) {
 }
 
 /**
- * Check if the typologie is one of the two accepted value
+ * Check if the typology is one of the two accepted value
  * @param {*} typology
  * @param {bool} doThrow
  */
-export function isTypology(typology, doThrow) {
+export function isTypology(typology, doThrow = false) {
 	if (typology === PORT_SOURCE || typology === PORT_SINK) {
 		return true;
 	}
@@ -66,8 +66,7 @@ export function isTypology(typology, doThrow) {
  * @returns {string}
  */
 export function getId(port) {
-	const whatver = isPortRecordElseThrow(port);
-	if (whatver) {
+	if (isPortRecordElseThrow(port)) {
 		return port.get('id');
 	}
 	return false;
@@ -79,7 +78,7 @@ export function getId(port) {
  * @returns {PortRecord}
  */
 const setId = curry((id, port) => {
-	if (isPortRecord(port) && typeof id === 'string') {
+	if (typeof id === 'string' && isPortRecord(port)) {
 		return port.set('id', id);
 	}
 	throw new Error(`id should be a string was given ${id.toString()}`);
@@ -102,7 +101,7 @@ export function getNodeId(port) {
  * @returns {PortRecord}
  */
 export const setNodeId = curry((nodeId, port) => {
-	if (isPortRecord(port, true) && typeof nodeId === 'string') {
+	if (typeof nodeId === 'string' && isPortRecord(port, true)) {
 		return port.set('nodeId', nodeId);
 	}
 	throw new Error(`nodeId should be a string was given ${nodeId.toString()}`);
@@ -171,7 +170,7 @@ export function getTypology(port) {
  * @returns {PortRecord}
  */
 export const setTypology = curry((typology, port) => {
-	if (isPortRecord(port, true && isTypology(typology))) {
+	if (isPortRecord(port, true) && isTypology(typology)) {
 		return port.setIn(portTopologySelector, typology);
 	}
 	return false;
@@ -196,12 +195,11 @@ export function getIndex(port) {
  * @returns {PortRecord}
  */
 export const setIndex = curry((index, port) => {
-	if (isPortRecord(port, true) && typeof index === 'number') {
+	if (typeof index === 'number' && isPortRecord(port, true)) {
 		return port.setIn(indexSelector, index);
 	}
 	throw new Error(`index should be a number was given ${index.toString()}`);
 });
-
 
 /**
  * @param {PortRecord} port
