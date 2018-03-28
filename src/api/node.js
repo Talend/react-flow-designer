@@ -11,6 +11,14 @@ const positionSelector = ['graphicalAttributes', 'position'];
 const sizeSelector = ['graphicalAttributes', 'nodeSize'];
 const componentTypeSelector = ['graphicalAttributes', 'nodeType'];
 
+
+/**
+ * Test if the first parameter is a NodeRecord instance
+ * @param {NodeRecord} node
+ * @param {bool} doThrow - throw if not a node
+ * @returns {bool}
+ * @throws
+ */
 export function isNodeRecord(node, doThrow = false) {
 	if (node && node instanceof NodeRecord) {
 		return true;
@@ -21,6 +29,10 @@ export function isNodeRecord(node, doThrow = false) {
 	return false;
 }
 
+/**
+ * @param {NodeRecord} node
+ * @returns {string}
+ */
 export function getId(node) {
 	if (isNodeRecord(node, true)) {
 		return node.get('id');
@@ -28,6 +40,11 @@ export function getId(node) {
 	return false;
 }
 
+/**
+ * @param {string} id
+ * @param {NodeRecord}
+ * @returns {NodeRecord}
+ */
 export const setId = curry((id, node) => {
 	if (typeof id === 'string' && isNodeRecord(node)) {
 		node.set('id', id);
@@ -35,6 +52,10 @@ export const setId = curry((id, node) => {
 	return false;
 });
 
+/**
+ * @param {NodeRecord} node 
+ * @returns {PositionRecord}
+ */
 export function getPosition(node) {
 	if (isNodeRecord(node)) {
 		node.getIn(positionSelector);
@@ -42,6 +63,11 @@ export function getPosition(node) {
 	return false;
 }
 
+/**
+ * @param {PositionRecord} position
+ * @param {NodeRecord} node
+ * @returns {NodeRecord}
+ */
 export const setPosition = curry((position, node) => {
 	if (isPositionRecord(position) && isNodeRecord(node)) {
 		return node.setIn(positionSelector, position);
@@ -49,6 +75,10 @@ export const setPosition = curry((position, node) => {
 	return false;
 });
 
+/**
+ * @param {NodeRecord} node
+ * @returns {PositionRecord}
+ */
 export function getSize(node) {
 	if (isNodeRecord(node)) {
 		return node.getIn(sizeSelector);
@@ -56,6 +86,11 @@ export function getSize(node) {
 	return false;
 }
 
+/**
+ * @param {SizeRecord} size
+ * @param {NodeRecord} node
+ * @returns {NodeRecord}
+ */
 export const setSize = curry((size, node) => {
 	if (isSizeRecord(size) && isNodeRecord(node)) {
 		node.setIn(sizeSelector, size);

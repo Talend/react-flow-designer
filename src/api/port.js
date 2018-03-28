@@ -12,8 +12,8 @@ const indexSelector = ['graphicalAttributes', 'properties', 'index'];
 
 
 /**
- * Test if the first parameter is a PortRecord
- * @param {*} port
+ * Test if the first parameter is a PortRecord instance
+ * @param {Portrecord} port
  * @param {bool} doThrow - throw if not a port
  * @returns {bool}
  * @throws
