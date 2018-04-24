@@ -12,25 +12,27 @@ import * as nodeActions from './actions/node.actions';
 import * as portActions from './actions/port.actions';
 import * as linkActions from './actions/link.actions';
 import * as portSelectors from './selectors/portSelectors';
+import * as nodeSelectors from './selectors/nodeSelectors';
 import * as flowPropTypes from './constants/flowdesigner.proptypes';
 import * as flowModels from './constants/flowdesigner.model';
 
 export {
-    flowDesignerReducer,
-    FlowDesigner,
-    AbstractNode,
-    AbstractLink,
-    AbstractPort,
-    NodeType,
-    LinkType,
+	flowDesignerReducer,
+	FlowDesigner,
+	AbstractNode,
+	AbstractLink,
+	AbstractPort,
+	NodeType,
+	LinkType,
 	PortType,
-    flowDesignerConstants,
-    // should i share ?
-    flowActions,
-    nodeActions,
-    portActions,
-    linkActions,
-    portSelectors,
-    flowPropTypes,
-    flowModels,
+	flowDesignerConstants,
+	// should i share ?
+	flowActions,
+	nodeActions,
+	portActions,
+	linkActions,
+	portSelectors,
+	nodeSelectors,
+	flowPropTypes,
+	flowModels,
 };

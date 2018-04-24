@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/acateland/react-flow-designer.svg?branch=master)](https://travis-ci.org/acateland/react-flow-designer)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1391fe51ad7e4a409f9bdb7df0ad7754)](https://www.codacy.com/app/Talend/react-flow-designer_2?utm_source=github.com&utm_medium=referral&utm_content=Talend/react-flow-designer&utm_campaign=badger)
+[![Build Status](https://travis-ci.org/Talend/react-flow-designer.svg?branch=master)](https://travis-ci.org/Talend/react-flow-designer.svg?branch=master)
 
 [![dependencies Status](https://david-dm.org/acateland/react-flow-designer/status.svg)](https://david-dm.org/acateland/react-flow-designer)
 
@@ -60,20 +61,4 @@ Exemple a reducer listening for 'DATASTREAM_DESIGNER_NODE_SELECTED' could trigge
 
 ## Redux API
 
-Redux action type for datastream_designer should follow this convention.
 
-DATASTREAM_DESIGNER_*DOMAIN*_*ACTION*
-
-Ex: DATASTREAM_DESIGNER_NODE_SELECTED, DATASTREAM_DESIGNER_NODE_MOVED
-
-| Action                                 | payload value           | expected type            |
-| -------------------------------------- |:-----------------------:| ------------------------:|
-| DATASTREAM_DESIGNER_NODE_SELECTED      | nodeId                  | string                   |
-| DATASTREAM_DESIGNER_NODE_MOVE          | nodeId                  | string                   |
-| DATASTREAM_DESIGNER_NODE_MOVE          | position                | `{x: number, y: number}` |
-
-other prospective,
-
-expose api as a configurable middleware to fire intermediate customized action into the host app ?
-
-expose api as classical callback hooks on the main component ?

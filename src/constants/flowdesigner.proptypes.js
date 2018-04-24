@@ -1,4 +1,4 @@
-import { PropTypes } from 'react';
+import PropTypes from 'prop-types';
 import { recordOf } from 'react-immutable-proptypes';
 
 export const NodeType = recordOf({
@@ -16,7 +16,6 @@ export const PortType = recordOf({
 		x: PropTypes.number.isRequired,
 		y: PropTypes.number.isRequired,
 	}),
-	attr: PropTypes.object.isRequired,
 });
 
 export const LinkType = recordOf({

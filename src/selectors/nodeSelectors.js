@@ -1,20 +1,30 @@
-import { createSelector } from 'reselect';
-import { Map } from 'immutable';
+import { Set } from 'immutable';
 
-const getNodes = state => state.get('nodes');
-const getPorts = state => state.get('ports');
+/**
+ * @param state Map flow state
+ * @param nodeId String
+ * @param predecessors Set list of already determined predecessors
+ */
+export function getPredecessors(state, nodeId, predecessors) {
+	return state
+		.getIn(['parents', nodeId])
+		.reduce(
+			(accumulator, parentId) => getPredecessors(state, parentId, accumulator).add(parentId),
+			predecessors || new Set(),
+		);
+}
 
-export const getNodesWithPorts = createSelector(
-	[getNodes, getPorts],
-	(nodes, ports) => {
-		let nodesWithPorts = new Map();
-		nodes.forEach(node => {
-			nodesWithPorts = nodesWithPorts.set(
-				node.id, new Map({ node, ports: ports.filter(port => port.nodeId === node.id) })
-			);
-		});
-		return nodesWithPorts;
-	}
-);
-
-export default getNodesWithPorts;
+/**
+ * @param state Map flow state
+ * @param nodeId String
+ * @param successors Set list of already determined successors
+ */
+export function getSuccessors(state, nodeId, successors) {
+	return state
+		.getIn(['childrens', nodeId])
+		.reduce(
+			(accumulator, childrenId) =>
+				getSuccessors(state, childrenId, accumulator).add(childrenId),
+			successors || new Set(),
+		);
+}

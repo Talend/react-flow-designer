@@ -1,85 +1,97 @@
+/* @flow */
 /* eslint-disable import/no-extraneous-dependencies */
 import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
 import { Map } from 'immutable';
 
 import * as portActions from './port.actions';
+import { PORT_SINK } from '../constants/flowdesigner.constants';
 
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
+const mockStore = configureMockStore();
 
-describe('Check that port action creators generate proper' +
-	' action objects and perform checking', () => {
-	it('addPort', () => {
-		const expectedActions = [{
-			type: 'FLOWDESIGNER_PORT_ADD',
-			nodeId: 'nodeId',
-			portId: 'portId',
-			portType: 'portType',
-			attr: { selected: true },
-		}];
+describe(
+	'Check that port action creators generate proper action objects and perform checking',
+	() => {
+		it('addPort', () => {
+			const store = mockStore({
+				flowDesigner: {
+					nodes: Map({ nodeId: { id: 'nodeId', nodeType: 'type' } }),
+					ports: Map(),
+				},
+			});
 
-		const store = mockStore({
-			flowDesigner: {
-				nodes: new Map({ nodeId: { id: 'nodeId', nodeType: 'type' } }),
-				ports: new Map(),
-			},
+			store.dispatch(
+				portActions.addPort('nodeId', 'portId', {
+					graphicalAttributes: {
+						portType: 'test',
+						properties: {
+							type: PORT_SINK,
+						},
+					},
+					data: {
+						flowType: 'string',
+					},
+				}),
+			);
+			expect(store.getActions()).toMatchSnapshot();
 		});
 
-		store.dispatch(portActions.addPort('nodeId', 'portId', 'portType', { selected: true }));
-		expect(store.getActions()).toEqual(expectedActions);
-	});
+		it('setPortGraphicalAttribute', () => {
+			const store = mockStore({
+				flowDesigner: {
+					ports: Map({ id: { id: 'portId', portType: 'type' } }),
+				},
+			});
 
+			store.dispatch(portActions.setPortGraphicalAttribute('id', { selected: true }));
 
-	it('setPortAttribute', () => {
-		const expectedActions = [{
-			type: 'FLOWDESIGNER_PORT_SET_ATTR',
-			portId: 'id',
-			attr: { selected: true },
-		}];
-
-		const store = mockStore({
-			flowDesigner: {
-				ports: new Map({ id: { id: 'portId', portType: 'type' } }),
-			},
+			expect(store.getActions()).toMatchSnapshot();
 		});
 
-		store.dispatch(portActions.setPortAttribute('id', { selected: true }));
+		it('removePortAttribute', () => {
+			const store = mockStore({
+				flowDesigner: {
+					ports: Map({ id: { id: 'portId' } }),
+				},
+			});
 
-		expect(store.getActions()).toEqual(expectedActions);
-	});
+			store.dispatch(portActions.removePortGraphicalAttribute('id', 'selected'));
 
-	it('removePortAttribute', () => {
-		const expectedActions = [{
-			type: 'FLOWDESIGNER_PORT_REMOVE_ATTR',
-			portId: 'id',
-			attrKey: 'selected',
-		}];
-
-		const store = mockStore({
-			flowDesigner: {
-				ports: new Map({ id: { id: 'portId' } }),
-			},
+			expect(store.getActions()).toMatchSnapshot();
 		});
 
-		store.dispatch(portActions.removePortAttribute('id', 'selected'));
+		it('setPortData', () => {
+			const store = mockStore({
+				flowDesigner: {
+					ports: Map({ id: { id: 'portId', portType: 'type' } }),
+				},
+			});
 
-		expect(store.getActions()).toEqual(expectedActions);
-	});
+			store.dispatch(portActions.setPortdata('id', { type: 'test' }));
 
-	it('removePort', () => {
-		const expectedActions = [{
-			type: 'FLOWDESIGNER_PORT_REMOVE',
-			portId: 'portId',
-		}];
-
-		const store = mockStore({
-			flowDesigner: {
-				ports: new Map({ portId: { id: 'portId' } }),
-			},
+			expect(store.getActions()).toMatchSnapshot();
 		});
 
-		store.dispatch(portActions.removePort('portId'));
-		expect(store.getActions()).toEqual(expectedActions);
-	});
-});
+		it('removePortData', () => {
+			const store = mockStore({
+				flowDesigner: {
+					ports: Map({ id: { id: 'portId' }, data: Map({ type: 'test' }) }),
+				},
+			});
+
+			store.dispatch(portActions.removePortData('id', 'type'));
+
+			expect(store.getActions()).toMatchSnapshot();
+		});
+
+		it('removePort', () => {
+			const store = mockStore({
+				flowDesigner: {
+					ports: { portId: { id: 'portId' } },
+				},
+			});
+
+			store.dispatch(portActions.removePort('portId'));
+			expect(store.getActions()).toMatchSnapshot();
+		});
+	},
+);

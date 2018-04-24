@@ -31,8 +31,12 @@ export const loadFlow = listOfActionCreation => ({
 	listOfActionCreation,
 });
 
-
-export const setZoom = transform => ({
-	type: FLOWDESIGNER_FLOW_SET_ZOOM,
-	transform,
-});
+export function setZoom(transform) {
+	if (!isNaN(transform.k) && !isNaN(transform.x) && !isNaN(transform.y)) {
+		return {
+			type: FLOWDESIGNER_FLOW_SET_ZOOM,
+			transform,
+		};
+	}
+	return null;
+}

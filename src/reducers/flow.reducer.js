@@ -1,69 +1,87 @@
-import { Map, OrderedMap } from 'immutable';
+import { Map } from 'immutable';
 import invariant from 'invariant';
+import { zoomIdentity } from 'd3-zoom';
 import {
 	FLOWDESIGNER_FLOW_ADD_ELEMENTS,
 	FLOWDESIGNER_FLOW_RESET,
 	FLOWDESIGNER_FLOW_LOAD,
 	FLOWDESIGNER_FLOW_SET_ZOOM,
+	FLOWDESIGNER_PAN_TO,
 } from '../constants/flowdesigner.constants';
 import nodesReducer from './node.reducer';
 import linksReducer from './link.reducer';
 import portsReducer from './port.reducer';
 import nodeTypeReducer from './nodeType.reducer';
-import { getDetachedPorts } from '../selectors/portSelectors';
-import { getDetachedLinks } from '../selectors/linkSelectors';
 
-const defaultState = new Map({
+export const defaultState = new Map({
 	nodes: new Map(),
 	links: new Map(),
-	ports: new OrderedMap(),
+	ports: new Map(),
+	out: new Map(),
+	in: new Map(),
+	childrens: new Map(),
+	parents: new Map(),
 	nodeTypes: new Map(),
 	transform: { k: 1, x: 0, y: 0 },
+	transformToApply: undefined,
 });
 
-const combinedReducer = (state = defaultState, action) => (
-	[nodesReducer, linksReducer, portsReducer, nodeTypeReducer].reduce(
-		(cumulatedState, reducer) => reducer(cumulatedState, action),
-		state
-	)
-);
+function combinedReducer(state = defaultState, action) {
+	return [nodesReducer, linksReducer, portsReducer, nodeTypeReducer].reduce(
+		(cumulatedState, subReducer) => subReducer(cumulatedState, action),
+		state,
+	);
+}
 
-export const reducer = (state, action) => {
+export function reducer(state, action) {
 	switch (action.type) {
-	case FLOWDESIGNER_FLOW_ADD_ELEMENTS:
-		try {
-			return action.listOfActionCreation.reduce(
-				(cumulativeState, actionCreation) => combinedReducer(cumulativeState, actionCreation),
-				state
+		case FLOWDESIGNER_FLOW_ADD_ELEMENTS:
+			try {
+				return action.listOfActionCreation.reduce(
+					(cumulativeState, actionCreation) =>
+						combinedReducer(cumulativeState, actionCreation),
+					state,
+				);
+			} catch (error) {
+				invariant(
+					true,
+					`Something happenned preventing FLOWDESIGNER_FLOW_ADD_ELEMENTS to be applied :${error}`,
+				);
+				return state;
+			}
+		case FLOWDESIGNER_FLOW_RESET:
+			return defaultState.set('nodeTypes', state.get('nodeTypes'));
+		case FLOWDESIGNER_FLOW_LOAD:
+			try {
+				return action.listOfActionCreation.reduce(
+					(cumulativeState, actionCreation) =>
+						combinedReducer(cumulativeState, actionCreation),
+					defaultState.set('nodeTypes', state.get('nodeTypes')),
+				);
+			} catch (error) {
+				invariant(
+					true,
+					`Something happenned preventing FLOWDESIGNER_FLOW_LOAD to be applied :${error}`,
+				);
+				return state;
+			}
+		case FLOWDESIGNER_FLOW_SET_ZOOM:
+			return state.set('transform', action.transform);
+		case FLOWDESIGNER_PAN_TO:
+			return state.update('transformToApply', () =>
+				zoomIdentity
+					.translate(state.get('transform').x, state.get('transform').y)
+					.scale(state.get('transform').k)
+					.scale(1 / state.get('transform').k)
+					.translate(
+						-(state.get('transform').x + action.x),
+						-(state.get('transform').y + action.y),
+					),
 			);
-		} catch (error) {
-			invariant(
-				true,
-				`Something happenned preventing FLOWDESIGNER_FLOW_ADD_ELEMENTS to be applied :${error}`
-			);
-			return state;
-		}
-	case FLOWDESIGNER_FLOW_RESET:
-		return defaultState.set('nodeTypes', state.get('nodeTypes'));
-	case FLOWDESIGNER_FLOW_LOAD:
-		try {
-			return action.listOfActionCreation.reduce(
-				(cumulativeState, actionCreation) => combinedReducer(cumulativeState, actionCreation),
-				defaultState.set('nodeTypes', state.get('nodeTypes'))
-			);
-		} catch (error) {
-			invariant(
-				true,
-				`Something happenned preventing FLOWDESIGNER_FLOW_LOAD to be applied :${error}`
-			);
-			return state;
-		}
-	case FLOWDESIGNER_FLOW_SET_ZOOM:
-		return state.set('transform', action.transform);
-	default:
-		return combinedReducer(state, action);
+		default:
+			return combinedReducer(state, action);
 	}
-};
+}
 
 /**
  * Calculate port position with the methods provided by port parent node
@@ -74,12 +92,14 @@ export const reducer = (state, action) => {
  *
  * @return {object} new state
  */
-export const calculatePortsPosition = (state, action) => {
+export function calculatePortsPosition(state, action) {
 	let nodes = [];
 	// TODO: NOT a big fan of this way to optimize port recalculations, don't feel future proof
-	if ((/FLOWDESIGNER_NODE_/.exec(action.type) && action.type !== 'FLOWDESIGNER_NODE_REMOVE') ||
+	if (
+		(/FLOWDESIGNER_NODE_/.exec(action.type) && action.type !== 'FLOWDESIGNER_NODE_REMOVE') ||
 		(/FLOWDESIGNER_PORT_/.exec(action.type) && action.type !== 'FLOWDESIGNER_PORT_REMOVE') ||
-		(/FLOWDESIGNER.FLOW_/.exec(action.type))) {
+		/FLOWDESIGNER.FLOW_/.exec(action.type)
+	) {
 		if (action.nodeId) {
 			nodes.push(state.getIn(['nodes', action.nodeId]));
 		} else if (action.portId) {
@@ -88,64 +108,28 @@ export const calculatePortsPosition = (state, action) => {
 			nodes = state.get('nodes');
 		}
 		return nodes.reduce((cumulativeState, node) => {
+			const nodeType = node.getNodeType();
 			const ports = state.get('ports').filter(port => port.nodeId === node.id);
-			const calculatePortPosition = state.getIn(['nodeTypes', node.nodeType, 'component'])
-				.calculatePortPosition;
-			return cumulativeState.mergeIn(
-				['ports'],
-				calculatePortPosition(ports, node.position, node.nodeSize)
-			);
+			const component = state.getIn(['nodeTypes', nodeType, 'component']);
+			if (component) {
+				const calculatePortPosition = component.calculatePortPosition;
+				if (calculatePortPosition) {
+					return cumulativeState.mergeIn(
+						['ports'],
+						calculatePortPosition(ports, node.getPosition(), node.getSize()),
+					);
+				}
+			}
+			return state;
 		}, state);
 	}
 	return state;
-};
+}
 
-/**
- * if any port parent node does not exist, the port will be destroyed
- *
- * @params {object} state react-flow-designer state
- *
- * @return {object} new state
- */
-const destroyDetachedPorts = (state) => {
-	const detachedPorts = getDetachedPorts(state);
-	let newState = state;
-	detachedPorts.forEach(port => {
-		newState = reducer(newState, {
-			type: 'FLOWDESIGNER_PORT_REMOVE',
-			portId: port.id,
-		});
-	});
-	return newState;
-};
-
-/**
- * if any link is not attached to two ports, it will be destroyed
- *
- * @params {object} state react-flow-designer state
- *
-* @return {object} new state
- */
-const destroyDetachedLinks = (state) => {
-	const detachedLinks = getDetachedLinks(state);
-	let newState = state;
-	detachedLinks.forEach(link => {
-		newState = reducer(newState, {
-			type: 'FLOWDESIGNER_LINK_REMOVE',
-			linkId: link.id,
-		});
-	});
-	return newState;
-};
-
-const flowDesignerReducer = (state, action) => {
+function flowDesignerReducer(state, action) {
 	let newState = reducer(state, action);
-	if (action.type !== 'FLOWDESIGNER_NODE_MOVE') {
-		newState = destroyDetachedPorts(newState, action, state);
-		newState = destroyDetachedLinks(newState, action, state);
-	}
 	newState = calculatePortsPosition(newState, action, state);
 	return newState;
-};
+}
 
 export default flowDesignerReducer;

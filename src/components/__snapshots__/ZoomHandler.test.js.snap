@@ -1,4 +1,4 @@
-exports[`<ZoomHandler /> renders correctly <ZoomHandler /> renders correctly 1`] = `
+exports[`ZoomHandler renders correctly <ZoomHandler /> renders correctly <ZoomHandler /> renders correctly 1`] = `
 <g
   height="100%"
   width="100%"
@@ -9,15 +9,29 @@ exports[`<ZoomHandler /> renders correctly <ZoomHandler /> renders correctly 1`]
     style={
       Object {
         "fill": "none",
-        "pointerEvents": "all"
+        "pointerEvents": "all",
       }
     }
     width="100%"
     x="0"
     y="0" />
-  <g
-    transform={undefined}>
-    <rect />
-  </g>
+  <rect
+    transform="translate(0, 0) scale(1)"
+    transformData={
+      Object {
+        "k": 1,
+        "x": 0,
+        "y": 0,
+      }
+    } />
+  <rect
+    transform="translate(0, 0) scale(1)"
+    transformData={
+      Object {
+        "k": 1,
+        "x": 0,
+        "y": 0,
+      }
+    } />
 </g>
 `;
