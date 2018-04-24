@@ -19,6 +19,7 @@ import { setNodeTypes } from '../actions/nodeType.actions';
 export class FlowDesigner extends React.Component {
 	static propTypes = {
 		children: PropTypes.node,
+		svgDefs: PropTypes.element,
 		setNodeTypes: PropTypes.func.isRequired,
 		moveNodeTo: PropTypes.func.isRequired,
 		moveNodeToEnd: PropTypes.func.isRequired,
@@ -94,18 +95,7 @@ export class FlowDesigner extends React.Component {
 	render() {
 		return (
 			<svg onClick={this.props.onClick} ref={c => (this.node = c)} width="100%">
-				<defs>
-					<filter id="blur-filter" width="1.5" height="1.5" x="-.25" y="-.25">
-						<feFlood floodColor="#01A7CF" result="COLOR" />
-						<feComposite in="COLOR" in2="SourceGraphic" operator="in" result="shadow" />
-						<feGaussianBlur in="shadow" stdDeviation="3" />
-						<feOffset dx="0" dy="0" />
-						<feMerge>
-							<feMergeNode />
-							<feMergeNode in="SourceGraphic" />
-						</feMerge>
-					</filter>
-				</defs>
+				{this.props.svgDefs}
 				<ZoomHandler
 					transform={this.props.transform}
 					transformToApply={this.props.transformToApply}
