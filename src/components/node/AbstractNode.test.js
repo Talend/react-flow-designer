@@ -32,7 +32,7 @@ describe('Testing <AbstractNode>', () => {
 
 	it('call the injected onClick action when clicked', () => {
 		const onClick = jasmine.createSpy('onClick');
-		const wrapper = shallow(
+		const wrapper = mount(
 			<AbstractNode node={node} onClick={onClick} startMoveNodeTo={noOp} moveNodeTo={noOp} moveNodeToEnd={noOp}>
 				<rect />
 			</AbstractNode>,
