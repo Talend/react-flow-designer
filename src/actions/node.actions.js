@@ -132,10 +132,11 @@ export const removeNodeGraphicalAttribute = (nodeId, graphicalAttributesKey) => 
  * @param {string} nodeId
  * @param {Object} data
  */
-export const setNodeData = (nodeId, data) => ({
+export const setNodeData = (nodeId, data, bySubmit) => ({
 	type: FLOWDESIGNER_NODE_SET_DATA,
 	nodeId,
 	data,
+	bySubmit,
 });
 
 /**
