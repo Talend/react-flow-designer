@@ -1,7 +1,8 @@
 import curry from 'lodash/curry';
 import flow from 'lodash/flow';
-import isEqual from 'lodash/isEqual';
+import indexOf from 'lodash/indexOf';
 import isString from 'lodash/isString';
+import upperFirst from 'lodash/upperFirst';
 
 import { NodeRecord } from '../constants/flowdesigner.model';
 import { isPositionElseThrow } from './position';
@@ -11,6 +12,8 @@ import { Data } from './data';
 const positionSelector = ['graphicalAttributes', 'position'];
 const sizeSelector = ['graphicalAttributes', 'nodeSize'];
 const componentTypeSelector = ['graphicalAttributes', 'nodeType'];
+
+const FORBIDEN_GRAPHICAL_ATTRIBUTES = ['position', 'nodeSize'];
 
 /**
  * Test if the first parameter is a NodeRecord instance
@@ -134,7 +137,7 @@ export const setComponentType = curry((nodeType, node) => {
  */
 export const setData = curry((key, value, node) => {
 	if (isNodeElseThrow(node)) {
-		Data.set(key, value, node.get('data'));
+		Node.set('data', Data.set(key, value, node.get('data')));
 	}
 	return node;
 });
@@ -146,66 +149,72 @@ export const setData = curry((key, value, node) => {
  */
 export const getData = curry((key, node) => {
 	if (isNodeElseThrow(node)) {
-		Data.get(key, node.get('data'));
+		Node.set('data', Data.get(key, node.get('data')));
 	}
 	return null;
 });
 
+/**
+ * @param {String} key
+ * @param {NodeRecord} node
+ * @returns {Bool}
+ */
 export const hasData = curry((key, node) => {
 	if (isNodeElseThrow(node)) {
-		Data.has(key, node.get('data'));
+		Node.set('data', Data.has(key, node.get('data')));
 	}
 	return false;
 });
 
+/**
+ * @param {String} key
+ * @param {NodeRecord} node
+ * @returns {NodeRecord}
+ */
 export const deleteData = curry((key, node) => {
 	if (isNodeElseThrow(node)) {
-		Data.deleteKey(key, node.get('data'));
+		Node.set('data', Data.deleteKey(key, node.get('data')));
 	}
 	return node;
 });
 
-/**
- * use to get any graphicalattribute attached to the node
- * @param {string} attributeName
- * @param {nodeRecord} node
- * @returns {nodeRecord}
- */
-export const getGraphicalAttribute = curry((attributeName, node) => {
-	if (isNodeElseThrow(node) && isString(attributeName)) {
-		return node.getIn(['graphicalAttributes', attributeName]);
+function isWhiteListAttribute(key) {
+	if (indexOf(FORBIDEN_GRAPHICAL_ATTRIBUTES, key)) {
+		return true;
+	}
+	throw new Error(
+		`${key} is a protected value of the Node, please use get${upperFirst(key)} set${upperFirst(
+			key,
+		)} from this module to make change on those values`,
+	);
+}
+
+export const setGraphicalAttribute = curry((key, value, node) => {
+	if (isNodeElseThrow(node) && isWhiteListAttribute(key)) {
+		return node.set(
+			'graphicalAttributes',
+			Data.set(key, value, Node.get('graphicalAttributes')),
+		);
+	}
+	return node;
+});
+
+export const getGraphicalAttribute = curry((key, node) => {
+	if (isNodeElseThrow(node) && isWhiteListAttribute(key)) {
+		return Data.get(key, Node.get('graphicalAttributes'));
 	}
 	return null;
 });
+export const hasGraphicalAttribute = curry((key, node) => {
+	if (isNodeElseThrow(node) && isWhiteListAttribute(key)) {
+		return Data.has(key, Node.get('graphicalAttributes'));
+	}
+	return false;
+});
 
-/**
- * disallow direct edition of some attribute namely  position, size, componentType
- * use for those setPosition, setSize, setNodeType who provide more garanties for
- * possible node state
- * attributeValue is not checked
- * @param {string} attributeName
- * @param {*} attributeValue
- * @param {nodeRecord} node
- * @returns {nodeRecord}
- */
-export const setGraphicalAttribute = curry((attributeName, attributeValue, node) => {
-	if (isNode(node) && isString(attributeName)) {
-		const selector = ['graphicalAttributes'].push(attributeName);
-		switch (selector) {
-			case isEqual(selector, positionSelector):
-				throw new Error(
-					'Please use setPosition function to change the position of the node',
-				);
-				break;
-			case isEqual(selector, sizeSelector):
-				throw new Error('Please use setSize function to change the size of the node');
-				break;
-			case isEqual(selector, componentTypeSelector):
-				throw new Error('Please use setNodeType function to change the type of the node');
-				break;
-			default:
-				return node.setIn(selector, attributeValue);
-		}
+export const deleteGraphicalAttribute = curry((key, node) => {
+	if (isNodeElseThrow(node) && isWhiteListAttribute(key)) {
+		return node.set('graphicalAttributes', Data.delete(key, Node.get('graphicalAttributes')));
 	}
 	return node;
 });
