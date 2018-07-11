@@ -1,3 +1,6 @@
+/**
+ * This module is public and deal with Graph's object Nodes
+ */
 import curry from 'lodash/curry';
 import flow from 'lodash/flow';
 import indexOf from 'lodash/indexOf';
@@ -13,7 +16,7 @@ const positionSelector = ['graphicalAttributes', 'position'];
 const sizeSelector = ['graphicalAttributes', 'nodeSize'];
 const componentTypeSelector = ['graphicalAttributes', 'nodeType'];
 
-const FORBIDEN_GRAPHICAL_ATTRIBUTES = ['position', 'nodeSize'];
+const FORBIDEN_GRAPHICAL_ATTRIBUTES = ['position', 'nodeSize', 'nodeType'];
 
 /**
  * Test if the first parameter is a NodeRecord instance
@@ -178,6 +181,11 @@ export const deleteData = curry((key, node) => {
 	return node;
 });
 
+/**
+ * given a key check if that key is white listed
+ * @param {String} key
+ * @returns {Bool}
+ */
 function isWhiteListAttribute(key) {
 	if (indexOf(FORBIDEN_GRAPHICAL_ATTRIBUTES, key)) {
 		return true;
@@ -189,6 +197,12 @@ function isWhiteListAttribute(key) {
 	);
 }
 
+/**
+ * @param {String} key
+ * @param {any} value
+ * @param {NodeRecord} node
+ * @returns {NodeRecord}
+ */
 export const setGraphicalAttribute = curry((key, value, node) => {
 	if (isNodeElseThrow(node) && isWhiteListAttribute(key)) {
 		return node.set(
@@ -199,12 +213,23 @@ export const setGraphicalAttribute = curry((key, value, node) => {
 	return node;
 });
 
+/**
+ * @param {String} key
+ * @param {NodeRecord} node
+ * @returns {any | null}
+ */
 export const getGraphicalAttribute = curry((key, node) => {
 	if (isNodeElseThrow(node) && isWhiteListAttribute(key)) {
 		return Data.get(key, Node.get('graphicalAttributes'));
 	}
 	return null;
 });
+
+/**
+ * @param {String} key
+ * @param {NodeRecord} node
+ * @returns {Bool}
+ */
 export const hasGraphicalAttribute = curry((key, node) => {
 	if (isNodeElseThrow(node) && isWhiteListAttribute(key)) {
 		return Data.has(key, Node.get('graphicalAttributes'));
@@ -212,6 +237,11 @@ export const hasGraphicalAttribute = curry((key, node) => {
 	return false;
 });
 
+/**
+ * @param {String} key
+ * @param {NodeRecord} node
+ * @returns {NodeRecord}
+ */
 export const deleteGraphicalAttribute = curry((key, node) => {
 	if (isNodeElseThrow(node) && isWhiteListAttribute(key)) {
 		return node.set('graphicalAttributes', Data.delete(key, Node.get('graphicalAttributes')));
@@ -219,6 +249,14 @@ export const deleteGraphicalAttribute = curry((key, node) => {
 	return node;
 });
 
+/**
+ * Create a new Node
+ * @param {String} id
+ * @param {PositionRecord} position
+ * @param {SizeRecord} size
+ * @param {String} componentType
+ * @returns {NodeRecord}
+ */
 export const create = curry((id, position, size, componentType) =>
 	flow([setId(id), setPosition(position), setSize(size), setComponentType(componentType)])(
 		new NodeRecord(),
