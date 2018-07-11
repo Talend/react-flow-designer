@@ -1,5 +1,7 @@
 import curry from 'lodash/curry';
 import flow from 'lodash/flow';
+import isString from 'lodash/isString';
+import isNumber from 'lodash/isNumber';
 import Immutable from 'immutable';
 import { PortRecord } from '../constants/flowdesigner.model';
 import { PORT_SOURCE, PORT_SINK } from '../constants/flowdesigner.constants';
@@ -9,7 +11,6 @@ const positionSelector = ['graphicalAttributes', 'position'];
 const componentTypeSelector = ['graphicalAttributes', 'portType'];
 const portTopologySelector = ['graphicalAttributes', 'properties', 'type'];
 const indexSelector = ['graphicalAttributes', 'properties', 'index'];
-
 
 /**
  * Test if the first parameter is a PortRecord instance
@@ -23,7 +24,10 @@ export function isPortRecord(port, doThrow = false) {
 		return true;
 	}
 	if (doThrow) {
-		throw new Error(`Should be a PortRecord was given ${port && port.toString()}`);
+		throw new Error(
+			`Should be a PortRecord was given ${port &&
+				port.toString()}, you should use Port module functions to create and transform Ports`,
+		);
 	}
 	return false;
 }
@@ -48,7 +52,9 @@ export function isTypology(typology, doThrow = false) {
 		return true;
 	}
 	if (doThrow) {
-		throw new Error(`Should be a typology 'SOURCE' or 'SINK' was given ${typology && typology.toString()}`);
+		throw new Error(
+			`Should be a typology 'SOURCE' or 'SINK' was given ${typology && typology.toString()}`,
+		);
 	}
 	return false;
 }
@@ -70,7 +76,7 @@ export function getId(port) {
  * @returns {PortRecord}
  */
 const setId = curry((id, port) => {
-	if (typeof id === 'string' && isPortRecordElseThrow(port)) {
+	if (isString(id) && isPortRecordElseThrow(port)) {
 		return port.set('id', id);
 	}
 	throw new Error(`id should be a string was given ${id && id.toString()}`);
@@ -93,7 +99,7 @@ export function getNodeId(port) {
  * @returns {PortRecord}
  */
 export const setNodeId = curry((nodeId, port) => {
-	if (typeof nodeId === 'string' && isPortRecordElseThrow(port, true)) {
+	if (isString(nodeId) && isPortRecordElseThrow(port, true)) {
 		return port.set('nodeId', nodeId);
 	}
 	throw new Error(`nodeId should be a string was given ${nodeId && nodeId.toString()}`);
@@ -139,10 +145,12 @@ export function getComponentType(port) {
  * @returns {PortRecord}
  */
 export const setComponentType = curry((componentType, port) => {
-	if (isPortRecordElseThrow(port, true) && typeof componentType === 'string') {
+	if (isPortRecordElseThrow(port, true) && isString(componentType)) {
 		return port.setIn(componentTypeSelector, componentType);
 	}
-	throw new Error(`componentType should be a string was given ${componentType && componentType.toString()}`);
+	throw new Error(
+		`componentType should be a string was given ${componentType && componentType.toString()}`,
+	);
 });
 
 /**
@@ -187,7 +195,7 @@ export function getIndex(port) {
  * @returns {PortRecord}
  */
 export const setIndex = curry((index, port) => {
-	if (typeof index === 'number' && isPortRecordElseThrow(port, true)) {
+	if (isNumber(index) && isPortRecordElseThrow(port, true)) {
 		return port.setIn(indexSelector, index);
 	}
 	throw new Error(`index should be a number was given ${index && index.toString()}`);
@@ -226,7 +234,6 @@ export const setData = curry((map, port) => {
  * @param {string} typology
  * @returns {PortRecord}
  */
-export const createPortRecord = curry((id, nodeId, index, typology) => {
-	const create = flow([setId(id), setNodeId(nodeId), setIndex(index), setTypology(typology)]);
-	return create(new PortRecord());
-});
+export const createPortRecord = curry((id, nodeId, index, typology) =>
+	flow([setId(id), setNodeId(nodeId), setIndex(index), setTypology(typology)])(new PortRecord()),
+);

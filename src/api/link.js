@@ -1,5 +1,6 @@
 import curry from 'lodash/curry';
 import flow from 'lodash/flow';
+import isString from 'lodash/isString';
 import Immutable from 'immutable';
 
 import { LinkRecord } from '../constants/flowdesigner.model';
@@ -13,24 +14,28 @@ const linkTypeSelector = ['graphicalAttributes', 'linkType'];
  * @returns {bool}
  * @throws
  */
-export function isLinkRecord(link, doThrow = false) {
+export function isLink(link) {
 	if (link && link instanceof LinkRecord) {
 		return true;
-	}
-	if (doThrow) {
-		throw new Error(`Should be a LinkRecord was given ${link && link.toString()}`);
 	}
 	return false;
 }
 
 /**
  * Test if the first parameter is a LinkRecord, throw if not
- * @param {*} port
+ * @param {*} link
  * @returns {bool}
  * @throws
  */
-export function isLinkRecordElseThrow(port) {
-	return isLinkRecord(port, true);
+export function isLinkElseThrow(link) {
+	const test = isLink(link);
+	if (!test) {
+		throw new Error(
+			`Should be a LinkRecord was given ${link &&
+				link.toString()} you should use Link module functions to create and transform Links`,
+		);
+	}
+	return test;
 }
 
 /**
@@ -39,7 +44,7 @@ export function isLinkRecordElseThrow(port) {
  * @return {string}
  */
 export function getId(link) {
-	if (isLinkRecordElseThrow(link)) {
+	if (isLinkElseThrow(link)) {
 		return link.get('id');
 	}
 	return false;
@@ -51,7 +56,7 @@ export function getId(link) {
  * @returns {LinkRecord}
  */
 export const setId = curry((id, link) => {
-	if (typeof id === 'string' && isLinkRecordElseThrow(link)) {
+	if (isString(id) && isLinkElseThrow(link)) {
 		return link.set('id', id);
 	}
 	throw new Error(`id should be a string was given ${id && id.toString()}`);
@@ -62,7 +67,7 @@ export const setId = curry((id, link) => {
  * @returns {string}
  */
 export function getSourceId(link) {
-	if (isLinkRecordElseThrow(link)) {
+	if (isLinkElseThrow(link)) {
 		return link.get('sourceId');
 	}
 	return false;
@@ -74,7 +79,7 @@ export function getSourceId(link) {
  * @returns {LinkRecord}
  */
 export const setSourceId = curry((sourceId, link) => {
-	if (typeof sourceId === 'string' && isLinkRecordElseThrow(link)) {
+	if (isString(sourceId) && isLinkElseThrow(link)) {
 		return link.set('sourceId', sourceId);
 	}
 	throw new Error(`id should be a string was given ${sourceId && sourceId.toString()}`);
@@ -85,7 +90,7 @@ export const setSourceId = curry((sourceId, link) => {
  * @returns {string}
  */
 export function getTargetId(link) {
-	if (isLinkRecordElseThrow(link)) {
+	if (isLinkElseThrow(link)) {
 		return link.get('targetId');
 	}
 	return false;
@@ -97,7 +102,7 @@ export function getTargetId(link) {
  * @returns {LinkRecord}
  */
 export const setTargetId = curry((targetId, link) => {
-	if (typeof targetId === 'string' && isLinkRecordElseThrow(link)) {
+	if (isString(targetId) && isLinkElseThrow(link)) {
 		return link.set('targetId', targetId);
 	}
 	throw new Error(`id should be a string was given ${targetId && targetId.toString()}`);
@@ -108,7 +113,7 @@ export const setTargetId = curry((targetId, link) => {
  * @returns {LinkRecord}
  */
 export function getComponentType(link) {
-	if (isLinkRecordElseThrow(link, true)) {
+	if (isLinkElseThrow(link, true)) {
 		return link.getIn(linkTypeSelector);
 	}
 	return false;
@@ -120,7 +125,7 @@ export function getComponentType(link) {
  * @returns {LinkRecord}
  */
 export const setComponentType = curry((linkType, link) => {
-	if (typeof linkType === 'string' && isLinkRecordElseThrow(link, true)) {
+	if (isString(linkType) && isLinkElseThrow(link, true)) {
 		return link.setIn(linkTypeSelector, linkType);
 	}
 	throw new Error(`linkType should be a string was given ${linkType && linkType.toString()}`);
@@ -131,7 +136,7 @@ export const setComponentType = curry((linkType, link) => {
  * @returns {Immutable.Map<String, *>}
  */
 export function getData(link) {
-	if (isLinkRecordElseThrow(link)) {
+	if (isLinkElseThrow(link)) {
 		return link.get('data');
 	}
 	return false;
@@ -144,7 +149,7 @@ export function getData(link) {
  * @returns {LinkRecord}
  */
 export const setData = curry((map, link) => {
-	if (isLinkRecordElseThrow(link) && Immutable.Map.isMap(map)) {
+	if (isLinkElseThrow(link) && Immutable.Map.isMap(map)) {
 		return link.set('data', map);
 	}
 	throw new Error(`data should be a Immutable.Map go ${map && map.toString()}`);
@@ -159,12 +164,11 @@ export const setData = curry((map, link) => {
  * @param {string} componenttype
  * @return {LinkRecord}
  */
-export const createLinkRecord = curry((id, sourceId, targetId, componentType) => {
-	const create = flow([
+export const create = curry((id, sourceId, targetId, componentType) =>
+	flow([
 		setId(id),
 		setSourceId(sourceId),
 		setTargetId(targetId),
 		setComponentType(componentType),
-	]);
-	return create(new LinkRecord());
-});
+	])(new LinkRecord()),
+);

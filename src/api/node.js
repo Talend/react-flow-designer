@@ -2,11 +2,11 @@ import curry from 'lodash/curry';
 import flow from 'lodash/flow';
 import isEqual from 'lodash/isEqual';
 import isString from 'lodash/isString';
-import Immutable from 'immutable';
 
 import { NodeRecord } from '../constants/flowdesigner.model';
 import { isPositionElseThrow } from './position';
 import { isSizeElseThrow } from './size';
+import { Data } from './data';
 
 const positionSelector = ['graphicalAttributes', 'position'];
 const sizeSelector = ['graphicalAttributes', 'nodeSize'];
@@ -35,7 +35,10 @@ export function isNode(node) {
 export function isNodeElseThrow(node) {
 	const test = isNode(node);
 	if (!test) {
-		throw new Error(`Should be a NodeRecord was given ${node && node.toString()}`);
+		throw new Error(
+			`Should be a NodeRecord was given ${node &&
+				node.toString()}, you should use Node module functions to create and transform Nodes`,
+		);
 	}
 	return test;
 }
@@ -83,6 +86,7 @@ export const setPosition = curry((position, node) => {
 	if (isPositionElseThrow(position) && isNodeElseThrow(node)) {
 		return node.setIn(positionSelector, position);
 	}
+	return node;
 });
 
 /**
@@ -105,6 +109,7 @@ export const setSize = curry((size, node) => {
 	if (isSizeElseThrow(size) && isNodeElseThrow(node)) {
 		return node.setIn(sizeSelector, size);
 	}
+	return node;
 });
 
 export function getComponentType(node) {
@@ -122,27 +127,42 @@ export const setComponentType = curry((nodeType, node) => {
 });
 
 /**
- * @param {NodeRecord} node
- * @returns {Immutable.Map<String, *>}
- */
-export function getData(node) {
-	if (isNodeElseThrow(node)) {
-		return node.get('data');
-	}
-	return null;
-}
-
-/**
- * beware set data overwritte current data
- * @param {Immutable.Map<String, *>}
+ * @param {String} key
+ * @param {any} value
  * @param {nodeRecord} node
  * @returns {nodeRecord}
  */
-export const setData = curry((map, node) => {
-	if (isNodeElseThrow(node) && Immutable.Map.isMap(map)) {
-		return node.set('data', map);
+export const setData = curry((key, value, node) => {
+	if (isNodeElseThrow(node)) {
+		Data.set(key, value, node.get('data'));
 	}
-	throw new Error(`data should be a Immutable.Map go ${map.toString()}`);
+	return node;
+});
+
+/**
+ * @param {String} key
+ * @param {NodeRecord} node
+ * @returns {any | null}
+ */
+export const getData = curry((key, node) => {
+	if (isNodeElseThrow(node)) {
+		Data.get(key, node.get('data'));
+	}
+	return null;
+});
+
+export const hasData = curry((key, node) => {
+	if (isNodeElseThrow(node)) {
+		Data.has(key, node.get('data'));
+	}
+	return false;
+});
+
+export const deleteData = curry((key, node) => {
+	if (isNodeElseThrow(node)) {
+		Data.deleteKey(key, node.get('data'));
+	}
+	return node;
 });
 
 /**
@@ -187,6 +207,7 @@ export const setGraphicalAttribute = curry((attributeName, attributeValue, node)
 				return node.setIn(selector, attributeValue);
 		}
 	}
+	return node;
 });
 
 export const create = curry((id, position, size, componentType) =>

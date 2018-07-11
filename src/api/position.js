@@ -16,7 +16,7 @@ export function isPositionElseThrow(position) {
 	if (!test) {
 		throw new Error(
 			`position should be a positionRecord was given ${position &&
-				position.toString()}, you should use Position.create to create your Position object}`,
+				position.toString()}, you should use Position module functions to create and transform Positions}`,
 		);
 	}
 	return test;
@@ -50,7 +50,6 @@ export const setYCoordinate = curry((y, position) => {
 	throw new Error(`y should be a number was given ${y && y.toString()}`);
 });
 
-export const createPositionRecord = curry((x, y) => {
-	const create = flow([setXCoordinate(x), setYCoordinate(y)]);
-	return create(new PositionRecord());
-});
+export const create = curry((x, y) =>
+	flow([setXCoordinate(x), setYCoordinate(y)])(new PositionRecord()),
+);

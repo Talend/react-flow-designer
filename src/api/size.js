@@ -14,7 +14,8 @@ export function isSizeElseThrow(size) {
 	if (!test) {
 		throw new Error(
 			`size should be a SizeRecord was given ${size &&
-				size.toString()}, you should use Size.create to create your Size object}`,
+				size.toString()}, , you should use Size module functions to create and transform Sizes`,
+		);
 	}
 	return test;
 }
@@ -47,7 +48,6 @@ export const setHeight = curry((height, size) => {
 	throw new Error(`height should be a number was given ${height.toString()}`);
 });
 
-export const createSizeRecord = curry((width, height) => {
-	const create = flow([setWidth(width), setHeight(height)]);
-	return create(new SizeRecord());
-});
+export const create = curry((width, height) =>
+	flow([setWidth(width), setHeight(height)])(new SizeRecord()),
+);
