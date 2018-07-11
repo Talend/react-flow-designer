@@ -1,5 +1,5 @@
 /**
- * This module is private and deal with updating a grpah object internal Immutable.Map
+ * This module is private and deal with updating a graph object internal Immutable.Map
  */
 import curry from 'lodash/curry';
 import isString from 'lodash/isString';

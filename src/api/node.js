@@ -53,7 +53,7 @@ export function isNodeElseThrow(node) {
  * @param {NodeRecord} node
  * @returns {string}
  */
-export function getId(node) {
+function getId(node) {
 	if (isNodeElseThrow(node)) {
 		return node.get('id');
 	}
@@ -76,7 +76,7 @@ const setId = curry((id, node) => {
  * @param {NodeRecord} node
  * @returns {PositionRecord}
  */
-export function getPosition(node) {
+function getPosition(node) {
 	if (isNodeElseThrow(node)) {
 		return node.getIn(positionSelector);
 	}
@@ -88,7 +88,7 @@ export function getPosition(node) {
  * @param {NodeRecord} node
  * @returns {NodeRecord}
  */
-export const setPosition = curry((position, node) => {
+const setPosition = curry((position, node) => {
 	if (isPositionElseThrow(position) && isNodeElseThrow(node)) {
 		return node.setIn(positionSelector, position);
 	}
@@ -99,7 +99,7 @@ export const setPosition = curry((position, node) => {
  * @param {NodeRecord} node
  * @returns {PositionRecord}
  */
-export function getSize(node) {
+function getSize(node) {
 	if (isNodeElseThrow(node)) {
 		return node.getIn(sizeSelector);
 	}
@@ -111,21 +111,21 @@ export function getSize(node) {
  * @param {NodeRecord} node
  * @returns {NodeRecord}
  */
-export const setSize = curry((size, node) => {
+const setSize = curry((size, node) => {
 	if (isSizeElseThrow(size) && isNodeElseThrow(node)) {
 		return node.setIn(sizeSelector, size);
 	}
 	return node;
 });
 
-export function getComponentType(node) {
+function getComponentType(node) {
 	if (isNodeElseThrow(node)) {
 		return node.getIn(componentTypeSelector);
 	}
 	return null;
 }
 
-export const setComponentType = curry((nodeType, node) => {
+const setComponentType = curry((nodeType, node) => {
 	if (isString(nodeType) && isNodeElseThrow(node)) {
 		return node.setIn(componentTypeSelector, nodeType);
 	}
@@ -138,9 +138,9 @@ export const setComponentType = curry((nodeType, node) => {
  * @param {nodeRecord} node
  * @returns {nodeRecord}
  */
-export const setData = curry((key, value, node) => {
+const setData = curry((key, value, node) => {
 	if (isNodeElseThrow(node)) {
-		Node.set('data', Data.set(key, value, node.get('data')));
+		node.set('data', Data.set(key, value, node.get('data')));
 	}
 	return node;
 });
@@ -150,9 +150,9 @@ export const setData = curry((key, value, node) => {
  * @param {NodeRecord} node
  * @returns {any | null}
  */
-export const getData = curry((key, node) => {
+const getData = curry((key, node) => {
 	if (isNodeElseThrow(node)) {
-		Node.set('data', Data.get(key, node.get('data')));
+		node.set('data', Data.get(key, node.get('data')));
 	}
 	return null;
 });
@@ -162,9 +162,9 @@ export const getData = curry((key, node) => {
  * @param {NodeRecord} node
  * @returns {Bool}
  */
-export const hasData = curry((key, node) => {
+const hasData = curry((key, node) => {
 	if (isNodeElseThrow(node)) {
-		Node.set('data', Data.has(key, node.get('data')));
+		node.set('data', Data.has(key, node.get('data')));
 	}
 	return false;
 });
@@ -174,9 +174,9 @@ export const hasData = curry((key, node) => {
  * @param {NodeRecord} node
  * @returns {NodeRecord}
  */
-export const deleteData = curry((key, node) => {
+const deleteData = curry((key, node) => {
 	if (isNodeElseThrow(node)) {
-		Node.set('data', Data.deleteKey(key, node.get('data')));
+		node.set('data', Data.deleteKey(key, node.get('data')));
 	}
 	return node;
 });
@@ -203,11 +203,11 @@ function isWhiteListAttribute(key) {
  * @param {NodeRecord} node
  * @returns {NodeRecord}
  */
-export const setGraphicalAttribute = curry((key, value, node) => {
+const setGraphicalAttribute = curry((key, value, node) => {
 	if (isNodeElseThrow(node) && isWhiteListAttribute(key)) {
 		return node.set(
 			'graphicalAttributes',
-			Data.set(key, value, Node.get('graphicalAttributes')),
+			Data.set(key, value, node.get('graphicalAttributes')),
 		);
 	}
 	return node;
@@ -218,9 +218,9 @@ export const setGraphicalAttribute = curry((key, value, node) => {
  * @param {NodeRecord} node
  * @returns {any | null}
  */
-export const getGraphicalAttribute = curry((key, node) => {
+const getGraphicalAttribute = curry((key, node) => {
 	if (isNodeElseThrow(node) && isWhiteListAttribute(key)) {
-		return Data.get(key, Node.get('graphicalAttributes'));
+		return Data.get(key, node.get('graphicalAttributes'));
 	}
 	return null;
 });
@@ -230,9 +230,9 @@ export const getGraphicalAttribute = curry((key, node) => {
  * @param {NodeRecord} node
  * @returns {Bool}
  */
-export const hasGraphicalAttribute = curry((key, node) => {
+const hasGraphicalAttribute = curry((key, node) => {
 	if (isNodeElseThrow(node) && isWhiteListAttribute(key)) {
-		return Data.has(key, Node.get('graphicalAttributes'));
+		return Data.has(key, node.get('graphicalAttributes'));
 	}
 	return false;
 });
@@ -242,9 +242,9 @@ export const hasGraphicalAttribute = curry((key, node) => {
  * @param {NodeRecord} node
  * @returns {NodeRecord}
  */
-export const deleteGraphicalAttribute = curry((key, node) => {
+const deleteGraphicalAttribute = curry((key, node) => {
 	if (isNodeElseThrow(node) && isWhiteListAttribute(key)) {
-		return node.set('graphicalAttributes', Data.delete(key, Node.get('graphicalAttributes')));
+		return node.set('graphicalAttributes', Data.delete(key, node.get('graphicalAttributes')));
 	}
 	return node;
 });
@@ -257,8 +257,28 @@ export const deleteGraphicalAttribute = curry((key, node) => {
  * @param {String} componentType
  * @returns {NodeRecord}
  */
-export const create = curry((id, position, size, componentType) =>
+const create = curry((id, position, size, componentType) =>
 	flow([setId(id), setPosition(position), setSize(size), setComponentType(componentType)])(
 		new NodeRecord(),
 	),
 );
+
+export const Node = {
+	create,
+	isNode,
+	getId,
+	getPosition,
+	setPosition,
+	getSize,
+	setSize,
+	getComponentType,
+	setComponentType,
+	setData,
+	getData,
+	hasData,
+	deleteData,
+	setGraphicalAttribute,
+	getGraphicalAttribute,
+	hasGraphicalAttribute,
+	deleteGraphicalAttribute,
+};
