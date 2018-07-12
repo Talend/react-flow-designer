@@ -1,4 +1,5 @@
 import {
+	FLOWDESIGNER_NODE_MOVE_START,
 	FLOWDESIGNER_NODE_APPLY_MOVEMENT,
 	FLOWDESIGNER_NODE_MOVE,
 	FLOWDESIGNER_NODE_MOVE_END,
@@ -28,6 +29,14 @@ export const addNode = (nodeId, nodeType, { data = {}, graphicalAttributes = {} 
 	data,
 	graphicalAttributes,
 });
+
+export function startMoveNodeTo(nodeId, nodePosition) {
+	return {
+		type: FLOWDESIGNER_NODE_MOVE_START,
+		nodeId,
+		nodePosition,
+	};
+}
 
 /**
  * Ask for moving node
@@ -122,11 +131,13 @@ export const removeNodeGraphicalAttribute = (nodeId, graphicalAttributesKey) => 
  * Give the ability to set data onto a node
  * @param {string} nodeId
  * @param {Object} data
+ * @param {boolean} bySubmit Flag to indicates that the action was triggered by a manual user action
  */
-export const setNodeData = (nodeId, data) => ({
+export const setNodeData = (nodeId, data, bySubmit) => ({
 	type: FLOWDESIGNER_NODE_SET_DATA,
 	nodeId,
 	data,
+	bySubmit,
 });
 
 /**
