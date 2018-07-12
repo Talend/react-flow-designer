@@ -4,7 +4,7 @@ import isNumber from 'lodash/isNumber';
 
 import { PositionRecord } from '../constants/flowdesigner.model';
 
-export function isPosition(position) {
+function isPosition(position) {
 	if (position && position instanceof PositionRecord) {
 		return true;
 	}
@@ -22,34 +22,43 @@ export function isPositionElseThrow(position) {
 	return test;
 }
 
-export function getXCoordinate(position) {
+function getXCoordinate(position) {
 	if (isPositionElseThrow(position)) {
 		return position.get('x');
 	}
 	return null;
 }
 
-export const setXCoordinate = curry((x, position) => {
+const setXCoordinate = curry((x, position) => {
 	if (isPositionElseThrow(position) && isNumber(x)) {
 		return position.set('x');
 	}
 	throw new Error(`x should be a number was given ${x && x.toString()}`);
 });
 
-export function getYCoordinate(position) {
+function getYCoordinate(position) {
 	if (isPositionElseThrow(position)) {
 		return position.get('y');
 	}
 	return null;
 }
 
-export const setYCoordinate = curry((y, position) => {
+const setYCoordinate = curry((y, position) => {
 	if (isPositionElseThrow(position) && isNumber(y)) {
 		return position.set('y');
 	}
 	throw new Error(`y should be a number was given ${y && y.toString()}`);
 });
 
-export const create = curry((x, y) =>
+const create = curry((x, y) =>
 	flow([setXCoordinate(x), setYCoordinate(y)])(new PositionRecord()),
 );
+
+export const Position = {
+	create,
+	isPosition,
+	getXCoordinate,
+	setXCoordinate,
+	getYCoordinate,
+	setYCoordinate,
+};

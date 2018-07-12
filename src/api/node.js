@@ -25,7 +25,7 @@ const FORBIDEN_GRAPHICAL_ATTRIBUTES = ['position', 'nodeSize', 'nodeType'];
  * @returns {bool}
  * @throws
  */
-export function isNode(node) {
+function isNode(node) {
 	if (node && node instanceof NodeRecord) {
 		return true;
 	}
