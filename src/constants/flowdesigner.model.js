@@ -56,7 +56,12 @@ export const PortData = Record({
 export const NodeRecord = Record({
 	id: undefined,
 	type: undefined,
-	data: new Map({ properties: new Map() }),
+	data: new Map({
+		properties: new Map(),
+		label: '',
+		description: '',
+		datasetInfo: new Map(),
+	}),
 	graphicalAttributes: new Map({
 		position: new PositionRecord(),
 		nodeSize: new SizeRecord(),
@@ -80,8 +85,13 @@ export const LinkRecord = Record({
 	id: undefined,
 	sourceId: undefined,
 	targetId: undefined,
-	data: new LinkData(),
-	graphicalAttributes: new LinkGraphicalAttributes(),
+	data: new Map({
+		properties: new Map(),
+	}),
+	graphicalAttributes: new Map({
+		linkType: undefined,
+		properties: new Map(),
+	}),
 	getLinkType(): string {
 		return this.getIn(['graphicalAttributes', 'linkType']);
 	},
@@ -90,8 +100,15 @@ export const LinkRecord = Record({
 export const PortRecord = Record({
 	id: undefined,
 	nodeId: undefined,
-	data: new PortData(),
-	graphicalAttributes: new PortGraphicalAttributes(),
+	data: new Map({
+		properties: new Map(),
+		flowType: undefined,
+	}),
+	graphicalAttributes: new Map({
+		position: PositionRecord,
+		portType: undefined,
+		properties: new Map(),
+	}),
 	getPosition(): Position {
 		return this.getIn(['graphicalAttributes', 'position']);
 	},
