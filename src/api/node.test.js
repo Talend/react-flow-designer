@@ -326,9 +326,30 @@ describe('Node', () => {
 		});
 	});
 	describe('setGraphicalAttribute', () => {
-		it('given a proper key, value and node return said node with the new key/value');
-		it('throw given a key being part of FORBIDEN_GRAPHICAL_ATTRIBUTES');
-		it('throw given an improper key');
+		it('given a proper key, value and node return said node with the new key/value', () => {
+			// given
+			const newKey = 'newKey';
+			const newValue = 'newValue';
+			// when
+			const test = Node.setGraphicalAttribute(newKey, newValue, testNode);
+			// expect
+			expect(Node.getGraphicalAttribute(newKey, test)).toEqual(newValue);
+		});
+		it('throw given a key being part of FORBIDEN_GRAPHICAL_ATTRIBUTES', () => {
+			// given
+			const improperNewKey = 'size';
+			const newValue = 'newValue';
+			// when
+			// expect
+			expect(() => Node.setGraphicalAttribute(improperNewKey, newValue, testNode)).toThrow();
+		});
+		it('throw given an improper key', () => {
+			// given
+			const improperKey = 12;
+			// when
+			// expect
+			expect(() => Node.setData(improperKey, value, testNode)).toThrow();
+		});
 		it('throw given an improper node', () => {
 			// given
 			// when
@@ -337,9 +358,30 @@ describe('Node', () => {
 		});
 	});
 	describe('getGraphicalAttribute', () => {
-		it('given a proper key and node return value associated with the key');
-		it('throw given a key being part of FORBIDEN_GRAPHICAL_ATTRIBUTES');
-		it('throw given an improper key');
+		it('given a proper key and node return value associated with the key', () => {
+			// given
+			const newKey = 'newKey';
+			const newValue = 'newValue';
+			const preparedNode = Node.setGraphicalAttribute(newKey, newValue, testNode);
+			// when
+			const test = Node.getGraphicalAttribute(newKey, preparedNode);
+			// expect
+			expect(test).toEqual(newValue);
+		});
+		it('throw given a key being part of FORBIDEN_GRAPHICAL_ATTRIBUTES', () => {
+			// given
+			const improperNewKey = 'size';
+			// when
+			// expect
+			expect(() => Node.getGraphicalAttribute(improperNewKey, testNode)).toThrow();
+		});
+		it('throw given an improper key', () => {
+			// given
+			const improperKey = 12;
+			// when
+			// expect
+			expect(() => Node.getGraphicalAttribute(improperKey, testNode)).toThrow();
+		});
 		it('throw given an improper node', () => {
 			// given
 			// when
@@ -348,9 +390,30 @@ describe('Node', () => {
 		});
 	});
 	describe('hasGraphicalAttribute', () => {
-		it('given a proper key and node return true if key exist');
-		it('throw given a key being part of FORBIDEN_GRAPHICAL_ATTRIBUTES');
-		it('throw given an improper key');
+		it('given a proper key and node return true if key exist', () => {
+			// given
+			const newKey = 'newKey';
+			const newValue = 'newValue';
+			const preparedNode = Node.setData(newKey, newValue, testNode);
+			// when
+			const test = Node.hasGraphicalAttribute(newKey, preparedNode);
+			// expect
+			expect(test).toEqual(true);
+		});
+		it('throw given a key being part of FORBIDEN_GRAPHICAL_ATTRIBUTES', () => {
+			// given
+			const improperKey = 12;
+			// when
+			// expect
+			expect(() => Node.hasGraphicalAttribute(improperKey, testNode)).toThrow();
+		});
+		it('throw given an improper key', () => {
+			// given
+			const improperKey = 'size';
+			// when
+			// expect
+			expect(() => Node.hasGraphicalAttribute(improperKey, testNode)).toThrow();
+		});
 		it('throw given an improper node', () => {
 			// given
 			// when
@@ -359,9 +422,31 @@ describe('Node', () => {
 		});
 	});
 	describe('deleteGraphicalAttribute', () => {
-		it('given a proper key and node return node without the key in data property if key exist');
-		it('throw given a key being part of FORBIDEN_GRAPHICAL_ATTRIBUTES');
-		it('throw given an improper key');
+		it('given a proper key and node return node without the key in data property if key exist', () => {
+			// given
+			const newKey = 'newKey';
+			const newValue = 'newValue';
+			const preparedNode = Node.setData(newKey, newValue, testNode);
+			// when
+			const test = Node.deleteGraphicalAttribute(newKey, preparedNode);
+			// expect
+			expect(Node.hasData(newKey, test)).toEqual(false);
+		});
+
+		it('throw given a key being part of FORBIDEN_GRAPHICAL_ATTRIBUTES', () => {
+			// given
+			const improperKey = 'size';
+			// when
+			// expect
+			expect(() => Node.deleteGraphicalAttribute(improperKey, testNode)).toThrow();
+		});
+		it('throw given an improper key', () => {
+			// given
+			const improperKey = 12;
+			// when
+			// expect
+			expect(() => Node.deleteGraphicalAttribute(improperKey, testNode)).toThrow();
+		});
 		it('throw given an improper node', () => {
 			// given
 			// when
