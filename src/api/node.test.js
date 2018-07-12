@@ -337,7 +337,7 @@ describe('Node', () => {
 		});
 		it('throw given a key being part of FORBIDEN_GRAPHICAL_ATTRIBUTES', () => {
 			// given
-			const improperNewKey = 'size';
+			const improperNewKey = 'position';
 			const newValue = 'newValue';
 			// when
 			// expect
@@ -348,7 +348,7 @@ describe('Node', () => {
 			const improperKey = 12;
 			// when
 			// expect
-			expect(() => Node.setData(improperKey, value, testNode)).toThrow();
+			expect(() => Node.setGraphicalAttribute(improperKey, value, testNode)).toThrow();
 		});
 		it('throw given an improper node', () => {
 			// given
@@ -370,7 +370,7 @@ describe('Node', () => {
 		});
 		it('throw given a key being part of FORBIDEN_GRAPHICAL_ATTRIBUTES', () => {
 			// given
-			const improperNewKey = 'size';
+			const improperNewKey = 'position';
 			// when
 			// expect
 			expect(() => Node.getGraphicalAttribute(improperNewKey, testNode)).toThrow();
@@ -394,7 +394,7 @@ describe('Node', () => {
 			// given
 			const newKey = 'newKey';
 			const newValue = 'newValue';
-			const preparedNode = Node.setData(newKey, newValue, testNode);
+			const preparedNode = Node.setGraphicalAttribute(newKey, newValue, testNode);
 			// when
 			const test = Node.hasGraphicalAttribute(newKey, preparedNode);
 			// expect
@@ -402,14 +402,14 @@ describe('Node', () => {
 		});
 		it('throw given a key being part of FORBIDEN_GRAPHICAL_ATTRIBUTES', () => {
 			// given
-			const improperKey = 12;
+			const improperKey = 'position';
 			// when
 			// expect
 			expect(() => Node.hasGraphicalAttribute(improperKey, testNode)).toThrow();
 		});
 		it('throw given an improper key', () => {
 			// given
-			const improperKey = 'size';
+			const improperKey = 12;
 			// when
 			// expect
 			expect(() => Node.hasGraphicalAttribute(improperKey, testNode)).toThrow();
@@ -426,16 +426,16 @@ describe('Node', () => {
 			// given
 			const newKey = 'newKey';
 			const newValue = 'newValue';
-			const preparedNode = Node.setData(newKey, newValue, testNode);
+			const preparedNode = Node.setGraphicalAttribute(newKey, newValue, testNode);
 			// when
 			const test = Node.deleteGraphicalAttribute(newKey, preparedNode);
 			// expect
-			expect(Node.hasData(newKey, test)).toEqual(false);
+			expect(Node.hasGraphicalAttribute(newKey, test)).toEqual(false);
 		});
 
 		it('throw given a key being part of FORBIDEN_GRAPHICAL_ATTRIBUTES', () => {
 			// given
-			const improperKey = 'size';
+			const improperKey = 'position';
 			// when
 			// expect
 			expect(() => Node.deleteGraphicalAttribute(improperKey, testNode)).toThrow();

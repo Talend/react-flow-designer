@@ -1,5 +1,3 @@
-/* @flow */
-
 import { Record, Map } from 'immutable';
 
 import type { Position, Size, PortDirection, PortRecordType } from '../flow-typed';
@@ -55,8 +53,15 @@ export const PortData = Record({
 export const NodeRecord = Record({
 	id: undefined,
 	type: undefined,
-	data: new NodeData(),
-	graphicalAttributes: new NodeGraphicalAttributes(),
+	data: new Map({ properties: new Map() }),
+	graphicalAttributes: new Map({
+		position: new PositionRecord(),
+		nodeSize: new SizeRecord(),
+		nodeType: undefined,
+		label: '',
+		description: '',
+		properties: new Map(),
+	}),
 	getPosition(): Position {
 		return this.getIn(['graphicalAttributes', 'position']);
 	},

@@ -5,7 +5,7 @@ import isNumber from 'lodash/isNumber';
 import Immutable from 'immutable';
 import { PortRecord } from '../constants/flowdesigner.model';
 import { PORT_SOURCE, PORT_SINK } from '../constants/flowdesigner.constants';
-import { isPositionRecord } from './position';
+import { Position } from './position';
 
 const positionSelector = ['graphicalAttributes', 'position'];
 const componentTypeSelector = ['graphicalAttributes', 'portType'];
@@ -122,7 +122,7 @@ export function getPosition(port) {
  * @returns {Port}
  */
 export const setPosition = curry((position, port) => {
-	if (isPortRecordElseThrow(port, true) && isPositionRecord(position, true)) {
+	if (isPortRecordElseThrow(port, true) && Position.isPosition(position, true)) {
 		return port.setIn(positionSelector, position);
 	}
 	return false;

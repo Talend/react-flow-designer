@@ -140,7 +140,7 @@ const setComponentType = curry((nodeType, node) => {
  */
 const setData = curry((key, value, node) => {
 	if (isNodeElseThrow(node)) {
-		node.set('data', Data.set(key, value, node.get('data')));
+		return node.set('data', Data.set(key, value, node.get('data')));
 	}
 	return node;
 });
@@ -152,7 +152,7 @@ const setData = curry((key, value, node) => {
  */
 const getData = curry((key, node) => {
 	if (isNodeElseThrow(node)) {
-		node.set('data', Data.get(key, node.get('data')));
+		return Data.get(key, node.get('data'));
 	}
 	return null;
 });
@@ -164,7 +164,7 @@ const getData = curry((key, node) => {
  */
 const hasData = curry((key, node) => {
 	if (isNodeElseThrow(node)) {
-		node.set('data', Data.has(key, node.get('data')));
+		return Data.has(key, node.get('data'));
 	}
 	return false;
 });
@@ -176,7 +176,7 @@ const hasData = curry((key, node) => {
  */
 const deleteData = curry((key, node) => {
 	if (isNodeElseThrow(node)) {
-		node.set('data', Data.deleteKey(key, node.get('data')));
+		return node.set('data', Data.delete(key, node.get('data')));
 	}
 	return node;
 });
