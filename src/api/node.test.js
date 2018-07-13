@@ -19,6 +19,14 @@ import { Node, isNodeElseThrow } from './node';
 import { Position } from './position';
 import { Size } from './size';
 
+import { isNotKeyException } from './data.test';
+
+const isNotNodeException =
+	'Should be a NodeRecord was given Map {}, you should use Node module functions to create and transform Nodes';
+
+const protectedValueException =
+	'position is a protected value of the Node, please use getPosition setPosition from this module to make change on those values';
+
 describe('isNodeElseThrow', () => {
 	it('return true if parameter node is a NodeRecord', () => {
 		// given
@@ -34,7 +42,7 @@ describe('isNodeElseThrow', () => {
 		const testNode = new Immutable.Map();
 		// when
 		// expect
-		expect(() => isNodeElseThrow(testNode)).toThrow();
+		expect(() => isNodeElseThrow(testNode)).toThrow(isNotNodeException);
 	});
 });
 
@@ -64,25 +72,33 @@ describe('Node', () => {
 			// given
 			// when
 			// expect
-			expect(() => Node.create(improperId, position, size, nodeType)).toThrow();
+			expect(() => Node.create(improperId, position, size, nodeType)).toThrow(
+				'nodeId should be a string was given 34',
+			);
 		});
 		it('throw if given an improper Position', () => {
 			// given
 			// when
 			// expect
-			expect(() => Node.create(id, improperPosition, size, nodeType)).toThrow();
+			expect(() => Node.create(id, improperPosition, size, nodeType)).toThrow(
+				'position should be a positionRecord was given Map { "x": 10, "y": 10 }, you should use Position module functions to create and transform Positions',
+			);
 		});
 		it('throw if given an improper Size', () => {
 			// given
 			// when
 			// expect
-			expect(() => Node.create(id, position, improperSize, nodeType)).toThrow();
+			expect(() => Node.create(id, position, improperSize, nodeType)).toThrow(
+				'size should be a SizeRecord was given Map { "width": 20, "height": 50 }, , you should use Size module functions to create and transform Sizes',
+			);
 		});
 		it('throw if given an improper componentType', () => {
 			// given
 			// when
 			// expect
-			expect(() => Node.create(id, position, size, improperNodeType)).toThrow();
+			expect(() => Node.create(id, position, size, improperNodeType)).toThrow(
+				'nodeType should be a string was given [object Object]',
+			);
 		});
 	});
 
@@ -113,7 +129,7 @@ describe('Node', () => {
 			expect(test).toEqual(id);
 		});
 		it('throw given an improper node', () => {
-			expect(() => Node.getId(improperNode)).toThrow();
+			expect(() => Node.getId(improperNode)).toThrow(isNotNodeException);
 		});
 	});
 
@@ -126,7 +142,7 @@ describe('Node', () => {
 			expect(test).toEqual(position);
 		});
 		it('throw given an improper node', () => {
-			expect(() => Node.getPosition(improperNode)).toThrow();
+			expect(() => Node.getPosition(improperNode)).toThrow(isNotNodeException);
 		});
 	});
 	describe('setPosition', () => {
@@ -142,13 +158,13 @@ describe('Node', () => {
 			// given
 			// when
 			// expect
-			expect(() => Node.setPosition(improperPosition, testNode)).toThrow();
+			expect(() => Node.setPosition(improperPosition, testNode)).toThrow('position should be a positionRecord was given Map { "x": 10, "y": 10 }, you should use Position module functions to create and transform Positions');
 		});
 		it('throw given an improper Node', () => {
 			// given
 			// when
 			// expect
-			expect(() => Node.setPosition(position, improperNode)).toThrow();
+			expect(() => Node.setPosition(position, improperNode)).toThrow(isNotNodeException);
 		});
 	});
 	describe('getSize', () => {
@@ -163,7 +179,7 @@ describe('Node', () => {
 			// given
 			// when
 			// expect
-			expect(() => Node.getSize(improperNode)).toThrow();
+			expect(() => Node.getSize(improperNode)).toThrow(isNotNodeException);
 		});
 	});
 	describe('setSize', () => {
@@ -179,13 +195,13 @@ describe('Node', () => {
 			// given
 			// when
 			// expect
-			expect(() => Node.setSize(improperSize, testNode)).toThrow();
+			expect(() => Node.setSize(improperSize, testNode)).toThrow('size should be a SizeRecord was given Map { "width": 20, "height": 50 }, , you should use Size module functions to create and transform Sizes');
 		});
 		it('throw given an improper Node', () => {
 			// given
 			// when
 			// expect
-			expect(() => Node.setSize(size, improperNode)).toThrow();
+			expect(() => Node.setSize(size, improperNode)).toThrow(isNotNodeException);
 		});
 	});
 	describe('getComponentType', () => {
@@ -200,7 +216,7 @@ describe('Node', () => {
 			// given
 			// when
 			// expect
-			expect(() => Node.getComponentType(improperNode)).toThrow();
+			expect(() => Node.getComponentType(improperNode)).toThrow(isNotNodeException);
 		});
 	});
 	describe('setComponentType', () => {
@@ -217,13 +233,15 @@ describe('Node', () => {
 			const newComponentType = { type: 'squareOne' };
 			// when
 			// expect
-			expect(() => Node.setComponentType(newComponentType, testNode)).toThrow();
+			expect(() => Node.setComponentType(newComponentType, testNode)).toThrow(
+				'nodeType should be a string was given [object Object]',
+			);
 		});
 		it('throw given an improper Node', () => {
 			// given
 			// when
 			// expect
-			expect(() => Node.setComponentType(nodeType, improperNode)).toThrow();
+			expect(() => Node.setComponentType(nodeType, improperNode)).toThrow(isNotNodeException);
 		});
 	});
 	describe('setData', () => {
@@ -238,16 +256,16 @@ describe('Node', () => {
 		});
 		it('throw given an improper key', () => {
 			// given
-			const improperKey = 12;
+			const improperKey = 8;
 			// when
 			// expect
-			expect(() => Node.setData(improperKey, value, testNode)).toThrow();
+			expect(() => Node.setData(improperKey, value, testNode)).toThrow(isNotKeyException);
 		});
 		it('throw given an improper node', () => {
 			// given
 			// when
 			// expect
-			expect(() => Node.setData(key, value, improperNode)).toThrow();
+			expect(() => Node.setData(key, value, improperNode)).toThrow(isNotNodeException);
 		});
 	});
 	describe('getData', () => {
@@ -263,16 +281,16 @@ describe('Node', () => {
 		});
 		it('throw given an improper key', () => {
 			// given
-			const improperKey = 12;
+			const improperKey = 8;
 			// when
 			// expect
-			expect(() => Node.getData(improperKey, testNode)).toThrow();
+			expect(() => Node.getData(improperKey, testNode)).toThrow(isNotKeyException);
 		});
 		it('throw given an improper node', () => {
 			// given
 			// when
 			// expect
-			expect(() => Node.getData(key, improperNode)).toThrow();
+			expect(() => Node.getData(key, improperNode)).toThrow(isNotNodeException);
 		});
 	});
 	describe('hasData', () => {
@@ -288,16 +306,16 @@ describe('Node', () => {
 		});
 		it('throw given an improper key', () => {
 			// given
-			const improperKey = 12;
+			const improperKey = 8;
 			// when
 			// expect
-			expect(() => Node.hasData(improperKey, testNode)).toThrow();
+			expect(() => Node.hasData(improperKey, testNode)).toThrow(isNotKeyException);
 		});
 		it('throw given an improper node', () => {
 			// given
 			// when
 			// expect
-			expect(() => Node.hasData(key, improperNode)).toThrow();
+			expect(() => Node.hasData(key, improperNode)).toThrow(isNotNodeException);
 		});
 	});
 	describe('deleteData', () => {
@@ -313,16 +331,16 @@ describe('Node', () => {
 		});
 		it('throw given an improper key', () => {
 			// given
-			const improperKey = 12;
+			const improperKey = 8;
 			// when
 			// expect
-			expect(() => Node.deleteData(improperKey, testNode)).toThrow();
+			expect(() => Node.deleteData(improperKey, testNode)).toThrow(isNotKeyException);
 		});
 		it('throw given an improper node', () => {
 			// given
 			// when
 			// expect
-			expect(() => Node.deleteData(key, improperNode)).toThrow();
+			expect(() => Node.deleteData(key, improperNode)).toThrow(isNotNodeException);
 		});
 	});
 	describe('setGraphicalAttribute', () => {
@@ -341,20 +359,26 @@ describe('Node', () => {
 			const newValue = 'newValue';
 			// when
 			// expect
-			expect(() => Node.setGraphicalAttribute(improperNewKey, newValue, testNode)).toThrow();
+			expect(() => Node.setGraphicalAttribute(improperNewKey, newValue, testNode)).toThrow(
+				protectedValueException,
+			);
 		});
 		it('throw given an improper key', () => {
 			// given
-			const improperKey = 12;
+			const improperKey = 8;
 			// when
 			// expect
-			expect(() => Node.setGraphicalAttribute(improperKey, value, testNode)).toThrow();
+			expect(() => Node.setGraphicalAttribute(improperKey, value, testNode)).toThrow(
+				isNotKeyException,
+			);
 		});
 		it('throw given an improper node', () => {
 			// given
 			// when
 			// expect
-			expect(() => Node.setGraphicalAttribute(key, value, improperNode)).toThrow();
+			expect(() => Node.setGraphicalAttribute(key, value, improperNode)).toThrow(
+				isNotNodeException,
+			);
 		});
 	});
 	describe('getGraphicalAttribute', () => {
@@ -373,20 +397,24 @@ describe('Node', () => {
 			const improperNewKey = 'position';
 			// when
 			// expect
-			expect(() => Node.getGraphicalAttribute(improperNewKey, testNode)).toThrow();
+			expect(() => Node.getGraphicalAttribute(improperNewKey, testNode)).toThrow(
+				protectedValueException,
+			);
 		});
 		it('throw given an improper key', () => {
 			// given
-			const improperKey = 12;
+			const improperKey = 8;
 			// when
 			// expect
-			expect(() => Node.getGraphicalAttribute(improperKey, testNode)).toThrow();
+			expect(() => Node.getGraphicalAttribute(improperKey, testNode)).toThrow(
+				isNotKeyException,
+			);
 		});
 		it('throw given an improper node', () => {
 			// given
 			// when
 			// expect
-			expect(() => Node.getGraphicalAttribute(key, improperNode)).toThrow();
+			expect(() => Node.getGraphicalAttribute(key, improperNode)).toThrow(isNotNodeException);
 		});
 	});
 	describe('hasGraphicalAttribute', () => {
@@ -405,20 +433,24 @@ describe('Node', () => {
 			const improperKey = 'position';
 			// when
 			// expect
-			expect(() => Node.hasGraphicalAttribute(improperKey, testNode)).toThrow();
+			expect(() => Node.hasGraphicalAttribute(improperKey, testNode)).toThrow(
+				protectedValueException,
+			);
 		});
 		it('throw given an improper key', () => {
 			// given
-			const improperKey = 12;
+			const improperKey = 8;
 			// when
 			// expect
-			expect(() => Node.hasGraphicalAttribute(improperKey, testNode)).toThrow();
+			expect(() => Node.hasGraphicalAttribute(improperKey, testNode)).toThrow(
+				isNotKeyException,
+			);
 		});
 		it('throw given an improper node', () => {
 			// given
 			// when
 			// expect
-			expect(() => Node.hasGraphicalAttribute(key, improperNode)).toThrow();
+			expect(() => Node.hasGraphicalAttribute(key, improperNode)).toThrow(isNotNodeException);
 		});
 	});
 	describe('deleteGraphicalAttribute', () => {
@@ -438,20 +470,26 @@ describe('Node', () => {
 			const improperKey = 'position';
 			// when
 			// expect
-			expect(() => Node.deleteGraphicalAttribute(improperKey, testNode)).toThrow();
+			expect(() => Node.deleteGraphicalAttribute(improperKey, testNode)).toThrow(
+				protectedValueException,
+			);
 		});
 		it('throw given an improper key', () => {
 			// given
-			const improperKey = 12;
+			const improperKey = 8;
 			// when
 			// expect
-			expect(() => Node.deleteGraphicalAttribute(improperKey, testNode)).toThrow();
+			expect(() => Node.deleteGraphicalAttribute(improperKey, testNode)).toThrow(
+				isNotKeyException,
+			);
 		});
 		it('throw given an improper node', () => {
 			// given
 			// when
 			// expect
-			expect(() => Node.deleteGraphicalAttribute(key, improperNode)).toThrow();
+			expect(() => Node.deleteGraphicalAttribute(key, improperNode)).toThrow(
+				isNotNodeException,
+			);
 		});
 	});
 });

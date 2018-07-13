@@ -14,8 +14,14 @@
 import Immutable from 'immutable';
 
 import { LinkRecord } from '../constants/flowdesigner.model';
-
 import { Link, isLinkElseThrow } from './link';
+
+import { isNotKeyException } from './data.test';
+
+const isNotLinkException =
+	'Should be a LinkRecord was given Map {} you should use Link module functions to create and transform Links';
+const protectedValueException =
+	'linkType is a protected value of the Link, please use getLinkType setLinkType from this module to make change on those values';
 
 describe('isLinkElseThrow', () => {
 	it('return true if parameter link is a LinkRecord', () => {
@@ -32,7 +38,9 @@ describe('isLinkElseThrow', () => {
 		const testLink = new Immutable.Map();
 		// when
 		// expect
-		expect(() => isLinkElseThrow(testLink)).toThrow();
+		expect(() => isLinkElseThrow(testLink)).toThrow(
+			'Should be a LinkRecord was given Map {} you should use Link module functions to create and transform Links',
+		);
 	});
 });
 
@@ -63,25 +71,33 @@ describe('Link', () => {
 			// given
 			// when
 			// expect
-			expect(() => Link.create(improperId, sourceId, targetId, linkType)).toThrow();
+			expect(() => Link.create(improperId, sourceId, targetId, linkType)).toThrow(
+				'id should be a string was given 34',
+			);
 		});
 		it('throw if given an improper sourceId', () => {
 			// given
 			// when
 			// expect
-			expect(() => Link.create(id, improperSourceId, targetId, linkType)).toThrow();
+			expect(() => Link.create(id, improperSourceId, targetId, linkType)).toThrow(
+				'id should be a string was given 42',
+			);
 		});
 		it('throw if given an improper targetId', () => {
 			// given
 			// when
 			// expect
-			expect(() => Link.create(id, sourceId, improperTargetId, linkType)).toThrow();
+			expect(() => Link.create(id, sourceId, improperTargetId, linkType)).toThrow(
+				'id should be a string was given 64',
+			);
 		});
 		it('throw if given an improper componentType', () => {
 			// given
 			// when
 			// expect
-			expect(() => Link.create(id, sourceId, targetId, improperLinkType)).toThrow();
+			expect(() => Link.create(id, sourceId, targetId, improperLinkType)).toThrow(
+				'linkType should be a string was given [object Object]',
+			);
 		});
 	});
 	describe('isLink', () => {
@@ -110,7 +126,7 @@ describe('Link', () => {
 			expect(test).toEqual(id);
 		});
 		it('throw given an improper link', () => {
-			expect(() => Link.getId(improperLink)).toThrow();
+			expect(() => Link.getId(improperLink)).toThrow(isNotLinkException);
 		});
 	});
 	describe('getSourceId', () => {
@@ -122,7 +138,7 @@ describe('Link', () => {
 			expect(test).toEqual(sourceId);
 		});
 		it('throw given an improper link', () => {
-			expect(() => Link.getSourceId(improperLink)).toThrow();
+			expect(() => Link.getSourceId(improperLink)).toThrow(isNotLinkException);
 		});
 	});
 	describe('setSourceId', () => {
@@ -138,13 +154,15 @@ describe('Link', () => {
 			// given
 			// when
 			// expect
-			expect(() => Link.setSourceId(improperSourceId, testLink)).toThrow();
+			expect(() => Link.setSourceId(improperSourceId, testLink)).toThrow(
+				'id should be a string was given 42',
+			);
 		});
 		it('throw given an improper Link', () => {
 			// given
 			// when
 			// expect
-			expect(() => Link.setSourceId(sourceId, improperLink)).toThrow();
+			expect(() => Link.setSourceId(sourceId, improperLink)).toThrow(isNotLinkException);
 		});
 	});
 	describe('getTargetId', () => {
@@ -156,7 +174,7 @@ describe('Link', () => {
 			expect(test).toEqual(targetId);
 		});
 		it('throw given an improper link', () => {
-			expect(() => Link.getTargetId(improperLink)).toThrow();
+			expect(() => Link.getTargetId(improperLink)).toThrow(isNotLinkException);
 		});
 	});
 	describe('setTargetId', () => {
@@ -172,13 +190,15 @@ describe('Link', () => {
 			// given
 			// when
 			// expect
-			expect(() => Link.setTargetId(improperTargetId, testLink)).toThrow();
+			expect(() => Link.setTargetId(improperTargetId, testLink)).toThrow(
+				'id should be a string was given 64',
+			);
 		});
 		it('throw given an improper Link', () => {
 			// given
 			// when
 			// expect
-			expect(() => Link.setTargetId(targetId, improperLink)).toThrow();
+			expect(() => Link.setTargetId(targetId, improperLink)).toThrow(isNotLinkException);
 		});
 	});
 	describe('getComponentType', () => {
@@ -193,7 +213,7 @@ describe('Link', () => {
 			// given
 			// when
 			// expect
-			expect(() => Link.getComponentType(improperLink)).toThrow();
+			expect(() => Link.getComponentType(improperLink)).toThrow(isNotLinkException);
 		});
 	});
 	describe('setComponentType', () => {
@@ -210,13 +230,15 @@ describe('Link', () => {
 			const newComponentType = { type: 'squareOne' };
 			// when
 			// expect
-			expect(() => Link.setComponentType(newComponentType, testLink)).toThrow();
+			expect(() => Link.setComponentType(newComponentType, testLink)).toThrow(
+				'linkType should be a string was given [object Object]',
+			);
 		});
 		it('throw given an improper Link', () => {
 			// given
 			// when
 			// expect
-			expect(() => Link.setComponentType(linkType, improperLink)).toThrow();
+			expect(() => Link.setComponentType(linkType, improperLink)).toThrow(isNotLinkException);
 		});
 	});
 	describe('setData', () => {
@@ -231,16 +253,16 @@ describe('Link', () => {
 		});
 		it('throw given an improper key', () => {
 			// given
-			const improperKey = 12;
+			const improperKey = 8;
 			// when
 			// expect
-			expect(() => Link.setData(improperKey, value, testLink)).toThrow();
+			expect(() => Link.setData(improperKey, value, testLink)).toThrow(isNotKeyException);
 		});
 		it('throw given an improper link', () => {
 			// given
 			// when
 			// expect
-			expect(() => Link.setData(key, value, improperLink)).toThrow();
+			expect(() => Link.setData(key, value, improperLink)).toThrow(isNotLinkException);
 		});
 	});
 	describe('getData', () => {
@@ -256,16 +278,16 @@ describe('Link', () => {
 		});
 		it('throw given an improper key', () => {
 			// given
-			const improperKey = 12;
+			const improperKey = 8;
 			// when
 			// expect
-			expect(() => Link.getData(improperKey, testLink)).toThrow();
+			expect(() => Link.getData(improperKey, testLink)).toThrow(isNotKeyException);
 		});
 		it('throw given an improper link', () => {
 			// given
 			// when
 			// expect
-			expect(() => Link.getData(key, improperLink)).toThrow();
+			expect(() => Link.getData(key, improperLink)).toThrow(isNotLinkException);
 		});
 	});
 	describe('hasData', () => {
@@ -281,16 +303,16 @@ describe('Link', () => {
 		});
 		it('throw given an improper key', () => {
 			// given
-			const improperKey = 12;
+			const improperKey = 8;
 			// when
 			// expect
-			expect(() => Link.hasData(improperKey, testLink)).toThrow();
+			expect(() => Link.hasData(improperKey, testLink)).toThrow(isNotKeyException);
 		});
 		it('throw given an improper link', () => {
 			// given
 			// when
 			// expect
-			expect(() => Link.hasData(key, improperLink)).toThrow();
+			expect(() => Link.hasData(key, improperLink)).toThrow(isNotLinkException);
 		});
 	});
 	describe('deleteData', () => {
@@ -306,16 +328,16 @@ describe('Link', () => {
 		});
 		it('throw given an improper key', () => {
 			// given
-			const improperKey = 12;
+			const improperKey = 8;
 			// when
 			// expect
-			expect(() => Link.deleteData(improperKey, testLink)).toThrow();
+			expect(() => Link.deleteData(improperKey, testLink)).toThrow(isNotKeyException);
 		});
 		it('throw given an improper link', () => {
 			// given
 			// when
 			// expect
-			expect(() => Link.deleteData(key, improperLink)).toThrow();
+			expect(() => Link.deleteData(key, improperLink)).toThrow(isNotLinkException);
 		});
 	});
 	describe('setGraphicalAttribute', () => {
@@ -334,20 +356,26 @@ describe('Link', () => {
 			const newValue = 'newValue';
 			// when
 			// expect
-			expect(() => Link.setGraphicalAttribute(improperNewKey, newValue, testLink)).toThrow();
+			expect(() => Link.setGraphicalAttribute(improperNewKey, newValue, testLink)).toThrow(
+				protectedValueException,
+			);
 		});
 		it('throw given an improper key', () => {
 			// given
-			const improperKey = 12;
+			const improperKey = 8;
 			// when
 			// expect
-			expect(() => Link.setGraphicalAttribute(improperKey, value, testLink)).toThrow();
+			expect(() => Link.setGraphicalAttribute(improperKey, value, testLink)).toThrow(
+				isNotKeyException,
+			);
 		});
 		it('throw given an improper link', () => {
 			// given
 			// when
 			// expect
-			expect(() => Link.setGraphicalAttribute(key, value, improperLink)).toThrow();
+			expect(() => Link.setGraphicalAttribute(key, value, improperLink)).toThrow(
+				isNotLinkException,
+			);
 		});
 	});
 	describe('getGraphicalAttribute', () => {
@@ -366,20 +394,24 @@ describe('Link', () => {
 			const improperNewKey = 'linkType';
 			// when
 			// expect
-			expect(() => Link.getGraphicalAttribute(improperNewKey, testLink)).toThrow();
+			expect(() => Link.getGraphicalAttribute(improperNewKey, testLink)).toThrow(
+				protectedValueException,
+			);
 		});
 		it('throw given an improper key', () => {
 			// given
-			const improperKey = 12;
+			const improperKey = 8;
 			// when
 			// expect
-			expect(() => Link.getGraphicalAttribute(improperKey, testLink)).toThrow();
+			expect(() => Link.getGraphicalAttribute(improperKey, testLink)).toThrow(
+				isNotKeyException,
+			);
 		});
 		it('throw given an improper link', () => {
 			// given
 			// when
 			// expect
-			expect(() => Link.getGraphicalAttribute(key, improperLink)).toThrow();
+			expect(() => Link.getGraphicalAttribute(key, improperLink)).toThrow(isNotLinkException);
 		});
 	});
 	describe('hasGraphicalAttribute', () => {
@@ -398,20 +430,24 @@ describe('Link', () => {
 			const improperKey = 'linkType';
 			// when
 			// expect
-			expect(() => Link.hasGraphicalAttribute(improperKey, testLink)).toThrow();
+			expect(() => Link.hasGraphicalAttribute(improperKey, testLink)).toThrow(
+				protectedValueException,
+			);
 		});
 		it('throw given an improper key', () => {
 			// given
-			const improperKey = 12;
+			const improperKey = 8;
 			// when
 			// expect
-			expect(() => Link.hasGraphicalAttribute(improperKey, testLink)).toThrow();
+			expect(() => Link.hasGraphicalAttribute(improperKey, testLink)).toThrow(
+				isNotKeyException,
+			);
 		});
 		it('throw given an improper link', () => {
 			// given
 			// when
 			// expect
-			expect(() => Link.hasGraphicalAttribute(key, improperLink)).toThrow();
+			expect(() => Link.hasGraphicalAttribute(key, improperLink)).toThrow(isNotLinkException);
 		});
 	});
 	describe('deleteGraphicalAttribute', () => {
@@ -431,20 +467,26 @@ describe('Link', () => {
 			const improperKey = 'linkType';
 			// when
 			// expect
-			expect(() => Link.deleteGraphicalAttribute(improperKey, testLink)).toThrow();
+			expect(() => Link.deleteGraphicalAttribute(improperKey, testLink)).toThrow(
+				protectedValueException,
+			);
 		});
 		it('throw given an improper key', () => {
 			// given
-			const improperKey = 12;
+			const improperKey = 8;
 			// when
 			// expect
-			expect(() => Link.deleteGraphicalAttribute(improperKey, testLink)).toThrow();
+			expect(() => Link.deleteGraphicalAttribute(improperKey, testLink)).toThrow(
+				isNotKeyException,
+			);
 		});
 		it('throw given an improper link', () => {
 			// given
 			// when
 			// expect
-			expect(() => Link.deleteGraphicalAttribute(key, improperLink)).toThrow();
+			expect(() => Link.deleteGraphicalAttribute(key, improperLink)).toThrow(
+				isNotLinkException,
+			);
 		});
 	});
 });

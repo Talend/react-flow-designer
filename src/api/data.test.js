@@ -2,6 +2,9 @@ import Immutable from 'immutable';
 
 import { Data, isMapElseThrow, isKeyElseThrow } from './data';
 
+export const isNotMapException = 'can\'t process value as the target is not an Immutable.Map was given a [object Map].'
+export const isNotKeyException = 'key should be a string was given 8 of type number';
+
 describe('isMapElseThrow', () => {
 	it('return true if parameter is an Immutable.Map', () => {
 		// given
@@ -17,7 +20,7 @@ describe('isMapElseThrow', () => {
 		const testMap = new Map();
 		// when
 		// expect
-		expect(() => isMapElseThrow(testMap)).toThrow();
+		expect(() => isMapElseThrow(testMap)).toThrow(isNotMapException);
 	});
 });
 
@@ -31,12 +34,12 @@ describe('isKeyElseThrow', () => {
 		expect(test).toEqual(true);
 	});
 
-	it('throw an error if parameter is not an Immutable.Map', () => {
+	it('throw an error if parameter is not a String', () => {
 		// given
-		const testString = new Map();
+		const testString = 8;
 		// when
 		// expect
-		expect(() => isKeyElseThrow(testString)).toThrow();
+		expect(() => isKeyElseThrow(testString)).toThrow(isNotKeyException);
 	});
 });
 
@@ -64,7 +67,7 @@ describe('Data', () => {
 			});
 			// when
 			// expect
-			expect(() => Data.set(key, value, map)).toThrow();
+			expect(() => Data.set(key, value, map)).toThrow(isNotKeyException);
 		});
 
 		it('given an improper map throw', () => {
@@ -74,7 +77,7 @@ describe('Data', () => {
 			const map = new Map();
 			// when
 			// expect
-			expect(() => Data.set(key, value, map)).toThrow();
+			expect(() => Data.set(key, value, map)).toThrow(isNotMapException);
 		});
 	});
 
@@ -113,7 +116,7 @@ describe('Data', () => {
 			});
 			// when
 			// expect
-			expect(() => Data.get(key, map)).toThrow();
+			expect(() => Data.get(key, map)).toThrow(isNotKeyException);
 		});
 
 		it('given an improper map throw', () => {
@@ -122,7 +125,7 @@ describe('Data', () => {
 			const map = new Map();
 			// when
 			// expect
-			expect(() => Data.get(key, map)).toThrow();
+			expect(() => Data.get(key, map)).toThrow(isNotMapException);
 		});
 	});
 
@@ -161,7 +164,7 @@ describe('Data', () => {
 			});
 			// when
 			// expect
-			expect(() => Data.has(key, map)).toThrow();
+			expect(() => Data.has(key, map)).toThrow(isNotKeyException);
 		});
 
 		it('given an improper map throw', () => {
@@ -170,7 +173,7 @@ describe('Data', () => {
 			const map = new Map();
 			// when
 			// expect
-			expect(() => Data.has(key, map)).toThrow();
+			expect(() => Data.has(key, map)).toThrow(isNotMapException);
 		});
 	});
 
@@ -209,7 +212,7 @@ describe('Data', () => {
 			});
 			// when
 			// expect
-			expect(() => Data.delete(key, map)).toThrow();
+			expect(() => Data.delete(key, map)).toThrow(isNotKeyException);
 		});
 
 		it('given an improper map throw', () => {
@@ -218,7 +221,7 @@ describe('Data', () => {
 			const map = new Map();
 			// when
 			// expect
-			expect(() => Data.delete(key, map)).toThrow();
+			expect(() => Data.delete(key, map)).toThrow(isNotMapException);
 		});
 	});
 });

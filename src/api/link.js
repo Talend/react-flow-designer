@@ -203,7 +203,7 @@ function isWhiteListAttribute(key) {
 		return true;
 	}
 	throwInDev(
-		`${key} is a protected value of the Node, please use get${upperFirst(key)} set${upperFirst(
+		`${key} is a protected value of the Link, please use get${upperFirst(key)} set${upperFirst(
 			key,
 		)} from this module to make change on those values`,
 	);

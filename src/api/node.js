@@ -70,7 +70,7 @@ const setId = curry((id, node) => {
 	if (isString(id) && isNodeElseThrow(node)) {
 		return node.set('id', id);
 	}
-	throwInDev(`nodeId should be a string was given ${id && id.toString()}}`);
+	throwInDev(`nodeId should be a string was given ${id && id.toString()}`);
 	return node;
 });
 
