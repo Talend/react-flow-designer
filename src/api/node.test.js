@@ -196,7 +196,7 @@ describe('Node', () => {
 			// expect
 			expect(test).toEqual(nodeType);
 		});
-		it('throw given an improper node', () => {
+		it('throw given an improper Link', () => {
 			// given
 			// when
 			// expect

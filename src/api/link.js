@@ -1,21 +1,29 @@
+/**
+ * This module is public and deal with Graph's object Links
+ */
+
 import curry from 'lodash/curry';
 import flow from 'lodash/flow';
+import indexOf from 'lodash/indexOf';
 import isString from 'lodash/isString';
-import Immutable from 'immutable';
+import upperFirst from 'lodash/upperFirst';
 
 import throwInDev from './throwInDev';
 import { LinkRecord } from '../constants/flowdesigner.model';
+import { Data } from './data';
 
 const linkTypeSelector = ['graphicalAttributes', 'linkType'];
+
+/** in future properties should be removed from the react-flow-designer lib */
+const FORBIDEN_GRAPHICAL_ATTRIBUTES = ['properties', 'linkType'];
 
 /**
  * Test if the first parameter is a LinkRecord instance
  * @param {LinkRecord} link
- * @param {bool} doThrow - throw if not a link
  * @returns {bool}
  * @throws
  */
-export function isLink(link) {
+function isLink(link) {
 	if (link && link instanceof LinkRecord) {
 		return true;
 	}
@@ -44,7 +52,7 @@ export function isLinkElseThrow(link) {
  * @param {LinkRecord} link
  * @return {string}
  */
-export function getId(link) {
+function getId(link) {
 	if (isLinkElseThrow(link)) {
 		return link.get('id');
 	}
@@ -56,7 +64,7 @@ export function getId(link) {
  * @param {LinkRecord} link
  * @returns {LinkRecord}
  */
-export const setId = curry((id, link) => {
+const setId = curry((id, link) => {
 	if (isString(id) && isLinkElseThrow(link)) {
 		return link.set('id', id);
 	}
@@ -68,7 +76,7 @@ export const setId = curry((id, link) => {
  * @param {LinkRecord} link
  * @returns {string}
  */
-export function getSourceId(link) {
+function getSourceId(link) {
 	if (isLinkElseThrow(link)) {
 		return link.get('sourceId');
 	}
@@ -80,7 +88,7 @@ export function getSourceId(link) {
  * @param {LinkRecord} link
  * @returns {LinkRecord}
  */
-export const setSourceId = curry((sourceId, link) => {
+const setSourceId = curry((sourceId, link) => {
 	if (isString(sourceId) && isLinkElseThrow(link)) {
 		return link.set('sourceId', sourceId);
 	}
@@ -92,7 +100,7 @@ export const setSourceId = curry((sourceId, link) => {
  * @param {LinkRecord} link
  * @returns {string}
  */
-export function getTargetId(link) {
+function getTargetId(link) {
 	if (isLinkElseThrow(link)) {
 		return link.get('targetId');
 	}
@@ -104,7 +112,7 @@ export function getTargetId(link) {
  * @param {LinkRecord} link
  * @returns {LinkRecord}
  */
-export const setTargetId = curry((targetId, link) => {
+const setTargetId = curry((targetId, link) => {
 	if (isString(targetId) && isLinkElseThrow(link)) {
 		return link.set('targetId', targetId);
 	}
@@ -116,7 +124,7 @@ export const setTargetId = curry((targetId, link) => {
  * @param {LinkRecord} link
  * @returns {LinkRecord}
  */
-export function getComponentType(link) {
+function getComponentType(link) {
 	if (isLinkElseThrow(link, true)) {
 		return link.getIn(linkTypeSelector);
 	}
@@ -128,7 +136,7 @@ export function getComponentType(link) {
  * @param {LinkRecord} link
  * @returns {LinkRecord}
  */
-export const setComponentType = curry((linkType, link) => {
+const setComponentType = curry((linkType, link) => {
 	if (isString(linkType) && isLinkElseThrow(link, true)) {
 		return link.setIn(linkTypeSelector, linkType);
 	}
@@ -137,27 +145,120 @@ export const setComponentType = curry((linkType, link) => {
 });
 
 /**
- * @param {LinkRecord} port
- * @returns {Immutable.Map<String, *>}
+ * @param {String} key
+ * @param {any} value
+ * @param {nodeRecord} node
+ * @returns {nodeRecord}
  */
-export function getData(link) {
+const setData = curry((key, value, link) => {
 	if (isLinkElseThrow(link)) {
-		return link.get('data');
+		return link.set('data', Data.set(key, value, link.get('data')));
 	}
+	return link;
+});
+
+/**
+ * @param {String} key
+ * @param {NodeRecord} node
+ * @returns {any | null}
+ */
+const getData = curry((key, link) => {
+	if (isLinkElseThrow(link)) {
+		return Data.get(key, link.get('data'));
+	}
+	return null;
+});
+
+/**
+ * @param {String} key
+ * @param {NodeRecord} node
+ * @returns {Bool}
+ */
+const hasData = curry((key, link) => {
+	if (isLinkElseThrow(link)) {
+		return Data.has(key, link.get('data'));
+	}
+	return false;
+});
+
+/**
+ * @param {String} key
+ * @param {NodeRecord} node
+ * @returns {NodeRecord}
+ */
+const deleteData = curry((key, link) => {
+	if (isLinkElseThrow(link)) {
+		return link.set('data', Data.delete(key, link.get('data')));
+	}
+	return link;
+});
+
+/**
+ * given a key check if that key is white listed
+ * @param {String} key
+ * @returns {Bool}
+ */
+function isWhiteListAttribute(key) {
+	if (indexOf(FORBIDEN_GRAPHICAL_ATTRIBUTES, key) === -1) {
+		return true;
+	}
+	throwInDev(
+		`${key} is a protected value of the Node, please use get${upperFirst(key)} set${upperFirst(
+			key,
+		)} from this module to make change on those values`,
+	);
 	return false;
 }
 
 /**
- * beware set data overwritte current data
- * @param {Immutable.Map<String, *>}
- * @param {LinkRecord} link
- * @returns {LinkRecord}
+ * @param {String} key
+ * @param {any} value
+ * @param {NodeRecord} node
+ * @returns {NodeRecord}
  */
-export const setData = curry((map, link) => {
-	if (isLinkElseThrow(link) && Immutable.Map.isMap(map)) {
-		return link.set('data', map);
+const setGraphicalAttribute = curry((key, value, link) => {
+	if (isLinkElseThrow(link) && isWhiteListAttribute(key)) {
+		return link.set(
+			'graphicalAttributes',
+			Data.set(key, value, link.get('graphicalAttributes')),
+		);
 	}
-	throwInDev(`data should be a Immutable.Map go ${map && map.toString()}`);
+	return link;
+});
+
+/**
+ * @param {String} key
+ * @param {NodeRecord} node
+ * @returns {any | null}
+ */
+const getGraphicalAttribute = curry((key, link) => {
+	if (isLinkElseThrow(link) && isWhiteListAttribute(key)) {
+		return Data.get(key, link.get('graphicalAttributes'));
+	}
+	return null;
+});
+
+/**
+ * @param {String} key
+ * @param {NodeRecord} node
+ * @returns {Bool}
+ */
+const hasGraphicalAttribute = curry((key, link) => {
+	if (isLinkElseThrow(link) && isWhiteListAttribute(key)) {
+		return Data.has(key, link.get('graphicalAttributes'));
+	}
+	return false;
+});
+
+/**
+ * @param {String} key
+ * @param {NodeRecord} node
+ * @returns {NodeRecord}
+ */
+const deleteGraphicalAttribute = curry((key, link) => {
+	if (isLinkElseThrow(link) && isWhiteListAttribute(key)) {
+		return link.set('graphicalAttributes', Data.delete(key, link.get('graphicalAttributes')));
+	}
 	return link;
 });
 
@@ -170,7 +271,7 @@ export const setData = curry((map, link) => {
  * @param {string} componenttype
  * @return {LinkRecord}
  */
-export const create = curry((id, sourceId, targetId, componentType) =>
+const create = curry((id, sourceId, targetId, componentType) =>
 	flow([
 		setId(id),
 		setSourceId(sourceId),
@@ -178,3 +279,23 @@ export const create = curry((id, sourceId, targetId, componentType) =>
 		setComponentType(componentType),
 	])(new LinkRecord()),
 );
+
+export const Link = {
+	create,
+	isLink,
+	getId,
+	getSourceId,
+	setSourceId,
+	getTargetId,
+	setTargetId,
+	getComponentType,
+	setComponentType,
+	setData,
+	getData,
+	hasData,
+	deleteData,
+	setGraphicalAttribute,
+	getGraphicalAttribute,
+	hasGraphicalAttribute,
+	deleteGraphicalAttribute,
+};

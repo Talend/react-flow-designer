@@ -17,12 +17,12 @@ const positionSelector = ['graphicalAttributes', 'position'];
 const sizeSelector = ['graphicalAttributes', 'nodeSize'];
 const componentTypeSelector = ['graphicalAttributes', 'nodeType'];
 
-const FORBIDEN_GRAPHICAL_ATTRIBUTES = ['position', 'nodeSize', 'nodeType'];
+/** in future properties should be removed from the react-flow-designer lib */
+const FORBIDEN_GRAPHICAL_ATTRIBUTES = ['properties', 'position', 'nodeSize', 'nodeType'];
 
 /**
  * Test if the first parameter is a NodeRecord instance
  * @param {NodeRecord} node
- * @param {bool} doThrow - throw if not a node
  * @returns {bool}
  * @throws
  */
@@ -120,6 +120,10 @@ const setSize = curry((size, node) => {
 	return node;
 });
 
+/**
+ * @param {NodeRecord} node
+ * @returns {NodeRecord}
+ */
 function getComponentType(node) {
 	if (isNodeElseThrow(node)) {
 		return node.getIn(componentTypeSelector);
@@ -127,6 +131,11 @@ function getComponentType(node) {
 	return null;
 }
 
+/**
+ * @param {string} nodeType
+ * @param {NodeRecord} node
+ * @returns {NodeRecord}
+ */
 const setComponentType = curry((nodeType, node) => {
 	if (isString(nodeType) && isNodeElseThrow(node)) {
 		return node.setIn(componentTypeSelector, nodeType);
@@ -190,7 +199,7 @@ const deleteData = curry((key, node) => {
  * @returns {Bool}
  */
 function isWhiteListAttribute(key) {
-	if (indexOf(FORBIDEN_GRAPHICAL_ATTRIBUTES, key)) {
+	if (indexOf(FORBIDEN_GRAPHICAL_ATTRIBUTES, key) === -1) {
 		return true;
 	}
 	throwInDev(
