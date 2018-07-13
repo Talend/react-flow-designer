@@ -3,6 +3,8 @@ import flow from 'lodash/flow';
 import isString from 'lodash/isString';
 import isNumber from 'lodash/isNumber';
 import Immutable from 'immutable';
+
+import throwInDev from './throwInDev';
 import { PortRecord } from '../constants/flowdesigner.model';
 import { PORT_SOURCE, PORT_SINK } from '../constants/flowdesigner.constants';
 import { Position } from './position';
@@ -19,27 +21,22 @@ const indexSelector = ['graphicalAttributes', 'properties', 'index'];
  * @returns {bool}
  * @throws
  */
-export function isPortRecord(port, doThrow = false) {
+export function isPort(port) {
 	if (port && port instanceof PortRecord) {
 		return true;
-	}
-	if (doThrow) {
-		throw new Error(
-			`Should be a PortRecord was given ${port &&
-				port.toString()}, you should use Port module functions to create and transform Ports`,
-		);
 	}
 	return false;
 }
 
-/**
- * Test if the first parameter is a PortRecord, throw if not
- * @param {*} port
- * @returns {bool}
- * @throws
- */
-export function isPortRecordElseThrow(port) {
-	return isPortRecord(port, true);
+export function isPortElseThrow(port) {
+	const test = isPort(port);
+	if (!test) {
+		throwInDev(
+			`Should be a PortRecord was given ${port &&
+				port.toString()}, you should use Port module functions to create and transform Ports`,
+		);
+	}
+	return test;
 }
 
 /**
@@ -52,7 +49,7 @@ export function isTypology(typology, doThrow = false) {
 		return true;
 	}
 	if (doThrow) {
-		throw new Error(
+		throwInDev(
 			`Should be a typology 'SOURCE' or 'SINK' was given ${typology && typology.toString()}`,
 		);
 	}
@@ -64,7 +61,7 @@ export function isTypology(typology, doThrow = false) {
  * @returns {string}
  */
 export function getId(port) {
-	if (isPortRecordElseThrow(port)) {
+	if (isPortElseThrow(port)) {
 		return port.get('id');
 	}
 	return false;
@@ -76,10 +73,11 @@ export function getId(port) {
  * @returns {PortRecord}
  */
 const setId = curry((id, port) => {
-	if (isString(id) && isPortRecordElseThrow(port)) {
+	if (isString(id) && isPortElseThrow(port)) {
 		return port.set('id', id);
 	}
-	throw new Error(`id should be a string was given ${id && id.toString()}`);
+	throwInDev(`id should be a string was given ${id && id.toString()}`);
+	return port;
 });
 
 /**
@@ -87,7 +85,7 @@ const setId = curry((id, port) => {
  * @returns {string}
  */
 export function getNodeId(port) {
-	if (isPortRecordElseThrow(port, true)) {
+	if (isPortElseThrow(port, true)) {
 		return port.get('nodeId');
 	}
 	return false;
@@ -99,10 +97,11 @@ export function getNodeId(port) {
  * @returns {PortRecord}
  */
 export const setNodeId = curry((nodeId, port) => {
-	if (isString(nodeId) && isPortRecordElseThrow(port, true)) {
+	if (isString(nodeId) && isPortElseThrow(port, true)) {
 		return port.set('nodeId', nodeId);
 	}
-	throw new Error(`nodeId should be a string was given ${nodeId && nodeId.toString()}`);
+	throwInDev(`nodeId should be a string was given ${nodeId && nodeId.toString()}`);
+	return port;
 });
 
 /**
@@ -110,7 +109,7 @@ export const setNodeId = curry((nodeId, port) => {
  * @returns {PositionRecord}
  */
 export function getPosition(port) {
-	if (isPortRecordElseThrow(port, true)) {
+	if (isPortElseThrow(port, true)) {
 		return port.getIn(positionSelector);
 	}
 	return false;
@@ -122,7 +121,7 @@ export function getPosition(port) {
  * @returns {Port}
  */
 export const setPosition = curry((position, port) => {
-	if (isPortRecordElseThrow(port, true) && Position.isPosition(position, true)) {
+	if (isPortElseThrow(port, true) && Position.isPosition(position, true)) {
 		return port.setIn(positionSelector, position);
 	}
 	return false;
@@ -133,7 +132,7 @@ export const setPosition = curry((position, port) => {
  * @returns {string}
  */
 export function getComponentType(port) {
-	if (isPortRecordElseThrow(port, true)) {
+	if (isPortElseThrow(port, true)) {
 		return port.getIn(componentTypeSelector);
 	}
 	return false;
@@ -145,12 +144,13 @@ export function getComponentType(port) {
  * @returns {PortRecord}
  */
 export const setComponentType = curry((componentType, port) => {
-	if (isPortRecordElseThrow(port, true) && isString(componentType)) {
+	if (isPortElseThrow(port, true) && isString(componentType)) {
 		return port.setIn(componentTypeSelector, componentType);
 	}
-	throw new Error(
+	throwInDev(
 		`componentType should be a string was given ${componentType && componentType.toString()}`,
 	);
+	return port;
 });
 
 /**
@@ -158,7 +158,7 @@ export const setComponentType = curry((componentType, port) => {
  * @returns {String}
  */
 export function getTypology(port) {
-	if (isPortRecordElseThrow(port, true)) {
+	if (isPortElseThrow(port, true)) {
 		return port.getIn(portTopologySelector);
 	}
 	return false;
@@ -170,7 +170,7 @@ export function getTypology(port) {
  * @returns {PortRecord}
  */
 export const setTypology = curry((typology, port) => {
-	if (isPortRecordElseThrow(port, true) && isTypology(typology)) {
+	if (isPortElseThrow(port, true) && isTypology(typology)) {
 		return port.setIn(portTopologySelector, typology);
 	}
 	return false;
@@ -183,7 +183,7 @@ export const setTypology = curry((typology, port) => {
  * @returns {number}
  */
 export function getIndex(port) {
-	if (isPortRecordElseThrow(port, true)) {
+	if (isPortElseThrow(port, true)) {
 		return port.getIn(indexSelector);
 	}
 	return false;
@@ -195,10 +195,11 @@ export function getIndex(port) {
  * @returns {PortRecord}
  */
 export const setIndex = curry((index, port) => {
-	if (isNumber(index) && isPortRecordElseThrow(port, true)) {
+	if (isNumber(index) && isPortElseThrow(port, true)) {
 		return port.setIn(indexSelector, index);
 	}
-	throw new Error(`index should be a number was given ${index && index.toString()}`);
+	throwInDev(`index should be a number was given ${index && index.toString()}`);
+	return port;
 });
 
 /**
@@ -206,7 +207,7 @@ export const setIndex = curry((index, port) => {
  * @returns {Immutable.Map<String, *>}
  */
 export function getData(port) {
-	if (isPortRecordElseThrow(port)) {
+	if (isPortElseThrow(port)) {
 		return port.get('data');
 	}
 	return false;
@@ -219,10 +220,11 @@ export function getData(port) {
  * @param {PortRecord}
  */
 export const setData = curry((map, port) => {
-	if (isPortRecordElseThrow(port) && Immutable.Map.isMap(map)) {
+	if (isPortElseThrow(port) && Immutable.Map.isMap(map)) {
 		return port.set('data', map);
 	}
-	throw new Error(`data should be a Immutable.Map go ${map && map.toString()}`);
+	throwInDev(`data should be a Immutable.Map go ${map && map.toString()}`);
+	return port;
 });
 
 /**

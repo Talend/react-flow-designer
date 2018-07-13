@@ -1,31 +1,22 @@
 import { PortRecord, PositionRecord } from '../constants/flowdesigner.model';
-import { isPortRecord, isTypology, getId, createPortRecord } from './port';
+import { isPort, isPortElseThrow, isTypology, getId, createPortRecord } from './port';
 
 describe('port api', () => {
-	describe('isPortRecord', () => {
+	describe('isPort', () => {
 		it('return true if given parameter is a PortRecord', () => {
-			expect(isPortRecord(new PortRecord())).toBe(true);
+			expect(isPort(new PortRecord())).toBe(true);
 		});
 		it('return false if given parameter is not a PortRecord', () => {
-			expect(isPortRecord(new PositionRecord())).toBe(false);
-		});
-
-		it('return true if given parameter is a PortRecord and doThrow is true', () => {
-			expect(isPortRecord(new PortRecord(), true)).toBe(true);
-		});
-		it('throw if given parameter is not a PortRecord and doThrow is true', () => {
-			expect(() => isPortRecord(new PositionRecord(), true)).toThrow(
-				'Should be a PortRecord was given Record { "x": undefined, "y": undefined }',
-			);
+			expect(isPort(new PositionRecord())).toBe(false);
 		});
 	});
 
-	describe('isPortRecordElseThrow', () => {
+	describe('isPortElseThrow', () => {
 		it('return true if given parameter is a PortRecord', () => {
-			expect(isPortRecord(new PortRecord(), true)).toBe(true);
+			expect(isPortElseThrow(new PortRecord())).toBe(true);
 		});
 		it('throw if given parameter is not a PortRecord', () => {
-			expect(() => isPortRecord(new PositionRecord(), true)).toThrow(
+			expect(() => isPortElseThrow(new PositionRecord())).toThrow(
 				'Should be a PortRecord was given Record { "x": undefined, "y": undefined }',
 			);
 		});
@@ -57,7 +48,7 @@ describe('port api', () => {
 			expect(getId(Record)).toBe(portId);
 		});
 
-		it('shoudl throw if the given parameter is not a PortRecord', () => {
+		it('should throw if the given parameter is not a PortRecord', () => {
 			expect(() => getId('whatever')).toThrowError(
 				'Should be a PortRecord was given whatever',
 			);

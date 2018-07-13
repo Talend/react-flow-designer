@@ -1,5 +1,7 @@
 import curry from 'lodash/curry';
 import flow from 'lodash/flow';
+
+import throwInDev from './throwInDev';
 import { SizeRecord } from '../constants/flowdesigner.model';
 
 function isSize(size) {
@@ -12,7 +14,7 @@ function isSize(size) {
 export function isSizeElseThrow(size) {
 	const test = isSize(size);
 	if (!test) {
-		throw new Error(
+		throwInDev(
 			`size should be a SizeRecord was given ${size &&
 				size.toString()}, , you should use Size module functions to create and transform Sizes`,
 		);
@@ -31,7 +33,8 @@ const setWidth = curry((width, size) => {
 	if (isSize(size) && typeof width === 'number') {
 		return size.set('width', width);
 	}
-	throw new Error(`width should be a number was given ${width.toString()}`);
+	throwInDev(`width should be a number was given ${width.toString()}`);
+	return size;
 });
 
 function getHeight(size) {
@@ -45,7 +48,8 @@ const setHeight = curry((height, size) => {
 	if (isSize(size) && typeof height === 'number') {
 		return size.set('height', height);
 	}
-	throw new Error(`height should be a number was given ${height.toString()}`);
+	throwInDev(`height should be a number was given ${height.toString()}`);
+	return size;
 });
 
 const create = curry((width, height) =>
@@ -59,4 +63,4 @@ export const Size = {
 	setWidth,
 	getHeight,
 	setHeight,
-}
+};

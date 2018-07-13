@@ -3,6 +3,7 @@ import flow from 'lodash/flow';
 import isString from 'lodash/isString';
 import Immutable from 'immutable';
 
+import throwInDev from './throwInDev';
 import { LinkRecord } from '../constants/flowdesigner.model';
 
 const linkTypeSelector = ['graphicalAttributes', 'linkType'];
@@ -30,7 +31,7 @@ export function isLink(link) {
 export function isLinkElseThrow(link) {
 	const test = isLink(link);
 	if (!test) {
-		throw new Error(
+		throwInDev(
 			`Should be a LinkRecord was given ${link &&
 				link.toString()} you should use Link module functions to create and transform Links`,
 		);
@@ -59,7 +60,8 @@ export const setId = curry((id, link) => {
 	if (isString(id) && isLinkElseThrow(link)) {
 		return link.set('id', id);
 	}
-	throw new Error(`id should be a string was given ${id && id.toString()}`);
+	throwInDev(`id should be a string was given ${id && id.toString()}`);
+	return link;
 });
 
 /**
@@ -82,7 +84,8 @@ export const setSourceId = curry((sourceId, link) => {
 	if (isString(sourceId) && isLinkElseThrow(link)) {
 		return link.set('sourceId', sourceId);
 	}
-	throw new Error(`id should be a string was given ${sourceId && sourceId.toString()}`);
+	throwInDev(`id should be a string was given ${sourceId && sourceId.toString()}`);
+	return link;
 });
 
 /**
@@ -105,7 +108,8 @@ export const setTargetId = curry((targetId, link) => {
 	if (isString(targetId) && isLinkElseThrow(link)) {
 		return link.set('targetId', targetId);
 	}
-	throw new Error(`id should be a string was given ${targetId && targetId.toString()}`);
+	throwInDev(`id should be a string was given ${targetId && targetId.toString()}`);
+	return link;
 });
 
 /**
@@ -128,7 +132,8 @@ export const setComponentType = curry((linkType, link) => {
 	if (isString(linkType) && isLinkElseThrow(link, true)) {
 		return link.setIn(linkTypeSelector, linkType);
 	}
-	throw new Error(`linkType should be a string was given ${linkType && linkType.toString()}`);
+	throwInDev(`linkType should be a string was given ${linkType && linkType.toString()}`);
+	return link;
 });
 
 /**
@@ -152,7 +157,8 @@ export const setData = curry((map, link) => {
 	if (isLinkElseThrow(link) && Immutable.Map.isMap(map)) {
 		return link.set('data', map);
 	}
-	throw new Error(`data should be a Immutable.Map go ${map && map.toString()}`);
+	throwInDev(`data should be a Immutable.Map go ${map && map.toString()}`);
+	return link;
 });
 
 /**

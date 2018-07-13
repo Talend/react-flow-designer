@@ -7,6 +7,7 @@ import indexOf from 'lodash/indexOf';
 import isString from 'lodash/isString';
 import upperFirst from 'lodash/upperFirst';
 
+import throwInDev from './throwInDev';
 import { NodeRecord } from '../constants/flowdesigner.model';
 import { isPositionElseThrow } from './position';
 import { isSizeElseThrow } from './size';
@@ -41,7 +42,7 @@ function isNode(node) {
 export function isNodeElseThrow(node) {
 	const test = isNode(node);
 	if (!test) {
-		throw new Error(
+		throwInDev(
 			`Should be a NodeRecord was given ${node &&
 				node.toString()}, you should use Node module functions to create and transform Nodes`,
 		);
@@ -69,7 +70,8 @@ const setId = curry((id, node) => {
 	if (isString(id) && isNodeElseThrow(node)) {
 		return node.set('id', id);
 	}
-	throw new Error(`nodeId should be a string was given ${id && id.toString()}}`);
+	throwInDev(`nodeId should be a string was given ${id && id.toString()}}`);
+	return node;
 });
 
 /**
@@ -129,7 +131,8 @@ const setComponentType = curry((nodeType, node) => {
 	if (isString(nodeType) && isNodeElseThrow(node)) {
 		return node.setIn(componentTypeSelector, nodeType);
 	}
-	throw new Error(`nodeType should be a string was given ${nodeType && nodeType.toString()}`);
+	throwInDev(`nodeType should be a string was given ${nodeType && nodeType.toString()}`);
+	return node;
 });
 
 /**
@@ -190,11 +193,12 @@ function isWhiteListAttribute(key) {
 	if (indexOf(FORBIDEN_GRAPHICAL_ATTRIBUTES, key)) {
 		return true;
 	}
-	throw new Error(
+	throwInDev(
 		`${key} is a protected value of the Node, please use get${upperFirst(key)} set${upperFirst(
 			key,
 		)} from this module to make change on those values`,
 	);
+	return false;
 }
 
 /**

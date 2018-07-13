@@ -2,6 +2,7 @@ import curry from 'lodash/curry';
 import flow from 'lodash/flow';
 import isNumber from 'lodash/isNumber';
 
+import throwInDev from './throwInDev';
 import { PositionRecord } from '../constants/flowdesigner.model';
 
 function isPosition(position) {
@@ -14,7 +15,7 @@ function isPosition(position) {
 export function isPositionElseThrow(position) {
 	const test = isPosition(position);
 	if (!test) {
-		throw new Error(
+		throwInDev(
 			`position should be a positionRecord was given ${position &&
 				position.toString()}, you should use Position module functions to create and transform Positions}`,
 		);
@@ -33,7 +34,8 @@ const setXCoordinate = curry((x, position) => {
 	if (isPositionElseThrow(position) && isNumber(x)) {
 		return position.set('x');
 	}
-	throw new Error(`x should be a number was given ${x && x.toString()}`);
+	throwInDev(`x should be a number was given ${x && x.toString()}`);
+	return position;
 });
 
 function getYCoordinate(position) {
@@ -47,12 +49,11 @@ const setYCoordinate = curry((y, position) => {
 	if (isPositionElseThrow(position) && isNumber(y)) {
 		return position.set('y');
 	}
-	throw new Error(`y should be a number was given ${y && y.toString()}`);
+	throwInDev(`y should be a number was given ${y && y.toString()}`);
+	return position;
 });
 
-const create = curry((x, y) =>
-	flow([setXCoordinate(x), setYCoordinate(y)])(new PositionRecord()),
-);
+const create = curry((x, y) => flow([setXCoordinate(x), setYCoordinate(y)])(new PositionRecord()));
 
 export const Position = {
 	create,
