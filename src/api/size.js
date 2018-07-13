@@ -16,39 +16,39 @@ export function isSizeElseThrow(size) {
 	if (!test) {
 		throwInDev(
 			`size should be a SizeRecord was given ${size &&
-				size.toString()}, , you should use Size module functions to create and transform Sizes`,
+				size.toString()}, you should use Size module functions to create and transform Sizes`,
 		);
 	}
 	return test;
 }
 
 function getWidth(size) {
-	if (isSize(size)) {
+	if (isSizeElseThrow(size)) {
 		return size.get('width');
 	}
 	return false;
 }
 
 const setWidth = curry((width, size) => {
-	if (isSize(size) && typeof width === 'number') {
+	if (isSizeElseThrow(size) && typeof width === 'number') {
 		return size.set('width', width);
 	}
-	throwInDev(`width should be a number was given ${width.toString()}`);
+	throwInDev(`width should be a number was given ${width.toString()}  of type ${typeof width}`);
 	return size;
 });
 
 function getHeight(size) {
-	if (isSize(size)) {
+	if (isSizeElseThrow(size)) {
 		return size.get('height');
 	}
 	return false;
 }
 
 const setHeight = curry((height, size) => {
-	if (isSize(size) && typeof height === 'number') {
+	if (isSizeElseThrow(size) && typeof height === 'number') {
 		return size.set('height', height);
 	}
-	throwInDev(`height should be a number was given ${height.toString()}`);
+	throwInDev(`height should be a number was given ${height.toString()}  of type ${typeof height}`);
 	return size;
 });
 

@@ -89,7 +89,7 @@ describe('Node', () => {
 			// when
 			// expect
 			expect(() => Node.create(id, position, improperSize, nodeType)).toThrow(
-				'size should be a SizeRecord was given Map { "width": 20, "height": 50 }, , you should use Size module functions to create and transform Sizes',
+				'size should be a SizeRecord was given Map { "width": 20, "height": 50 }, you should use Size module functions to create and transform Sizes',
 			);
 		});
 		it('throw if given an improper componentType', () => {
@@ -158,7 +158,9 @@ describe('Node', () => {
 			// given
 			// when
 			// expect
-			expect(() => Node.setPosition(improperPosition, testNode)).toThrow('position should be a positionRecord was given Map { "x": 10, "y": 10 }, you should use Position module functions to create and transform Positions');
+			expect(() => Node.setPosition(improperPosition, testNode)).toThrow(
+				'position should be a positionRecord was given Map { "x": 10, "y": 10 }, you should use Position module functions to create and transform Positions',
+			);
 		});
 		it('throw given an improper Node', () => {
 			// given
@@ -195,7 +197,9 @@ describe('Node', () => {
 			// given
 			// when
 			// expect
-			expect(() => Node.setSize(improperSize, testNode)).toThrow('size should be a SizeRecord was given Map { "width": 20, "height": 50 }, , you should use Size module functions to create and transform Sizes');
+			expect(() => Node.setSize(improperSize, testNode)).toThrow(
+				'size should be a SizeRecord was given Map { "width": 20, "height": 50 }, you should use Size module functions to create and transform Sizes',
+			);
 		});
 		it('throw given an improper Node', () => {
 			// given

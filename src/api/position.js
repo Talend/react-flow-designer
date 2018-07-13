@@ -17,7 +17,7 @@ export function isPositionElseThrow(position) {
 	if (!test) {
 		throwInDev(
 			`position should be a positionRecord was given ${position &&
-				position.toString()}, you should use Position module functions to create and transform Positions}`,
+				position.toString()}, you should use Position module functions to create and transform Positions`,
 		);
 	}
 	return test;
@@ -32,9 +32,9 @@ function getXCoordinate(position) {
 
 const setXCoordinate = curry((x, position) => {
 	if (isPositionElseThrow(position) && isNumber(x)) {
-		return position.set('x');
+		return position.set('x', x);
 	}
-	throwInDev(`x should be a number was given ${x && x.toString()}`);
+	throwInDev(`x should be a number was given ${x && x.toString()} of type ${typeof x}`);
 	return position;
 });
 
@@ -47,9 +47,9 @@ function getYCoordinate(position) {
 
 const setYCoordinate = curry((y, position) => {
 	if (isPositionElseThrow(position) && isNumber(y)) {
-		return position.set('y');
+		return position.set('y', y);
 	}
-	throwInDev(`y should be a number was given ${y && y.toString()}`);
+	throwInDev(`y should be a number was given ${y && y.toString()} of type ${typeof y}`);
 	return position;
 });
 
