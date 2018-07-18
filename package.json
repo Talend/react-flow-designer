@@ -79,8 +79,8 @@
   },
   "peerDependencies": {
     "immutable": "3",
-    "react": "15",
-    "react-dom": "15",
+    "react": "15 || ^16.0.0",
+    "react-dom": "15 || ^16.0.0",
     "react-redux": "4",
     "redux": "3",
     "reselect": "2"
