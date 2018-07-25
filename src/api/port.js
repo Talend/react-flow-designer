@@ -42,8 +42,13 @@ export function isPortElseThrow(port) {
 	const test = isPort(port);
 	if (!test) {
 		throwInDev(
-			`Should be a PortRecord was given ${port &&
-				port.toString()}, you should use Port module functions to create and transform Ports`,
+			`port parameter should be a PortRecord was given
+"""
+${typeof port}
+"""
+${port && port.toString()}
+"""
+you should use Port module functions to create and transform Ports`,
 		);
 	}
 	return test;
