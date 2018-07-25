@@ -9,7 +9,7 @@
  *	hasGraphicalAttribute,
  *	deleteGraphicalAttribute
 
-    because the underlying module data is itself tested.
+	because the underlying module data is itself tested.
  */
 import Immutable from 'immutable';
 
@@ -18,8 +18,13 @@ import { Link, isLinkElseThrow } from './link';
 
 import { isNotKeyException } from './data.test';
 
-const isNotLinkException =
-	'Should be a LinkRecord was given Map {} you should use Link module functions to create and transform Links';
+const isNotLinkException = `Linkrecord should be a Linkrecord was given
+"""
+object
+"""
+Map {}
+"""
+you should use Link module functions to create and transform Link`;
 const protectedValueException =
 	'linkType is a protected value of the Link, please use getLinkType setLinkType from this module to make change on those values';
 
@@ -39,7 +44,7 @@ describe('isLinkElseThrow', () => {
 		// when
 		// expect
 		expect(() => isLinkElseThrow(testLink)).toThrow(
-			'Should be a LinkRecord was given Map {} you should use Link module functions to create and transform Links',
+			isNotLinkException,
 		);
 	});
 });

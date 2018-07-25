@@ -5,7 +5,7 @@ import curry from 'lodash/curry';
 import isString from 'lodash/isString';
 import Immutable from 'immutable';
 
-import throwInDev from './throwInDev';
+import { throwInDev, throwTypeError } from './throwInDev';
 
 /**
  * return true if the parameter is an Immutable.Map throw otherwise
@@ -15,10 +15,7 @@ import throwInDev from './throwInDev';
 export function isMapElseThrow(map) {
 	const test = Immutable.Map.isMap(map);
 	if (!test) {
-		throwInDev(
-			`can't process value as the target is not an Immutable.Map was given a ${map &&
-				map.toString()}.`,
-		);
+		throwTypeError('Immutable.Map', map, 'map');
 	}
 	return test;
 }
@@ -31,7 +28,9 @@ export function isMapElseThrow(map) {
 export function isKeyElseThrow(key) {
 	const test = isString(key);
 	if (!test) {
-		throwInDev(`key should be a string was given ${key && key.toString()} of type ${typeof key}`);
+		throwInDev(
+			`key should be a string was given ${key && key.toString()} of type ${typeof key}`,
+		);
 	}
 	return test;
 }

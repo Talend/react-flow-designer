@@ -11,7 +11,10 @@ Object {
     "getPortType": [Function],
     "getPosition": [Function],
     "graphicalAttributes": Object {
+      "portType": "reactComponentType",
+      "position": [Function],
       "properties": Object {
+        "index": 0,
         "type": "SOURCE",
       },
     },
@@ -31,7 +34,10 @@ Object {
     "getPortType": [Function],
     "getPosition": [Function],
     "graphicalAttributes": Object {
+      "portType": "reactComponentType",
+      "position": [Function],
       "properties": Object {
+        "index": 0,
         "type": "SOURCE",
       },
     },
@@ -56,7 +62,10 @@ Object {
     "getPortType": [Function],
     "getPosition": [Function],
     "graphicalAttributes": Object {
+      "portType": "reactComponentType",
+      "position": [Function],
       "properties": Object {
+        "index": 0,
         "type": "SOURCE",
       },
     },
@@ -81,7 +90,10 @@ Object {
     "getPortType": [Function],
     "getPosition": [Function],
     "graphicalAttributes": Object {
+      "portType": "reactComponentType",
+      "position": [Function],
       "properties": Object {
+        "index": 0,
         "type": "SINK",
       },
     },
@@ -101,7 +113,10 @@ Object {
     "getPortType": [Function],
     "getPosition": [Function],
     "graphicalAttributes": Object {
+      "portType": "reactComponentType",
+      "position": [Function],
       "properties": Object {
+        "index": 0,
         "type": "SINK",
       },
     },

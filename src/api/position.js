@@ -2,7 +2,7 @@ import curry from 'lodash/curry';
 import flow from 'lodash/flow';
 import isNumber from 'lodash/isNumber';
 
-import throwInDev from './throwInDev';
+import { throwInDev, throwTypeError } from './throwInDev';
 import { PositionRecord } from '../constants/flowdesigner.model';
 
 function isPosition(position) {
@@ -15,10 +15,7 @@ function isPosition(position) {
 export function isPositionElseThrow(position) {
 	const test = isPosition(position);
 	if (!test) {
-		throwInDev(
-			`position should be a positionRecord was given ${position &&
-				position.toString()}, you should use Position module functions to create and transform Positions`,
-		);
+		throwTypeError('PositionRecord', position, 'position', 'Position');
 	}
 	return test;
 }

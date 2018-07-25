@@ -8,7 +8,7 @@ import indexOf from 'lodash/indexOf';
 import isString from 'lodash/isString';
 import upperFirst from 'lodash/upperFirst';
 
-import throwInDev from './throwInDev';
+import { throwInDev, throwTypeError } from './throwInDev';
 import { LinkRecord } from '../constants/flowdesigner.model';
 import { Data } from './data';
 
@@ -39,10 +39,7 @@ function isLink(link) {
 export function isLinkElseThrow(link) {
 	const test = isLink(link);
 	if (!test) {
-		throwInDev(
-			`Should be a LinkRecord was given ${link &&
-				link.toString()} you should use Link module functions to create and transform Links`,
-		);
+		throwTypeError('Linkrecord', link, 'link', 'Link');
 	}
 	return test;
 }

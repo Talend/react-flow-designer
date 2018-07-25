@@ -7,7 +7,7 @@ import indexOf from 'lodash/indexOf';
 import isString from 'lodash/isString';
 import upperFirst from 'lodash/upperFirst';
 
-import throwInDev from './throwInDev';
+import { throwInDev, throwTypeError } from './throwInDev';
 import { NodeRecord } from '../constants/flowdesigner.model';
 import { isPositionElseThrow } from './position';
 import { isSizeElseThrow } from './size';
@@ -42,10 +42,7 @@ function isNode(node) {
 export function isNodeElseThrow(node) {
 	const test = isNode(node);
 	if (!test) {
-		throwInDev(
-			`Should be a NodeRecord was given ${node &&
-				node.toString()}, you should use Node module functions to create and transform Nodes`,
-		);
+		throwTypeError('NodeRecord', node, 'node', 'Node');
 	}
 	return test;
 }

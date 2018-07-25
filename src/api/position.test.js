@@ -4,9 +4,20 @@ import { PositionRecord } from '../constants/flowdesigner.model';
 
 import { Position, isPositionElseThrow } from './position';
 
-const isNotPositionException =
-    'position should be a positionRecord was given Map {}, you should use Position module functions to create and transform Positions';
-const improperPositionException = 'position should be a positionRecord was given Map { "x": 10, "y": 10 }, you should use Position module functions to create and transform Positions';
+const isNotPositionException = `PositionRecord should be a PositionRecord was given
+"""
+object
+"""
+Map {}
+"""
+you should use Position module functions to create and transform Position`;
+const improperPositionException = `PositionRecord should be a PositionRecord was given
+"""
+object
+"""
+Map { "x": 10, "y": 10 }
+"""
+you should use Position module functions to create and transform Position`;
 const isImproperXCoordinate = 'x should be a number was given 10 of type string';
 const isImproperYCoordinate = 'y should be a number was given 50 of type string';
 

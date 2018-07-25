@@ -2,7 +2,13 @@ import Immutable from 'immutable';
 
 import { Data, isMapElseThrow, isKeyElseThrow } from './data';
 
-export const isNotMapException = 'can\'t process value as the target is not an Immutable.Map was given a [object Map].'
+export const isNotMapException = `Immutable.Map should be a Immutable.Map was given
+"""
+object
+"""
+[object Map]
+"""
+`;
 export const isNotKeyException = 'key should be a string was given 8 of type number';
 
 describe('isMapElseThrow', () => {

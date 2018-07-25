@@ -5,7 +5,7 @@ import isString from 'lodash/isString';
 import isNumber from 'lodash/isNumber';
 import upperFirst from 'lodash/upperFirst';
 
-import throwInDev from './throwInDev';
+import { throwInDev, throwTypeError } from './throwInDev';
 import { PortRecord } from '../constants/flowdesigner.model';
 import { PORT_SOURCE, PORT_SINK } from '../constants/flowdesigner.constants';
 import { isPositionElseThrow } from './position';
@@ -41,15 +41,7 @@ function isPort(port) {
 export function isPortElseThrow(port) {
 	const test = isPort(port);
 	if (!test) {
-		throwInDev(
-			`port parameter should be a PortRecord was given
-"""
-${typeof port}
-"""
-${port && port.toString()}
-"""
-you should use Port module functions to create and transform Ports`,
-		);
+		throwTypeError('PortRecord', port, 'port', 'Port');
 	}
 	return test;
 }

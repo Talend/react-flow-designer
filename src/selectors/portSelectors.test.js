@@ -1,29 +1,15 @@
-import { Map, fromJS } from 'immutable';
+import { Map } from 'immutable';
 import * as Selectors from './portSelectors';
 import { defaultState } from '../reducers/flow.reducer';
-import { LinkRecord, PortRecord } from '../constants/flowdesigner.model';
+import { LinkRecord } from '../constants/flowdesigner.model';
 import { PORT_SINK, PORT_SOURCE } from '../constants/flowdesigner.constants';
+import { Port } from '../api';
 
-const port1 = new PortRecord({
-	id: 'id1',
-	nodeId: 'nodeId1',
-	graphicalAttributes: fromJS({ properties: { type: PORT_SINK } }),
-});
-const port2 = new PortRecord({
-	id: 'id2',
-	nodeId: 'nodeId1',
-	graphicalAttributes: fromJS({ properties: { type: PORT_SOURCE } }),
-});
-const port3 = new PortRecord({
-	id: 'id3',
-	nodeId: 'nodeId2',
-	graphicalAttributes: fromJS({ properties: { type: PORT_SINK } }),
-});
-const port4 = new PortRecord({
-	id: 'id4',
-	nodeId: 'nodeId2',
-	graphicalAttributes: fromJS({ properties: { type: PORT_SOURCE } }),
-});
+const port1 = Port.create('id1', 'nodeId1', 0, PORT_SINK, 'reactComponentType');
+const port2 = Port.create('id2', 'nodeId1', 0, PORT_SOURCE, 'reactComponentType');
+const port3 = Port.create('id3', 'nodeId2', 0, PORT_SINK, 'reactComponentType');
+const port4 = Port.create('id4', 'nodeId2', 0, PORT_SOURCE, 'reactComponentType');
+
 const givenState = defaultState
 	.set(
 		'links',

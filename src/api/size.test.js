@@ -4,10 +4,20 @@ import { SizeRecord } from '../constants/flowdesigner.model';
 
 import { Size, isSizeElseThrow } from './size';
 
-const isNotSizeException =
-	'size should be a SizeRecord was given Map {}, you should use Size module functions to create and transform Sizes';
-const isNotProperSizeException =
-	'size should be a SizeRecord was given Map { "width": 10, "height": 10 }, you should use Size module functions to create and transform Sizes';
+const isNotSizeException = `SizeRecord should be a SizeRecord was given
+"""
+object
+"""
+Map {}
+"""
+you should use Size module functions to create and transform Size`;
+const isNotProperSizeException = `SizeRecord should be a SizeRecord was given
+"""
+object
+"""
+Map { "width": 10, "height": 10 }
+"""
+you should use Size module functions to create and transform Size`;
 const isImproperWidth = 'width should be a number was given 10  of type string';
 const isImproperHeight = 'height should be a number was given 50  of type string';
 
@@ -109,9 +119,7 @@ describe('Size', () => {
 			// given
 			// when
 			// expect
-			expect(() => Size.setWidth(width, improperTestSize)).toThrow(
-				isNotProperSizeException,
-			);
+			expect(() => Size.setWidth(width, improperTestSize)).toThrow(isNotProperSizeException);
 		});
 	});
 	describe('getHeight', () => {
