@@ -33,18 +33,42 @@ const givenState = defaultState
 
 describe('getEmitterPorts', () => {
 	it('return a map with port id2 && id4', () => {
-		expect(Selectors.getEmitterPorts(givenState)).toMatchSnapshot();
+		// given
+		// when
+		const result = Selectors.getEmitterPorts(givenState);
+		// expect
+		expect(result.has('id2')).toBe(true);
+		expect(result.has('id4')).toBe(true);
 	});
 });
 
 describe('getSinkPorts', () => {
 	it('return a map with port id1 & id3', () => {
-		expect(Selectors.getSinkPorts(givenState)).toMatchSnapshot();
+		// given
+		// when
+		const result = Selectors.getSinkPorts(givenState);
+		// expect
+		expect(result.has('id1')).toBe(true);
+		expect(result.has('id3')).toBe(true);
 	});
 });
 
 describe('getEmitterPortsForNode', () => {
 	it('return a map with port id2', () => {
-		expect(Selectors.getEmitterPortsForNode(givenState)('nodeId1')).toMatchSnapshot();
+		// given
+		// when
+		const result = Selectors.getEmitterPortsForNode(givenState)('nodeId1');
+		// expect
+		expect(result.has('id2')).toBe(true);
+	});
+});
+
+describe('getSinkPortsForNode', () => {
+	it('return a map with port id1', () => {
+		// given
+		// when
+		const result = Selectors.getSinkPortsForNode(givenState)('nodeId1');
+		// expect
+		expect(result.has('id1')).toBe(true);
 	});
 });
