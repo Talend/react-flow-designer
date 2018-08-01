@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 
-import { SizeRecord } from '../constants/flowdesigner.model';
+import { SizeRecord } from '../../constants/flowdesigner.model';
 
 import { Size, isSizeElseThrow } from './size';
 

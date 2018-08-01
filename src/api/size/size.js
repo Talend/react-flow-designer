@@ -1,8 +1,12 @@
 import curry from 'lodash/curry';
 import flow from 'lodash/flow';
 
-import { throwInDev, throwTypeError } from './throwInDev';
-import { SizeRecord } from '../constants/flowdesigner.model';
+import { throwInDev, throwTypeError } from '../throwInDev';
+import { SizeRecord } from '../../constants/flowdesigner.model';
+
+/**
+ * @typedef {Immutable.Record} SizeRecord
+ */
 
 function isSize(size) {
 	if (size && size instanceof SizeRecord) {

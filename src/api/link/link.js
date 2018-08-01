@@ -8,14 +8,18 @@ import indexOf from 'lodash/indexOf';
 import isString from 'lodash/isString';
 import upperFirst from 'lodash/upperFirst';
 
-import { throwInDev, throwTypeError } from './throwInDev';
-import { LinkRecord } from '../constants/flowdesigner.model';
-import * as Data from './data';
+import { throwInDev, throwTypeError } from '../throwInDev';
+import { LinkRecord } from '../../constants/flowdesigner.model';
+import * as Data from '../data/data';
 
 const linkTypeSelector = ['graphicalAttributes', 'linkType'];
 
 /** in future properties should be removed from the react-flow-designer lib */
 const FORBIDEN_GRAPHICAL_ATTRIBUTES = ['properties', 'linkType'];
+
+/**
+ * @typedef {Immutable.Record} LinkRecord
+ */
 
 /**
  * Test if the first parameter is a LinkRecord instance

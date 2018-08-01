@@ -2,8 +2,12 @@ import curry from 'lodash/curry';
 import flow from 'lodash/flow';
 import isNumber from 'lodash/isNumber';
 
-import { throwInDev, throwTypeError } from './throwInDev';
-import { PositionRecord } from '../constants/flowdesigner.model';
+import { throwInDev, throwTypeError } from '../throwInDev';
+import { PositionRecord } from '../../constants/flowdesigner.model';
+
+/**
+ * @typedef {Immutable.Record} PositionRecord
+ */
 
 function isPosition(position) {
 	if (position && position instanceof PositionRecord) {

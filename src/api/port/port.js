@@ -5,11 +5,11 @@ import isString from 'lodash/isString';
 import isNumber from 'lodash/isNumber';
 import upperFirst from 'lodash/upperFirst';
 
-import { throwInDev, throwTypeError } from './throwInDev';
-import { PortRecord } from '../constants/flowdesigner.model';
-import { PORT_SOURCE, PORT_SINK } from '../constants/flowdesigner.constants';
-import { isPositionElseThrow } from './position';
-import * as Data from './data';
+import { throwInDev, throwTypeError } from '../throwInDev';
+import { PortRecord } from '../../constants/flowdesigner.model';
+import { PORT_SOURCE, PORT_SINK } from '../../constants/flowdesigner.constants';
+import { isPositionElseThrow } from '../position/position';
+import * as Data from '../data/data';
 
 const positionSelector = ['graphicalAttributes', 'position'];
 const componentTypeSelector = ['graphicalAttributes', 'portType'];
@@ -18,6 +18,10 @@ const indexSelector = ['graphicalAttributes', 'properties', 'index'];
 
 /** in future properties should be removed from the react-flow-designer lib */
 const FORBIDEN_GRAPHICAL_ATTRIBUTES = ['properties', 'portType'];
+
+/**
+ * @typedef {Immutable.Record} LinkRecord
+ */
 
 /**
  * Test if the first parameter is a PortRecord instance

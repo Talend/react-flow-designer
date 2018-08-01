@@ -13,9 +13,9 @@
  */
 import Immutable from 'immutable';
 
-import { PortRecord } from '../constants/flowdesigner.model';
+import { PortRecord } from '../../constants/flowdesigner.model';
 import { Port, isPortElseThrow, isTypologyElseThrow } from './port';
-import { Position } from './position';
+import { Position } from '../position/position';
 
 describe('isPortElseThrow', () => {
 	it('return true if given parameter is a PortRecord', () => {

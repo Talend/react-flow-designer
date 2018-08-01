@@ -1,9 +1,9 @@
-import { Port as port } from './port';
-import { Link as link } from './link';
-import { Node as node } from './node';
-import { Position as position } from './position';
-import { Size as size } from './size';
-import * as data from './data';
+import { Port as port } from './port/port';
+import { Link as link } from './link/link';
+import { Node as node } from './node/node';
+import { Position as position } from './position/position';
+import { Size as size } from './size/size';
+import * as data from './data/data';
 
 export const Port = port;
 export const Link = link;

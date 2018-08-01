@@ -13,10 +13,10 @@
  */
 import Immutable from 'immutable';
 
-import { LinkRecord } from '../constants/flowdesigner.model';
+import { LinkRecord } from '../../constants/flowdesigner.model';
 import { Link, isLinkElseThrow } from './link';
 
-import { isNotKeyException } from './data.test';
+import { isNotKeyException } from '../data/data';
 
 const isNotLinkException = `Linkrecord should be a Linkrecord was given
 """

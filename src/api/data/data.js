@@ -5,10 +5,11 @@ import curry from 'lodash/curry';
 import isString from 'lodash/isString';
 import Immutable from 'immutable';
 
-import { throwInDev, throwTypeError } from './throwInDev';
+import { throwInDev, throwTypeError } from '../throwInDev';
 
 /**
  * return true if the parameter is an Immutable.Map throw otherwise
+ * @private
  * @param {any} map - the value to be checkd as Immutable.Map
  * @return {Bool}
  */
@@ -22,6 +23,7 @@ export function isMapElseThrow(map) {
 
 /**
  * return true if the parameter key is a String throw otherwise
+ * @private
  * @param {any} key - the value to be checked as String
  * @return {Bool}
  */
@@ -37,6 +39,7 @@ export function isKeyElseThrow(key) {
 
 /**
  * given a key and a value, add those to a map
+ * @function
  * @param {String} key
  * @param {any} value
  * @param {Immutable.Map} map
@@ -51,6 +54,7 @@ export const set = curry((key, value, map) => {
 
 /**
  * given a key and a map return the value associated if exist
+ * @function
  * @param {String} key
  * @param {Immutable.Map} map
  * @returns {any | null}
@@ -64,6 +68,7 @@ export const get = curry((key, map) => {
 
 /**
  * Given a key and a map check if this key exist on the map
+ * @function
  * @param {String} key
  * @param {Immutable.Map} map
  * @return {Bool}
@@ -76,6 +81,8 @@ export const has = curry((key, map) => {
 });
 
 /**
+ * remove given key and its value from the map
+ * @function
  * @param {String} key
  * @param {Immutable.Map} map
  * @returns {Immutable.Map}

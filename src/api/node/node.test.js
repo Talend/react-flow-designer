@@ -13,13 +13,13 @@
  */
 import Immutable from 'immutable';
 
-import { NodeRecord } from '../constants/flowdesigner.model';
+import { NodeRecord } from '../../constants/flowdesigner.model';
 
 import { Node, isNodeElseThrow } from './node';
-import { Position } from './position';
-import { Size } from './size';
+import { Position } from '../position/position';
+import { Size } from '../size/size';
 
-import * as Data from './data.test';
+import * as Data from '../data/data';
 
 const isNotNodeException = `NodeRecord should be a NodeRecord was given
 """

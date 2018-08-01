@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 
-import { PositionRecord } from '../constants/flowdesigner.model';
+import { PositionRecord } from '../../constants/flowdesigner.model';
 
 import { Position, isPositionElseThrow } from './position';
 
