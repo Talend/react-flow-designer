@@ -8,13 +8,23 @@ import { SizeRecord } from '../../constants/flowdesigner.model';
  * @typedef {Immutable.Record} SizeRecord
  */
 
-function isSize(size) {
+ /**
+  * check if parameter is SizeRecord
+  * @param {*} size
+  * @return {bool}
+  */
+export function isSize(size) {
 	if (size && size instanceof SizeRecord) {
 		return true;
 	}
 	return false;
 }
 
+/**
+ * check if parameter is SizeRecord else throw in dev mode
+ * @param {*} size
+ * @return {bool}
+ */
 export function isSizeElseThrow(size) {
 	const test = isSize(size);
 	if (!test) {
@@ -23,14 +33,26 @@ export function isSizeElseThrow(size) {
 	return test;
 }
 
-function getWidth(size) {
+/**
+ * return width of SizeRecord
+ * @param {SizeRecord} size
+ * @return {number}
+ */
+export function getWidth(size) {
 	if (isSizeElseThrow(size)) {
 		return size.get('width');
 	}
 	return false;
 }
 
-const setWidth = curry((width, size) => {
+/**
+ * set width of given SizeRecord
+ * @function
+ * @param {number} width
+ * @param {SizeRecord} size
+ * @return {SizeRecord}
+ */
+export const setWidth = curry((width, size) => {
 	if (isSizeElseThrow(size) && typeof width === 'number') {
 		return size.set('width', width);
 	}
@@ -38,14 +60,26 @@ const setWidth = curry((width, size) => {
 	return size;
 });
 
-function getHeight(size) {
+/**
+ * return height of the SizeRecord
+ * @param {SizeRecord} size
+ * @return {number}
+ */
+export function getHeight(size) {
 	if (isSizeElseThrow(size)) {
 		return size.get('height');
 	}
 	return false;
 }
 
-const setHeight = curry((height, size) => {
+/**
+ * set height of given SizeRecord
+ * @function
+ * @param {number} height
+ * @param {SizeRecord} size
+ * @returns {SizeRecord}
+ */
+export const setHeight = curry((height, size) => {
 	if (isSizeElseThrow(size) && typeof height === 'number') {
 		return size.set('height', height);
 	}
@@ -55,15 +89,13 @@ const setHeight = curry((height, size) => {
 	return size;
 });
 
-const create = curry((width, height) =>
+/**
+ * given width and height create a SizeRecord
+ * @function
+ * @param {number} width
+ * @param {number} height
+ * @return {SizeRecord}
+ */
+export const create = curry((width, height) =>
 	flow([setWidth(width), setHeight(height)])(new SizeRecord()),
 );
-
-export const Size = {
-	create,
-	isSize,
-	getWidth,
-	setWidth,
-	getHeight,
-	setHeight,
-};

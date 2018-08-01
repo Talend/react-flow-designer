@@ -2,7 +2,7 @@ import Immutable from 'immutable';
 
 import { PositionRecord } from '../../constants/flowdesigner.model';
 
-import { Position, isPositionElseThrow } from './position';
+import * as Position from './position';
 
 const isNotPositionException = `PositionRecord should be a PositionRecord was given
 """
@@ -26,7 +26,7 @@ describe('isPositionElseThrow', () => {
 		// given
 		const testPosition = new PositionRecord();
 		// when
-		const test = isPositionElseThrow(testPosition);
+		const test = Position.isPositionElseThrow(testPosition);
 		// expect
 		expect(test).toEqual(true);
 	});
@@ -36,7 +36,7 @@ describe('isPositionElseThrow', () => {
 		const testPosition = new Immutable.Map();
 		// when
 		// expect
-		expect(() => isPositionElseThrow(testPosition)).toThrow(isNotPositionException);
+		expect(() => Position.isPositionElseThrow(testPosition)).toThrow(isNotPositionException);
 	});
 });
 

@@ -14,9 +14,8 @@
 import Immutable from 'immutable';
 
 import { LinkRecord } from '../../constants/flowdesigner.model';
-import { Link, isLinkElseThrow } from './link';
-
-import { isNotKeyException } from '../data/data';
+import * as Link from './link';
+import * as Data from '../data/data';
 
 const isNotLinkException = `Linkrecord should be a Linkrecord was given
 """
@@ -33,7 +32,7 @@ describe('isLinkElseThrow', () => {
 		// given
 		const testLink = new LinkRecord();
 		// when
-		const test = isLinkElseThrow(testLink);
+		const test = Link.isLinkElseThrow(testLink);
 		// expect
 		expect(test).toEqual(true);
 	});
@@ -43,7 +42,7 @@ describe('isLinkElseThrow', () => {
 		const testLink = new Immutable.Map();
 		// when
 		// expect
-		expect(() => isLinkElseThrow(testLink)).toThrow(
+		expect(() => Link.isLinkElseThrow(testLink)).toThrow(
 			isNotLinkException,
 		);
 	});
@@ -261,7 +260,7 @@ describe('Link', () => {
 			const improperKey = 8;
 			// when
 			// expect
-			expect(() => Link.setData(improperKey, value, testLink)).toThrow(isNotKeyException);
+			expect(() => Link.setData(improperKey, value, testLink)).toThrow(Data.isNotKeyException);
 		});
 		it('throw given an improper link', () => {
 			// given
@@ -286,7 +285,7 @@ describe('Link', () => {
 			const improperKey = 8;
 			// when
 			// expect
-			expect(() => Link.getData(improperKey, testLink)).toThrow(isNotKeyException);
+			expect(() => Link.getData(improperKey, testLink)).toThrow(Data.isNotKeyException);
 		});
 		it('throw given an improper link', () => {
 			// given
@@ -311,7 +310,7 @@ describe('Link', () => {
 			const improperKey = 8;
 			// when
 			// expect
-			expect(() => Link.hasData(improperKey, testLink)).toThrow(isNotKeyException);
+			expect(() => Link.hasData(improperKey, testLink)).toThrow(Data.isNotKeyException);
 		});
 		it('throw given an improper link', () => {
 			// given
@@ -336,7 +335,7 @@ describe('Link', () => {
 			const improperKey = 8;
 			// when
 			// expect
-			expect(() => Link.deleteData(improperKey, testLink)).toThrow(isNotKeyException);
+			expect(() => Link.deleteData(improperKey, testLink)).toThrow(Data.isNotKeyException);
 		});
 		it('throw given an improper link', () => {
 			// given
@@ -371,7 +370,7 @@ describe('Link', () => {
 			// when
 			// expect
 			expect(() => Link.setGraphicalAttribute(improperKey, value, testLink)).toThrow(
-				isNotKeyException,
+				Data.isNotKeyException,
 			);
 		});
 		it('throw given an improper link', () => {
@@ -409,7 +408,7 @@ describe('Link', () => {
 			// when
 			// expect
 			expect(() => Link.getGraphicalAttribute(improperKey, testLink)).toThrow(
-				isNotKeyException,
+				Data.isNotKeyException,
 			);
 		});
 		it('throw given an improper link', () => {
@@ -445,7 +444,7 @@ describe('Link', () => {
 			// when
 			// expect
 			expect(() => Link.hasGraphicalAttribute(improperKey, testLink)).toThrow(
-				isNotKeyException,
+				Data.isNotKeyException,
 			);
 		});
 		it('throw given an improper link', () => {
@@ -482,7 +481,7 @@ describe('Link', () => {
 			// when
 			// expect
 			expect(() => Link.deleteGraphicalAttribute(improperKey, testLink)).toThrow(
-				isNotKeyException,
+				Data.isNotKeyException,
 			);
 		});
 		it('throw given an improper link', () => {

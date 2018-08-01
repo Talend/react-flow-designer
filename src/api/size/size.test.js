@@ -2,7 +2,7 @@ import Immutable from 'immutable';
 
 import { SizeRecord } from '../../constants/flowdesigner.model';
 
-import { Size, isSizeElseThrow } from './size';
+import * as Size from './size';
 
 const isNotSizeException = `SizeRecord should be a SizeRecord was given
 """
@@ -26,7 +26,7 @@ describe('isSizeElseThrow', () => {
 		// given
 		const testSize = new SizeRecord();
 		// when
-		const test = isSizeElseThrow(testSize);
+		const test = Size.isSizeElseThrow(testSize);
 		// expect
 		expect(test).toEqual(true);
 	});
@@ -36,7 +36,7 @@ describe('isSizeElseThrow', () => {
 		const testSize = new Immutable.Map();
 		// when
 		// expect
-		expect(() => isSizeElseThrow(testSize)).toThrow(isNotSizeException);
+		expect(() => Size.isSizeElseThrow(testSize)).toThrow(isNotSizeException);
 	});
 });
 

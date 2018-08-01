@@ -29,7 +29,7 @@ const FORBIDEN_GRAPHICAL_ATTRIBUTES = ['properties', 'portType'];
  * @returns {bool}
  * @throws
  */
-function isPort(port) {
+export function isPort(port) {
 	if (port && port instanceof PortRecord) {
 		return true;
 	}
@@ -68,7 +68,7 @@ export function isTypologyElseThrow(typology) {
  * @param {PortRecord} port
  * @returns {string}
  */
-function getId(port) {
+export function getId(port) {
 	if (isPortElseThrow(port)) {
 		return port.get('id');
 	}
@@ -80,7 +80,7 @@ function getId(port) {
  * @param {PortRecord} port
  * @returns {PortRecord}
  */
-const setId = curry((id, port) => {
+export const setId = curry((id, port) => {
 	if (isString(id) && isPortElseThrow(port)) {
 		return port.set('id', id);
 	}
@@ -92,7 +92,7 @@ const setId = curry((id, port) => {
  * @param {PortRecord} port
  * @returns {string}
  */
-function getNodeId(port) {
+export function getNodeId(port) {
 	if (isPortElseThrow(port)) {
 		return port.get('nodeId');
 	}
@@ -104,7 +104,7 @@ function getNodeId(port) {
  * @param {PortRecord} port
  * @returns {PortRecord}
  */
-const setNodeId = curry((nodeId, port) => {
+export const setNodeId = curry((nodeId, port) => {
 	if (isString(nodeId) && isPortElseThrow(port)) {
 		return port.set('nodeId', nodeId);
 	}
@@ -116,7 +116,7 @@ const setNodeId = curry((nodeId, port) => {
  * @param {PortRecord} port
  * @returns {PositionRecord}
  */
-function getPosition(port) {
+export function getPosition(port) {
 	if (isPortElseThrow(port)) {
 		return port.getIn(positionSelector);
 	}
@@ -128,7 +128,7 @@ function getPosition(port) {
  * @param {PortRecord} port
  * @returns {Port}
  */
-const setPosition = curry((position, port) => {
+export const setPosition = curry((position, port) => {
 	if (isPortElseThrow(port) && isPositionElseThrow(position)) {
 		return port.setIn(positionSelector, position);
 	}
@@ -139,7 +139,7 @@ const setPosition = curry((position, port) => {
  * @param {PortRecord} port
  * @returns {string}
  */
-function getComponentType(port) {
+export function getComponentType(port) {
 	if (isPortElseThrow(port)) {
 		return port.getIn(componentTypeSelector);
 	}
@@ -151,7 +151,7 @@ function getComponentType(port) {
  * @param {PortRecord} port
  * @returns {PortRecord}
  */
-const setComponentType = curry((componentType, port) => {
+export const setComponentType = curry((componentType, port) => {
 	if (isPortElseThrow(port) && isString(componentType)) {
 		return port.setIn(componentTypeSelector, componentType);
 	}
@@ -165,7 +165,7 @@ const setComponentType = curry((componentType, port) => {
  * @param {PortRecord} port
  * @returns {String}
  */
-function getTypology(port) {
+export function getTypology(port) {
 	if (isPortElseThrow(port)) {
 		return port.getIn(portTopologySelector);
 	}
@@ -177,7 +177,7 @@ function getTypology(port) {
  * @param {PortRecord} port
  * @returns {PortRecord}
  */
-const setTypology = curry((typology, port) => {
+export const setTypology = curry((typology, port) => {
 	if (isPortElseThrow(port) && isTypologyElseThrow(typology)) {
 		return port.setIn(portTopologySelector, typology);
 	}
@@ -190,7 +190,7 @@ const setTypology = curry((typology, port) => {
  * @param {PortRecord} port
  * @returns {number}
  */
-function getIndex(port) {
+export function getIndex(port) {
 	if (isPortElseThrow(port)) {
 		return port.getIn(indexSelector);
 	}
@@ -202,7 +202,7 @@ function getIndex(port) {
  * @param {PortRecord} port
  * @returns {PortRecord}
  */
-const setIndex = curry((index, port) => {
+export const setIndex = curry((index, port) => {
 	if (isNumber(index) && isPortElseThrow(port)) {
 		return port.setIn(indexSelector, index);
 	}
@@ -216,7 +216,7 @@ const setIndex = curry((index, port) => {
  * @param {nodeRecord} port
  * @returns {nodeRecord}
  */
-const setData = curry((key, value, port) => {
+export const setData = curry((key, value, port) => {
 	if (isPortElseThrow(port)) {
 		return port.set('data', Data.set(key, value, port.get('data')));
 	}
@@ -228,7 +228,7 @@ const setData = curry((key, value, port) => {
  * @param {NodeRecord} port
  * @returns {any | null}
  */
-const getData = curry((key, port) => {
+export const getData = curry((key, port) => {
 	if (isPortElseThrow(port)) {
 		return Data.get(key, port.get('data'));
 	}
@@ -240,7 +240,7 @@ const getData = curry((key, port) => {
  * @param {NodeRecord} port
  * @returns {Bool}
  */
-const hasData = curry((key, port) => {
+export const hasData = curry((key, port) => {
 	if (isPortElseThrow(port)) {
 		return Data.has(key, port.get('data'));
 	}
@@ -252,7 +252,7 @@ const hasData = curry((key, port) => {
  * @param {NodeRecord} port
  * @returns {NodeRecord}
  */
-const deleteData = curry((key, port) => {
+export const deleteData = curry((key, port) => {
 	if (isPortElseThrow(port)) {
 		return port.set('data', Data.deleteKey(key, port.get('data')));
 	}
@@ -264,7 +264,7 @@ const deleteData = curry((key, port) => {
  * @param {String} key
  * @returns {Bool}
  */
-function isWhiteListAttribute(key) {
+export function isWhiteListAttribute(key) {
 	if (indexOf(FORBIDEN_GRAPHICAL_ATTRIBUTES, key) === -1) {
 		return true;
 	}
@@ -282,7 +282,7 @@ function isWhiteListAttribute(key) {
  * @param {NodeRecord} port
  * @returns {NodeRecord}
  */
-const setGraphicalAttribute = curry((key, value, port) => {
+export const setGraphicalAttribute = curry((key, value, port) => {
 	if (isPortElseThrow(port) && isWhiteListAttribute(key)) {
 		return port.set(
 			'graphicalAttributes',
@@ -297,7 +297,7 @@ const setGraphicalAttribute = curry((key, value, port) => {
  * @param {NodeRecord} port
  * @returns {any | null}
  */
-const getGraphicalAttribute = curry((key, port) => {
+export const getGraphicalAttribute = curry((key, port) => {
 	if (isPortElseThrow(port) && isWhiteListAttribute(key)) {
 		return Data.get(key, port.get('graphicalAttributes'));
 	}
@@ -309,7 +309,7 @@ const getGraphicalAttribute = curry((key, port) => {
  * @param {NodeRecord} port
  * @returns {Bool}
  */
-const hasGraphicalAttribute = curry((key, port) => {
+export const hasGraphicalAttribute = curry((key, port) => {
 	if (isPortElseThrow(port) && isWhiteListAttribute(key)) {
 		return Data.has(key, port.get('graphicalAttributes'));
 	}
@@ -321,7 +321,7 @@ const hasGraphicalAttribute = curry((key, port) => {
  * @param {NodeRecord} port
  * @returns {NodeRecord}
  */
-const deleteGraphicalAttribute = curry((key, port) => {
+export const deleteGraphicalAttribute = curry((key, port) => {
 	if (isPortElseThrow(port) && isWhiteListAttribute(key)) {
 		return port.set('graphicalAttributes', Data.deleteKey(key, port.get('graphicalAttributes')));
 	}
@@ -337,7 +337,7 @@ const deleteGraphicalAttribute = curry((key, port) => {
  * @param {string} componentType
  * @returns {PortRecord}
  */
-const create = curry((id, nodeId, index, typology, componentType) =>
+export const create = curry((id, nodeId, index, typology, componentType) =>
 	flow([
 		setId(id),
 		setNodeId(nodeId),
@@ -346,27 +346,3 @@ const create = curry((id, nodeId, index, typology, componentType) =>
 		setComponentType(componentType),
 	])(new PortRecord()),
 );
-
-export const Port = {
-	create,
-	isPort,
-	getId,
-	getNodeId,
-	setNodeId,
-	getComponentType,
-	setComponentType,
-	getPosition,
-	setPosition,
-	getTypology,
-	setTypology,
-	getIndex,
-	setIndex,
-	setData,
-	getData,
-	hasData,
-	deleteData,
-	setGraphicalAttribute,
-	getGraphicalAttribute,
-	hasGraphicalAttribute,
-	deleteGraphicalAttribute,
-};

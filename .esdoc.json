@@ -1,5 +1,6 @@
 {
 	"source": "./src/api",
 	"destination": "./docs",
+	"excludes": ["\\index\\.js$"],
 	"plugins": [{ "name": "esdoc-standard-plugin" }]
 }

@@ -15,10 +15,9 @@ import Immutable from 'immutable';
 
 import { NodeRecord } from '../../constants/flowdesigner.model';
 
-import { Node, isNodeElseThrow } from './node';
-import { Position } from '../position/position';
-import { Size } from '../size/size';
-
+import * as Node from './node';
+import * as Position from '../position/position';
+import * as Size from '../size/size';
 import * as Data from '../data/data';
 
 const isNotNodeException = `NodeRecord should be a NodeRecord was given
@@ -52,7 +51,7 @@ describe('isNodeElseThrow', () => {
 		// given
 		const testNode = new NodeRecord();
 		// when
-		const test = isNodeElseThrow(testNode);
+		const test = Node.isNodeElseThrow(testNode);
 		// expect
 		expect(test).toEqual(true);
 	});
@@ -62,7 +61,7 @@ describe('isNodeElseThrow', () => {
 		const testNode = new Immutable.Map();
 		// when
 		// expect
-		expect(() => isNodeElseThrow(testNode)).toThrow(isNotNodeException);
+		expect(() => Node.isNodeElseThrow(testNode)).toThrow(isNotNodeException);
 	});
 });
 

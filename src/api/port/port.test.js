@@ -14,15 +14,15 @@
 import Immutable from 'immutable';
 
 import { PortRecord } from '../../constants/flowdesigner.model';
-import { Port, isPortElseThrow, isTypologyElseThrow } from './port';
-import { Position } from '../position/position';
+import * as Port from './port';
+import * as Position from '../position/position';
 
 describe('isPortElseThrow', () => {
 	it('return true if given parameter is a PortRecord', () => {
 		// given
 		const testPort = new PortRecord();
 		// when
-		const test = isPortElseThrow(testPort);
+		const test = Port.isPortElseThrow(testPort);
 		// expect
 		expect(test).toEqual(true);
 	});
@@ -31,17 +31,17 @@ describe('isPortElseThrow', () => {
 		const testPort = new Immutable.Map();
 		// when
 		// expect
-		expect(() => isPortElseThrow(testPort)).toThrow();
+		expect(() => Port.isPortElseThrow(testPort)).toThrow();
 	});
 });
 
 describe('isTypologyElseThrow', () => {
 	it('return true if given parameter is a valid Typologu', () => {
-		expect(isTypologyElseThrow('SINK')).toBe(true);
+		expect(Port.isTypologyElseThrow('SINK')).toBe(true);
 	});
 	it('throw if given parameter is not  a valid Typologu and doThrow is true', () => {
 		const invalidTypology = 'LOOKUP';
-		expect(() => isTypologyElseThrow('LOOKUP', true)).toThrow(
+		expect(() => Port.isTypologyElseThrow('LOOKUP', true)).toThrow(
 			`Should be a typology 'SOURCE' or 'SINK' was given ${invalidTypology}`,
 		);
 	});

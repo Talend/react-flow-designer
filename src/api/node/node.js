@@ -100,7 +100,7 @@ export const setPosition = curry((position, node) => {
 
 /**
  * @param {NodeRecord} node
- * @returns {PositionRecord}
+ * @returns {SizeRecord}
  */
 export function getSize(node) {
 	if (isNodeElseThrow(node)) {
