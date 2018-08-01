@@ -67,7 +67,7 @@ describe('port api', () => {
 	const improperPort = new Immutable.Map();
 
 	describe('create', () => {
-		it('given proper id, position, size and componentType return a Node', () => {
+		it('given proper id, nodeId, index, typology and componentType return a Node', () => {
 			// given
 			// when
 			const test = Port.create(id, nodeId, index, typology, portType);

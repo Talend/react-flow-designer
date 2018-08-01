@@ -9,6 +9,11 @@ import { PositionRecord } from '../../constants/flowdesigner.model';
  * @typedef {Immutable.Record} PositionRecord
  */
 
+/**
+ * given a parameter check if it is a PositionRecord
+ * @param {*} position
+ * @return {bool}
+ */
 export function isPosition(position) {
 	if (position && position instanceof PositionRecord) {
 		return true;
@@ -16,6 +21,11 @@ export function isPosition(position) {
 	return false;
 }
 
+/**
+ * given a parameter check if it is a PositionRecord, if not throw in developpement
+ * @param {*} position
+ * @return {bool}
+ */
 export function isPositionElseThrow(position) {
 	const test = isPosition(position);
 	if (!test) {
@@ -24,6 +34,11 @@ export function isPositionElseThrow(position) {
 	return test;
 }
 
+/**
+ * given a PositionRecord return X coordinate
+ * @param {PositionRecord} position
+ * @return {number}
+ */
 export function getXCoordinate(position) {
 	if (isPositionElseThrow(position)) {
 		return position.get('x');
@@ -31,6 +46,13 @@ export function getXCoordinate(position) {
 	return null;
 }
 
+/**
+ * given a number and a PositionRecord return updated PositionRecord
+ * @function
+ * @param {number} x
+ * @param {PositionRecord} position
+ * @return {PositionRecord}
+ */
 export const setXCoordinate = curry((x, position) => {
 	if (isPositionElseThrow(position) && isNumber(x)) {
 		return position.set('x', x);
@@ -39,6 +61,11 @@ export const setXCoordinate = curry((x, position) => {
 	return position;
 });
 
+/**
+ * given a PositionRecord return the Y coordinate
+ * @param {PositionRecord} position
+ * @return {number}
+ */
 export function getYCoordinate(position) {
 	if (isPositionElseThrow(position)) {
 		return position.get('y');
@@ -46,6 +73,12 @@ export function getYCoordinate(position) {
 	return null;
 }
 
+/**
+ * given a number and a PositionRecord return updated PositionRecord
+ * @param {number} y
+ * @param {PositionRecord} position
+ * @return {PositionRecord}
+ */
 export const setYCoordinate = curry((y, position) => {
 	if (isPositionElseThrow(position) && isNumber(y)) {
 		return position.set('y', y);
@@ -54,4 +87,12 @@ export const setYCoordinate = curry((y, position) => {
 	return position;
 });
 
-export const create = curry((x, y) => flow([setXCoordinate(x), setYCoordinate(y)])(new PositionRecord()));
+/**
+ * given x and y coordinate return a PositionRecord
+ * @param {number} x
+ * @param {number} y
+ * @return {PositionRecord}
+ */
+export const create = curry((x, y) =>
+	flow([setXCoordinate(x), setYCoordinate(y)])(new PositionRecord()),
+);

@@ -24,7 +24,7 @@ const FORBIDEN_GRAPHICAL_ATTRIBUTES = ['properties', 'linkType'];
 /**
  * Test if the first parameter is a LinkRecord instance
  * @param {LinkRecord} link
- * @returns {bool}
+ * @return {bool}
  * @throws
  */
 export function isLink(link) {
@@ -37,7 +37,7 @@ export function isLink(link) {
 /**
  * Test if the first parameter is a LinkRecord, throw if not
  * @param {*} link
- * @returns {bool}
+ * @return {bool}
  * @throws
  */
 export function isLinkElseThrow(link) {
@@ -61,9 +61,10 @@ export function getId(link) {
 }
 
 /**
+ * @function
  * @param {string} id
  * @param {LinkRecord} link
- * @returns {LinkRecord}
+ * @return {LinkRecord}
  */
 export const setId = curry((id, link) => {
 	if (isString(id) && isLinkElseThrow(link)) {
@@ -75,7 +76,7 @@ export const setId = curry((id, link) => {
 
 /**
  * @param {LinkRecord} link
- * @returns {string}
+ * @return {string}
  */
 export function getSourceId(link) {
 	if (isLinkElseThrow(link)) {
@@ -85,9 +86,10 @@ export function getSourceId(link) {
 }
 
 /**
+ * @function
  * @param {string} sourceId
  * @param {LinkRecord} link
- * @returns {LinkRecord}
+ * @return {LinkRecord}
  */
 export const setSourceId = curry((sourceId, link) => {
 	if (isString(sourceId) && isLinkElseThrow(link)) {
@@ -99,7 +101,7 @@ export const setSourceId = curry((sourceId, link) => {
 
 /**
  * @param {LinkRecord} link
- * @returns {string}
+ * @return {string}
  */
 export function getTargetId(link) {
 	if (isLinkElseThrow(link)) {
@@ -109,9 +111,10 @@ export function getTargetId(link) {
 }
 
 /**
+ * @function
  * @param {string} targetId
  * @param {LinkRecord} link
- * @returns {LinkRecord}
+ * @return {LinkRecord}
  */
 export const setTargetId = curry((targetId, link) => {
 	if (isString(targetId) && isLinkElseThrow(link)) {
@@ -123,7 +126,7 @@ export const setTargetId = curry((targetId, link) => {
 
 /**
  * @param {LinkRecord} link
- * @returns {LinkRecord}
+ * @return {string}
  */
 export function getComponentType(link) {
 	if (isLinkElseThrow(link, true)) {
@@ -133,9 +136,10 @@ export function getComponentType(link) {
 }
 
 /**
+ * @function
  * @param {string} linkType
  * @param {LinkRecord} link
- * @returns {LinkRecord}
+ * @return {LinkRecord}
  */
 export const setComponentType = curry((linkType, link) => {
 	if (isString(linkType) && isLinkElseThrow(link, true)) {
@@ -148,8 +152,8 @@ export const setComponentType = curry((linkType, link) => {
 /**
  * @param {String} key
  * @param {any} value
- * @param {nodeRecord} node
- * @returns {nodeRecord}
+ * @param {LinkRecord} link
+ * @return {LinkRecord}
  */
 export const setData = curry((key, value, link) => {
 	if (isLinkElseThrow(link)) {
@@ -159,9 +163,10 @@ export const setData = curry((key, value, link) => {
 });
 
 /**
+ * @function
  * @param {String} key
- * @param {NodeRecord} node
- * @returns {any | null}
+ * @param {LinkRecord} link
+ * @return {any | null}
  */
 export const getData = curry((key, link) => {
 	if (isLinkElseThrow(link)) {
@@ -172,8 +177,8 @@ export const getData = curry((key, link) => {
 
 /**
  * @param {String} key
- * @param {NodeRecord} node
- * @returns {Bool}
+ * @param {LinkRecord} link
+ * @return {Bool}
  */
 export const hasData = curry((key, link) => {
 	if (isLinkElseThrow(link)) {
@@ -183,9 +188,10 @@ export const hasData = curry((key, link) => {
 });
 
 /**
+ * @function
  * @param {String} key
- * @param {NodeRecord} node
- * @returns {NodeRecord}
+ * @param {LinkRecord} link
+ * @return {NodeRecord}
  */
 export const deleteData = curry((key, link) => {
 	if (isLinkElseThrow(link)) {
@@ -197,7 +203,7 @@ export const deleteData = curry((key, link) => {
 /**
  * given a key check if that key is white listed
  * @param {String} key
- * @returns {Bool}
+ * @return {Bool}
  */
 function isWhiteListAttribute(key) {
 	if (indexOf(FORBIDEN_GRAPHICAL_ATTRIBUTES, key) === -1) {
@@ -212,10 +218,11 @@ function isWhiteListAttribute(key) {
 }
 
 /**
+ * @function
  * @param {String} key
  * @param {any} value
- * @param {NodeRecord} node
- * @returns {NodeRecord}
+ * @param {LinkRecord} link
+ * @return {LinkRecord}
  */
 export const setGraphicalAttribute = curry((key, value, link) => {
 	if (isLinkElseThrow(link) && isWhiteListAttribute(key)) {
@@ -228,9 +235,10 @@ export const setGraphicalAttribute = curry((key, value, link) => {
 });
 
 /**
+ * @function
  * @param {String} key
- * @param {NodeRecord} node
- * @returns {any | null}
+ * @param {LinkRecord} link
+ * @return {any | null}
  */
 export const getGraphicalAttribute = curry((key, link) => {
 	if (isLinkElseThrow(link) && isWhiteListAttribute(key)) {
@@ -240,9 +248,10 @@ export const getGraphicalAttribute = curry((key, link) => {
 });
 
 /**
+ * @function
  * @param {String} key
- * @param {NodeRecord} node
- * @returns {Bool}
+ * @param {LinkRecord} link
+ * @return {Bool}
  */
 export const hasGraphicalAttribute = curry((key, link) => {
 	if (isLinkElseThrow(link) && isWhiteListAttribute(key)) {
@@ -252,9 +261,10 @@ export const hasGraphicalAttribute = curry((key, link) => {
 });
 
 /**
+ * @function
  * @param {String} key
- * @param {NodeRecord} node
- * @returns {NodeRecord}
+ * @param {LinkRecord} node
+ * @return {LinkRecord}
  */
 export const deleteGraphicalAttribute = curry((key, link) => {
 	if (isLinkElseThrow(link) && isWhiteListAttribute(key)) {
@@ -266,6 +276,7 @@ export const deleteGraphicalAttribute = curry((key, link) => {
 /**
  * minimal link creation factory, additionnals information can be set trought
  * the above set* functions
+ * @function
  * @param {string} id
  * @param {string} sourceId
  * @param {string} targetId
