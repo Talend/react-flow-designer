@@ -9,7 +9,7 @@ import { throwInDev, throwTypeError } from './throwInDev';
 import { PortRecord } from '../constants/flowdesigner.model';
 import { PORT_SOURCE, PORT_SINK } from '../constants/flowdesigner.constants';
 import { isPositionElseThrow } from './position';
-import { Data } from './data';
+import * as Data from './data';
 
 const positionSelector = ['graphicalAttributes', 'position'];
 const componentTypeSelector = ['graphicalAttributes', 'portType'];
@@ -34,7 +34,7 @@ function isPort(port) {
 
 /**
  * Test if the first parameter is a PortRecord, throw if not
- * @param {*} node
+ * @param {*} port
  * @returns {bool}
  * @throws
  */
@@ -49,7 +49,6 @@ export function isPortElseThrow(port) {
 /**
  * Check if the typology is one of the two accepted value
  * @param {*} typology
- * @param {bool} doThrow
  */
 export function isTypologyElseThrow(typology) {
 	if (typology === PORT_SOURCE || typology === PORT_SINK) {
@@ -73,8 +72,8 @@ function getId(port) {
 }
 
 /**
- * @param {string}
- * @param {PortRecord}
+ * @param {string} id
+ * @param {PortRecord} port
  * @returns {PortRecord}
  */
 const setId = curry((id, port) => {
@@ -251,7 +250,7 @@ const hasData = curry((key, port) => {
  */
 const deleteData = curry((key, port) => {
 	if (isPortElseThrow(port)) {
-		return port.set('data', Data.delete(key, port.get('data')));
+		return port.set('data', Data.deleteKey(key, port.get('data')));
 	}
 	return port;
 });
@@ -320,7 +319,7 @@ const hasGraphicalAttribute = curry((key, port) => {
  */
 const deleteGraphicalAttribute = curry((key, port) => {
 	if (isPortElseThrow(port) && isWhiteListAttribute(key)) {
-		return port.set('graphicalAttributes', Data.delete(key, port.get('graphicalAttributes')));
+		return port.set('graphicalAttributes', Data.deleteKey(key, port.get('graphicalAttributes')));
 	}
 	return port;
 });

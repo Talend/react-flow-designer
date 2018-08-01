@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 
-import { Data, isMapElseThrow, isKeyElseThrow } from './data';
+import * as Data from './data';
 
 export const isNotMapException = `Immutable.Map should be a Immutable.Map was given
 """
@@ -16,7 +16,7 @@ describe('isMapElseThrow', () => {
 		// given
 		const testMap = new Immutable.Map();
 		// when
-		const test = isMapElseThrow(testMap);
+		const test = Data.isMapElseThrow(testMap);
 		// expect
 		expect(test).toEqual(true);
 	});
@@ -26,7 +26,7 @@ describe('isMapElseThrow', () => {
 		const testMap = new Map();
 		// when
 		// expect
-		expect(() => isMapElseThrow(testMap)).toThrow(isNotMapException);
+		expect(() => Data.isMapElseThrow(testMap)).toThrow(isNotMapException);
 	});
 });
 
@@ -35,7 +35,7 @@ describe('isKeyElseThrow', () => {
 		// given
 		const testString = 'a String';
 		// when
-		const test = isKeyElseThrow(testString);
+		const test = Data.isKeyElseThrow(testString);
 		// expect
 		expect(test).toEqual(true);
 	});
@@ -45,7 +45,7 @@ describe('isKeyElseThrow', () => {
 		const testString = 8;
 		// when
 		// expect
-		expect(() => isKeyElseThrow(testString)).toThrow(isNotKeyException);
+		expect(() => Data.isKeyElseThrow(testString)).toThrow(isNotKeyException);
 	});
 });
 
@@ -192,7 +192,7 @@ describe('Data', () => {
 				key: value,
 			});
 			// when
-			const test = Data.delete(key, map);
+			const test = Data.deleteKey(key, map);
 			// expect
 			expect(test).toEqual(new Immutable.Map());
 		});
@@ -205,7 +205,7 @@ describe('Data', () => {
 				key: value,
 			});
 			// when
-			const test = Data.delete(key, map);
+			const test = Data.deleteKey(key, map);
 			// expect
 			expect(test).toEqual(map);
 		});
@@ -218,7 +218,7 @@ describe('Data', () => {
 			});
 			// when
 			// expect
-			expect(() => Data.delete(key, map)).toThrow(isNotKeyException);
+			expect(() => Data.deleteKey(key, map)).toThrow(isNotKeyException);
 		});
 
 		it('given an improper map throw', () => {
@@ -227,7 +227,7 @@ describe('Data', () => {
 			const map = new Map();
 			// when
 			// expect
-			expect(() => Data.delete(key, map)).toThrow(isNotMapException);
+			expect(() => Data.deleteKey(key, map)).toThrow(isNotMapException);
 		});
 	});
 });

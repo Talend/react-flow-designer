@@ -11,7 +11,7 @@ import { throwInDev, throwTypeError } from './throwInDev';
 import { NodeRecord } from '../constants/flowdesigner.model';
 import { isPositionElseThrow } from './position';
 import { isSizeElseThrow } from './size';
-import { Data } from './data';
+import * as Data from './data';
 
 const positionSelector = ['graphicalAttributes', 'position'];
 const sizeSelector = ['graphicalAttributes', 'nodeSize'];
@@ -60,7 +60,7 @@ function getId(node) {
 
 /**
  * @param {string} id
- * @param {NodeRecord}
+ * @param {NodeRecord} node
  * @returns {NodeRecord}
  */
 const setId = curry((id, node) => {
@@ -185,7 +185,7 @@ const hasData = curry((key, node) => {
  */
 const deleteData = curry((key, node) => {
 	if (isNodeElseThrow(node)) {
-		return node.set('data', Data.delete(key, node.get('data')));
+		return node.set('data', Data.deleteKey(key, node.get('data')));
 	}
 	return node;
 });
@@ -254,7 +254,7 @@ const hasGraphicalAttribute = curry((key, node) => {
  */
 const deleteGraphicalAttribute = curry((key, node) => {
 	if (isNodeElseThrow(node) && isWhiteListAttribute(key)) {
-		return node.set('graphicalAttributes', Data.delete(key, node.get('graphicalAttributes')));
+		return node.set('graphicalAttributes', Data.deleteKey(key, node.get('graphicalAttributes')));
 	}
 	return node;
 });

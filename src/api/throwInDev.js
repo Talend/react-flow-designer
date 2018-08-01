@@ -2,9 +2,9 @@
  * Throw {message} only in dev mode
  * @param {String} message
  */
-export function throwInDev(error) {
+export function throwInDev(message) {
 	if (!(process.env.NODE_ENV === 'production')) {
-		throw error;
+		throw message;
 	}
 }
 

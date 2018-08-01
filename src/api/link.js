@@ -10,7 +10,7 @@ import upperFirst from 'lodash/upperFirst';
 
 import { throwInDev, throwTypeError } from './throwInDev';
 import { LinkRecord } from '../constants/flowdesigner.model';
-import { Data } from './data';
+import * as Data from './data';
 
 const linkTypeSelector = ['graphicalAttributes', 'linkType'];
 
@@ -185,7 +185,7 @@ const hasData = curry((key, link) => {
  */
 const deleteData = curry((key, link) => {
 	if (isLinkElseThrow(link)) {
-		return link.set('data', Data.delete(key, link.get('data')));
+		return link.set('data', Data.deleteKey(key, link.get('data')));
 	}
 	return link;
 });
@@ -254,7 +254,7 @@ const hasGraphicalAttribute = curry((key, link) => {
  */
 const deleteGraphicalAttribute = curry((key, link) => {
 	if (isLinkElseThrow(link) && isWhiteListAttribute(key)) {
-		return link.set('graphicalAttributes', Data.delete(key, link.get('graphicalAttributes')));
+		return link.set('graphicalAttributes', Data.deleteKey(key, link.get('graphicalAttributes')));
 	}
 	return link;
 });

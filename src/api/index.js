@@ -3,7 +3,7 @@ import { Link as link } from './link';
 import { Node as node } from './node';
 import { Position as position } from './position';
 import { Size as size } from './size';
-import { Data as data } from './data';
+import * as data from './data';
 
 export const Port = port;
 export const Link = link;

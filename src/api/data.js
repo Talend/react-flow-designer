@@ -9,7 +9,7 @@ import { throwInDev, throwTypeError } from './throwInDev';
 
 /**
  * return true if the parameter is an Immutable.Map throw otherwise
- * @param {any} map
+ * @param {any} map - the value to be checkd as Immutable.Map
  * @return {Bool}
  */
 export function isMapElseThrow(map) {
@@ -22,7 +22,7 @@ export function isMapElseThrow(map) {
 
 /**
  * return true if the parameter key is a String throw otherwise
- * @param {any} map
+ * @param {any} key - the value to be checked as String
  * @return {Bool}
  */
 export function isKeyElseThrow(key) {
@@ -42,7 +42,7 @@ export function isKeyElseThrow(key) {
  * @param {Immutable.Map} map
  * @returns {Immutable.Map}
  */
-const set = curry((key, value, map) => {
+export const set = curry((key, value, map) => {
 	if (isKeyElseThrow(key) && isMapElseThrow(map)) {
 		return map.set(key, value);
 	}
@@ -55,7 +55,7 @@ const set = curry((key, value, map) => {
  * @param {Immutable.Map} map
  * @returns {any | null}
  */
-const get = curry((key, map) => {
+export const get = curry((key, map) => {
 	if (isKeyElseThrow(key) && isMapElseThrow(map)) {
 		return map.get(key);
 	}
@@ -68,7 +68,7 @@ const get = curry((key, map) => {
  * @param {Immutable.Map} map
  * @return {Bool}
  */
-const has = curry((key, map) => {
+export const has = curry((key, map) => {
 	if (isKeyElseThrow(key) && isMapElseThrow(map)) {
 		return map.has(key);
 	}
@@ -80,16 +80,9 @@ const has = curry((key, map) => {
  * @param {Immutable.Map} map
  * @returns {Immutable.Map}
  */
-const deleteKey = curry((key, map) => {
+export const deleteKey = curry((key, map) => {
 	if (isKeyElseThrow(key) && isMapElseThrow(map)) {
 		return map.delete(key);
 	}
 	return map;
 });
-
-export const Data = {
-	set,
-	get,
-	has,
-	delete: deleteKey,
-};

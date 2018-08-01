@@ -19,7 +19,7 @@ import { Node, isNodeElseThrow } from './node';
 import { Position } from './position';
 import { Size } from './size';
 
-import { isNotKeyException } from './data.test';
+import * as Data from './data.test';
 
 const isNotNodeException = `NodeRecord should be a NodeRecord was given
 """
@@ -100,7 +100,9 @@ describe('Node', () => {
 			// given
 			// when
 			// expect
-			expect(() => Node.create(id, improperPosition, size, nodeType)).toThrow(improperPositionMessage);
+			expect(() => Node.create(id, improperPosition, size, nodeType)).toThrow(
+				improperPositionMessage,
+			);
 		});
 		it('throw if given an improper Size', () => {
 			// given
@@ -285,7 +287,7 @@ you should use Position module functions to create and transform Position`,
 			const improperKey = 8;
 			// when
 			// expect
-			expect(() => Node.setData(improperKey, value, testNode)).toThrow(isNotKeyException);
+			expect(() => Node.setData(improperKey, value, testNode)).toThrow(Data.isNotKeyException);
 		});
 		it('throw given an improper node', () => {
 			// given
@@ -310,7 +312,7 @@ you should use Position module functions to create and transform Position`,
 			const improperKey = 8;
 			// when
 			// expect
-			expect(() => Node.getData(improperKey, testNode)).toThrow(isNotKeyException);
+			expect(() => Node.getData(improperKey, testNode)).toThrow(Data.isNotKeyException);
 		});
 		it('throw given an improper node', () => {
 			// given
@@ -335,7 +337,7 @@ you should use Position module functions to create and transform Position`,
 			const improperKey = 8;
 			// when
 			// expect
-			expect(() => Node.hasData(improperKey, testNode)).toThrow(isNotKeyException);
+			expect(() => Node.hasData(improperKey, testNode)).toThrow(Data.isNotKeyException);
 		});
 		it('throw given an improper node', () => {
 			// given
@@ -360,7 +362,7 @@ you should use Position module functions to create and transform Position`,
 			const improperKey = 8;
 			// when
 			// expect
-			expect(() => Node.deleteData(improperKey, testNode)).toThrow(isNotKeyException);
+			expect(() => Node.deleteData(improperKey, testNode)).toThrow(Data.isNotKeyException);
 		});
 		it('throw given an improper node', () => {
 			// given
@@ -395,7 +397,7 @@ you should use Position module functions to create and transform Position`,
 			// when
 			// expect
 			expect(() => Node.setGraphicalAttribute(improperKey, value, testNode)).toThrow(
-				isNotKeyException,
+				Data.isNotKeyException,
 			);
 		});
 		it('throw given an improper node', () => {
@@ -433,7 +435,7 @@ you should use Position module functions to create and transform Position`,
 			// when
 			// expect
 			expect(() => Node.getGraphicalAttribute(improperKey, testNode)).toThrow(
-				isNotKeyException,
+				Data.isNotKeyException,
 			);
 		});
 		it('throw given an improper node', () => {
@@ -469,7 +471,7 @@ you should use Position module functions to create and transform Position`,
 			// when
 			// expect
 			expect(() => Node.hasGraphicalAttribute(improperKey, testNode)).toThrow(
-				isNotKeyException,
+				Data.isNotKeyException,
 			);
 		});
 		it('throw given an improper node', () => {
@@ -506,7 +508,7 @@ you should use Position module functions to create and transform Position`,
 			// when
 			// expect
 			expect(() => Node.deleteGraphicalAttribute(improperKey, testNode)).toThrow(
-				isNotKeyException,
+				Data.isNotKeyException,
 			);
 		});
 		it('throw given an improper node', () => {
