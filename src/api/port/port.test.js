@@ -35,14 +35,14 @@ describe('isPortElseThrow', () => {
 	});
 });
 
-describe('isTypologyElseThrow', () => {
+describe('isTopologyElseThrow', () => {
 	it('return true if given parameter is a valid Typologu', () => {
-		expect(Port.isTypologyElseThrow('SINK')).toBe(true);
+		expect(Port.isTopologyElseThrow('SINK')).toBe(true);
 	});
 	it('throw if given parameter is not  a valid Typologu and doThrow is true', () => {
-		const invalidTypology = 'LOOKUP';
-		expect(() => Port.isTypologyElseThrow('LOOKUP', true)).toThrow(
-			`Should be a typology 'SOURCE' or 'SINK' was given ${invalidTypology}`,
+		const invalidtopology = 'LOOKUP';
+		expect(() => Port.isTopologyElseThrow('LOOKUP', true)).toThrow(
+			`Should be a topology 'SOURCE' or 'SINK' was given ${invalidtopology}`,
 		);
 	});
 });
@@ -52,25 +52,25 @@ describe('port api', () => {
 	const nodeId = 'NODE_ID';
 	const position = Position.create(10, 10);
 	const index = 1;
-	const typology = 'SOURCE';
+	const topology = 'SOURCE';
 	const portType = 'PortType';
-	const testPort = Port.create(id, nodeId, index, typology, portType);
+	const testPort = Port.create(id, nodeId, index, topology, portType);
 	const key = 'KEY';
 	const value = { whatever: 'whatever' };
 
 	const improperId = 34;
 	const improperNodeId = 42;
 	const improperIndex = '10';
-	const improperTypology = {};
+	const impropertopology = {};
 	const improperPosition = new Immutable.Map({ x: 10, y: 10 });
 	const improperPortType = {};
 	const improperPort = new Immutable.Map();
 
 	describe('create', () => {
-		it('given proper id, nodeId, index, typology and componentType return a Node', () => {
+		it('given proper id, nodeId, index, topology and componentType return a Node', () => {
 			// given
 			// when
-			const test = Port.create(id, nodeId, index, typology, portType);
+			const test = Port.create(id, nodeId, index, topology, portType);
 			// expect
 			expect(Port.isPort(test)).toEqual(true);
 		});
@@ -78,31 +78,31 @@ describe('port api', () => {
 			// given
 			// when
 			// expect
-			expect(() => Port.create(improperId, nodeId, index, typology, portType)).toThrow();
+			expect(() => Port.create(improperId, nodeId, index, topology, portType)).toThrow();
 		});
 		it('throw if given an improper NodeId', () => {
 			// given
 			// when
 			// expect
-			expect(() => Port.create(id, improperNodeId, index, typology, portType)).toThrow();
+			expect(() => Port.create(id, improperNodeId, index, topology, portType)).toThrow();
 		});
 		it('throw if given an improper index', () => {
 			// given
 			// when
 			// expect
-			expect(() => Port.create(id, nodeId, improperIndex, typology, portType)).toThrow();
+			expect(() => Port.create(id, nodeId, improperIndex, topology, portType)).toThrow();
 		});
-		it('throw if given an improper typology', () => {
+		it('throw if given an improper topology', () => {
 			// given
 			// when
 			// expect
-			expect(() => Port.create(id, nodeId, index, improperTypology, portType)).toThrow();
+			expect(() => Port.create(id, nodeId, index, impropertopology, portType)).toThrow();
 		});
 		it('throw if given an improper componentType', () => {
 			// given
 			// when
 			// expect
-			expect(() => Port.create(id, nodeId, index, typology, improperPortType)).toThrow();
+			expect(() => Port.create(id, nodeId, index, topology, improperPortType)).toThrow();
 		});
 	});
 
@@ -238,38 +238,38 @@ describe('port api', () => {
 			expect(() => Port.setPosition(position, improperPort)).toThrow();
 		});
 	});
-	describe('getTypology', () => {
-		it('given a proper Port return a typology', () => {
+	describe('getTopology', () => {
+		it('given a proper Port return a topology', () => {
 			// given
 			// when
-			const test = Port.getTypology(testPort);
+			const test = Port.getTopology(testPort);
 			// expect
-			expect(test).toEqual(typology);
+			expect(test).toEqual(topology);
 		});
 		it('throw given an improper Port', () => {
-			expect(() => Port.getTypology(improperPort)).toThrow();
+			expect(() => Port.getTopology(improperPort)).toThrow();
 		});
 	});
-	describe('setTypology', () => {
-		it('given a proper Port and Typology return a Port with updated Typology', () => {
+	describe('setTopology', () => {
+		it('given a proper Port and topology return a Port with updated topology', () => {
 			// given
-			const newTypology = 'SINK';
+			const newTopology = 'SINK';
 			// when
-			const test = Port.setTypology(newTypology, testPort);
+			const test = Port.setTopology(newTopology, testPort);
 			// expect
-			expect(Port.getTypology(test)).toEqual(newTypology);
+			expect(Port.getTopology(test)).toEqual(newTopology);
 		});
-		it('throw given an improper typology', () => {
+		it('throw given an improper topology', () => {
 			// given
 			// when
 			// expect
-			expect(() => Port.setTypology(improperTypology, testPort)).toThrow();
+			expect(() => Port.setTopology(impropertopology, testPort)).toThrow();
 		});
 		it('throw given an improper Port', () => {
 			// given
 			// when
 			// expect
-			expect(() => Port.setTypology(typology, improperPort)).toThrow();
+			expect(() => Port.setTopology(topology, improperPort)).toThrow();
 		});
 	});
 	describe('getIndex', () => {
@@ -297,13 +297,13 @@ describe('port api', () => {
 			// given
 			// when
 			// expect
-			expect(() => Port.setTypology(improperIndex, testPort)).toThrow();
+			expect(() => Port.setTopology(improperIndex, testPort)).toThrow();
 		});
 		it('throw given an improper Port', () => {
 			// given
 			// when
 			// expect
-			expect(() => Port.setTypology(typology, improperPort)).toThrow();
+			expect(() => Port.setTopology(topology, improperPort)).toThrow();
 		});
 	});
 	describe('setData', () => {

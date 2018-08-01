@@ -22,8 +22,8 @@ ex: <AbstractNode><rect /></AbstractNode>`;
  */
 function calculatePortPosition(ports, nodePosition, nodeSize) {
 	let portsWithPosition = new Map();
-	const emitterPorts = ports.filter(port => Port.getTypology(port) === PORT_SOURCE);
-	const sinkPorts = ports.filter(port => Port.getTypology(port) === PORT_SINK);
+	const emitterPorts = ports.filter(port => Port.getTopology(port) === PORT_SOURCE);
+	const sinkPorts = ports.filter(port => Port.getTopology(port) === PORT_SINK);
 	const range = [
 		Position.getYCoordinate(nodePosition),
 		Position.getYCoordinate(nodePosition) + Size.getHeight(nodeSize),

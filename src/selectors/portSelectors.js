@@ -37,7 +37,7 @@ export const getPortsForNode = createSelector(getPorts, ports =>
  * @return Map
  */
 export const getEmitterPorts = createSelector(getPorts, ports =>
-	ports.filter(port => Port.getTypology(port) === PORT_SOURCE),
+	ports.filter(port => Port.getTopology(port) === PORT_SOURCE),
 );
 
 /**
@@ -46,7 +46,7 @@ export const getEmitterPorts = createSelector(getPorts, ports =>
  * @return Map
  */
 export const getSinkPorts = createSelector(getPorts, ports =>
-	ports.filter(port => Port.getTypology(port) === PORT_SINK),
+	ports.filter(port => Port.getTopology(port) === PORT_SINK),
 );
 
 /**

@@ -1,6 +1,6 @@
 /**
  * Throw {message} only in dev mode
- * @param {String} message
+ * @param {string} message
  */
 export function throwInDev(message) {
 	if (!(process.env.NODE_ENV === 'production')) {
@@ -10,10 +10,10 @@ export function throwInDev(message) {
 
 /**
  * Throw a type error
- * @param {String} expected - describe expected type
+ * @param {string} expected - describe expected type
  * @param {any} given - the given param
- * @param {String} paramName - the paramname
- * @param {String} module - (optionnal) module to use
+ * @param {string} paramName - the paramname
+ * @param {string} module - (optionnal) module to use
  */
 export function throwTypeError(expected, given, paramName, module) {
 	throwInDev(

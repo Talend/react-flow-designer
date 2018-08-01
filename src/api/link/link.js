@@ -150,7 +150,8 @@ export const setComponentType = curry((linkType, link) => {
 });
 
 /**
- * @param {String} key
+ * @function
+ * @param {string} key
  * @param {any} value
  * @param {LinkRecord} link
  * @return {LinkRecord}
@@ -164,7 +165,7 @@ export const setData = curry((key, value, link) => {
 
 /**
  * @function
- * @param {String} key
+ * @param {string} key
  * @param {LinkRecord} link
  * @return {any | null}
  */
@@ -176,9 +177,10 @@ export const getData = curry((key, link) => {
 });
 
 /**
- * @param {String} key
+ * @function
+ * @param {string} key
  * @param {LinkRecord} link
- * @return {Bool}
+ * @return {bool}
  */
 export const hasData = curry((key, link) => {
 	if (isLinkElseThrow(link)) {
@@ -189,7 +191,7 @@ export const hasData = curry((key, link) => {
 
 /**
  * @function
- * @param {String} key
+ * @param {string} key
  * @param {LinkRecord} link
  * @return {NodeRecord}
  */
@@ -202,8 +204,8 @@ export const deleteData = curry((key, link) => {
 
 /**
  * given a key check if that key is white listed
- * @param {String} key
- * @return {Bool}
+ * @param {string} key
+ * @return {bool}
  */
 function isWhiteListAttribute(key) {
 	if (indexOf(FORBIDEN_GRAPHICAL_ATTRIBUTES, key) === -1) {
@@ -219,7 +221,7 @@ function isWhiteListAttribute(key) {
 
 /**
  * @function
- * @param {String} key
+ * @param {string} key
  * @param {any} value
  * @param {LinkRecord} link
  * @return {LinkRecord}
@@ -236,7 +238,7 @@ export const setGraphicalAttribute = curry((key, value, link) => {
 
 /**
  * @function
- * @param {String} key
+ * @param {string} key
  * @param {LinkRecord} link
  * @return {any | null}
  */
@@ -249,9 +251,9 @@ export const getGraphicalAttribute = curry((key, link) => {
 
 /**
  * @function
- * @param {String} key
+ * @param {string} key
  * @param {LinkRecord} link
- * @return {Bool}
+ * @return {bool}
  */
 export const hasGraphicalAttribute = curry((key, link) => {
 	if (isLinkElseThrow(link) && isWhiteListAttribute(key)) {
@@ -262,7 +264,7 @@ export const hasGraphicalAttribute = curry((key, link) => {
 
 /**
  * @function
- * @param {String} key
+ * @param {string} key
  * @param {LinkRecord} node
  * @return {LinkRecord}
  */

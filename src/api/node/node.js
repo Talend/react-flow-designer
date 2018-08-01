@@ -63,6 +63,7 @@ export function getId(node) {
 }
 
 /**
+ * @function
  * @param {string} id
  * @param {NodeRecord} node
  * @returns {NodeRecord}
@@ -87,6 +88,7 @@ export function getPosition(node) {
 }
 
 /**
+ * @function
  * @param {PositionRecord} position
  * @param {NodeRecord} node
  * @returns {NodeRecord}
@@ -110,6 +112,7 @@ export function getSize(node) {
 }
 
 /**
+ * @function
  * @param {SizeRecord} size
  * @param {NodeRecord} node
  * @returns {NodeRecord}
@@ -133,6 +136,7 @@ export function getComponentType(node) {
 }
 
 /**
+ * @function
  * @param {string} nodeType
  * @param {NodeRecord} node
  * @returns {NodeRecord}
@@ -146,7 +150,8 @@ export const setComponentType = curry((nodeType, node) => {
 });
 
 /**
- * @param {String} key
+ * @function
+ * @param {string} key
  * @param {any} value
  * @param {NodeRecord} node
  * @returns {NodeRecord}
@@ -159,7 +164,8 @@ export const setData = curry((key, value, node) => {
 });
 
 /**
- * @param {String} key
+ * @function
+ * @param {string} key
  * @param {NodeRecord} node
  * @returns {any | null}
  */
@@ -171,9 +177,10 @@ export const getData = curry((key, node) => {
 });
 
 /**
- * @param {String} key
+ * @function
+ * @param {string} key
  * @param {NodeRecord} node
- * @returns {Bool}
+ * @returns {bool}
  */
 export const hasData = curry((key, node) => {
 	if (isNodeElseThrow(node)) {
@@ -183,7 +190,8 @@ export const hasData = curry((key, node) => {
 });
 
 /**
- * @param {String} key
+ * @function
+ * @param {string} key
  * @param {NodeRecord} node
  * @returns {NodeRecord}
  */
@@ -196,8 +204,8 @@ export const deleteData = curry((key, node) => {
 
 /**
  * given a key check if that key is white listed
- * @param {String} key
- * @returns {Bool}
+ * @param {string} key
+ * @returns {bool}
  */
 export function isWhiteListAttribute(key) {
 	if (indexOf(FORBIDEN_GRAPHICAL_ATTRIBUTES, key) === -1) {
@@ -212,7 +220,8 @@ export function isWhiteListAttribute(key) {
 }
 
 /**
- * @param {String} key
+ * @function
+ * @param {string} key
  * @param {any} value
  * @param {NodeRecord} node
  * @returns {NodeRecord}
@@ -228,7 +237,8 @@ export const setGraphicalAttribute = curry((key, value, node) => {
 });
 
 /**
- * @param {String} key
+ * @function
+ * @param {string} key
  * @param {NodeRecord} node
  * @returns {any | null}
  */
@@ -240,9 +250,10 @@ export const getGraphicalAttribute = curry((key, node) => {
 });
 
 /**
- * @param {String} key
+ * @function
+ * @param {string} key
  * @param {NodeRecord} node
- * @returns {Bool}
+ * @returns {bool}
  */
 export const hasGraphicalAttribute = curry((key, node) => {
 	if (isNodeElseThrow(node) && isWhiteListAttribute(key)) {
@@ -252,7 +263,8 @@ export const hasGraphicalAttribute = curry((key, node) => {
 });
 
 /**
- * @param {String} key
+ * @function
+ * @param {string} key
  * @param {NodeRecord} node
  * @returns {NodeRecord}
  */
@@ -265,10 +277,11 @@ export const deleteGraphicalAttribute = curry((key, node) => {
 
 /**
  * Create a new Node
- * @param {String} id
+ * @function
+ * @param {string} id
  * @param {PositionRecord} position
  * @param {SizeRecord} size
- * @param {String} componentType
+ * @param {string} componentType
  * @returns {NodeRecord}
  */
 export const create = curry((id, position, size, componentType) =>
