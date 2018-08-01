@@ -72,13 +72,13 @@ the idea is to reduce the surface api of the redux action, encouraging batching 
   - move nodeId Vector
   - moveEnd nodeId Position
 - Link
-  - add NodeRecord
-  - update NodeRecord
-  - delete NodeRecord
+  - add LinkRecord
+  - update LinkRecord
+  - delete LinkRecord
 - Port
-  - add NodeRecord
-  - update NodeRecord
-  - delete NodeRecord
+  - add PortRecord
+  - update PortRecord
+  - delete PortRecord
 
 each of those action are intended to be used with the apply function
 

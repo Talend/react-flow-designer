@@ -6,6 +6,15 @@ import { throwInDev, throwTypeError } from '../throwInDev';
 import { PositionRecord } from '../../constants/flowdesigner.model';
 
 /**
+ * @desc Represent a position comprised of X and Y coordinates
+ * avoid reading directly, use the Size module api
+ * Do not mutate it manually, use the Size module api
+ * @example <caption>Create a Position</caption>
+ * const position = Position.create(100, 200);
+ * @example <caption>Read from Position</caption>
+ * const x = Size.getXCoordinate(position);
+ * @example <caption>transform a Position</caption>
+ * const position = Size.setXCoordinate(100, position);
  * @typedef {Immutable.Record} PositionRecord
  */
 

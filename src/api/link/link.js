@@ -18,6 +18,7 @@ const linkTypeSelector = ['graphicalAttributes', 'linkType'];
 const FORBIDEN_GRAPHICAL_ATTRIBUTES = ['properties', 'linkType'];
 
 /**
+ * @desc represent a link between Port of the flow diagram
  * @typedef {Immutable.Record} LinkRecord
  */
 

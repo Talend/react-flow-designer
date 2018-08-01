@@ -5,6 +5,15 @@ import { throwInDev, throwTypeError } from '../throwInDev';
 import { SizeRecord } from '../../constants/flowdesigner.model';
 
 /**
+ * @desc Represent a size comprised of width and height
+ * avoid reading directly, use the Size module api
+ * Do not mutate it manually, use the Size module api
+ * @example <caption>Create a Size</caption>
+ * const size = Size.create(100, 200);
+ * @example <caption>Read from Size</caption>
+ * const width = Size.getWidth(size);
+ * @example <caption>transform a Size</caption>
+ * const size = Size.setWidth(100, size);
  * @typedef {Immutable.Record} SizeRecord
  */
 

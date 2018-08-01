@@ -21,6 +21,7 @@ const componentTypeSelector = ['graphicalAttributes', 'nodeType'];
 const FORBIDEN_GRAPHICAL_ATTRIBUTES = ['properties', 'position', 'nodeSize', 'nodeType'];
 
 /**
+ * @desc represent a Node on the flow diagram
  * @typedef {Immutable.Record} NodeRecord
  */
 
