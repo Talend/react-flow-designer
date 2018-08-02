@@ -21,7 +21,7 @@ const FORBIDEN_GRAPHICAL_ATTRIBUTES = ['properties', 'portType'];
 
 /**
  * @desc represent a Port attached to Node
- * @typedef {Immutable.Record} LinkRecord
+ * @typedef {Immutable.Record} PortRecord
  */
 
 /**
