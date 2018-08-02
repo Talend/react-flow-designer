@@ -54,6 +54,7 @@ export function isPortElseThrow(port) {
 /**
  * Check if the topology is one of the two accepted value
  * @param {*} topology
+ * @return {bool}
  */
 export function isTopologyElseThrow(topology) {
 	if (topology === PORT_SOURCE || topology === PORT_SINK) {
@@ -73,7 +74,7 @@ export function getId(port) {
 	if (isPortElseThrow(port)) {
 		return port.get('id');
 	}
-	return false;
+	return null;
 }
 
 /**
@@ -92,13 +93,13 @@ export const setId = curry((id, port) => {
 
 /**
  * @param {PortRecord} port
- * @returns {string}
+ * @return {string}
  */
 export function getNodeId(port) {
 	if (isPortElseThrow(port)) {
 		return port.get('nodeId');
 	}
-	return false;
+	return null;
 }
 
 /**
@@ -123,7 +124,7 @@ export function getPosition(port) {
 	if (isPortElseThrow(port)) {
 		return port.getIn(positionSelector);
 	}
-	return false;
+	return null;
 }
 
 /**
@@ -136,7 +137,7 @@ export const setPosition = curry((position, port) => {
 	if (isPortElseThrow(port) && isPositionElseThrow(position)) {
 		return port.setIn(positionSelector, position);
 	}
-	return false;
+	return port;
 });
 
 /**
@@ -147,7 +148,7 @@ export function getComponentType(port) {
 	if (isPortElseThrow(port)) {
 		return port.getIn(componentTypeSelector);
 	}
-	return false;
+	return null;
 }
 
 /**
@@ -174,7 +175,7 @@ export function getTopology(port) {
 	if (isPortElseThrow(port)) {
 		return port.getIn(portTopologySelector);
 	}
-	return false;
+	return null;
 }
 
 /**
@@ -187,7 +188,7 @@ export const setTopology = curry((topology, port) => {
 	if (isPortElseThrow(port) && isTopologyElseThrow(topology)) {
 		return port.setIn(portTopologySelector, topology);
 	}
-	return false;
+	return port;
 });
 
 /**
@@ -200,7 +201,7 @@ export function getIndex(port) {
 	if (isPortElseThrow(port)) {
 		return port.getIn(indexSelector);
 	}
-	return false;
+	return null;
 }
 
 /**

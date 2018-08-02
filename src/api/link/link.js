@@ -58,7 +58,7 @@ export function getId(link) {
 	if (isLinkElseThrow(link)) {
 		return link.get('id');
 	}
-	return false;
+	return null;
 }
 
 /**
@@ -83,7 +83,7 @@ export function getSourceId(link) {
 	if (isLinkElseThrow(link)) {
 		return link.get('sourceId');
 	}
-	return false;
+	return null;
 }
 
 /**
@@ -108,7 +108,7 @@ export function getTargetId(link) {
 	if (isLinkElseThrow(link)) {
 		return link.get('targetId');
 	}
-	return false;
+	return null;
 }
 
 /**
@@ -133,7 +133,7 @@ export function getComponentType(link) {
 	if (isLinkElseThrow(link, true)) {
 		return link.getIn(linkTypeSelector);
 	}
-	return false;
+	return null;
 }
 
 /**

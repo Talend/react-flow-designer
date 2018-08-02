@@ -51,7 +51,7 @@ export function getWidth(size) {
 	if (isSizeElseThrow(size)) {
 		return size.get('width');
 	}
-	return false;
+	return null;
 }
 
 /**
@@ -78,7 +78,7 @@ export function getHeight(size) {
 	if (isSizeElseThrow(size)) {
 		return size.get('height');
 	}
-	return false;
+	return null;
 }
 
 /**
