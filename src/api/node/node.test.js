@@ -20,14 +20,14 @@ import * as Position from '../position/position';
 import * as Size from '../size/size';
 import * as Data from '../data/data';
 
-const isNotNodeException = `NodeRecord should be a NodeRecord was given
+const isNotNodeException = `NodeRecord should be a NodeRecord, was given
 """
 object
 """
 Map {}
 """`;
 
-const improperSizeMessage = `SizeRecord should be a SizeRecord was given
+const improperSizeMessage = `SizeRecord should be a SizeRecord, was given
 """
 object
 """
@@ -35,7 +35,7 @@ Map { "width": 20, "height": 50 }
 """
 you should use Size module functions to create and transform Size`;
 
-const improperPositionMessage = `PositionRecord should be a PositionRecord was given
+const improperPositionMessage = `PositionRecord should be a PositionRecord, was given
 """
 object
 """
@@ -92,7 +92,7 @@ describe('Node', () => {
 			// when
 			// expect
 			expect(() => Node.create(improperId, position, size, nodeType)).toThrow(
-				'nodeId should be a string was given 34',
+				'nodeId should be a string, was given 34',
 			);
 		});
 		it('throw if given an improper Position', () => {
@@ -116,7 +116,7 @@ describe('Node', () => {
 			// when
 			// expect
 			expect(() => Node.create(id, position, size, improperNodeType)).toThrow(
-				'nodeType should be a string was given [object Object]',
+				'nodeType should be a string, was given [object Object]',
 			);
 		});
 	});
@@ -178,7 +178,7 @@ describe('Node', () => {
 			// when
 			// expect
 			expect(() => Node.setPosition(improperPosition, testNode)).toThrow(
-				`PositionRecord should be a PositionRecord was given
+				`PositionRecord should be a PositionRecord, was given
 """
 object
 """
@@ -261,7 +261,7 @@ you should use Position module functions to create and transform Position`,
 			// when
 			// expect
 			expect(() => Node.setComponentType(newComponentType, testNode)).toThrow(
-				'nodeType should be a string was given [object Object]',
+				'nodeType should be a string, was given [object Object]',
 			);
 		});
 		it('throw given an improper Node', () => {

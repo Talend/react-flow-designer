@@ -4,22 +4,22 @@ import { SizeRecord } from '../../constants/flowdesigner.model';
 
 import * as Size from './size';
 
-const isNotSizeException = `SizeRecord should be a SizeRecord was given
+const isNotSizeException = `SizeRecord should be a SizeRecord, was given
 """
 object
 """
 Map {}
 """
 you should use Size module functions to create and transform Size`;
-const isNotProperSizeException = `SizeRecord should be a SizeRecord was given
+const isNotProperSizeException = `SizeRecord should be a SizeRecord, was given
 """
 object
 """
 Map { "width": 10, "height": 10 }
 """
 you should use Size module functions to create and transform Size`;
-const isImproperWidth = 'width should be a number was given 10  of type string';
-const isImproperHeight = 'height should be a number was given 50  of type string';
+const isImproperWidth = 'width should be a number, was given 10  of type string';
+const isImproperHeight = 'height should be a number, was given 50  of type string';
 
 describe('isSizeElseThrow', () => {
 	it('return true if parameter size is a SizeRecord', () => {
@@ -112,7 +112,7 @@ describe('Size', () => {
 			// when
 			// expect
 			expect(() => Size.setWidth(improperWidth, testSize)).toThrow(
-				'width should be a number was given 10  of type string',
+				'width should be a number, was given 10  of type string',
 			);
 		});
 		it('throw given an improper Position', () => {
@@ -148,7 +148,7 @@ describe('Size', () => {
 			// when
 			// expect
 			expect(() => Size.setHeight(improperHeight, testSize)).toThrow(
-				'height should be a number was given 50  of type string',
+				'height should be a number, was given 50  of type string',
 			);
 		});
 		it('throw given an improper Size', () => {

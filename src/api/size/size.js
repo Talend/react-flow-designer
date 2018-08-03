@@ -65,7 +65,7 @@ export const setWidth = curry((width, size) => {
 	if (isSizeElseThrow(size) && typeof width === 'number') {
 		return size.set('width', width);
 	}
-	throwInDev(`width should be a number was given ${width.toString()}  of type ${typeof width}`);
+	throwInDev(`width should be a number, was given ${width.toString()}  of type ${typeof width}`);
 	return size;
 });
 
@@ -93,7 +93,7 @@ export const setHeight = curry((height, size) => {
 		return size.set('height', height);
 	}
 	throwInDev(
-		`height should be a number was given ${height.toString()}  of type ${typeof height}`,
+		`height should be a number, was given ${height.toString()}  of type ${typeof height}`,
 	);
 	return size;
 });

@@ -2,14 +2,14 @@ import Immutable from 'immutable';
 
 import * as Data from './data';
 
-export const isNotMapException = `Immutable.Map should be a Immutable.Map was given
+export const isNotMapException = `Immutable.Map should be a Immutable.Map, was given
 """
 object
 """
 [object Map]
 """
 `;
-export const isNotKeyException = 'key should be a string was given 8 of type number';
+export const isNotKeyException = 'key should be a string, was given 8 of type number';
 
 describe('isMapElseThrow', () => {
 	it('return true if parameter is an Immutable.Map', () => {

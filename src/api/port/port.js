@@ -61,7 +61,7 @@ export function isTopologyElseThrow(topology) {
 		return true;
 	}
 	throwInDev(
-		`Should be a topology 'SOURCE' or 'SINK' was given ${topology && topology.toString()}`,
+		`Should be a topology 'SOURCE' or 'SINK', was given ${topology && topology.toString()}`,
 	);
 	return false;
 }
@@ -87,7 +87,7 @@ export const setId = curry((id, port) => {
 	if (isString(id) && isPortElseThrow(port)) {
 		return port.set('id', id);
 	}
-	throwInDev(`id should be a string was given ${id && id.toString()}`);
+	throwInDev(`id should be a string, was given ${id && id.toString()}`);
 	return port;
 });
 
@@ -112,7 +112,7 @@ export const setNodeId = curry((nodeId, port) => {
 	if (isString(nodeId) && isPortElseThrow(port)) {
 		return port.set('nodeId', nodeId);
 	}
-	throwInDev(`nodeId should be a string was given ${nodeId && nodeId.toString()}`);
+	throwInDev(`nodeId should be a string, was given ${nodeId && nodeId.toString()}`);
 	return port;
 });
 
@@ -162,7 +162,7 @@ export const setComponentType = curry((componentType, port) => {
 		return port.setIn(componentTypeSelector, componentType);
 	}
 	throwInDev(
-		`componentType should be a string was given ${componentType && componentType.toString()}`,
+		`componentType should be a string, was given ${componentType && componentType.toString()}`,
 	);
 	return port;
 });
@@ -214,7 +214,7 @@ export const setIndex = curry((index, port) => {
 	if (isNumber(index) && isPortElseThrow(port)) {
 		return port.setIn(indexSelector, index);
 	}
-	throwInDev(`index should be a number was given ${index && index.toString()}`);
+	throwInDev(`index should be a number, was given ${index && index.toString()}`);
 	return port;
 });
 

@@ -73,7 +73,7 @@ export const setId = curry((id, node) => {
 	if (isString(id) && isNodeElseThrow(node)) {
 		return node.set('id', id);
 	}
-	throwInDev(`nodeId should be a string was given ${id && id.toString()}`);
+	throwInDev(`nodeId should be a string, was given ${id && id.toString()}`);
 	return node;
 });
 
@@ -146,7 +146,7 @@ export const setComponentType = curry((nodeType, node) => {
 	if (isString(nodeType) && isNodeElseThrow(node)) {
 		return node.setIn(componentTypeSelector, nodeType);
 	}
-	throwInDev(`nodeType should be a string was given ${nodeType && nodeType.toString()}`);
+	throwInDev(`nodeType should be a string, was given ${nodeType && nodeType.toString()}`);
 	return node;
 });
 

@@ -17,7 +17,7 @@ import { LinkRecord } from '../../constants/flowdesigner.model';
 import * as Link from './link';
 import * as Data from '../data/data';
 
-const isNotLinkException = `Linkrecord should be a Linkrecord was given
+const isNotLinkException = `Linkrecord should be a Linkrecord, was given
 """
 object
 """
@@ -76,7 +76,7 @@ describe('Link', () => {
 			// when
 			// expect
 			expect(() => Link.create(improperId, sourceId, targetId, linkType)).toThrow(
-				'id should be a string was given 34',
+				'id should be a string, was given 34',
 			);
 		});
 		it('throw if given an improper sourceId', () => {
@@ -84,7 +84,7 @@ describe('Link', () => {
 			// when
 			// expect
 			expect(() => Link.create(id, improperSourceId, targetId, linkType)).toThrow(
-				'id should be a string was given 42',
+				'id should be a string, was given 42',
 			);
 		});
 		it('throw if given an improper targetId', () => {
@@ -92,7 +92,7 @@ describe('Link', () => {
 			// when
 			// expect
 			expect(() => Link.create(id, sourceId, improperTargetId, linkType)).toThrow(
-				'id should be a string was given 64',
+				'id should be a string, was given 64',
 			);
 		});
 		it('throw if given an improper componentType', () => {
@@ -100,7 +100,7 @@ describe('Link', () => {
 			// when
 			// expect
 			expect(() => Link.create(id, sourceId, targetId, improperLinkType)).toThrow(
-				'linkType should be a string was given [object Object]',
+				'linkType should be a string, was given [object Object]',
 			);
 		});
 	});
@@ -159,7 +159,7 @@ describe('Link', () => {
 			// when
 			// expect
 			expect(() => Link.setSourceId(improperSourceId, testLink)).toThrow(
-				'id should be a string was given 42',
+				'id should be a string, was given 42',
 			);
 		});
 		it('throw given an improper Link', () => {
@@ -195,7 +195,7 @@ describe('Link', () => {
 			// when
 			// expect
 			expect(() => Link.setTargetId(improperTargetId, testLink)).toThrow(
-				'id should be a string was given 64',
+				'id should be a string, was given 64',
 			);
 		});
 		it('throw given an improper Link', () => {
@@ -235,7 +235,7 @@ describe('Link', () => {
 			// when
 			// expect
 			expect(() => Link.setComponentType(newComponentType, testLink)).toThrow(
-				'linkType should be a string was given [object Object]',
+				'linkType should be a string, was given [object Object]',
 			);
 		});
 		it('throw given an improper Link', () => {

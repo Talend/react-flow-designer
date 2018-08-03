@@ -10,6 +10,12 @@ export function throwInDev(message) {
 
 /**
  * Throw a type error
+ * @todo for ease of use param should be an object {
+ *	expected: 'Linkrecord',
+ *	given: link,
+ *	paramName: 'link',
+ *	module: 'Link'
+ *	}
  * @param {string} expected - describe expected type
  * @param {any} given - the given param
  * @param {string} paramName - the paramname
@@ -18,7 +24,7 @@ export function throwInDev(message) {
 export function throwTypeError(expected, given, paramName, module) {
 	throwInDev(
 		new TypeError(
-			`${expected || 'parameter'} should be a ${expected} was given
+			`${expected || 'parameter'} should be a ${expected}, was given
 """
 ${typeof given}
 """

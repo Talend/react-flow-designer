@@ -71,7 +71,7 @@ export const setId = curry((id, link) => {
 	if (isString(id) && isLinkElseThrow(link)) {
 		return link.set('id', id);
 	}
-	throwInDev(`id should be a string was given ${id && id.toString()}`);
+	throwInDev(`id should be a string, was given ${id && id.toString()}`);
 	return link;
 });
 
@@ -96,7 +96,7 @@ export const setSourceId = curry((sourceId, link) => {
 	if (isString(sourceId) && isLinkElseThrow(link)) {
 		return link.set('sourceId', sourceId);
 	}
-	throwInDev(`id should be a string was given ${sourceId && sourceId.toString()}`);
+	throwInDev(`id should be a string, was given ${sourceId && sourceId.toString()}`);
 	return link;
 });
 
@@ -121,7 +121,7 @@ export const setTargetId = curry((targetId, link) => {
 	if (isString(targetId) && isLinkElseThrow(link)) {
 		return link.set('targetId', targetId);
 	}
-	throwInDev(`id should be a string was given ${targetId && targetId.toString()}`);
+	throwInDev(`id should be a string, was given ${targetId && targetId.toString()}`);
 	return link;
 });
 
@@ -146,7 +146,7 @@ export const setComponentType = curry((linkType, link) => {
 	if (isString(linkType) && isLinkElseThrow(link, true)) {
 		return link.setIn(linkTypeSelector, linkType);
 	}
-	throwInDev(`linkType should be a string was given ${linkType && linkType.toString()}`);
+	throwInDev(`linkType should be a string, was given ${linkType && linkType.toString()}`);
 	return link;
 });
 

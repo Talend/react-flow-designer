@@ -4,22 +4,22 @@ import { PositionRecord } from '../../constants/flowdesigner.model';
 
 import * as Position from './position';
 
-const isNotPositionException = `PositionRecord should be a PositionRecord was given
+const isNotPositionException = `PositionRecord should be a PositionRecord, was given
 """
 object
 """
 Map {}
 """
 you should use Position module functions to create and transform Position`;
-const improperPositionException = `PositionRecord should be a PositionRecord was given
+const improperPositionException = `PositionRecord should be a PositionRecord, was given
 """
 object
 """
 Map { "x": 10, "y": 10 }
 """
 you should use Position module functions to create and transform Position`;
-const isImproperXCoordinate = 'x should be a number was given 10 of type string';
-const isImproperYCoordinate = 'y should be a number was given 50 of type string';
+const isImproperXCoordinate = 'x should be a number, was given 10 of type string';
+const isImproperYCoordinate = 'y should be a number, was given 50 of type string';
 
 describe('isPositionElseThrow', () => {
 	it('return true if parameter position is a PositionRecord', () => {
@@ -114,7 +114,7 @@ describe('Position', () => {
 			// when
 			// expect
 			expect(() => Position.setXCoordinate(improperX, testPosition)).toThrow(
-				'x should be a number was given 10 of type string',
+				'x should be a number, was given 10 of type string',
 			);
 		});
 		it('throw given an improper Position', () => {
@@ -154,7 +154,7 @@ describe('Position', () => {
 			// when
 			// expect
 			expect(() => Position.setYCoordinate(improperY, testPosition)).toThrow(
-				'y should be a number was given 50 of type string',
+				'y should be a number, was given 50 of type string',
 			);
 		});
 		it('throw given an improper Position', () => {

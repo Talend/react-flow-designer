@@ -42,7 +42,7 @@ describe('isTopologyElseThrow', () => {
 	it('throw if given parameter is not  a valid Typologu and doThrow is true', () => {
 		const invalidtopology = 'LOOKUP';
 		expect(() => Port.isTopologyElseThrow('LOOKUP', true)).toThrow(
-			`Should be a topology 'SOURCE' or 'SINK' was given ${invalidtopology}`,
+			`Should be a topology 'SOURCE' or 'SINK', was given ${invalidtopology}`,
 		);
 	});
 });
