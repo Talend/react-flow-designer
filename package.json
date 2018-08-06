@@ -10,7 +10,7 @@
     "lint": "npm run lint:es",
     "lint:es": "eslint --config .eslintrc src/**",
     "prepublish": "babel -d lib ./src/ && rimraf lib/**/*.test.js",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "semantic-release": "semantic-release --prepare && npm publish && semantic-release --publish",
     "test": "jest --no-cache",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
@@ -75,7 +75,7 @@
     "reselect": "2.5.4",
     "rimraf": "2.5.4",
     "sass-loader": "4.0.2",
-    "semantic-release": "15.9.5",
+    "semantic-release": "4.3.5",
     "style-loader": "0.13.1",
     "webpack": "2.1.0-beta.25"
   },
