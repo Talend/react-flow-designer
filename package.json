@@ -10,7 +10,7 @@
     "lint": "npm run lint:es",
     "lint:es": "eslint --config .eslintrc src/**",
     "prepublish": "babel -d lib ./src/ && rimraf lib/**/*.test.js",
-    "semantic-release": "semantic-release --prepare && npm publish && semantic-release --publish",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "test": "jest --no-cache",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
