@@ -70,8 +70,10 @@ const nodeReducer = (state = defaultState, action) => {
 			if (action.nodeId === Node.getId(action.node)) {
 				return state.setIn(['nodes', Node.getId(action.node)], action.node);
 			}
+			// special case here, the id got changed and it have lots of implication
 			return state
 				.setIn(['nodes', Node.getId(action.node)], action.node)
+				.deleteIn(['nodes', action.nodeId])
 				.setIn(['out', Node.getId(action.node)], new Map())
 				.setIn(['in', Node.getId(action.node)], new Map())
 				.setIn(['childrens', Node.getId(action.node)], new Map())
