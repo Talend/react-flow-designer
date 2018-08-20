@@ -1,4 +1,4 @@
-import { Map, fromJS } from 'immutable';
+import Immutable, { Map, fromJS } from 'immutable';
 import invariant from 'invariant';
 import { removePort } from '../actions/port.actions';
 import portReducer from './port.reducer';
@@ -25,7 +25,6 @@ import {
 	PositionRecord,
 	SizeRecord,
 	NodeGraphicalAttributes,
-	NodeData,
 } from '../constants/flowdesigner.model';
 
 const defaultState = new Map();
@@ -44,7 +43,7 @@ const nodeReducer = (state = defaultState, action) => {
 					new NodeRecord({
 						id: action.nodeId,
 						type: action.nodeType,
-						data: new NodeData(action.data).set(
+						data: new Immutable.Map(action.data).set(
 							'properties',
 							fromJS(action.data && action.data.properties) || new Map(),
 						),

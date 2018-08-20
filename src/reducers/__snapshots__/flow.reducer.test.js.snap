@@ -13,9 +13,6 @@ Object {
   "nodes": Object {
     "node2": Object {
       "data": Object {
-        "datasetInfo": Object {},
-        "description": "",
-        "label": "",
         "properties": Object {},
       },
       "getNodeType": [Function],
@@ -40,9 +37,6 @@ Object {
     },
     "nodeId": Object {
       "data": Object {
-        "datasetInfo": Object {},
-        "description": "",
-        "label": "",
         "properties": Object {},
       },
       "getNodeType": [Function],
@@ -124,9 +118,6 @@ Object {
   "nodes": Object {
     "nodeId": Object {
       "data": Object {
-        "datasetInfo": Object {},
-        "description": "",
-        "label": "",
         "properties": Object {},
       },
       "getNodeType": [Function],
@@ -200,9 +191,6 @@ Object {
   "nodes": Object {
     "node2": Object {
       "data": Object {
-        "datasetInfo": Object {},
-        "description": "",
-        "label": "",
         "properties": Object {},
       },
       "getNodeType": [Function],
@@ -227,9 +215,6 @@ Object {
     },
     "nodeId": Object {
       "data": Object {
-        "datasetInfo": Object {},
-        "description": "",
-        "label": "",
         "properties": Object {},
       },
       "getNodeType": [Function],
