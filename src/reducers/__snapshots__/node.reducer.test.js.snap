@@ -11,6 +11,58 @@ Object {
   "nodes": Object {
     "id": Object {
       "data": Object {
+        "properties": Object {},
+      },
+      "getNodeType": [Function],
+      "getPosition": [Function],
+      "getSize": [Function],
+      "graphicalAttributes": Object {
+        "description": "",
+        "label": "",
+        "nodeSize": Object {
+          "height": 50,
+          "width": 50,
+        },
+        "nodeType": undefined,
+        "position": Object {
+          "x": 10,
+          "y": 10,
+        },
+        "properties": Object {},
+      },
+      "id": "id",
+      "type": undefined,
+    },
+  },
+  "out": Object {
+    "id": Object {},
+  },
+  "parents": Object {
+    "id": Object {},
+  },
+  "ports": Object {},
+  "transform": Object {
+    "k": 1,
+    "x": 0,
+    "y": 0,
+  },
+  "transformToApply": undefined,
+}
+`;
+
+exports[`Check node reducer FLOWDESIGNER_NODE_ADD add a new node to the node collection with the right type 2`] = `
+Object {
+  "childrens": Object {
+    "id": Object {},
+  },
+  "in": Object {
+    "id": Object {},
+  },
+  "links": Object {},
+  "nodeTypes": Object {},
+  "nodes": Object {
+    "id": Object {
+      "data": Object {
         "datasetInfo": Object {},
         "description": "",
         "label": "",
@@ -23,13 +75,13 @@ Object {
         "description": "",
         "label": "",
         "nodeSize": Object {
-          "height": undefined,
-          "width": undefined,
+          "height": 50,
+          "width": 50,
         },
-        "nodeType": undefined,
+        "nodeType": "MY_NODE_TYPE",
         "position": Object {
-          "x": undefined,
-          "y": undefined,
+          "x": 10,
+          "y": 10,
         },
         "properties": Object {},
       },
@@ -66,9 +118,6 @@ Object {
   "nodes": Object {
     "id": Object {
       "data": Object {
-        "datasetInfo": Object {},
-        "description": "",
-        "label": "",
         "properties": Object {},
       },
       "getNodeType": [Function],
@@ -158,7 +207,12 @@ Object {
           "x": 50,
           "y": 50,
         },
-        "properties": Object {},
+        "properties": Object {
+          "startPosition": Object {
+            "x": 50,
+            "y": 50,
+          },
+        },
       },
       "id": "id2",
       "type": "type2",

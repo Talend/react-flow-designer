@@ -13,7 +13,7 @@ import NodesRenderer from './node/NodesRenderer.component';
 import LinksRenderer from './link/LinksRenderer.component';
 import PortsRenderer from './port/PortsRenderer.component';
 
-import { startMoveNodeTo, moveNodeTo, moveNodeToEnd } from '../actions/node.actions';
+import { move, moveEnd } from '../actions/node.actions';
 import { setNodeTypes } from '../actions/nodeType.actions';
 
 export class FlowDesigner extends React.Component {
@@ -148,10 +148,13 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = dispatch => ({
 	setNodeTypes: nodeTypeMap => dispatch(setNodeTypes(nodeTypeMap)),
-	startMoveNodeTo: (nodeId, nodePosition) => dispatch(startMoveNodeTo(nodeId, nodePosition)),
-	moveNodeTo: (nodeId, nodePosition) => dispatch(moveNodeTo(nodeId, nodePosition)),
-	moveNodeToEnd: (nodeId, nodePosition) => dispatch(moveNodeToEnd(nodeId, nodePosition)),
+	startMoveNodeTo: (nodeId, nodePosition) => dispatch(move(nodeId, nodePosition)),
+	moveNodeTo: (nodeId, nodePosition) => dispatch(move(nodeId, nodePosition)),
+	moveNodeToEnd: (nodeId, nodePosition) => dispatch(moveEnd(nodeId, nodePosition)),
 	setZoom: transform => dispatch(setZoom(transform)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(FlowDesigner);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(FlowDesigner);

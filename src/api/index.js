@@ -1,3 +1,4 @@
+import * as flow from './flow/flow';
 import * as port from './port/port';
 import * as link from './link/link';
 import * as node from './node/node';
@@ -5,6 +6,7 @@ import * as position from './position/position';
 import * as size from './size/size';
 import * as data from './data/data';
 
+export const Flow = flow;
 export const Port = port;
 export const Link = link;
 export const Node = node;

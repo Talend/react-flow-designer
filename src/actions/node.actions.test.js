@@ -31,7 +31,7 @@ describe('Check that node action creators generate proper action objects and per
 		expect(store.getActions()).toMatchSnapshot();
 	});
 
-	it('moveNode generate a proper action object witch nodeId and nodePosition parameter', () => {
+	it('move generate a proper action object witch nodeId and nodePosition parameter', () => {
 		const store = mockStore({
 			flowDesigner: {
 				nodes: new Map({ nodeId: { id: 'nodeId', type: 'type' } }),
@@ -44,7 +44,7 @@ describe('Check that node action creators generate proper action objects and per
 			},
 		});
 
-		store.dispatch(nodeActions.moveNodeTo('nodeId', { x: 10, y: 20 }, {}));
+		store.dispatch(nodeActions.move('nodeId', { x: 10, y: 20 }, {}));
 
 		expect(store.getActions()).toMatchSnapshot();
 	});

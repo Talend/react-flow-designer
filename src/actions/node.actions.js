@@ -1,20 +1,81 @@
 import {
-	FLOWDESIGNER_NODE_MOVE_START,
 	FLOWDESIGNER_NODE_APPLY_MOVEMENT,
 	FLOWDESIGNER_NODE_MOVE,
 	FLOWDESIGNER_NODE_MOVE_END,
-	FLOWDESIGNER_NODE_ADD,
 	FLOWDESIGNER_NODE_SET_TYPE,
 	FLOWDESIGNER_NODE_SET_GRAPHICAL_ATTRIBUTES,
 	FLOWDESIGNER_NODE_REMOVE_GRAPHICAL_ATTRIBUTES,
 	FLOWDESIGNER_NODE_SET_DATA,
 	FLOWDESIGNER_NODE_REMOVE_DATA,
 	FLOWDESIGNER_NODE_SET_SIZE,
+	FLOWDESIGNER_NODE_ADD,
+	FLOWDESIGNER_NODE_UPDATE,
 	FLOWDESIGNER_NODE_REMOVE,
 } from '../constants/flowdesigner.constants';
 
 /**
+ * add the given node to the pipeline
+ * @param {NodeRecord} node
+ * @return {Action}
+ */
+export const add = node => ({
+	type: FLOWDESIGNER_NODE_ADD,
+	node,
+});
+
+/**
+ * update the given node identified by its id
+ * @param {string} nodeId
+ * @param {NodeRecord} node
+ * @return {Action}
+ */
+export const update = (nodeId, node) => ({
+	type: FLOWDESIGNER_NODE_UPDATE,
+	node,
+	nodeId,
+});
+
+/**
+ * remove the node identified by its id
+ * @param {string} nodeId
+ * @return {Action}
+ */
+export const remove = nodeId => ({
+	type: FLOWDESIGNER_NODE_REMOVE,
+	nodeId,
+});
+
+/**
+ * dispatched when the user drag a component
+ * @param {string} nodeId
+ * @param {PositionRecord} nodePosition
+ * @return {Action}
+ */
+export function move(nodeId, nodePosition) {
+	return {
+		type: FLOWDESIGNER_NODE_MOVE,
+		nodeId,
+		nodePosition,
+	};
+}
+
+/**
+ * dispatched when the user release component after drag
+ * @param {string} nodeId
+ * @param {PositionRecord} nodePosition
+ * @return {Action}
+ */
+export function moveEnd(nodeId, nodePosition) {
+	return {
+		type: FLOWDESIGNER_NODE_MOVE_END,
+		nodeId,
+		nodePosition,
+	};
+}
+
+/**
  * Ask for node creation and injection into current dataflow
+ * @deprecated use add
  * @param {string} nodeId
  * @param {{x: number, y: number}} nodePosition
  * @param {{height: number, width: number}} nodeSize
@@ -29,17 +90,6 @@ export const addNode = (nodeId, nodeType, { data = {}, graphicalAttributes = {} 
 	data,
 	graphicalAttributes,
 });
-
-/**
- * @deprecated use moveStart action
- */
-export function startMoveNodeTo(nodeId, nodePosition) {
-	return {
-		type: FLOWDESIGNER_NODE_MOVE_START,
-		nodeId,
-		nodePosition,
-	};
-}
 
 /**
  * Ask for moving node
@@ -58,7 +108,6 @@ export function moveNodeTo(nodeId, nodePosition) {
 
 /**
  * Ask to apply the same movement to multiples nodesId
- * @deprecated
  * @param nodesId {array<string>} list of nodeId
  * @param movement {Object} relative movement to apply on all nodes
  *
@@ -165,7 +214,7 @@ export const removeNodeData = (nodeId, dataKey) => ({
 
 /**
  * Ask for removal of target node and each ports/links attached to it
- * @deprecated use deleteNode action
+ * @deprecated use remove action
  * @param {string} nodeId
  */
 export const removeNode = nodeId => ({

@@ -10,7 +10,7 @@ Array [
 ]
 `;
 
-exports[`Check that node action creators generate proper action objects and perform checking moveNode generate a proper action object witch nodeId and nodePosition parameter 1`] = `
+exports[`Check that node action creators generate proper action objects and perform checking move generate a proper action object witch nodeId and nodePosition parameter 1`] = `
 Array [
   Object {
     "nodeId": "nodeId",
