@@ -37,7 +37,7 @@ export function isSize(size) {
 export function isSizeElseThrow(size) {
 	const test = isSize(size);
 	if (!test) {
-		throwTypeError('SizeRecord', size, 'size', 'Size');
+		throwTypeError('SizeRecord', 'size', 'Size', size);
 	}
 	return test;
 }

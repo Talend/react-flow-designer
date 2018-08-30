@@ -47,7 +47,7 @@ export function isNode(node) {
 export function isNodeElseThrow(node) {
 	const test = isNode(node);
 	if (!test) {
-		throwTypeError('NodeRecord', node, 'node', 'Node');
+		throwTypeError('NodeRecord', 'node', 'Node', node);
 	}
 	return test;
 }

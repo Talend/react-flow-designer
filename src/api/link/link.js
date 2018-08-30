@@ -44,7 +44,7 @@ export function isLink(link) {
 export function isLinkElseThrow(link) {
 	const test = isLink(link);
 	if (!test) {
-		throwTypeError('Linkrecord', link, 'link', 'Link');
+		throwTypeError('Linkrecord', 'link', 'Link', link);
 	}
 	return test;
 }

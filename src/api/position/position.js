@@ -38,7 +38,7 @@ export function isPosition(position) {
 export function isPositionElseThrow(position) {
 	const test = isPosition(position);
 	if (!test) {
-		throwTypeError('PositionRecord', position, 'position', 'Position');
+		throwTypeError('PositionRecord', 'position', 'Position', position);
 	}
 	return test;
 }

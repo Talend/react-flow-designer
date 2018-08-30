@@ -46,7 +46,7 @@ export function isPort(port) {
 export function isPortElseThrow(port) {
 	const test = isPort(port);
 	if (!test) {
-		throwTypeError('PortRecord', port, 'port', 'Port');
+		throwTypeError('PortRecord', 'port', 'Port', port);
 	}
 	return test;
 }

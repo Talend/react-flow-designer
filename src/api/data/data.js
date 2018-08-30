@@ -16,7 +16,7 @@ import { throwInDev, throwTypeError } from '../throwInDev';
 export function isMapElseThrow(map) {
 	const test = Immutable.Map.isMap(map);
 	if (!test) {
-		throwTypeError('Immutable.Map', map, 'map');
+		throwTypeError('Immutable.Map', 'map', 'Immutable', map);
 	}
 	return test;
 }
