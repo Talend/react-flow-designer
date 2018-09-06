@@ -1,6 +1,7 @@
 {
   "name": "react-flow-designer",
   "description": "Flow designer for react and redux",
+  "version": "1.0.0",
   "main": "lib/index.js",
   "scripts": {
     "clean": "npm run clean:lib && npm run clean:coverage",
