@@ -1,17 +1,5 @@
-/* @flow */
-
 import invariant from 'invariant';
 import { Map, fromJS } from 'immutable';
-
-import type {
-	Id,
-	PortAction,
-	Port,
-	PortDirection,
-	PortRecordType,
-	PortRecordMap,
-	State,
-} from '../flow-typed';
 
 import {
 	PortRecord,
@@ -39,28 +27,28 @@ import {
 /**
  * get ports attached to a node
  */
-function filterPortsByNode(ports: PortRecordMap, nodeId: Id): PortRecordMap {
-	return ports.filter((port: PortRecordType) => port.nodeId === nodeId);
+function filterPortsByNode(ports, nodeId) {
+	return ports.filter(port => port.nodeId === nodeId);
 }
 
 /**
  * get ports of direction EMITTER or SINK
  */
-function filterPortsByDirection(ports: PortRecordMap, direction: PortDirection): PortRecordMap {
-	return ports.filter((port: PortRecordType) => port.getPortDirection() === direction);
+function filterPortsByDirection(ports, direction) {
+	return ports.filter(port => port.getPortDirection() === direction);
 }
 
 /**
  * for a new port calculate its index by retrieving all its siblings
  */
-function calculateNewPortIndex(ports: PortRecordMap, port: Port): number {
+function calculateNewPortIndex(ports, port): number {
 	return filterPortsByDirection(
 		filterPortsByNode(ports, port.nodeId),
 		port.graphicalAttributes.properties.type,
 	).size;
 }
 
-function indexPortMap(ports: PortRecordMap): PortRecordMap {
+function indexPortMap(ports) {
 	let i = 0;
 	return ports
 		.sort((a, b) => {
@@ -78,7 +66,7 @@ function indexPortMap(ports: PortRecordMap): PortRecordMap {
 		});
 }
 
-function setPort(state: State, port: Port) {
+function setPort(state, port) {
 	const index: number =
 		port.graphicalAttributes.properties.index ||
 		calculateNewPortIndex(state.get('ports'), port);
@@ -119,7 +107,7 @@ function setPort(state: State, port: Port) {
 	return state;
 }
 
-export default function portReducer(state: State, action: PortAction): State {
+export default function portReducer(state, action) {
 	switch (action.type) {
 		case FLOWDESIGNER_PORT_ADD:
 			if (!state.getIn(['nodes', action.nodeId])) {
@@ -203,7 +191,7 @@ export default function portReducer(state: State, action: PortAction): State {
 			if (!state.getIn(['ports', action.portId])) {
 				invariant(false, `Can not remove port ${action.portId} since it doesn't exist`);
 			}
-			const port: ?PortRecordType = state.getIn(['ports', action.portId]);
+			const port = state.getIn(['ports', action.portId]);
 			if (port) {
 				const newState = portInLink(state, action.portId)
 					.reduce(

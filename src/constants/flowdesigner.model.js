@@ -1,7 +1,5 @@
 import { Record, Map } from 'immutable';
 
-import type { Position, Size, PortDirection, PortRecordType } from '../flow-typed';
-
 export const NONE = 'NONE';
 export const SELECTED = 'SELECTED';
 export const DROP_TARGET = 'DROP_TARGET';
@@ -72,13 +70,13 @@ export const NodeRecord = Record({
 		properties: new Map(),
 	}),
 	/** methods TO BE REMOVED */
-	getPosition(): Position {
+	getPosition() {
 		return this.getIn(['graphicalAttributes', 'position']);
 	},
-	getSize(): Size {
+	getSize() {
 		return this.getIn(['graphicalAttributes', 'nodeSize']);
 	},
-	getNodeType(): string {
+	getNodeType() {
 		return this.getIn(['graphicalAttributes', 'nodeType']);
 	},
 });
@@ -113,25 +111,25 @@ export const PortRecord = Record({
 		properties: new Map(),
 	}),
 	/** methods TO BE REMOVED */
-	getPosition(): Position {
+	getPosition() {
 		return this.getIn(['graphicalAttributes', 'position']);
 	},
-	setPosition(position: Position): PortRecordType {
+	setPosition(position) {
 		return this.setIn(['graphicalAttributes', 'position'], position);
 	},
-	getPortType(): string {
+	getPortType() {
 		return this.getIn(['graphicalAttributes', 'portType']);
 	},
-	getPortDirection(): PortDirection {
+	getPortDirection() {
 		return this.getIn(['graphicalAttributes', 'properties', 'type']);
 	},
-	getPortFlowType(): string {
+	getPortFlowType() {
 		return this.getIn(['data', 'flowType']);
 	},
-	getIndex(): number {
+	getIndex() {
 		return this.getIn(['graphicalAttributes', 'properties', 'index']);
 	},
-	setIndex(index: number): PortRecordType {
+	setIndex(index) {
 		return this.setIn(['graphicalAttributes', 'properties', 'index'], index);
 	},
 });

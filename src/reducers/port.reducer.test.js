@@ -1,4 +1,3 @@
-/* @flow */
 import { Map, OrderedMap } from 'immutable';
 
 import { defaultState } from './flow.reducer';

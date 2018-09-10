@@ -6,14 +6,13 @@ import { interpolateBasis } from 'd3-interpolate';
 
 import LinkHandle from './LinkHandle.component';
 import { PortType } from '../../constants/flowdesigner.proptypes';
-import type { Position } from '../../flow-typed';
 
 const concreteLine = line()
 	.x(d => d.x)
 	.y(d => d.y)
 	.curve(curveBasis);
 
-function calculatePath(sourcePosition: Position, targetPosition: Position) {
+function calculatePath(sourcePosition, targetPosition) {
 	const pathCoords = [];
 	pathCoords[0] = targetPosition;
 	pathCoords[1] = sourcePosition;
