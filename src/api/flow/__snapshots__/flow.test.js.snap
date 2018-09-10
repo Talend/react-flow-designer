@@ -1,0 +1,101 @@
+exports[`flow node addNode whatever 1`] = `
+Object {
+  "childrens": Object {
+    "nodeId": Object {},
+  },
+  "in": Object {
+    "nodeId": Object {},
+  },
+  "nodes": Object {
+    "nodeId": Object {
+      "data": Object {
+        "datasetInfo": Object {},
+        "description": "",
+        "label": "",
+        "properties": Object {},
+      },
+      "getNodeType": [Function],
+      "getPosition": [Function],
+      "getSize": [Function],
+      "graphicalAttributes": Object {
+        "description": "",
+        "label": "",
+        "nodeSize": Object {
+          "height": 120,
+          "width": 70,
+        },
+        "nodeType": "nodeType",
+        "position": Object {
+          "x": 100,
+          "y": 150,
+        },
+        "properties": Object {},
+      },
+      "id": "nodeId",
+      "type": undefined,
+    },
+  },
+  "out": Object {
+    "nodeId": Object {},
+  },
+  "parents": Object {
+    "nodeId": Object {},
+  },
+}
+`;
+
+exports[`flow node deleteNode whatever 1`] = `
+Object {
+  "childrens": Object {},
+  "in": Object {},
+  "nodes": Object {},
+  "out": Object {},
+  "parents": Object {},
+}
+`;
+
+exports[`flow node updateNode whatever 1`] = `
+Object {
+  "childrens": Object {
+    "newNodeId": Object {},
+  },
+  "in": Object {
+    "newNodeId": Object {},
+  },
+  "nodes": Object {
+    "newNodeId": Object {
+      "data": Object {
+        "datasetInfo": Object {},
+        "description": "",
+        "label": "",
+        "properties": Object {},
+      },
+      "getNodeType": [Function],
+      "getPosition": [Function],
+      "getSize": [Function],
+      "graphicalAttributes": Object {
+        "description": "",
+        "label": "",
+        "nodeSize": Object {
+          "height": 120,
+          "width": 70,
+        },
+        "nodeType": "nodeType",
+        "position": Object {
+          "x": 100,
+          "y": 150,
+        },
+        "properties": Object {},
+      },
+      "id": "newNodeId",
+      "type": undefined,
+    },
+  },
+  "out": Object {
+    "newNodeId": Object {},
+  },
+  "parents": Object {
+    "newNodeId": Object {},
+  },
+}
+`;

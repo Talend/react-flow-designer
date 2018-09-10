@@ -470,8 +470,12 @@ Object {
 
 exports[`Check node reducer FLOWDESIGNER_NODE_SET_SIZE update node size property 1`] = `
 Object {
-  "childrens": Object {},
-  "in": Object {},
+  "childrens": Object {
+    "id1": Object {},
+  },
+  "in": Object {
+    "id1": Object {},
+  },
   "links": Object {},
   "nodeTypes": Object {},
   "nodes": Object {
@@ -512,8 +516,12 @@ Object {
       "type": "type2",
     },
   },
-  "out": Object {},
-  "parents": Object {},
+  "out": Object {
+    "id1": Object {},
+  },
+  "parents": Object {
+    "id1": Object {},
+  },
   "ports": Object {},
   "transform": Object {
     "k": 1,

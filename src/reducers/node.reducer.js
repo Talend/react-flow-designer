@@ -27,7 +27,7 @@ import {
 	SizeRecord,
 	NodeGraphicalAttributes,
 } from '../constants/flowdesigner.model';
-import { Flow, Node, Position } from '../api';
+import { Flow, Node, Position, Size } from '../api';
 import { getNode } from '../api/flow/flow';
 import {
 	getImmutableMapValue,
@@ -139,6 +139,48 @@ function addNode(state, action) {
 	return addNodeDeprecated(action, state);
 }
 
+/**
+ * update node position and create node startPosition if it does not exist
+ * @param {FlowState} state
+ * @param {Action} action
+ * @return {NodeRecord}
+ */
+const updateNodePosition = curry((action, node) =>
+	flow([
+		Node.setPosition(Position.create(action.nodePosition.x, action.nodePosition.y)),
+		setStartPosition(action.nodePosition.x, action.nodePosition.y),
+	])(node),
+);
+
+/**
+ * update node position and delete node startPosition
+ * @param {FlowState} state
+ * @param {Action} action
+ * @return {NodeRecord}
+ */
+const updateNodePositionEnd = curry((action, node) =>
+	flow([
+		Node.setPosition(Position.create(action.nodePosition.x, action.nodePosition.y)),
+		deleteStartPosition,
+	])(node),
+);
+
+/**
+ * apply a move transformation on the component
+ * @param {FlowState} state
+ * @param {Action} action
+ * @return {NodeRecord}
+ */
+const applyNodeTransform = curry((action, node) =>
+	Node.setPosition(
+		Position.create(
+			Position.getXCoordinate(Node.getPosition(node)) + action.movement.x,
+			Position.getYCoordinate(Node.getPosition(node)) + action.movement.y,
+		),
+		node,
+	),
+);
+
 const defaultState = new Immutable.Map();
 const nodeReducer = (state = defaultState, action) => {
 	switch (action.type) {
@@ -153,10 +195,7 @@ const nodeReducer = (state = defaultState, action) => {
 			return Flow.updateNode(
 				state,
 				action.nodeId,
-				flow([
-					Node.setPosition(Position.create(action.nodePosition.x, action.nodePosition.y)),
-					setStartPosition(action.nodePosition.x, action.nodePosition.y),
-				])(getNode(state, action.nodeId)),
+				updateNodePosition(action, getNode(state, action.nodeId)),
 			);
 		case FLOWDESIGNER_NODE_MOVE_END:
 			if (!Flow.isNodeExist(state, action.nodeId)) {
@@ -165,24 +204,13 @@ const nodeReducer = (state = defaultState, action) => {
 			return Flow.updateNode(
 				state,
 				action.nodeId,
-				flow([
-					Node.setPosition(Position.create(action.nodePosition.x, action.nodePosition.y)),
-					deleteStartPosition,
-				])(getNode(state, action.nodeId)),
+				updateNodePositionEnd(action, getNode(state, action.nodeId)),
 			);
 		case FLOWDESIGNER_NODE_APPLY_MOVEMENT:
 			return state.update('nodes', nodes =>
 				nodes.map(node => {
 					if (action.nodesId.find(id => id === node.id)) {
-						return node
-							.setIn(
-								['graphicalAttributes', 'position', 'x'],
-								node.getPosition().x + action.movement.x,
-							)
-							.setIn(
-								['graphicalAttributes', 'position', 'y'],
-								node.getPosition().y + action.movement.y,
-							);
+						return applyNodeTransform(action, node);
 					}
 					return node;
 				}),
@@ -191,10 +219,15 @@ const nodeReducer = (state = defaultState, action) => {
 			if (!Flow.isNodeExist(state, action.nodeId)) {
 				invariant(false, `Can't set size on node ${action.nodeId} since it doesn't exist`);
 			}
-			return state.setIn(
-				['nodes', action.nodeId, 'graphicalAttributes', 'nodeSize'],
-				new SizeRecord(action.nodeSize),
+			return Flow.updateNode(
+				state,
+				action.nodeId,
+				Node.setSize(
+					Size.create(action.nodeSize.width, action.nodeSize.height),
+					getNode(state, action.nodeId),
+				),
 			);
+		// @todo: this should only exist on streams since type is a streams information
 		case FLOWDESIGNER_NODE_SET_TYPE:
 			if (!Flow.isNodeExist(state, action.nodeId)) {
 				invariant(
@@ -203,6 +236,7 @@ const nodeReducer = (state = defaultState, action) => {
 				);
 			}
 			return state.setIn(['nodes', action.nodeId, 'type'], action.nodeType);
+		// @deprecated
 		case FLOWDESIGNER_NODE_SET_GRAPHICAL_ATTRIBUTES:
 			if (!Flow.isNodeExist(state, action.nodeId)) {
 				invariant(
@@ -221,6 +255,7 @@ const nodeReducer = (state = defaultState, action) => {
 					fromJS(action.graphicalAttributes),
 				);
 			}
+		// @deprecated
 		case FLOWDESIGNER_NODE_REMOVE_GRAPHICAL_ATTRIBUTES:
 			if (!Flow.isNodeExist(state, action.nodeId)) {
 				invariant(
@@ -235,6 +270,7 @@ const nodeReducer = (state = defaultState, action) => {
 				'properties',
 				action.graphicalAttributesKey,
 			]);
+		// @deprecated
 		case FLOWDESIGNER_NODE_SET_DATA:
 			if (!Flow.isNodeExist(state, action.nodeId)) {
 				invariant(false, `Can't set a data on non existing node ${action.nodeId}`);
@@ -247,6 +283,7 @@ const nodeReducer = (state = defaultState, action) => {
 					fromJS(action.data),
 				);
 			}
+		// @deprecated
 		case FLOWDESIGNER_NODE_REMOVE_DATA:
 			if (!Flow.isNodeExist(state, action.nodeId)) {
 				invariant(false, `Can't remove a data on non existing node ${action.nodeId}`);

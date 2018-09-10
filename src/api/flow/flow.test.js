@@ -17,7 +17,7 @@ describe('flow', () => {
 					'nodeType',
 				);
 
-				expect(Flow.addNode(new Immutable.Map(), node)).toEqual({});
+				expect(Flow.addNode(new Immutable.Map(), node)).toMatchSnapshot();
 			});
 		});
 
@@ -37,7 +37,7 @@ describe('flow', () => {
 				);
 				const initState = Flow.addNode(new Immutable.Map(), node);
 
-				expect(Flow.updateNode(initState, 'nodeId', updatedNode)).toEqual({});
+				expect(Flow.updateNode(initState, 'nodeId', updatedNode)).toMatchSnapshot();
 			});
 		});
 
@@ -52,7 +52,7 @@ describe('flow', () => {
 
 				const initState = Flow.addNode(new Immutable.Map(), node);
 
-				expect(Flow.deleteNode(initState, 'nodeId')).toEqual({});
+				expect(Flow.deleteNode(initState, 'nodeId')).toMatchSnapshot();
 			});
 		});
 	});
