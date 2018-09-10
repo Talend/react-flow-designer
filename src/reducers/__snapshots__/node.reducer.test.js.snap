@@ -159,8 +159,12 @@ Object {
 
 exports[`Check node reducer FLOWDESIGNER_NODE_MOVE update node position 1`] = `
 Object {
-  "childrens": Object {},
-  "in": Object {},
+  "childrens": Object {
+    "id2": Object {},
+  },
+  "in": Object {
+    "id2": Object {},
+  },
   "links": Object {},
   "nodeTypes": Object {},
   "nodes": Object {
@@ -172,18 +176,10 @@ Object {
       "getPosition": [Function],
       "getSize": [Function],
       "graphicalAttributes": Object {
-        "description": "",
-        "label": "",
-        "nodeSize": Object {
-          "height": undefined,
-          "width": undefined,
-        },
-        "nodeType": undefined,
         "position": Object {
           "x": 10,
           "y": 10,
         },
-        "properties": Object {},
       },
       "id": "id1",
       "type": "type1",
@@ -196,13 +192,6 @@ Object {
       "getPosition": [Function],
       "getSize": [Function],
       "graphicalAttributes": Object {
-        "description": "",
-        "label": "",
-        "nodeSize": Object {
-          "height": undefined,
-          "width": undefined,
-        },
-        "nodeType": undefined,
         "position": Object {
           "x": 50,
           "y": 50,
@@ -218,8 +207,12 @@ Object {
       "type": "type2",
     },
   },
-  "out": Object {},
-  "parents": Object {},
+  "out": Object {
+    "id2": Object {},
+  },
+  "parents": Object {
+    "id2": Object {},
+  },
   "ports": Object {},
   "transform": Object {
     "k": 1,
@@ -245,18 +238,10 @@ Object {
       "getPosition": [Function],
       "getSize": [Function],
       "graphicalAttributes": Object {
-        "description": "",
-        "label": "",
-        "nodeSize": Object {
-          "height": undefined,
-          "width": undefined,
-        },
-        "nodeType": undefined,
         "position": Object {
           "x": 10,
           "y": 10,
         },
-        "properties": Object {},
       },
       "id": "id2",
       "type": "type2",
@@ -289,18 +274,10 @@ Object {
       "getPosition": [Function],
       "getSize": [Function],
       "graphicalAttributes": Object {
-        "description": "",
-        "label": "",
-        "nodeSize": Object {
-          "height": undefined,
-          "width": undefined,
-        },
-        "nodeType": undefined,
         "position": Object {
           "x": 10,
           "y": 10,
         },
-        "properties": Object {},
       },
       "id": "id1",
       "type": "type1",
@@ -313,18 +290,10 @@ Object {
       "getPosition": [Function],
       "getSize": [Function],
       "graphicalAttributes": Object {
-        "description": "",
-        "label": "",
-        "nodeSize": Object {
-          "height": undefined,
-          "width": undefined,
-        },
-        "nodeType": undefined,
         "position": Object {
           "x": 10,
           "y": 10,
         },
-        "properties": Object {},
       },
       "id": "id2",
       "type": "type2",
@@ -357,18 +326,10 @@ Object {
       "getPosition": [Function],
       "getSize": [Function],
       "graphicalAttributes": Object {
-        "description": "",
-        "label": "",
-        "nodeSize": Object {
-          "height": undefined,
-          "width": undefined,
-        },
-        "nodeType": undefined,
         "position": Object {
           "x": 10,
           "y": 10,
         },
-        "properties": Object {},
       },
       "id": "id1",
       "type": "type1",
@@ -381,18 +342,10 @@ Object {
       "getPosition": [Function],
       "getSize": [Function],
       "graphicalAttributes": Object {
-        "description": "",
-        "label": "",
-        "nodeSize": Object {
-          "height": undefined,
-          "width": undefined,
-        },
-        "nodeType": undefined,
         "position": Object {
           "x": 10,
           "y": 10,
         },
-        "properties": Object {},
       },
       "id": "id2",
       "type": "type2",
@@ -425,18 +378,10 @@ Object {
       "getPosition": [Function],
       "getSize": [Function],
       "graphicalAttributes": Object {
-        "description": "",
-        "label": "",
-        "nodeSize": Object {
-          "height": undefined,
-          "width": undefined,
-        },
-        "nodeType": undefined,
         "position": Object {
           "x": 10,
           "y": 10,
         },
-        "properties": Object {},
       },
       "id": "id1",
       "type": "type1",
@@ -449,18 +394,10 @@ Object {
       "getPosition": [Function],
       "getSize": [Function],
       "graphicalAttributes": Object {
-        "description": "",
-        "label": "",
-        "nodeSize": Object {
-          "height": undefined,
-          "width": undefined,
-        },
-        "nodeType": undefined,
         "position": Object {
           "x": 10,
           "y": 10,
         },
-        "properties": Object {},
       },
       "id": "id2",
       "type": "type2",
@@ -493,20 +430,11 @@ Object {
       "getPosition": [Function],
       "getSize": [Function],
       "graphicalAttributes": Object {
-        "description": "",
-        "label": "",
-        "nodeSize": Object {
-          "height": undefined,
-          "width": undefined,
-        },
-        "nodeType": undefined,
         "position": Object {
           "x": 10,
           "y": 10,
         },
-        "properties": Object {
-          "selected": false,
-        },
+        "selected": false,
       },
       "id": "id1",
       "type": "type1",
@@ -519,18 +447,10 @@ Object {
       "getPosition": [Function],
       "getSize": [Function],
       "graphicalAttributes": Object {
-        "description": "",
-        "label": "",
-        "nodeSize": Object {
-          "height": undefined,
-          "width": undefined,
-        },
-        "nodeType": undefined,
         "position": Object {
           "x": 10,
           "y": 10,
         },
-        "properties": Object {},
       },
       "id": "id2",
       "type": "type2",
@@ -563,18 +483,14 @@ Object {
       "getPosition": [Function],
       "getSize": [Function],
       "graphicalAttributes": Object {
-        "description": "",
-        "label": "",
         "nodeSize": Object {
           "height": 200,
           "width": 200,
         },
-        "nodeType": undefined,
         "position": Object {
           "x": 10,
           "y": 10,
         },
-        "properties": Object {},
       },
       "id": "id1",
       "type": "type1",
@@ -587,18 +503,10 @@ Object {
       "getPosition": [Function],
       "getSize": [Function],
       "graphicalAttributes": Object {
-        "description": "",
-        "label": "",
-        "nodeSize": Object {
-          "height": undefined,
-          "width": undefined,
-        },
-        "nodeType": undefined,
         "position": Object {
           "x": 10,
           "y": 10,
         },
-        "properties": Object {},
       },
       "id": "id2",
       "type": "type2",
@@ -631,18 +539,10 @@ Object {
       "getPosition": [Function],
       "getSize": [Function],
       "graphicalAttributes": Object {
-        "description": "",
-        "label": "",
-        "nodeSize": Object {
-          "height": undefined,
-          "width": undefined,
-        },
-        "nodeType": undefined,
         "position": Object {
           "x": 10,
           "y": 10,
         },
-        "properties": Object {},
       },
       "id": "id1",
       "type": "nodetype",
@@ -655,18 +555,10 @@ Object {
       "getPosition": [Function],
       "getSize": [Function],
       "graphicalAttributes": Object {
-        "description": "",
-        "label": "",
-        "nodeSize": Object {
-          "height": undefined,
-          "width": undefined,
-        },
-        "nodeType": undefined,
         "position": Object {
           "x": 10,
           "y": 10,
         },
-        "properties": Object {},
       },
       "id": "id2",
       "type": "type2",

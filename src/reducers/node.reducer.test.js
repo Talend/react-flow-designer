@@ -1,4 +1,4 @@
-import { Map } from 'immutable';
+import Immutable, { Map } from 'immutable';
 
 import { defaultState } from './flow.reducer';
 import nodeReducer from './node.reducer';
@@ -22,9 +22,7 @@ describe('Check node reducer', () => {
 				id: 'id1',
 				type: 'type1',
 				data: new Map({ type: 'test' }),
-				graphicalAttributes: new NodeGraphicalAttributes({
-					type: 'type1',
-					selected: true,
+				graphicalAttributes: new Immutable.Map({
 					position: new PositionRecord({ x: 10, y: 10 }),
 				}),
 			}),
@@ -35,9 +33,7 @@ describe('Check node reducer', () => {
 				id: 'id2',
 				type: 'type2',
 				data: new Map({ type: 'test' }),
-				graphicalAttributes: new NodeGraphicalAttributes({
-					type: 'type2',
-					selected: false,
+				graphicalAttributes: new Immutable.Map({
 					position: new PositionRecord({ x: 10, y: 10 }),
 				}),
 			}),

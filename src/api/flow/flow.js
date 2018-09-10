@@ -74,7 +74,14 @@ export const updateNode = curry((state, nodeId, node) => {
 		if (nodeId === Node.getId(node)) {
 			return addNode(deleteNode(state, Node.getId(node)), node);
 		}
-		return state.setIn(['nodes', nodeId], node);
+		return addNode(deleteNode(state, nodeId), node);
 	}
 	return state;
 });
+
+/**
+ * @param {FlowState} state
+ * @param {string} nodeId
+ * @return {?NodeRecord}
+ */
+export const getNode = curry((state, nodeId) => state.getIn(['nodes', nodeId]));

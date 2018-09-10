@@ -1,6 +1,11 @@
 /* @flow */
 
-import type {
+import {
+	FLOWDESIGNER_PORT_ADD,
+	FLOWDESIGNER_PORT_UPDATE,
+	FLOWDESIGNER_PORT_REMOVE,
+} from '../constants/flowdesigner.constants';
+import {
 	PortGraphicalAttributes,
 	Port,
 	PortData,
@@ -10,7 +15,40 @@ import type {
 } from '../flow-typed';
 
 /**
+ * add the given port the the pipeline
+ * @param {PortRecord} port
+ * @return {Action}
+ */
+export const add = port => ({
+	type: FLOWDESIGNER_PORT_ADD,
+	port,
+});
+
+/**
+ * update the given port identified by its id
+ * @param {string} portId
+ * @param {PortRecord} port
+ * @return {Action}
+ */
+export const update = (portId, port) => ({
+	type: FLOWDESIGNER_PORT_UPDATE,
+	port,
+	portId,
+});
+
+/**
+ * remove the port identified by its id
+ * @param {string} portId
+ * @return {Action}
+ */
+export const remove = portId => ({
+	type: FLOWDESIGNER_PORT_REMOVE,
+	portId,
+});
+
+/**
  * return an action to create a new port
+ * @deprecated use add
  * @param {string} nodeId - identifier of the node to wich the created connector should be attached
  * @param {string} id
  * @param {string} portType
@@ -102,7 +140,7 @@ export function removePortData(portId: Id, dataKey: string): PortAction {
 
 /**
  * return an action to remove port and all attached links
- * @deprecated use deletePort action
+ * @deprecated use remove action
  * @param {string} portId
  */
 export function removePort(portId: Id): PortAction {
