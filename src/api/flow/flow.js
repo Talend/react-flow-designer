@@ -3,7 +3,8 @@ import curry from 'lodash/curry';
 import Immutable from 'immutable';
 
 import { throwInDev } from '../throwInDev';
-import { Node } from './..';
+import { Node, Port } from './..';
+import { PORT_SINK, PORT_SOURCE } from '../../constants/flowdesigner.constants';
 
 /**
  * check if node exist in flow
@@ -34,10 +35,10 @@ const deleteParents = curry((nodeId, state) => state.deleteIn(['parents', nodeId
  * @return {FlowState}
  */
 export const addNode = curry((state, node) => {
-	if (Node.isNodeElseThrow(node) && !isNodeExist(state, Node.getId(node))) {
-		const nodeId = Node.getId(node);
+	const nodeId = Node.getId(node);
+	if (Node.isNodeElseThrow(node) && !isNodeExist(state, nodeId)) {
 		return flow([setOut(nodeId), setIn(nodeId), setChildrens(nodeId), setParents(nodeId)])(
-			state.setIn(['nodes', Node.getId(node)], node),
+			state.setIn(['nodes', nodeId], node),
 		);
 	}
 	throwInDev(`Node with id = ${Node.getId(node)}, already exist, can't create node.`);
@@ -85,3 +86,39 @@ export const updateNode = curry((state, nodeId, node) => {
  * @return {?NodeRecord}
  */
 export const getNode = curry((state, nodeId) => state.getIn(['nodes', nodeId]));
+
+/**
+ * check if port exist in flow
+ * @param {FlowState} state
+ * @param {string} portId
+ * @return {bool} true if port exist
+ */
+export const isPortExist = curry((state, portId) => state.hasIn(['ports', portId]));
+
+const setPortOut = curry((port, state) => {
+	if (Port.getTopology(port) === PORT_SOURCE) {
+		return state.setIn(['out', Port.getNodeId(port), Port.getId(port)], new Map());
+	}
+	return state;
+});
+
+const setPortIn = curry((port, state) => {
+	if (Port.getTopology(port) === PORT_SINK) {
+		return state.setIn(['in', Port.getNodeId(port), Port.getId(port)], new Map());
+	}
+	return state;
+});
+
+/**
+ * @param {FlowState} state
+ * @param {NodeRecord} port
+ * @return {FlowState}
+ */
+export const addPort = curry((state, port) => {
+	const portId = Port.getId(port);
+	if (Port.isPortElseThrow(port) && !isPortExist(state, portId)) {
+		return flow([setPortOut(port), setPortIn(port)])(state.setIn(['ports', portId], port));
+	}
+	throwInDev(`Port with id = ${Port.getId(port)}, already exist, can't create port.`);
+	return state;
+});

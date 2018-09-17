@@ -41,7 +41,7 @@ function filterPortsByDirection(ports, direction) {
 /**
  * for a new port calculate its index by retrieving all its siblings
  */
-function calculateNewPortIndex(ports, port): number {
+function calculateNewPortIndex(ports, port) {
 	return filterPortsByDirection(
 		filterPortsByNode(ports, port.nodeId),
 		port.graphicalAttributes.properties.type,
@@ -67,6 +67,10 @@ function indexPortMap(ports) {
 }
 
 function setPort(state, port) {
+	// determine index
+	// create port
+	// add port to state
+	// add out/in info
 	const index: number =
 		port.graphicalAttributes.properties.index ||
 		calculateNewPortIndex(state.get('ports'), port);
