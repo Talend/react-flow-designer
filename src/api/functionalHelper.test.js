@@ -20,6 +20,16 @@ describe('withDefault', () => {
 		// expect
 		expect(result).toBe(defaultValue);
 	});
+
+	it('return defaultValue if value is null', () => {
+		// given
+		const value = null;
+		const defaultValue = 'defaultValue';
+		// when
+		const result = withDefault(defaultValue, value);
+		// expect
+		expect(result).toBe(defaultValue);
+	});
 });
 
 describe('andThen', () => {
@@ -41,5 +51,15 @@ describe('andThen', () => {
 		const result = andThen(func, value);
 		// expect
 		expect(result).toBe(undefined);
+	});
+
+	it('return value without applying function if value is null', () => {
+		// given
+		const value = null;
+		const func = string => string.toUpperCase();
+		// when
+		const result = andThen(func, value);
+		// expect
+		expect(result).toBe(null);
 	});
 });

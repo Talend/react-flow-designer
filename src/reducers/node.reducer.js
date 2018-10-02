@@ -129,7 +129,7 @@ function addNodeDeprecated(action, state) {
  * @return {FlowState}
  */
 function addNode(state, action) {
-	if (Flow.isNodeExist(state, action.nodeId)) {
+	if (Flow.hasNode(state, action.nodeId)) {
 		invariant(false, `Can not create node ${action.nodeId} since it does already exist`);
 	}
 	if (action.node && Node.isNode(action.node)) {
@@ -189,7 +189,7 @@ const nodeReducer = (state = defaultState, action) => {
 		case FLOWDESIGNER_NODE_UPDATE:
 			return Flow.updateNode(state, action.nodeId, action.node);
 		case FLOWDESIGNER_NODE_MOVE:
-			if (!Flow.isNodeExist(state, action.nodeId)) {
+			if (!Flow.hasNode(state, action.nodeId)) {
 				invariant(false, `Can't move node ${action.nodeId} since it doesn't exist`);
 			}
 			return Flow.updateNode(
@@ -198,7 +198,7 @@ const nodeReducer = (state = defaultState, action) => {
 				updateNodePosition(action, getNode(state, action.nodeId)),
 			);
 		case FLOWDESIGNER_NODE_MOVE_END:
-			if (!Flow.isNodeExist(state, action.nodeId)) {
+			if (!Flow.hasNode(state, action.nodeId)) {
 				invariant(false, `Can't move node ${action.nodeId} since it doesn't exist`);
 			}
 			return Flow.updateNode(
@@ -216,7 +216,7 @@ const nodeReducer = (state = defaultState, action) => {
 				}),
 			);
 		case FLOWDESIGNER_NODE_SET_SIZE:
-			if (!Flow.isNodeExist(state, action.nodeId)) {
+			if (!Flow.hasNode(state, action.nodeId)) {
 				invariant(false, `Can't set size on node ${action.nodeId} since it doesn't exist`);
 			}
 			return Flow.updateNode(
@@ -229,7 +229,7 @@ const nodeReducer = (state = defaultState, action) => {
 			);
 		// @todo: this should only exist on streams since type is a streams information
 		case FLOWDESIGNER_NODE_SET_TYPE:
-			if (!Flow.isNodeExist(state, action.nodeId)) {
+			if (!Flow.hasNode(state, action.nodeId)) {
 				invariant(
 					false,
 					`Can't set node.type on node ${action.nodeid} since it doesn't exist`,
@@ -238,7 +238,7 @@ const nodeReducer = (state = defaultState, action) => {
 			return state.setIn(['nodes', action.nodeId, 'type'], action.nodeType);
 		// @deprecated
 		case FLOWDESIGNER_NODE_SET_GRAPHICAL_ATTRIBUTES:
-			if (!Flow.isNodeExist(state, action.nodeId)) {
+			if (!Flow.hasNode(state, action.nodeId)) {
 				invariant(
 					false,
 					`Can't set a graphical attribute on non existing node ${action.nodeId}`,
@@ -257,7 +257,7 @@ const nodeReducer = (state = defaultState, action) => {
 			}
 		// @deprecated
 		case FLOWDESIGNER_NODE_REMOVE_GRAPHICAL_ATTRIBUTES:
-			if (!Flow.isNodeExist(state, action.nodeId)) {
+			if (!Flow.hasNode(state, action.nodeId)) {
 				invariant(
 					false,
 					`Can't remove a graphical attribute on non existing node ${action.nodeId}`,
@@ -272,7 +272,7 @@ const nodeReducer = (state = defaultState, action) => {
 			]);
 		// @deprecated
 		case FLOWDESIGNER_NODE_SET_DATA:
-			if (!Flow.isNodeExist(state, action.nodeId)) {
+			if (!Flow.hasNode(state, action.nodeId)) {
 				invariant(false, `Can't set a data on non existing node ${action.nodeId}`);
 			}
 			try {
@@ -285,12 +285,12 @@ const nodeReducer = (state = defaultState, action) => {
 			}
 		// @deprecated
 		case FLOWDESIGNER_NODE_REMOVE_DATA:
-			if (!Flow.isNodeExist(state, action.nodeId)) {
+			if (!Flow.hasNode(state, action.nodeId)) {
 				invariant(false, `Can't remove a data on non existing node ${action.nodeId}`);
 			}
 			return state.deleteIn(['nodes', action.nodeId, 'data', 'properties', action.dataKey]);
 		case FLOWDESIGNER_NODE_REMOVE:
-			if (!Flow.isNodeExist(state, action.nodeId)) {
+			if (!Flow.hasNode(state, action.nodeId)) {
 				invariant(false, `Can not remove node ${action.nodeId} since it doesn't exist`);
 			}
 			return Flow.deleteNode(

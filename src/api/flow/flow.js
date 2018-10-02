@@ -12,7 +12,7 @@ import { PORT_SINK, PORT_SOURCE } from '../../constants/flowdesigner.constants';
  * @param {string} nodeId
  * @return {bool} true if node exist
  */
-export const isNodeExist = curry((state, nodeId) => state.hasIn(['nodes', nodeId]));
+export const hasNode = curry((state, nodeId) => state.hasIn(['nodes', nodeId]));
 
 const setOut = curry((nodeId, state) => state.setIn(['out', nodeId], new Immutable.Map()));
 const deleteOut = curry((nodeId, state) => state.deleteIn(['out', nodeId]));
@@ -20,10 +20,10 @@ const deleteOut = curry((nodeId, state) => state.deleteIn(['out', nodeId]));
 const setIn = curry((nodeId, state) => state.setIn(['in', nodeId], new Immutable.Map()));
 const deleteIn = curry((nodeId, state) => state.deleteIn(['in', nodeId]));
 
-const setChildrens = curry((nodeId, state) =>
+const setChildren = curry((nodeId, state) =>
 	state.setIn(['childrens', nodeId], new Immutable.Map()),
 );
-const deleteChildrens = curry((nodeId, state) => state.deleteIn(['childrens', nodeId]));
+const deleteChildren = curry((nodeId, state) => state.deleteIn(['childrens', nodeId]));
 
 const setParents = curry((nodeId, state) => state.setIn(['parents', nodeId], new Immutable.Map()));
 const deleteParents = curry((nodeId, state) => state.deleteIn(['parents', nodeId]));
@@ -36,8 +36,8 @@ const deleteParents = curry((nodeId, state) => state.deleteIn(['parents', nodeId
  */
 export const addNode = curry((state, node) => {
 	const nodeId = Node.getId(node);
-	if (Node.isNodeElseThrow(node) && !isNodeExist(state, nodeId)) {
-		return flow([setOut(nodeId), setIn(nodeId), setChildrens(nodeId), setParents(nodeId)])(
+	if (Node.isNodeElseThrow(node) && !hasNode(state, nodeId)) {
+		return flow([setOut(nodeId), setIn(nodeId), setChildren(nodeId), setParents(nodeId)])(
 			state.setIn(['nodes', nodeId], node),
 		);
 	}
@@ -52,11 +52,11 @@ export const addNode = curry((state, node) => {
  * @return {FlowState}
  */
 export const deleteNode = curry((state, nodeId) => {
-	if (isNodeExist(nodeId)) {
+	if (hasNode(nodeId)) {
 		return flow([
 			deleteOut(nodeId),
 			deleteIn(nodeId),
-			deleteChildrens(nodeId),
+			deleteChildren(nodeId),
 			deleteParents(nodeId),
 		])(state.deleteIn(['nodes', nodeId]));
 	}
@@ -71,7 +71,7 @@ export const deleteNode = curry((state, nodeId) => {
  * @return {FlowState}
  */
 export const updateNode = curry((state, nodeId, node) => {
-	if (Node.isNodeElseThrow(node) && (isNodeExist(state, Node.getId(node)), isNodeExist(nodeId))) {
+	if (Node.isNodeElseThrow(node) && (hasNode(state, Node.getId(node)), hasNode(nodeId))) {
 		if (nodeId === Node.getId(node)) {
 			return addNode(deleteNode(state, Node.getId(node)), node);
 		}
