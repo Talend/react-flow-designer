@@ -188,6 +188,24 @@ const nodeReducer = (state = defaultState, action) => {
 			return addNode(state, action);
 		case FLOWDESIGNER_NODE_UPDATE:
 			return Flow.updateNode(state, action.nodeId, action.node);
+		case FLOWDESIGNER_NODE_REMOVE:
+			if (!Flow.hasNode(state, action.nodeId)) {
+				invariant(false, `Can not remove node ${action.nodeId} since it doesn't exist`);
+			}
+			return Flow.deleteNode(
+				inPort(state, action.nodeId).reduce(
+					(cumulativeState, port, key) => portReducer(cumulativeState, removePort(key)),
+					outPort(state, action.nodeId).reduce(
+						(cumulativeState, port, key) =>
+							portReducer(cumulativeState, removePort(key)),
+						state,
+					),
+				),
+				action.nodeId,
+			);
+		// the following three actions FLOWDESIGNER_NODE_MOVE, FLOWDESIGNER_NODE_MOVE_END
+		// FLOWDESIGNER_NODE_APPLY_MOVEMENT have specific action creator to ease
+		// thing on user side
 		case FLOWDESIGNER_NODE_MOVE:
 			if (!Flow.hasNode(state, action.nodeId)) {
 				invariant(false, `Can't move node ${action.nodeId} since it doesn't exist`);
@@ -215,6 +233,16 @@ const nodeReducer = (state = defaultState, action) => {
 					return node;
 				}),
 			);
+		// @todo: this should only exist on streams since type is a streams information
+		case FLOWDESIGNER_NODE_SET_TYPE:
+			if (!Flow.hasNode(state, action.nodeId)) {
+				invariant(
+					false,
+					`Can't set node.type on node ${action.nodeid} since it doesn't exist`,
+				);
+			}
+			return state.setIn(['nodes', action.nodeId, 'type'], action.nodeType);
+		// @deprecated
 		case FLOWDESIGNER_NODE_SET_SIZE:
 			if (!Flow.hasNode(state, action.nodeId)) {
 				invariant(false, `Can't set size on node ${action.nodeId} since it doesn't exist`);
@@ -227,15 +255,6 @@ const nodeReducer = (state = defaultState, action) => {
 					getNode(state, action.nodeId),
 				),
 			);
-		// @todo: this should only exist on streams since type is a streams information
-		case FLOWDESIGNER_NODE_SET_TYPE:
-			if (!Flow.hasNode(state, action.nodeId)) {
-				invariant(
-					false,
-					`Can't set node.type on node ${action.nodeid} since it doesn't exist`,
-				);
-			}
-			return state.setIn(['nodes', action.nodeId, 'type'], action.nodeType);
 		// @deprecated
 		case FLOWDESIGNER_NODE_SET_GRAPHICAL_ATTRIBUTES:
 			if (!Flow.hasNode(state, action.nodeId)) {
@@ -289,21 +308,6 @@ const nodeReducer = (state = defaultState, action) => {
 				invariant(false, `Can't remove a data on non existing node ${action.nodeId}`);
 			}
 			return state.deleteIn(['nodes', action.nodeId, 'data', 'properties', action.dataKey]);
-		case FLOWDESIGNER_NODE_REMOVE:
-			if (!Flow.hasNode(state, action.nodeId)) {
-				invariant(false, `Can not remove node ${action.nodeId} since it doesn't exist`);
-			}
-			return Flow.deleteNode(
-				inPort(state, action.nodeId).reduce(
-					(cumulativeState, port, key) => portReducer(cumulativeState, removePort(key)),
-					outPort(state, action.nodeId).reduce(
-						(cumulativeState, port, key) =>
-							portReducer(cumulativeState, removePort(key)),
-						state,
-					),
-				),
-				action.nodeId,
-			);
 		default:
 			return state;
 	}
