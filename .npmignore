@@ -7,4 +7,3 @@ test/
 .eslintrc
 .gitignore
 .travis.yml
-webpack.config.babel.js

@@ -1,101 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`flow node addNode whatever 1`] = `
-Object {
-  "childrens": Object {
-    "nodeId": Object {},
-  },
-  "in": Object {
-    "nodeId": Object {},
-  },
-  "nodes": Object {
-    "nodeId": Object {
-      "data": Object {
-        "datasetInfo": Object {},
-        "description": "",
+Immutable.Map {
+  "nodes": Immutable.Map {
+    "nodeId": Immutable.Record {
+      "id": "nodeId",
+      "type": undefined,
+      "data": Immutable.Map {
+        "properties": Immutable.Map {},
         "label": "",
-        "properties": Object {},
+        "description": "",
+        "datasetInfo": Immutable.Map {},
       },
-      "getNodeType": [Function],
-      "getPosition": [Function],
-      "getSize": [Function],
-      "graphicalAttributes": Object {
-        "description": "",
-        "label": "",
-        "nodeSize": Object {
-          "height": 120,
-          "width": 70,
-        },
-        "nodeType": "nodeType",
-        "position": Object {
+      "graphicalAttributes": Immutable.Map {
+        "position": Immutable.Record {
           "x": 100,
           "y": 150,
         },
-        "properties": Object {},
+        "nodeSize": Immutable.Record {
+          "width": 70,
+          "height": 120,
+        },
+        "nodeType": "nodeType",
+        "label": "",
+        "description": "",
+        "properties": Immutable.Map {},
       },
-      "id": "nodeId",
-      "type": undefined,
+      "getPosition": [Function],
+      "getSize": [Function],
+      "getNodeType": [Function],
     },
   },
-  "out": Object {
-    "nodeId": Object {},
+  "out": Immutable.Map {
+    "nodeId": Immutable.Map {},
   },
-  "parents": Object {
-    "nodeId": Object {},
+  "in": Immutable.Map {
+    "nodeId": Immutable.Map {},
+  },
+  "childrens": Immutable.Map {
+    "nodeId": Immutable.Map {},
+  },
+  "parents": Immutable.Map {
+    "nodeId": Immutable.Map {},
   },
 }
 `;
 
 exports[`flow node deleteNode whatever 1`] = `
-Object {
-  "childrens": Object {},
-  "in": Object {},
-  "nodes": Object {},
-  "out": Object {},
-  "parents": Object {},
+Immutable.Map {
+  "nodes": Immutable.Map {},
+  "out": Immutable.Map {},
+  "in": Immutable.Map {},
+  "childrens": Immutable.Map {},
+  "parents": Immutable.Map {},
 }
 `;
 
 exports[`flow node updateNode whatever 1`] = `
-Object {
-  "childrens": Object {
-    "newNodeId": Object {},
-  },
-  "in": Object {
-    "newNodeId": Object {},
-  },
-  "nodes": Object {
-    "newNodeId": Object {
-      "data": Object {
-        "datasetInfo": Object {},
-        "description": "",
+Immutable.Map {
+  "nodes": Immutable.Map {
+    "newNodeId": Immutable.Record {
+      "id": "newNodeId",
+      "type": undefined,
+      "data": Immutable.Map {
+        "properties": Immutable.Map {},
         "label": "",
-        "properties": Object {},
+        "description": "",
+        "datasetInfo": Immutable.Map {},
       },
-      "getNodeType": [Function],
-      "getPosition": [Function],
-      "getSize": [Function],
-      "graphicalAttributes": Object {
-        "description": "",
-        "label": "",
-        "nodeSize": Object {
-          "height": 120,
-          "width": 70,
-        },
-        "nodeType": "nodeType",
-        "position": Object {
+      "graphicalAttributes": Immutable.Map {
+        "position": Immutable.Record {
           "x": 100,
           "y": 150,
         },
-        "properties": Object {},
+        "nodeSize": Immutable.Record {
+          "width": 70,
+          "height": 120,
+        },
+        "nodeType": "nodeType",
+        "label": "",
+        "description": "",
+        "properties": Immutable.Map {},
       },
-      "id": "newNodeId",
-      "type": undefined,
+      "getPosition": [Function],
+      "getSize": [Function],
+      "getNodeType": [Function],
     },
   },
-  "out": Object {
-    "newNodeId": Object {},
+  "out": Immutable.Map {
+    "newNodeId": Immutable.Map {},
   },
-  "parents": Object {
-    "newNodeId": Object {},
+  "in": Immutable.Map {
+    "newNodeId": Immutable.Map {},
+  },
+  "childrens": Immutable.Map {
+    "newNodeId": Immutable.Map {},
+  },
+  "parents": Immutable.Map {
+    "newNodeId": Immutable.Map {},
   },
 }
 `;
