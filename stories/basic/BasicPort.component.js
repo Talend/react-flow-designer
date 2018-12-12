@@ -1,5 +1,5 @@
 import React from 'react';
-import { AbstractPort, flowPropTypes } from '../src/index';
+import { AbstractPort, flowPropTypes } from '../../src/index';
 
 
 function PortBasic(props) {

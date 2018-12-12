@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import * as NodeActions from '../src/actions/node.actions';
-import * as flowPropTypes from '../src/constants/flowdesigner.proptypes';
-import AbstractNode from '../src/components/node/AbstractNode.component';
-import * as Node from '../src/api/node/node';
+import * as NodeActions from '../../src/actions/node.actions';
+import * as flowPropTypes from '../../src/constants/flowdesigner.proptypes';
+import AbstractNode from '../../src/components/node/AbstractNode.component';
+import * as Node from '../../src/api/node/node';
 
 class BasicNode extends React.Component {
 	static displayName = 'BasicNode';
