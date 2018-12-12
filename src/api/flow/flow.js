@@ -3,7 +3,7 @@ import curry from 'lodash/curry';
 import Immutable from 'immutable';
 
 import { throwInDev } from '../throwInDev';
-import { Node, Port } from './..';
+import { Node, Port, Link } from './..';
 import { PORT_SINK, PORT_SOURCE } from '../../constants/flowdesigner.constants';
 
 /**
@@ -95,6 +95,14 @@ export const getNode = curry((state, nodeId) => state.getIn(['nodes', nodeId]));
  */
 export const isPortExist = curry((state, portId) => state.hasIn(['ports', portId]));
 
+/**
+ * check if link exist in flow
+ * @param {FlowState} state
+ * @param {string} linkId
+ * @return {bool} true if link exist
+ */
+export const isLinkExist = curry((state, linkId) => state.hasIn(['links', linkId]));
+
 const setPortOut = curry((port, state) => {
 	if (Port.getTopology(port) === PORT_SOURCE) {
 		return state.setIn(['out', Port.getNodeId(port), Port.getId(port)], new Map());
@@ -111,7 +119,7 @@ const setPortIn = curry((port, state) => {
 
 /**
  * @param {FlowState} state
- * @param {NodeRecord} port
+ * @param {PortRecord} port
  * @return {FlowState}
  */
 export const addPort = curry((state, port) => {
@@ -120,5 +128,18 @@ export const addPort = curry((state, port) => {
 		return flow([setPortOut(port), setPortIn(port)])(state.setIn(['ports', portId], port));
 	}
 	throwInDev(`Port with id = ${Port.getId(port)}, already exist, can't create port.`);
+	return state;
+});
+
+/**
+ * @param {FlowState} state
+ * @param {LinkRecord} link
+ * @return {FlowState}
+ */
+export const addLink = curry((state, link) => {
+	const linkId = Link.getId(link);
+	if (Link.isLinkElseThrow(link) && !isLinkExist(state, linkId)) {
+		return state.setIn(['links', linkId], link);
+	}
 	return state;
 });

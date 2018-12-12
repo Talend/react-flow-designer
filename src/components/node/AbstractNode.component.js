@@ -55,7 +55,7 @@ function calculatePortPosition(ports, nodePosition, nodeSize) {
 			);
 			portsWithPosition = portsWithPosition.set(
 				Port.getId(port),
-				Port.setPosition(port, position),
+				Port.setPosition(position, port),
 			);
 		});
 	sinkPorts
@@ -76,7 +76,7 @@ function calculatePortPosition(ports, nodePosition, nodeSize) {
 			);
 			portsWithPosition = portsWithPosition.set(
 				Port.getId(port),
-				Port.setPosition(port, position),
+				Port.setPosition(position, port),
 			);
 		});
 	return portsWithPosition;

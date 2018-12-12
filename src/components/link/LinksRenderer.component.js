@@ -3,6 +3,7 @@ import React from 'react';
 import invariant from 'invariant';
 import { mapOf } from 'react-immutable-proptypes';
 import { LinkType, PortType } from '../../constants/flowdesigner.proptypes';
+import * as Link from '../../api/link/link';
 
 class LinksRender extends React.Component {
 	static propTypes = {
@@ -17,7 +18,7 @@ class LinksRender extends React.Component {
 	}
 
 	renderLink(link) {
-		const ConcreteLink = this.props.linkTypeMap[link.getLinkType()].component;
+		const ConcreteLink = this.props.linkTypeMap[Link.getComponentType(link)].component;
 		const source = this.props.ports.get(link.sourceId);
 		const target = this.props.ports.get(link.targetId);
 		if (!ConcreteLink) {

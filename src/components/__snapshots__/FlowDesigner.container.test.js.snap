@@ -2,6 +2,7 @@
 
 exports[`<FlowDesigner /> renders correctly <FlowDesigner /> renders correctly 1`] = `
 <svg
+  height="100%"
   width="100%"
 >
   <defs>
