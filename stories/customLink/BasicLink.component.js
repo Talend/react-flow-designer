@@ -4,6 +4,7 @@ import { interpolateBasis } from 'd3-interpolate';
 import { line } from 'd3-shape';
 
 import { AbstractLink, flowPropTypes } from '../../src/index';
+import * as Position from '../../src/api/position/position';
 
 const concreteLine = line()
 	.x(d => d.x)
@@ -17,20 +18,24 @@ const concreteLine = line()
  */
 export function calculatePath(sourcePosition, targetPosition) {
 	const pathCoords = [];
-	const distanceFromPorts = (targetPosition.get('x') - sourcePosition.get('x')) / 4 < 0 ?
-		-(targetPosition.get('x') - sourcePosition.get('x')) / 2 : (targetPosition.get('x') - sourcePosition.get('x')) / 4;
+	const sourceX = Position.getXCoordinate(sourcePosition);
+	const sourceY = Position.getYCoordinate(sourcePosition);
+	const targetX = Position.getXCoordinate(targetPosition);
+	const targetY = Position.getYCoordinate(targetPosition);
+	const distanceFromPorts = (targetX - sourceX) / 4 < 0 ?
+		-(targetX - sourceX) / 2 : (targetX - sourceX) / 4;
 	pathCoords[3] = targetPosition.toJS();
 	pathCoords[2] = {
-		x: targetPosition.get('x') - distanceFromPorts,
-		y: targetPosition.get('y'),
+		x: targetX - distanceFromPorts,
+		y: targetY,
 	};
 	pathCoords[1] = {
-		x: sourcePosition.get('x') + distanceFromPorts,
-		y: sourcePosition.get('y'),
+		x: sourceX + distanceFromPorts,
+		y: sourceY,
 	};
 	pathCoords[0] = {
-		x: sourcePosition.get('x'),
-		y: sourcePosition.get('y'),
+		x: sourceX,
+		y: sourceY,
 	};
 	const xInterpolate = interpolateBasis(
 		[pathCoords[0].x, pathCoords[1].x, pathCoords[2].x, pathCoords[3].x],
@@ -58,7 +63,6 @@ LinkHandle.propTypes = {
 
 export default class LinkBasic extends React.Component {
 	static propTypes = {
-		link: flowPropTypes.LinkType.isRequired,
 		source: flowPropTypes.PortType.isRequired,
 	};
 
