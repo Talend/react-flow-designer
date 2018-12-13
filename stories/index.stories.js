@@ -9,4 +9,4 @@ storiesOf('BasicLink pipeline', module)
 	.add('basic', basic)
 	.add('custom link shape', customLink)
 	.add('multiple ports', multiplePorts)
-	.add('custom pipeline bahavior', customBehavior);
+	.add('custom pipeline bahavior', customBehavior, { notes: 'test' });

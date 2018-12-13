@@ -50,19 +50,19 @@ function higherOrderReducer(areducer) {
 				),
 			);
 			// create temp sink port on temp node
-			newState = areducer(
-				newState,
-				portActions.add(
-					Port.setPosition(
-						Position.create(0, 0),
-						Port.create(tempPortId, tempNodeId, 0, 'SINK', 'basicport'),
-					),
-				),
-			);
-			newState = areducer(
-				newState,
-				linkActions.add(Link.create(tempLinkId, Port.getId(port), tempPortId, 'basiclink')),
-			);
+			// newState = areducer(
+			// 	newState,
+			// 	portActions.add(
+			// 		Port.setPosition(
+			// 			Position.create(0, 0),
+			// 			Port.create(tempPortId, tempNodeId, 0, 'SINK', 'basicport'),
+			// 		),
+			// 	),
+			// );
+			// newState = areducer(
+			// 	newState,
+			// 	linkActions.add(Link.create(tempLinkId, Port.getId(port), tempPortId, 'basiclink')),
+			// );
 			emitterNumber += 1;
 		});
 		return newState;
