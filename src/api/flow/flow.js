@@ -112,12 +112,13 @@ export const addNode = curry((state, node) => {
 
 /**
  * if exist remove a node from the flow
+ * @todo delete Ports in cascade
  * @param {FlowState} state
  * @param {string} nodeId
  * @return {FlowState}
  */
 export const deleteNode = curry((state, nodeId) => {
-	if (hasNode(nodeId)) {
+	if (hasNode(state, nodeId)) {
 		return flow([
 			deleteOut(nodeId),
 			deleteIn(nodeId),
@@ -182,6 +183,12 @@ export const isPortExist = curry((state, portId) => state.hasIn([PORTS_COLLECTIO
  */
 export const isLinkExist = curry((state, linkId) => state.hasIn([LINKS_COLLECTION, linkId]));
 
+/**
+ * depending on the port topology add reference to `out` collection
+ * @param {PortRecord} port
+ * @param {FlowState} state
+ * @return {FlowState}
+ */
 const setPortOut = curry((port, state) => {
 	if (Port.getTopology(port) === PORT_SOURCE) {
 		return addPortOut(Port.getNodeId(port), Port.getId(port), state);
@@ -189,6 +196,12 @@ const setPortOut = curry((port, state) => {
 	return state;
 });
 
+/**
+ * depending on the port topology add reference to `in` collection
+ * @param {PortRecord} port
+ * @param {FlowState} state
+ * @return {FlowState}
+ */
 const setPortIn = curry((port, state) => {
 	if (Port.getTopology(port) === PORT_SINK) {
 		return addPortIn(Port.getNodeId(port), Port.getId(port), state);
@@ -213,6 +226,24 @@ export const addPort = curry((state, port) => {
 });
 
 /**
+ * @todo delete link in cascade
+ * @param {FlowState} state
+ * @param {String} portId
+ * @return {FlowState}
+ */
+export const deletePort = curry((state, portId) => {
+	if (hasPort(state, portId)) {
+		const nodeId = Port.getNodeId(getPort(state, portId));
+		return flow(
+			removePortOut(nodeId, portId),
+			removePortOut(nodeId, portId),
+			deleteLinkByPort(portid),
+		)(state.deleteIn([PORTS_COLLECTION, portId]));
+	}
+	return state;
+});
+
+/**
  * @param {FlowState} state
  * @param {LinkRecord} link
  * @return {FlowState}
@@ -224,7 +255,6 @@ export const addLink = curry((state, link) => {
 		const linkTargetId = Link.getTargetId(link);
 		const sourceNodeId = Port.getNodeId(getPort(state, linkSourceId));
 		const targetNodeId = Port.getNodeId(getPort(state, linkTargetId));
-		console.error('__DEBUG__', linkSourceId, linkTargetId, sourceNodeId, targetNodeId);
 		return flow([
 			addChildren(sourceNodeId, targetNodeId),
 			addParent(targetNodeId, sourceNodeId),
@@ -233,4 +263,35 @@ export const addLink = curry((state, link) => {
 		])(state.setIn([LINKS_COLLECTION, linkId], link));
 	}
 	return state;
+});
+
+/**
+ *
+ */
+export const deleteLink = curry((state, linkId) => {
+	if (hasLink(state, linkId)) {
+		const link = getLink(state, linkId);
+		const linkSourceId = Link.getSourceId(link);
+		const linkTargetId = Link.getTargetId(link);
+		const sourceNodeId = Port.getNodeId(getPort(state, linkSourceId));
+		const targetNodeId = Port.getNodeId(getPort(state, linkTargetId));
+		return flow([
+			removeChildren(targetNodeId),
+			removeParent(sourceNodeId),
+			removeLinkOut(targetNodeId, linkTargetId, linkId),
+			removeLinkIn(sourceNodeId, linkSourceId, linkId),
+		])(state.deleteIn([LINKS_COLLECTION, linkId]));
+	}
+	return state;
+});
+
+/**
+ * toughts and prayers
+ */
+export const deleteLinkByPort = curry((state, portId) => {
+	return state
+		.get(LINKS_COLLECTION)
+		.filter(link => Link.getSourceId(link) === portId || Link.getTargetId(link) === portId)
+		.map(link => Link.getId(link))
+		.reduce(deleteLink, state);
 });
