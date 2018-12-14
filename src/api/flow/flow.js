@@ -36,13 +36,19 @@ const deleteOut = curry((nodeId, state) => state.deleteIn(['out', nodeId]));
 const setIn = curry((nodeId, state) => state.setIn(['in', nodeId], new Immutable.Map()));
 const deleteIn = curry((nodeId, state) => state.deleteIn(['in', nodeId]));
 
-const setChildren = curry((nodeId, state) =>
-	state.setIn(['childrens', nodeId], new Immutable.Map()),
+const setChildren = curry((parentNodeId, state) =>
+	state.setIn(['childrens', parentNodeId], new Immutable.Map()),
 );
-const deleteChildren = curry((nodeId, state) => state.deleteIn(['childrens', nodeId]));
+const addChildren = curry((parentNodeId, childrenNodeId, state) =>
+	state.setIn(['childrens', parentNodeId, childrenNodeId], childrenNodeId),
+);
+const removeChildren(curry((parentNodeId, childrenNodeId, state) => ))
+const deleteChildren = curry((parentNodeId, state) => state.deleteIn(['childrens', parentNodeId]));
 
-const setParents = curry((nodeId, state) => state.setIn(['parents', nodeId], new Immutable.Map()));
-const deleteParents = curry((nodeId, state) => state.deleteIn(['parents', nodeId]));
+const setParents = curry((childrenNodeId, state) =>
+	state.setIn(['parents', childrenNodeId], new Immutable.Map()),
+);
+const deleteParents = curry((childrenNodeId, state) => state.deleteIn(['parents', childrenNodeId]));
 
 /**
  * add a node to the flow
@@ -146,6 +152,8 @@ export const addPort = curry((state, port) => {
 	throwInDev(`Port with id = ${Port.getId(port)}, already exist, can't create port.`);
 	return state;
 });
+
+setLinkIn;
 
 /**
  * @param {FlowState} state
