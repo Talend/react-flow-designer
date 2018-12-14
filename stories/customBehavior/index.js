@@ -19,6 +19,7 @@ import * as Position from '../../src/api/position/position';
 import * as Size from '../../src/api/size/size';
 
 import BasicNode from './BasicNode.component';
+import PlaceholderNode from './PlaceholderNode.component';
 import BasicLink from './BasicLink.component';
 import BasicPort from './BasicPort.component';
 
@@ -50,19 +51,19 @@ function higherOrderReducer(areducer) {
 				),
 			);
 			// create temp sink port on temp node
-			// newState = areducer(
-			// 	newState,
-			// 	portActions.add(
-			// 		Port.setPosition(
-			// 			Position.create(0, 0),
-			// 			Port.create(tempPortId, tempNodeId, 0, 'SINK', 'basicport'),
-			// 		),
-			// 	),
-			// );
-			// newState = areducer(
-			// 	newState,
-			// 	linkActions.add(Link.create(tempLinkId, Port.getId(port), tempPortId, 'basiclink')),
-			// );
+			newState = areducer(
+				newState,
+				portActions.add(
+					Port.setPosition(
+						Position.create(0, 0),
+						Port.create(tempPortId, tempNodeId, 0, 'SINK', 'basicport'),
+					),
+				),
+			);
+			newState = areducer(
+				newState,
+				linkActions.add(Link.create(tempLinkId, Port.getId(port), tempPortId, 'basiclink')),
+			);
 			emitterNumber += 1;
 		});
 		return newState;
@@ -119,7 +120,7 @@ export default function basic() {
 			<div style={{ height: '800px' }}>
 				<FlowDesigner reduxMountPoint="pipeline" style={{ height: '100%' }}>
 					<NodeType type="basicnode" component={BasicNode} />
-					<NodeType type="placeholdernode" component={BasicNode} />
+					<NodeType type="placeholdernode" component={PlaceholderNode} />
 					<LinkType type="basiclink" component={BasicLink} />
 					<PortType type="basicport" component={BasicPort} />
 				</FlowDesigner>

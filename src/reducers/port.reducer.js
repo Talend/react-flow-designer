@@ -23,6 +23,7 @@ import {
 	PORT_SINK,
 	PORT_SOURCE,
 } from '../constants/flowdesigner.constants';
+import { Flow, Port } from '../api';
 
 /**
  * get ports attached to a node
@@ -66,6 +67,11 @@ function indexPortMap(ports) {
 		});
 }
 
+/**
+ * @deprecated
+ * @param {*} state
+ * @param {*} port
+ */
 function setPort(state, port) {
 	// determine index
 	// create port
@@ -111,21 +117,72 @@ function setPort(state, port) {
 	return state;
 }
 
+function addPortDeprecated(action, state) {
+	if (!state.getIn(['nodes', action.nodeId])) {
+		invariant(false, `Can't set a new port ${action.id} on non existing node ${action.nodeId}`);
+	}
+	return setPort(state, {
+		id: action.id,
+		nodeId: action.nodeId,
+		data: action.data,
+		graphicalAttributes: action.graphicalAttributes,
+	});
+}
+
+function addPort(state, action) {
+	if (Flow.hasPort(state, action.portId)) {
+	}
+	if (action.port && Port.isPort(action.port)) {
+		return Flow.addPort(state, action.port);
+	}
+	// @deprecated bellow
+	return addPortDeprecated(action, state);
+}
+
 export default function portReducer(state, action) {
 	switch (action.type) {
 		case FLOWDESIGNER_PORT_ADD:
-			if (!state.getIn(['nodes', action.nodeId])) {
-				invariant(
-					false,
-					`Can't set a new port ${action.id} on non existing node ${action.nodeId}`,
-				);
+			return addPort(state, action);
+		case FLOWDESIGNER_PORT_UPDATE:
+			return state;
+		case FLOWDESIGNER_PORT_REMOVE: {
+			if (!state.getIn(['ports', action.portId])) {
+				invariant(false, `Can not remove port ${action.portId} since it doesn't exist`);
 			}
-			return setPort(state, {
-				id: action.id,
-				nodeId: action.nodeId,
-				data: action.data,
-				graphicalAttributes: action.graphicalAttributes,
-			});
+			const port = state.getIn(['ports', action.portId]);
+			if (port) {
+				const newState = portInLink(state, action.portId)
+					.reduce(
+						(cumulativeState, link) =>
+							linkReducer(cumulativeState, removeLink(link.id)),
+						portOutLink(state, action.portId).reduce(
+							(cumulativeState, link) =>
+								linkReducer(cumulativeState, removeLink(link.id)),
+							state,
+						),
+					)
+					.deleteIn(['ports', action.portId])
+					.deleteIn([
+						'out',
+						state.getIn(['ports', action.portId, 'nodeId']),
+						action.portId,
+					])
+					.deleteIn([
+						'in',
+						state.getIn(['ports', action.portId, 'nodeId']),
+						action.portId,
+					]);
+				return newState.mergeDeep({
+					ports: indexPortMap(
+						filterPortsByDirection(
+							filterPortsByNode(newState.get('ports'), port.nodeId),
+							port.getPortDirection(),
+						),
+					),
+				});
+			}
+			return state;
+		}
 		case FLOWDESIGNER_PORT_ADDS: {
 			const localAction = action;
 			if (!state.getIn(['nodes', action.nodeId])) {
@@ -191,44 +248,6 @@ export default function portReducer(state, action) {
 				invariant(false, `Can't remove a data on non existing port ${action.portId}`);
 			}
 			return state.deleteIn(['ports', action.portId, 'data', 'properties', action.dataKey]);
-		case FLOWDESIGNER_PORT_REMOVE: {
-			if (!state.getIn(['ports', action.portId])) {
-				invariant(false, `Can not remove port ${action.portId} since it doesn't exist`);
-			}
-			const port = state.getIn(['ports', action.portId]);
-			if (port) {
-				const newState = portInLink(state, action.portId)
-					.reduce(
-						(cumulativeState, link) =>
-							linkReducer(cumulativeState, removeLink(link.id)),
-						portOutLink(state, action.portId).reduce(
-							(cumulativeState, link) =>
-								linkReducer(cumulativeState, removeLink(link.id)),
-							state,
-						),
-					)
-					.deleteIn(['ports', action.portId])
-					.deleteIn([
-						'out',
-						state.getIn(['ports', action.portId, 'nodeId']),
-						action.portId,
-					])
-					.deleteIn([
-						'in',
-						state.getIn(['ports', action.portId, 'nodeId']),
-						action.portId,
-					]);
-				return newState.mergeDeep({
-					ports: indexPortMap(
-						filterPortsByDirection(
-							filterPortsByNode(newState.get('ports'), port.nodeId),
-							port.getPortDirection(),
-						),
-					),
-				});
-			}
-			return state;
-		}
 		default:
 			return state;
 	}

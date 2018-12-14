@@ -1,13 +1,48 @@
 import {
 	FLOWDESIGNER_LINK_ADD,
+	FLOWDESIGNER_LINK_UPDATE,
+	FLOWDESIGNER_LINK_REMOVE,
 	FLOWDESIGNER_LINK_SET_TARGET,
 	FLOWDESIGNER_LINK_SET_SOURCE,
-	FLOWDESIGNER_LINK_REMOVE,
 	FLOWDESIGNER_LINK_SET_GRAPHICAL_ATTRIBUTES,
 	FLOWDESIGNER_LINK_REMOVE_GRAPHICAL_ATTRIBUTES,
 	FLOWDESIGNER_LINK_SET_DATA,
 	FLOWDESIGNER_LINK_REMOVE_DATA,
 } from '../constants/flowdesigner.constants';
+
+
+/**
+ * add the given link to the pipeline
+ * @param {LinkRecord} node
+ * @return {Action}
+ */
+export const add = link => ({
+	type: FLOWDESIGNER_LINK_ADD,
+	link,
+});
+
+/**
+ * update the given link identified by its id
+ * @param {string} linkId
+ * @param {LinkRecord} link
+ * @return {Action}
+ */
+export const update = (linkId, link) => ({
+	type: FLOWDESIGNER_LINK_UPDATE,
+	link,
+	linkId,
+});
+
+/**
+ * remove the link identified by its id
+ * @param {string} linkId
+ * @return {Action}
+ */
+export const remove = linkId => ({
+	type: FLOWDESIGNER_LINK_REMOVE,
+	linkId,
+});
+
 
 /**
  * Ask for link creation

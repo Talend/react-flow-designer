@@ -14,6 +14,22 @@ import { PORT_SINK, PORT_SOURCE } from '../../constants/flowdesigner.constants';
  */
 export const hasNode = curry((state, nodeId) => state.hasIn(['nodes', nodeId]));
 
+/**
+ * check if port exist in flow
+ * @param {FlowState} state
+ * @param {string} portId
+ * @return {bool} true if port exist
+ */
+export const hasPort = curry((state, portId) => state.hasIn(['ports', portId]));
+
+/**
+ * check if link exist in flow
+ * @param {FlowState} state
+ * @param {string} linkId
+ * @return {bool} true if link exist
+ */
+export const hasLink = curry((state, linkId) => state.hasIn(['links', linkId]));
+
 const setOut = curry((nodeId, state) => state.setIn(['out', nodeId], new Immutable.Map()));
 const deleteOut = curry((nodeId, state) => state.deleteIn(['out', nodeId]));
 
