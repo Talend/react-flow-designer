@@ -1,7 +1,11 @@
+/**
+ * @module API/FuncHelpers
+ */
+
 import curry from 'lodash/curry';
 
 /**
- * given a value an defautl value, act as identity function except if value is undefined or null
+ * given a default value and a value, act as identity function except if value is undefined or null
  * returning default value instead.
  * @param {a} defaultValue
  * @param {b} value
@@ -16,8 +20,8 @@ export const withDefault = curry((defaultValue, value) => {
 
 /**
  * if value is undefined or null, does not apply the function to this value
- * @param { a => b }
- * @param {a}
+ * @param { function(a):b } func
+ * @param {a} value
  * @return {a | b}
  */
 export const andThen = curry((func, value) => {

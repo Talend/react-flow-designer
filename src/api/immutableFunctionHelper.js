@@ -14,7 +14,7 @@ import { throwTypeError } from './throwInDev';
 export const getImmutableMapValue = curry((key, map) => {
 	const test = Immutable.Map.isMap(map);
 	if (test) {
-		return map.get(key);
+		return map.get(key, null);
 	}
 	throwTypeError('Immutable.Map', map, 'map');
 	return null;

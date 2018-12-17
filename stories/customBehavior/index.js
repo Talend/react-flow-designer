@@ -70,11 +70,7 @@ function higherOrderReducer(areducer) {
 	};
 }
 
-let initialState = new Immutable.Map({
-	links: new Immutable.Map(),
-	ports: new Immutable.Map(),
-	transform: { k: 1, x: 0, y: 0 },
-});
+let initialState = Flow.createInitialState();
 
 initialState = Flow.addNode(
 	initialState,

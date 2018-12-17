@@ -1,3 +1,8 @@
+/**
+ * This module is public and deal with Graph's object Links
+ * @module API/Flow/Size
+ */
+
 import curry from 'lodash/curry';
 import flow from 'lodash/flow';
 

@@ -1,5 +1,6 @@
 /**
  * This module is public and deal with Graph's object Nodes
+ * @module API/Flow/Node
  */
 import curry from 'lodash/curry';
 import flow from 'lodash/flow';
@@ -29,7 +30,6 @@ const FORBIDEN_GRAPHICAL_ATTRIBUTES = ['position', 'nodeSize', 'nodeType'];
  * Test if the first parameter is a NodeRecord instance
  * @param {NodeRecord} node
  * @returns {bool}
- * @throws
  */
 export function isNode(node) {
 	if (node && node instanceof NodeRecord) {
@@ -42,7 +42,7 @@ export function isNode(node) {
  * Test if the first parameter is a NodeRecord, throw if not
  * @param {*} node
  * @returns {bool}
- * @throws
+ * @throws TypeError
  */
 export function isNodeElseThrow(node) {
 	const test = isNode(node);

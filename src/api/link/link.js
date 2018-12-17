@@ -1,5 +1,6 @@
 /**
  * This module is public and deal with Graph's object Links
+ * @module API/Flow/Link
  */
 
 import curry from 'lodash/curry';
@@ -19,14 +20,13 @@ const FORBIDEN_GRAPHICAL_ATTRIBUTES = ['properties', 'linkType'];
 
 /**
  * @desc represent a link between Port of the flow diagram
- * @typedef {Immutable.Record} LinkRecord
+ * @typedef {Immutable.Record} module-API_Flow_Link~LinkRecord
  */
 
 /**
  * Test if the first parameter is a LinkRecord instance
- * @param {LinkRecord} link
+ * @param {LinkRecord} link - {@link module-API_Flow_Link~LinkRecord}
  * @return {bool}
- * @throws
  */
 export function isLink(link) {
 	if (link && link instanceof LinkRecord) {
@@ -37,9 +37,9 @@ export function isLink(link) {
 
 /**
  * Test if the first parameter is a LinkRecord, throw if not
- * @param {*} link
+ * @param {LinkRecord} link
  * @return {bool}
- * @throws
+ * @throws TypeError
  */
 export function isLinkElseThrow(link) {
 	const test = isLink(link);

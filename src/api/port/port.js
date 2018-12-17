@@ -1,3 +1,8 @@
+/**
+ * This module is public and deal with Graph's object Ports
+ * @module API/Flow/Port
+ */
+
 import curry from 'lodash/curry';
 import flow from 'lodash/flow';
 import indexOf from 'lodash/indexOf';
@@ -28,7 +33,6 @@ const FORBIDEN_GRAPHICAL_ATTRIBUTES = ['properties', 'portType'];
  * Test if the first parameter is a PortRecord instance
  * @param {Portrecord} port
  * @returns {bool}
- * @throws
  */
 export function isPort(port) {
 	if (port && port instanceof PortRecord) {
@@ -41,7 +45,7 @@ export function isPort(port) {
  * Test if the first parameter is a PortRecord, throw if not
  * @param {*} port
  * @returns {bool}
- * @throws
+ * @throws TypeError
  */
 export function isPortElseThrow(port) {
 	const test = isPort(port);

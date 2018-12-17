@@ -42,7 +42,7 @@ import { withDefault, andThen } from '../api/functionalHelpers';
  * @return {?Positionrecord}
  */
 function getStartPosition(node) {
-	return !!flow([
+	return flow([
 		Node.getGraphicalAttribute('properties'),
 		andThen(getImmutableMapValue('startPosition')),
 	])(node);

@@ -144,6 +144,7 @@ export default function portReducer(state, action) {
 		case FLOWDESIGNER_PORT_ADD:
 			return addPort(state, action);
 		case FLOWDESIGNER_PORT_UPDATE:
+		// TODO
 			return state;
 		case FLOWDESIGNER_PORT_REMOVE: {
 			if (!state.getIn(['ports', action.portId])) {

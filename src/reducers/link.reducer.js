@@ -107,6 +107,7 @@ export default function linkReducer(state = defaultState, action) {
 		case FLOWDESIGNER_LINK_ADD:
 			return addLink(state, action);
 		case FLOWDESIGNER_LINK_UPDATE:
+		// TODO
 			return state;
 
 		case FLOWDESIGNER_LINK_REMOVE:

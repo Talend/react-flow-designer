@@ -1,4 +1,8 @@
 /**
+ * @module API/Error
+ */
+
+/**
  * Throw {message} only in dev mode
  * @param {string} message
  */

@@ -7,18 +7,25 @@ import * as NodeActions from '../../src/actions/node.actions';
 import * as flowPropTypes from '../../src/constants/flowdesigner.proptypes';
 import AbstractNode from '../../src/components/node/AbstractNode.component';
 import * as Node from '../../src/api/node/node';
+import * as Port from '../../src/api/port/port';
 import * as Position from '../../src/api/position/position';
+
+function sortByIndex(a, b) {
+	if (a.getIndex() < b.getIndex()) {
+		return -1;
+	}
+	if (a.getIndex() > b.getIndex()) {
+		return 1;
+	}
+	return 0;
+}
 
 function calculatePortPosition(ports, nodePosition, nodeSize) {
 	let portsWithPosition = new Map();
-	const emitterPorts = ports.filter(
-		port => port.getIn(['graphicalAttributes', 'properties', 'type']) === 'SOURCE',
-	);
-	const sinkPorts = ports.filter(
-		port => port.getIn(['graphicalAttributes', 'properties', 'type']) === 'SINK',
-	);
+	const emitterPorts = ports.filter(port => Port.getTopology(port) === 'SOURCE');
+	const sinkPorts = ports.filter(port => Port.getTopology(port) === 'SINK');
 	const range = [
-		nodePosition.get('y') + (nodeSize.get('height') / 2),
+		nodePosition.get('y') + nodeSize.get('height') / 2,
 		nodePosition.get('y') + nodeSize.get('height'),
 	];
 	const scaleYEmitter = scaleLinear()
@@ -29,42 +36,25 @@ function calculatePortPosition(ports, nodePosition, nodeSize) {
 		.range(range);
 	let emitterNumber = -1;
 	let sinkNumber = -1;
-	emitterPorts
-		.sort((a, b) => {
-			if (a.getIndex() < b.getIndex()) {
-				return -1;
-			}
-			if (a.getIndex() > b.getIndex()) {
-				return 1;
-			}
-			return 0;
-		})
-		.forEach(port => {
-			emitterNumber += 1;
-			const position = Position.create(nodePosition.get('x') + nodeSize.get('width'), scaleYEmitter(emitterNumber));
-			portsWithPosition = portsWithPosition.set(
-				port.id,
-				port.setIn(['graphicalAttributes', 'position'], position),
-			);
-		});
-	sinkPorts
-		.sort((a, b) => {
-			if (a.getIndex() < b.getIndex()) {
-				return -1;
-			}
-			if (a.getIndex() > b.getIndex()) {
-				return 1;
-			}
-			return 0;
-		})
-		.forEach(port => {
-			sinkNumber += 1;
-			const position = Position.create(nodePosition.get('x'),scaleYSink(sinkNumber));
-			portsWithPosition = portsWithPosition.set(
-				port.id,
-				port.setIn(['graphicalAttributes', 'position'], position),
-			);
-		});
+	emitterPorts.sort(sortByIndex).forEach(port => {
+		emitterNumber += 1;
+		const position = Position.create(
+			nodePosition.get('x') + nodeSize.get('width'),
+			scaleYEmitter(emitterNumber),
+		);
+		portsWithPosition = portsWithPosition.set(
+			port.id,
+			port.setIn(['graphicalAttributes', 'position'], position),
+		);
+	});
+	sinkPorts.sort(sortByIndex).forEach(port => {
+		sinkNumber += 1;
+		const position = Position.create(nodePosition.get('x'), scaleYSink(sinkNumber));
+		portsWithPosition = portsWithPosition.set(
+			port.id,
+			port.setIn(['graphicalAttributes', 'position'], position),
+		);
+	});
 	return portsWithPosition;
 }
 

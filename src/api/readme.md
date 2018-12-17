@@ -1,3 +1,21 @@
+# Scope of this API
+This API is meant to interact with a Dag flow data structure and each of its components.
+This API allow to transform and query the flow datastructure
+The Flow datastructure is not automatically self healing, meaning that you have to commit your transformation for this to happen.
+This API is not meant to be bound to a specific renderer (React) or specifics tools (Redux)
+
+# USAGE
+
+## Flow components API
+
+## Flow API
+
+### commit and self healing
+Why ? because we want to be able to reuse the low level Flow api to create complex flow update functions.
+such pipeline will end up creating various intermediate state that may not be valid DAG.
+The commit function is here to raise error and fix the Flow datastructure
+Since the datastructure is immutable, there is no need for creating a complete transaction API icluding such elements as `begin`, `commit` and `reset`
+
 # Uncertainty
 How uncertainty is handled in this API.
 

@@ -1,5 +1,6 @@
 /**
  * This module is private and deal with updating a graph object internal Immutable.Map
+ * @module API/Flow/Data
  */
 import curry from 'lodash/curry';
 import isString from 'lodash/isString';

@@ -16,7 +16,8 @@
     "test:cov": "jest --coverage",
     "test:reset:snapshot": "jest --no-cache -u",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "generate-docs": "jsdoc -c jsdoc.json"
   },
   "repository": {
     "type": "git",
@@ -57,10 +58,9 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "css-loader": "0.28.7",
+    "docdash": "^1.0.1",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "esdoc": "^1.1.0",
-    "esdoc-standard-plugin": "^1.0.0",
     "eslint": "3.11.1",
     "eslint-config-airbnb": "13.0.0",
     "eslint-plugin-import": "2.2.0",
@@ -68,6 +68,7 @@
     "eslint-plugin-react": "6.7.1",
     "immutable": "3.8.1",
     "jest": "^23.6.0",
+    "jsdoc": "^3.5.5",
     "node-sass": "4.7.2",
     "prop-types": "^15.5.10",
     "raf": "^3.4.0",

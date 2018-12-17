@@ -1,3 +1,7 @@
+/**
+ * This module is public and deal with Graph's object Links
+ * @module API/Flow/Position
+ */
 import curry from 'lodash/curry';
 import flow from 'lodash/flow';
 import isNumber from 'lodash/isNumber';
