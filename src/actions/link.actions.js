@@ -46,6 +46,7 @@ export const remove = linkId => ({
 
 /**
  * Ask for link creation
+ * @deprecated
  * @param {string} linkId
  * @param {string} sourceId - the source port Identifier
  * @param {string} targetId - the target port Identifier
