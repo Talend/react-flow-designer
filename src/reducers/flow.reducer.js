@@ -36,6 +36,7 @@ function combinedReducer(state = defaultState, action) {
 
 export function reducer(state, action) {
 	switch (action.type) {
+		// @deprecated
 		case FLOWDESIGNER_FLOW_ADD_ELEMENTS:
 			try {
 				return action.listOfActionCreation.reduce(
@@ -52,6 +53,7 @@ export function reducer(state, action) {
 			}
 		case FLOWDESIGNER_FLOW_RESET:
 			return defaultState.set('nodeTypes', state.get('nodeTypes'));
+		// @deprecated
 		case FLOWDESIGNER_FLOW_LOAD:
 			try {
 				return action.listOfActionCreation.reduce(
