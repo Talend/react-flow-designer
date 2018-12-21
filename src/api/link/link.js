@@ -79,7 +79,7 @@ export const setId = curry((id, link) => {
  * @param {LinkRecord} link
  * @return {string}
  */
-export function getSourceId(link) {
+export function getSourcePortId(link) {
 	if (isLinkElseThrow(link)) {
 		return link.get('sourceId');
 	}
@@ -92,11 +92,11 @@ export function getSourceId(link) {
  * @param {LinkRecord} link
  * @return {LinkRecord}
  */
-export const setSourceId = curry((sourceId, link) => {
-	if (isString(sourceId) && isLinkElseThrow(link)) {
-		return link.set('sourceId', sourceId);
+export const setSourcePortId = curry((sourcePortId, link) => {
+	if (isString(sourcePortId) && isLinkElseThrow(link)) {
+		return link.set('sourceId', sourcePortId);
 	}
-	throwInDev(`id should be a string, was given ${sourceId && sourceId.toString()}`);
+	throwInDev(`id should be a string, was given ${sourcePortId && sourcePortId.toString()}`);
 	return link;
 });
 
@@ -104,7 +104,7 @@ export const setSourceId = curry((sourceId, link) => {
  * @param {LinkRecord} link
  * @return {string}
  */
-export function getTargetId(link) {
+export function getTargetPortId(link) {
 	if (isLinkElseThrow(link)) {
 		return link.get('targetId');
 	}
@@ -117,11 +117,11 @@ export function getTargetId(link) {
  * @param {LinkRecord} link
  * @return {LinkRecord}
  */
-export const setTargetId = curry((targetId, link) => {
-	if (isString(targetId) && isLinkElseThrow(link)) {
-		return link.set('targetId', targetId);
+export const setTargetPortId = curry((targetPortId, link) => {
+	if (isString(targetPortId) && isLinkElseThrow(link)) {
+		return link.set('targetId', targetPortId);
 	}
-	throwInDev(`id should be a string, was given ${targetId && targetId.toString()}`);
+	throwInDev(`id should be a string, was given ${targetPortId && targetPortId.toString()}`);
 	return link;
 });
 
@@ -286,11 +286,11 @@ export const deleteGraphicalAttribute = curry((key, link) => {
  * @param {string} componenttype
  * @return {LinkRecord}
  */
-export const create = curry((id, sourceId, targetId, componentType) =>
+export const create = curry((id, sourcePortId, targetPortId, componentType) =>
 	flow([
 		setId(id),
-		setSourceId(sourceId),
-		setTargetId(targetId),
+		setSourcePortId(sourcePortId),
+		setTargetPortId(targetPortId),
 		setComponentType(componentType),
 	])(new LinkRecord()),
 );

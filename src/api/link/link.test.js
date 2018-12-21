@@ -133,32 +133,32 @@ describe('Link', () => {
 			expect(() => Link.getId(improperLink)).toThrow(isNotLinkException);
 		});
 	});
-	describe('getSourceId', () => {
+	describe('getSourcePortId', () => {
 		it('given a proper Link return a SourceId', () => {
 			// given
 			// when
-			const test = Link.getSourceId(testLink);
+			const test = Link.getSourcePortId(testLink);
 			// expect
 			expect(test).toEqual(sourceId);
 		});
 		it('throw given an improper link', () => {
-			expect(() => Link.getSourceId(improperLink)).toThrow(isNotLinkException);
+			expect(() => Link.getSourcePortId(improperLink)).toThrow(isNotLinkException);
 		});
 	});
-	describe('setSourceId', () => {
+	describe('setSourcePortId', () => {
 		it('given a proper Link and SourceId return a Link with updated SourceId', () => {
 			// given
 			const newSourceId = 'newSourceId';
 			// when
-			const test = Link.setSourceId(newSourceId, testLink);
+			const test = Link.setSourcePortId(newSourceId, testLink);
 			// expect
-			expect(Link.getSourceId(test)).toEqual(newSourceId);
+			expect(Link.getSourcePortId(test)).toEqual(newSourceId);
 		});
 		it('throw given an improper SourceId', () => {
 			// given
 			// when
 			// expect
-			expect(() => Link.setSourceId(improperSourceId, testLink)).toThrow(
+			expect(() => Link.setSourcePortId(improperSourceId, testLink)).toThrow(
 				'id should be a string, was given 42',
 			);
 		});
@@ -166,35 +166,35 @@ describe('Link', () => {
 			// given
 			// when
 			// expect
-			expect(() => Link.setSourceId(sourceId, improperLink)).toThrow(isNotLinkException);
+			expect(() => Link.setSourcePortId(sourceId, improperLink)).toThrow(isNotLinkException);
 		});
 	});
-	describe('getTargetId', () => {
+	describe('getTargetPortId', () => {
 		it('given a proper Link return a TargetId', () => {
 			// given
 			// when
-			const test = Link.getTargetId(testLink);
+			const test = Link.getTargetPortId(testLink);
 			// expect
 			expect(test).toEqual(targetId);
 		});
 		it('throw given an improper link', () => {
-			expect(() => Link.getTargetId(improperLink)).toThrow(isNotLinkException);
+			expect(() => Link.getTargetPortId(improperLink)).toThrow(isNotLinkException);
 		});
 	});
-	describe('setTargetId', () => {
+	describe('setTargetPortId', () => {
 		it('given a proper Link and TargetId return a Link with updated TargetId', () => {
 			// given
 			const newTargetId = 'newTargetId';
 			// when
-			const test = Link.setTargetId(newTargetId, testLink);
+			const test = Link.setTargetPortId(newTargetId, testLink);
 			// expect
-			expect(Link.getTargetId(test)).toEqual(newTargetId);
+			expect(Link.getTargetPortId(test)).toEqual(newTargetId);
 		});
 		it('throw given an improper TargetId', () => {
 			// given
 			// when
 			// expect
-			expect(() => Link.setTargetId(improperTargetId, testLink)).toThrow(
+			expect(() => Link.setTargetPortId(improperTargetId, testLink)).toThrow(
 				'id should be a string, was given 64',
 			);
 		});
@@ -202,7 +202,7 @@ describe('Link', () => {
 			// given
 			// when
 			// expect
-			expect(() => Link.setTargetId(targetId, improperLink)).toThrow(isNotLinkException);
+			expect(() => Link.setTargetPortId(targetId, improperLink)).toThrow(isNotLinkException);
 		});
 	});
 	describe('getComponentType', () => {

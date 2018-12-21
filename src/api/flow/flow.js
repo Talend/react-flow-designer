@@ -17,18 +17,33 @@ const PORTS_COLLECTION = 'ports';
 const LINKS_COLLECTION = 'links';
 const CHILDRENS_COLLECTION = 'childrens';
 const PARENTS_COLLECTION = 'parents';
+/**
+ * IN_COLLECTION || OUT_COLLECTION
+ * only contains ids as reference within this nested data structure:
+ * Immutable.Map
+ * <	nodeId,
+ *  	Immutable.Map
+ * 		<		portId,
+ * 				Immutable.Map
+ * 				<		linkId,
+ * 						linkId
+ * 				>
+ * 		>
+ *	>
+ */
 const IN_COLLECTION = 'in';
 const OUT_COLLECTION = 'out';
 
 export function createInitialState() {
+	const emptyMap = new Immutable.Map();
 	return Immutable.Map({
-		NODES_COLLECTION: new Immutable.Map(),
-		LINKS_COLLECTION: new Immutable.Map(),
-		PORTS_COLLECTION: new Immutable.Map(),
-		IN_COLLECTION: new Immutable.Map(),
-		OUT_COLLECTION: new Immutable.Map(),
-		PARENTS_COLLECTION: new Immutable.Map(),
-		CHILDRENS_COLLECTION: new Immutable.Map(),
+		[NODES_COLLECTION]: emptyMap,
+		[LINKS_COLLECTION]: emptyMap,
+		[PORTS_COLLECTION]: emptyMap,
+		[IN_COLLECTION]: emptyMap,
+		[OUT_COLLECTION]: emptyMap,
+		[PARENTS_COLLECTION]: emptyMap,
+		[CHILDRENS_COLLECTION]: emptyMap,
 		transform: { k: 1, x: 0, y: 0 },
 	});
 }
@@ -169,9 +184,9 @@ const addLinkOut = curry((nodeId, portId, linkId, state) =>
  * @param {FlowState} state
  * @return {FlowState}
  */
-const removeLinkOut = curry((nodeId, portId, linkId, state) =>
-	state.deleteIn([OUT_COLLECTION, nodeId, portId, linkId]),
-);
+const removeLinkOut = curry((nodeId, portId, linkId, state) => {
+	return state.deleteIn([OUT_COLLECTION, nodeId, portId, linkId]);
+});
 
 /**
  * onto the out collection, remove a port from a nodeId -> portId assoociation
@@ -387,10 +402,15 @@ const deleteIn = curry((nodeId, state) => state.deleteIn([IN_COLLECTION, nodeId]
  * to a node
  * Children<NodeId, Map<NodeId, NodeId>>
  */
+const getChildrens = curry(state => state.get(CHILDRENS_COLLECTION));
 
- /**
-  * @function
-  */
+const getChildren = curry((nodeId, state) =>
+	state.getIn([CHILDRENS_COLLECTION, nodeId], new Immutable.Map()),
+);
+
+/**
+ * @function
+ */
 const setChildren = curry((parentNodeId, state) =>
 	state.setIn([CHILDRENS_COLLECTION, parentNodeId], new Immutable.Map()),
 );
@@ -398,29 +418,22 @@ const setChildren = curry((parentNodeId, state) =>
 /**
  * @function
  */
-const addChildren = curry((parentNodeId, childrenNodeId, state) =>
-	state.setIn([CHILDRENS_COLLECTION, parentNodeId, childrenNodeId], childrenNodeId),
-);
-
-/**
- * @function
- */
-const removeChildren = curry((parentNodeId, childrenNodeId, state) =>
-	state.deleteIn([CHILDRENS_COLLECTION, parentNodeId, childrenNodeId]),
-);
-
-/**
- * @function
- */
-const deleteChildren = curry((parentNodeId, state) =>
-	state.deleteIn([CHILDRENS_COLLECTION, parentNodeId]),
-);
+const addChildren = curry((parentNodeId, childrenNodeId, state) => {
+	const grandChildren = getChildren(childrenNodeId, state);
+	const descendants = grandChildren.set(childrenNodeId, childrenNodeId);
+	const currentChildren = state.getIn([CHILDRENS_COLLECTION, parentNodeId]);
+	return state.setIn([CHILDRENS_COLLECTION, parentNodeId], currentChildren.merge(descendants));
+});
 
 /**
  * parents collection list all the node that are considered to be direct or indirect children
  * to a node
  * Parents<NodeId, Map<NodeId, NodeId>>
  */
+
+const getParentsCollection = curry(state => state.get(PARENTS_COLLECTION));
+
+const getParents = curry((nodeId, state) => state.getIn([PARENTS_COLLECTION, nodeId]));
 /**
  * probably not that usefull
  * addParents by its implem is smart enought to add the initial collection if it doesn't exist
@@ -434,16 +447,30 @@ const setParents = curry((childrenNodeId, state) =>
 	state.setIn([PARENTS_COLLECTION, childrenNodeId], new Immutable.Map()),
 );
 
+const updateChildren = curry((grandParents, childrenNodeId, state) => {
+	const updatedState = grandParents.reduce(
+		(value, gpId) => addChildren(gpId, childrenNodeId, state),
+		state,
+	);
+
+	return updatedState;
+});
+
 /**
  * add a parentNodeId to an existing childrenNodeId
  * @function
  * @param {String} childrenNodeId
  * @param {String} parentNodeId
- * @param {flowState}
+ * @param {FlowState}
  */
-const addParent = curry((childrenNodeId, parentNodeId, state) =>
-	state.setIn([PARENTS_COLLECTION, childrenNodeId, parentNodeId], parentNodeId),
-);
+const addParent = curry((childrenNodeId, parentNodeId, state) => {
+	const grandParents = getParents(parentNodeId, state);
+	const ancestors = grandParents.set(parentNodeId, parentNodeId);
+
+	const updateState = updateChildren(grandParents, childrenNodeId, state);
+
+	return updateState.setIn([PARENTS_COLLECTION, childrenNodeId], ancestors);
+});
 
 /**
  * remove a parentNodeId to an existing childrenNodeId
@@ -453,9 +480,9 @@ const addParent = curry((childrenNodeId, parentNodeId, state) =>
  * @param {FlowState} state
  * @return {FlowState}
  */
-const removeParent = curry((childrenNodeId, parentNodeId, state) =>
-	state.deleteIn([PARENTS_COLLECTION, childrenNodeId, parentNodeId]),
-);
+const removeParent = curry((childrenNodeId, parentNodeId, state) => {
+	return state.deleteIn([PARENTS_COLLECTION, childrenNodeId, parentNodeId]);
+});
 /**
  * could be implemented in the removeParent
  * if a node don't have parents anymore please delete the ref
@@ -466,6 +493,45 @@ const removeParent = curry((childrenNodeId, parentNodeId, state) =>
  */
 const deleteParents = curry((childrenNodeId, state) =>
 	state.deleteIn([PARENTS_COLLECTION, childrenNodeId]),
+);
+
+/**
+ * @function
+ */
+const deleteChild = curry((parentNodeId, childrenNodeId, state) => {
+	return state.deleteIn([CHILDRENS_COLLECTION, parentNodeId, childrenNodeId]);
+});
+
+/**
+ * @function
+ */
+const deleteChildren = curry((parentNodeId, state) =>
+	state.deleteIn([CHILDRENS_COLLECTION, parentNodeId]),
+);
+
+// remove parents of children
+const cleanParentsOnDownstream = curry((children, parents, state) =>
+	children.reduce(
+		(acc, childMap, childId) =>
+			parents.reduce((acc3, parentId) => removeParent(childId, parentId, acc3), acc),
+		state,
+	),
+);
+
+// nodes that have nodeId as a child should see their children collection updated
+const cleanChildrenOnUpstream = curry((children, parents, state) =>
+	parents.reduce(
+		(acc, parentId) =>
+			children.reduce((acc2, childId) => deleteChild(parentId, childId, acc2), acc),
+		state,
+	),
+);
+
+/**
+ * @function
+ */
+const cleanChildrenParents = curry((nodeId, children, state) =>
+	children.reduce((acc, childId) => removeParent(childId, nodeId, acc), state),
 );
 
 /**
@@ -634,16 +700,16 @@ export const deletePort = curry((state, portId) => {
 export const addLink = curry((state, link) => {
 	const linkId = Link.getId(link);
 	if (Link.isLinkElseThrow(link) && !hasLink(state, linkId)) {
-		const linkSourceId = Link.getSourceId(link);
-		const linkTargetId = Link.getTargetId(link);
-		const nodeSourceId = Port.getNodeId(getPort(state, linkSourceId));
-		const nodeTargetId = Port.getNodeId(getPort(state, linkTargetId));
+		const linkSourcePortId = Link.getSourcePortId(link);
+		const linkTargetPortId = Link.getTargetPortId(link);
+		const nodeSourceId = Port.getNodeId(getPort(state, linkSourcePortId));
+		const nodeTargetId = Port.getNodeId(getPort(state, linkTargetPortId));
 		// NOTE: children/parents/out/in update may be delegated to the commit function
 		return flow([
 			addChildren(nodeSourceId, nodeTargetId),
 			addParent(nodeTargetId, nodeSourceId),
-			addLinkOut(nodeSourceId, linkSourceId, linkId),
-			addLinkIn(nodeTargetId, linkTargetId, linkId),
+			addLinkOut(nodeSourceId, linkSourcePortId, linkId),
+			addLinkIn(nodeTargetId, linkTargetPortId, linkId),
 		])(state.setIn([LINKS_COLLECTION, linkId], link));
 	}
 	return state;
@@ -658,16 +724,23 @@ export const addLink = curry((state, link) => {
 export const deleteLink = curry((state, linkId) => {
 	if (hasLink(state, linkId)) {
 		const link = getLink(state, linkId);
-		const linkSourceId = Link.getSourceId(link);
-		const linkTargetId = Link.getTargetId(link);
-		const nodeSourceId = Port.getNodeId(getPort(state, linkSourceId));
-		const nodeTargetId = Port.getNodeId(getPort(state, linkTargetId));
+		const linkSourcePortId = Link.getSourcePortId(link);
+		const linkTargetPortId = Link.getTargetPortId(link);
+		const nodeSourceId = Port.getNodeId(getPort(state, linkSourcePortId));
+		const nodeTargetId = Port.getNodeId(getPort(state, linkTargetPortId));
+		const children = getChildren(nodeSourceId, state);
+		const parents = getParents(nodeSourceId, state);
+
 		// NOTE: children/parents/out/in update may be delegated to the commit function
 		return flow([
-			removeChildren(nodeTargetId),
-			removeParent(nodeSourceId),
-			removeLinkOut(nodeTargetId, linkTargetId, linkId),
-			removeLinkIn(nodeSourceId, linkSourceId, linkId),
+			cleanChildrenParents(nodeSourceId, children),
+			// remove parents of children
+			cleanParentsOnDownstream(children, parents),
+			// nodes that have nodeId as a child should see their children collection updated
+			cleanChildrenOnUpstream(children, parents),
+			deleteChildren(nodeSourceId),
+			removeLinkOut(nodeTargetId, linkTargetPortId, linkId),
+			removeLinkIn(nodeSourceId, linkSourcePortId, linkId),
 		])(state.deleteIn([LINKS_COLLECTION, linkId]));
 	}
 	return state;
@@ -683,11 +756,37 @@ export const deleteLink = curry((state, linkId) => {
 export const deleteLinkByPort = curry((state, portId) => {
 	return state
 		.get(LINKS_COLLECTION, new Immutable.Map())
-		.filter(link => Link.getSourceId(link) === portId || Link.getTargetId(link) === portId)
+		.filter(
+			link => Link.getSourcePortId(link) === portId || Link.getTargetPortId(link) === portId,
+		)
 		.map(link => Link.getId(link))
 		.reduce(deleteLink, state);
 });
 
+/**
+ * return the NodeRecord collection from the flow
+ * @function
+ * @param {FlowState} state
+ * @return {Immutable.Map<?NodeRecord>}
+ */
+export const getNodes = state => state.get(NODES_COLLECTION);
+/**
+ * return the PortRecord collection from the flow
+ * @function
+ * @param {FlowState} state
+ * @return {Immutable.Map<?PortRecord>}
+ */
+export const getPorts = state => state.get(PORTS_COLLECTION);
+export const getOutReferences = state => state.get(OUT_COLLECTION);
+export const getInReferences = state => state.get(IN_COLLECTION);
+
+/**
+ * return the LinkRecord collection from the flow
+ * @function
+ * @param {FlowState} state
+ * @return {Immutable.Map<?LinkRecord>}
+ */
+export const getLinks = state => state.get(LINKS_COLLECTION);
 /**
  * this function task is to ensure that the flow state is in stable state
  * that conform a DAG description
