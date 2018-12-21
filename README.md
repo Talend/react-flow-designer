@@ -19,10 +19,12 @@ Redux as a state manager.
 ### How to use it
 
 #### Use the rendering component
+
 ```js
 import React from 'react';
 import { render } from 'react-dom';
-import { Provider } from 'react-redux';node
+import { Provider } from 'react-redux';
+node;
 import configureStore from './store/configureStore';
 
 import { DatastreamDesigner } from './datastream_designer/';
@@ -30,12 +32,13 @@ import { DatastreamDesigner } from './datastream_designer/';
 const store = configureStore();
 
 render(
-  <Provider store={store}>
-    <DatastreamDesigner />
-  </Provider>,
-  document.getElementById('app')
+	<Provider store={store}>
+		<DatastreamDesigner />
+	</Provider>,
+	document.getElementById('app'),
 );
 ```
+
 #### integrate the reducer into your redux data store
 
 ```js
@@ -45,13 +48,12 @@ import { routerReducer } from 'react-router-redux';
 import { datastreamDesignerReducer } from '../datastream_designer/';
 
 const rootReducer = combineReducers({
-    routing: routerReducer,
-    datastream: datastreamDesignerReducer,
+	routing: routerReducer,
+	datastream: datastreamDesignerReducer,
 });
 
 export default rootReducer;
 ```
-
 
 the datastream_designer module expose its components, reducers, and action type constants.
 
@@ -60,51 +62,84 @@ Action type constants are exposed for the sake of listening to them and add new 
 Exemple a reducer listening for 'DATASTREAM_DESIGNER_NODE_SELECTED' could trigger a form so you can edit the node data.
 
 ## Redux API
-the idea is to reduce the surface api of the redux action, encouraging batching multiple transformation in a transaction
+
+The redux part of this library, actions and reducer are just a thin layer on top of the API. Redux being just a medium to expose a way to interact with the API in a React/Redux application.
+
+This action api allow the user to create/update/delete each kind of pipeline component, with the underlying datastructure healing itself, for example a link being detached from an existing port has no longer a meaning and should be deleted.
+
+Or the action api provide `batchFlowActions` that allow an user to transform the flow datastructure trought many unstable change with a the auto healing done only when all action are applied.
+
 ### Graph
-- Graph
-  - transaction [List<Action<Node|Link|Port>>]
-- Node
-  - add NodeRecord
-  - update NodeRecord
-  - delete NodeRecord
-  - moveStart nodeId Position
-  - move nodeId Vector
-  - moveEnd nodeId Position
-- Link
-  - add LinkRecord
-  - update LinkRecord
-  - delete LinkRecord
-- Port
-  - add PortRecord
-  - update PortRecord
-  - delete PortRecord
+
+-   Graph
+    -   batchFlowActions [List<Action<Node|Link|Port>>]
+    -   resetFlow
+-   Node
+    -   add NodeRecord
+    -   update NodeRecord
+    -   delete NodeRecord
+    -   moveStart nodeId Position
+    -   move nodeId Vector
+    -   moveEnd nodeId Position
+-   Link
+    -   add LinkRecord
+    -   update LinkRecord
+    -   delete LinkRecord
+-   Port
+    -   add PortRecord
+    -   update PortRecord
+    -   delete PortRecord
 
 each of those action are intended to be used with the apply function
 
-Each of those action are backed by the graph API wich check graph integrity, if one action fail to apply the whole transaction is void and the original graph is returned, one or many errors are logged.
+If any of those action fail it will throw an exception in dev mode, and just return the previous graph state un production mode.
 
 special action for movement are kept for optimisation purpose, nothing prevent the user to update position via the `update` action
 
-#### deprecate
-removeNode
-removeNodeData
-setNodeData
-removeNodeGraphicalAttribute
-setNodeGraphicalAttributes
-setNodeType
-setNodeSize
-moveNodeToEnd
-applyMovementTo
-moveNodeTo
-startMoveNodeTo
 
-## Element API
+## Core API
 
-### Node
-### Link
-### Port
-### Graph
-### Data
-### Size
-### Position
+The core API is meant to be sued to manipulate the Graph datastructure and its constituent elements at the lowest level.
+Those fonction are :
+- curryed by default allowing you to create complex transformation pipeline.
+- check for parameter safety, throwing in dev, not applying transformation in production if those are not safe.
+- Provide immutable transformation.
+
+
+### Graph level
+
+Graph level function are here to transform the graph, adding, removing and updating graph elements in the grpah context.
+Those function applied to the graph do not ensure that the graph is a complient DAG, you have to commit the graph at the end of your graph operation.
+
+```javascript
+/**
+ lets assume that our state contain 2 nodes with one port each * linked by a link, the `deletePort` will remove a port making * the link unstable because a link can exist only if attached to * two ports
+ */
+let newState = Flow.deletePort(state, 'onPortId');
+/**
+ the `commit` will search for all detached link and remove them resulting in a clean graph state.
+ */
+let newState = Flow.commit(newState);
+```
+
+### Element level
+
+Element level function exist solely to create, transform and query information from any Graph element constituents without the context of the Graph. For example `Link.setTargetId` function will not warn you if linked port does not exist in the graph.
+
+#### Node
+
+#### Link
+
+#### Port
+
+#### Graph
+
+#### Data
+
+#### Size
+
+#### Position
+
+Overview
+
+link https://www.lucidchart.com/documents/edit/a573ef3b-c155-4ade-983e-c7e6a16b7674/0
