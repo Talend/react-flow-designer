@@ -2173,9 +2173,9 @@ dezalgo@^1.0.1:
     wrappy "1"
 
 diff@^3.0.0:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/diff/-/diff-3.0.1.tgz#a52d90cc08956994be00877bff97110062582c35"
-  integrity sha1-pS2QzAiVaZS+AId7/5cRAGJYLDU=
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/diff/-/diff-3.5.0.tgz#800c0dd1e0a8bfbc95835c202ad220fe317e5a12"
+  integrity sha512-A46qtFgd+g7pDZinpnwiRJtxbC1hpgf0uzP3iG89scHk0AUC7A1TGxf5OiiOUv/JMZR8GOt8hL900hV0bOy5xA==
 
 diffie-hellman@^5.0.0:
   version "5.0.2"
@@ -2713,7 +2713,7 @@ event-emitter@~0.3.4:
 
 event-stream@^3.3.0:
   version "3.3.4"
-  resolved "http://registry.npmjs.org/event-stream/-/event-stream-3.3.4.tgz#4ab4c9a0f5a54db9338b4c34d86bfce8f4b35571"
+  resolved "https://registry.npmjs.org/event-stream/-/event-stream-3.3.4.tgz#4ab4c9a0f5a54db9338b4c34d86bfce8f4b35571"
   integrity sha1-SrTJoPWlTbkzi0w02Gv86PSzVXE=
   dependencies:
     duplexer "~0.1.1"
