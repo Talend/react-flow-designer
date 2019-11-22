@@ -29,7 +29,7 @@ function Grid({ transformData }) {
 				y="0"
 				width="100%"
 				height="100%"
-				fill="url(#grid)"
+				fill={`url(${window.location.href}#grid)`} // fix for safari url with base attribute
 			/>
 		</g>
 	);

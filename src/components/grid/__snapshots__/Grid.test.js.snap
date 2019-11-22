@@ -19,7 +19,7 @@ exports[`Grid.component should render a grid by default 1`] = `
     </pattern>
   </defs>
   <rect
-    fill="url(#grid)"
+    fill="url(about:blank#grid)"
     height="100%"
     style={
       Object {
@@ -53,7 +53,7 @@ exports[`Grid.component should render custom component with transform injected 1
     </pattern>
   </defs>
   <rect
-    fill="url(#grid)"
+    fill="url(about:blank#grid)"
     height="100%"
     style={
       Object {
