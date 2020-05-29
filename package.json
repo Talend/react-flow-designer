@@ -24,9 +24,9 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@babel/preset-flow": "^7.7.4",
-    "@talend/scripts-core": "^3.1.0",
-    "@talend/scripts-preset-react-lib": "^3.1.0",
-    "coveralls": "3.0.9",
+    "@talend/scripts-core": "^6.2.3",
+    "@talend/scripts-preset-react-lib": "^6.2.3",
+    "coveralls": "3.1.0",
     "enzyme": "^3.1.0",
     "flow-bin": "^0.41.0",
     "flow-typed": "^2.0.0",
@@ -44,10 +44,7 @@
     "redux-thunk": "2.1.0",
     "reselect": "2.5.4",
     "rimraf": "2.5.4",
-    "sass-loader": "4.0.2",
-    "semantic-release": "15.13.31",
-    "style-loader": "0.13.1",
-    "webpack": "2.1.0-beta.25"
+    "semantic-release": "17.0.8"
   },
   "peerDependencies": {
     "immutable": "3",
