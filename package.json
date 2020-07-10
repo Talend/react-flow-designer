@@ -6,12 +6,10 @@
   "mainSrc": "src/index.js",
   "scripts": {
     "build": "talend-scripts build:lib",
-    "clean": "npm run clean:lib && npm run clean:coverage",
+    "clean": "yarn clean:lib && yarn clean:coverage",
     "clean:lib": "rimraf ./lib",
     "clean:coverage": "rimraf ./coverage",
-    "flow": "flow",
-    "lint": "npm run lint:es",
-    "lint:es": "eslint --config .eslintrc src/**",
+    "lint": "talend-scripts lint:es",
     "prepublish": "babel -d lib ./src/ && rimraf lib/**/*.test.js",
     "test": "talend-scripts test --silent"
   },
@@ -22,13 +20,10 @@
   "author": "Axel Cateland <acateland@talend.com>",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@babel/preset-flow": "^7.7.4",
     "@talend/scripts-core": "^6.4.1",
     "@talend/scripts-preset-react-lib": "^6.4.1",
     "coveralls": "3.1.0",
     "enzyme": "^3.11.0",
-    "flow-bin": "^0.41.0",
-    "flow-typed": "^2.0.0",
     "i18next": "^15.1.3",
     "immutable": "3.8.1",
     "prop-types": "^15.7.2",
@@ -42,7 +37,7 @@
     "redux-mock-store": "1.2.1",
     "redux-thunk": "2.1.0",
     "reselect": "2.5.4",
-    "rimraf": "2.5.4"
+    "rimraf": "3.0.2"
   },
   "peerDependencies": {
     "immutable": "3",
