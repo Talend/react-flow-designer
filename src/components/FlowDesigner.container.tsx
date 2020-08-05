@@ -146,7 +146,7 @@ export class FlowDesigner extends React.Component<Props, State> {
 							moveNodeTo={this.props.moveNodeTo}
 							moveNodeToEnd={this.props.moveNodeToEnd}
 							nodes={this.props.nodes}
-							snapToGrid={this.props.snapToGrid || true}
+							snapToGrid={this.props.snapToGrid || false}
 						/>
 						<PortsRenderer
 							portTypeMap={this.state.portTypeMap}

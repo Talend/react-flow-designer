@@ -17,14 +17,10 @@ export function throwInDev(message: string | TypeError) {
  *	module: 'Link'
  *	}
  * @param {string} expected - describe expected type
- * @param {any} given - the given param
+ * @param {Object} given - the given param
  * @param {string} module - (optionnal) module to use
  */
-export function throwTypeError(
-	expected: string,
-	given: { toString: () => any },
-	module?: string | undefined,
-) {
+export function throwTypeError(expected: string, given: Object, module?: string | undefined) {
 	throwInDev(
 		new TypeError(`${expected || 'parameter'} should be a ${expected}, was given
 """

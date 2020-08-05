@@ -1,15 +1,11 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import invariant from 'invariant';
-import { mapOf } from 'react-immutable-proptypes';
-import { Map } from 'immutable';
-
-import { NodeType } from '../../constants/flowdesigner.proptypes';
+import get from 'lodash/get';
 import { NodeRecordMap, NodeRecord, Id, Position } from '../../customTypings/index.d';
 
 type Props = {
 	nodes: NodeRecordMap;
-	nodeTypeMap: Map<string, any>;
+	nodeTypeMap: Object;
 	startMoveNodeTo: (nodeId: Id, nodePosition: string) => void;
 	moveNodeTo: (nodeId: Id, nodePosition: Position) => void;
 	moveNodeToEnd: (nodeId: Id, nodePosition: Position) => void;
@@ -17,15 +13,6 @@ type Props = {
 };
 
 class NodesRenderer extends React.Component<Props> {
-	static propTypes = {
-		nodes: mapOf(NodeType).isRequired,
-		nodeTypeMap: PropTypes.object.isRequired,
-		startMoveNodeTo: PropTypes.func.isRequired,
-		moveNodeTo: PropTypes.func.isRequired,
-		moveNodeToEnd: PropTypes.func.isRequired,
-		snapToGrid: PropTypes.bool.isRequired,
-	};
-
 	constructor(props: Props) {
 		super(props);
 		this.renderNode = this.renderNode.bind(this);
@@ -33,7 +20,7 @@ class NodesRenderer extends React.Component<Props> {
 
 	renderNode(node: NodeRecord) {
 		const type = node.getNodeType();
-		const ConcreteComponent = (this.props.nodeTypeMap as any)[type].component;
+		const ConcreteComponent = get((this.props.nodeTypeMap as any)[type], 'component');
 		if (!ConcreteComponent) {
 			invariant(
 				false,

@@ -22,7 +22,7 @@ describe('<NodesRenderer />', () => {
 				}),
 			}),
 		);
-		const nodeTypeMap = Map<string, any>().set('id', { id: 'id', component: MockNode });
+		const nodeTypeMap = { id: { id: 'id', component: MockNode } };
 		const tree = renderer
 			.create(
 				<NodesRenderer

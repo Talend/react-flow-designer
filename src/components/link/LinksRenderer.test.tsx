@@ -47,7 +47,7 @@ describe('<LinksRenderer />', () => {
 					}),
 				}),
 			);
-		const linkTypeMap = Map<string, any>().set('id', { id: 'id', component: MockLink });
+		const linkTypeMap = { id: { id: 'id', component: MockLink } };
 		const tree = renderer
 			.create(<LinksRenderer links={links} ports={ports} linkTypeMap={linkTypeMap} />)
 			.toJSON();

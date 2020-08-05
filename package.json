@@ -11,7 +11,7 @@
     "clean:coverage": "rimraf ./coverage",
     "lint": "talend-scripts lint:es",
     "prepublish": "babel -d lib ./src/ && rimraf lib/**/*.test.js",
-    "test": "talend-scripts test --silent"
+    "test": "talend-scripts test"
   },
   "repository": {
     "type": "git",

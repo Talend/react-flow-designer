@@ -1,29 +1,19 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import { select, event } from 'd3-selection';
 
 import { Port, Position } from '../../api';
 import { PortRecord } from '../../customTypings/index.d';
-import { PortType } from '../../constants/flowdesigner.proptypes';
 
 type Props = {
-	port: PortRecord;
+	port?: PortRecord;
 	onClick?: React.MouseEventHandler;
 	children?: React.ReactChildren;
 };
 
-type State = {};
-
-class AbstractPort extends React.Component<Props, State> {
+class AbstractPort extends React.Component<Props> {
 	d3Node: any;
 
 	node: any;
-
-	static propTypes = {
-		port: PortType,
-		onClick: PropTypes.func,
-		children: PropTypes.element,
-	};
 
 	constructor(props: Props) {
 		super(props);

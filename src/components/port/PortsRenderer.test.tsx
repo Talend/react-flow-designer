@@ -20,10 +20,12 @@ describe('<PortsRenderer />', () => {
 				}),
 			}),
 		);
-		const portTypeMap = Map<string, any>().set('id', {
-			id: 'id',
-			component: MockPort,
-		});
+		const portTypeMap = {
+			id: {
+				id: 'id',
+				component: MockPort,
+			},
+		};
 		const tree = renderer
 			.create(<PortsRenderer ports={ports} portTypeMap={portTypeMap} />)
 			.toJSON();

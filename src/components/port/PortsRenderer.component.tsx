@@ -1,17 +1,10 @@
 import React from 'react';
 import get from 'lodash/get';
-import { Map } from 'immutable';
 
 import { Port } from '../../api';
 import { PortRecord, PortRecordMap } from '../../customTypings/index.d';
 
-export default function PortsRenderer({
-	ports,
-	portTypeMap,
-}: {
-	ports: PortRecordMap;
-	portTypeMap: Map<string, any>;
-}) {
+function PortsRenderer({ ports, portTypeMap }: { ports: PortRecordMap; portTypeMap: Object }) {
 	const renderPort = (port: PortRecord) => {
 		const type = Port.getComponentType(port);
 		const ConcretePort = get((portTypeMap as any)[type], 'component');
@@ -20,3 +13,5 @@ export default function PortsRenderer({
 
 	return <g>{ports.valueSeq().map(renderPort)}</g>;
 }
+
+export default PortsRenderer;

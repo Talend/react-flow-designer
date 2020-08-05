@@ -1,7 +1,4 @@
-import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import React from 'react';
-
 import { select, event } from 'd3-selection';
 import { drag } from 'd3-drag';
 import { PositionRecord } from '../../customTypings/index.d';
@@ -17,16 +14,6 @@ class LinkHandle extends React.Component<Props> {
 	d3Handle: any;
 
 	handle: React.ElementRef<'g'> | null;
-
-	static propTypes = {
-		position: ImmutablePropTypes.recordOf({
-			x: PropTypes.number.isRequired,
-			y: PropTypes.number.isRequired,
-		}).isRequired,
-		onDrag: PropTypes.func,
-		onDragEnd: PropTypes.func,
-		component: PropTypes.element.isRequired,
-	};
 
 	constructor(props: Props) {
 		super(props);

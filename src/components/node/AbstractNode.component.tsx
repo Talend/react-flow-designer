@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import { select, event } from 'd3-selection';
 import { drag } from 'd3-drag';
@@ -8,7 +7,6 @@ import { Map } from 'immutable';
 import invariant from 'invariant';
 
 import { Node, Port, Position, Size } from '../../api';
-import { NodeType } from '../../constants/flowdesigner.proptypes';
 import { GRID_SIZE, PORT_SINK, PORT_SOURCE } from '../../constants/flowdesigner.constants';
 import {
 	PortRecordMap,
@@ -112,19 +110,6 @@ class AbstractNode extends React.Component<Props> {
 	nodeElement: any;
 
 	squaredDeltaDrag: number = 0;
-
-	static propTypes = {
-		node: NodeType.isRequired,
-		startMoveNodeTo: PropTypes.func.isRequired,
-		moveNodeTo: PropTypes.func.isRequired,
-		moveNodeToEnd: PropTypes.func.isRequired,
-		snapToGrid: PropTypes.bool,
-		onDragStart: PropTypes.func,
-		onDrag: PropTypes.func,
-		onDragEnd: PropTypes.func,
-		onClick: PropTypes.func,
-		children: PropTypes.node,
-	};
 
 	constructor(props: Props) {
 		super(props);
