@@ -14,7 +14,7 @@ export default function PortsRenderer({
 }) {
 	const renderPort = (port: PortRecord) => {
 		const type = Port.getComponentType(port);
-		const ConcretePort = get(portTypeMap.get(type), 'component');
+		const ConcretePort = get((portTypeMap as any)[type], 'component');
 		return <ConcretePort key={Port.getId(port)} port={port} />;
 	};
 

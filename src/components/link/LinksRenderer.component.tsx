@@ -25,7 +25,7 @@ class LinksRender extends React.Component<Props> {
 	}
 
 	renderLink(link: LinkRecord) {
-		const ConcreteLink = this.props.linkTypeMap.get(link.getLinkType()).component;
+		const ConcreteLink = (this.props.linkTypeMap as any)[link.getLinkType()].component;
 		const source = this.props.ports.get(link.sourceId);
 		const target = this.props.ports.get(link.targetId);
 		if (!ConcreteLink) {

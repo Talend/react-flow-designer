@@ -36,9 +36,6 @@ class ZoomHandler extends React.Component<Props, State> {
 			.scaleExtent([1 / 4, 2])
 			.on('zoom', this.onZoom)
 			.on('end', this.onZoomEnd);
-
-		this.onZoom = this.onZoom.bind(this);
-		this.onZoomEnd = this.onZoomEnd.bind(this);
 	}
 
 	UNSAFE_componentWillMount() {
@@ -61,13 +58,13 @@ class ZoomHandler extends React.Component<Props, State> {
 		}
 	}
 
-	onZoomEnd() {
+	onZoomEnd = () => {
 		if (this.props.setZoom) this.props.setZoom(event.transform);
-	}
+	};
 
-	onZoom() {
+	onZoom = () => {
 		this.setState({ transform: event.transform });
-	}
+	};
 
 	render() {
 		const { transform } = this.state;

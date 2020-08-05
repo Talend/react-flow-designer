@@ -33,7 +33,7 @@ class NodesRenderer extends React.Component<Props> {
 
 	renderNode(node: NodeRecord) {
 		const type = node.getNodeType();
-		const ConcreteComponent = this.props.nodeTypeMap.get(type).component;
+		const ConcreteComponent = (this.props.nodeTypeMap as any)[type].component;
 		if (!ConcreteComponent) {
 			invariant(
 				false,
