@@ -17,25 +17,36 @@ import {
 	PORT_SINK,
 	PORT_SOURCE,
 } from '../constants/flowdesigner.constants';
+import {
+	PortRecordMap,
+	Id,
+	LinkRecord as LinkRecordType,
+	PortRecord as PortRecordType,
+	PortDirection,
+	State,
+	PortAction,
+} from '../customTypings/index.d';
 
 /**
  * get ports attached to a node
  */
 function filterPortsByNode(ports: PortRecordMap, nodeId: Id): PortRecordMap {
-	return ports.filter((port: PortRecordType) => port.nodeId === nodeId);
+	return ports.filter((port: PortRecordType) => port.nodeId === nodeId) as PortRecordMap;
 }
 
 /**
  * get ports of direction EMITTER or SINK
  */
 function filterPortsByDirection(ports: PortRecordMap, direction: PortDirection): PortRecordMap {
-	return ports.filter((port: PortRecordType) => port.getPortDirection() === direction);
+	return ports.filter(
+		(port: PortRecordType) => port.getPortDirection() === direction,
+	) as PortRecordMap;
 }
 
 /**
  * for a new port calculate its index by retrieving all its siblings
  */
-function calculateNewPortIndex(ports: PortRecordMap, port: Port): number {
+function calculateNewPortIndex(ports: PortRecordMap, port: PortRecordType): number {
 	return filterPortsByDirection(
 		filterPortsByNode(ports, port.nodeId),
 		port.graphicalAttributes.properties.type,
@@ -57,7 +68,7 @@ function indexPortMap(ports: PortRecordMap): PortRecordMap {
 		.map(port => {
 			i += 1;
 			return port.setIndex(i - 1);
-		});
+		}) as PortRecordMap;
 }
 
 /**
@@ -65,7 +76,7 @@ function indexPortMap(ports: PortRecordMap): PortRecordMap {
  * @param {*} state
  * @param {*} port
  */
-function setPort(state: State, port: Port) {
+function setPort(state: State, port: PortRecordType) {
 	const index: number =
 		port.graphicalAttributes.properties.index ||
 		calculateNewPortIndex(state.get('ports'), port);
@@ -74,11 +85,11 @@ function setPort(state: State, port: Port) {
 		new PortRecord({
 			id: port.id,
 			nodeId: port.nodeId,
-			data: new Map(port.data).set(
+			data: Map(port.data).set(
 				'properties',
-				fromJS(port.data && port.data.properties) || new Map(),
+				fromJS(port.data && port.data.properties) || Map(),
 			),
-			graphicalAttributes: new Map(port.graphicalAttributes)
+			graphicalAttributes: Map(port.graphicalAttributes)
 				.set('position', new PositionRecord(port.graphicalAttributes.position))
 				.set(
 					'properties',
@@ -87,15 +98,15 @@ function setPort(state: State, port: Port) {
 							index,
 							...port.graphicalAttributes.properties,
 						},
-					) || new Map(),
+					) || Map(),
 				),
 		}),
 	);
 	const type = port.graphicalAttributes.properties.type;
 	if (type === PORT_SOURCE) {
-		return newState.setIn(['out', port.nodeId, port.id], new Map());
+		return newState.setIn(['out', port.nodeId, port.id], Map());
 	} else if (type === PORT_SINK) {
-		return newState.setIn(['in', port.nodeId, port.id], new Map());
+		return newState.setIn(['in', port.nodeId, port.id], Map());
 	}
 	invariant(
 		false,
@@ -203,10 +214,10 @@ export default function portReducer(state: State, action: PortAction): State {
 			if (port) {
 				const newState = portInLink(state, action.portId)
 					.reduce(
-						(cumulativeState, link) =>
+						(cumulativeState: State, link: LinkRecordType) =>
 							linkReducer(cumulativeState, removeLink(link.id)),
 						portOutLink(state, action.portId).reduce(
-							(cumulativeState, link) =>
+							(cumulativeState: State, link: LinkRecordType) =>
 								linkReducer(cumulativeState, removeLink(link.id)),
 							state,
 						),

@@ -1,31 +1,22 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import { mapOf } from 'react-immutable-proptypes';
+import get from 'lodash/get';
+import { Map } from 'immutable';
 
 import { Port } from '../../api';
-import { PortType } from '../../constants/flowdesigner.proptypes';
+import { PortRecord, PortRecordMap } from '../../customTypings/index.d';
 
-class PortsRenderer extends React.Component {
+export default function PortsRenderer({
+	ports,
+	portTypeMap,
+}: {
+	ports: PortRecordMap;
+	portTypeMap: Map<string, any>;
+}) {
+	const renderPort = (port: PortRecord) => {
+		const type = Port.getComponentType(port);
+		const ConcretePort = get(portTypeMap.get(type), 'component');
+		return <ConcretePort key={Port.getId(port)} port={port} />;
+	};
 
-  static propTypes = {
-    ports: mapOf(PortType).isRequired,
-    portTypeMap: PropTypes.object.isRequired
-  };
-
-  constructor(props) {
-    super(props);
-    this.renderPort = this.renderPort.bind(this);
-  }
-
-  renderPort(port) {
-    const type = Port.getComponentType(port);
-    const ConcretePort = this.props.portTypeMap[type].component;
-    return <ConcretePort key={Port.getId(port)} port={port} />;
-  }
-
-  render() {
-    return <g>{this.props.ports.valueSeq().map(this.renderPort)}</g>;
-  }
+	return <g>{ports.valueSeq().map(renderPort)}</g>;
 }
-
-export default PortsRenderer;

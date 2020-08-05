@@ -13,6 +13,7 @@ import {
 	FLOWDESIGNER_NODE_REMOVE,
 	FLOWDESIGNER_NODE_UPDATE,
 } from '../constants/flowdesigner.constants';
+import { Position } from '../customTypings/index.d';
 
 /**
  * Ask for node creation and injection into current dataflow
@@ -23,7 +24,7 @@ import {
  */
 export const addNode = (
 	nodeId: string,
-	nodeType: string,
+	nodeType?: string,
 	{ data = {}, graphicalAttributes = {} }: any = {},
 ) => ({
 	type: FLOWDESIGNER_NODE_ADD,
@@ -51,7 +52,7 @@ export function startMoveNodeTo(nodeId: string, nodePosition: string) {
  * @param {{x: number, y: number}} nodePosition - the new absolute position of the node
  * @return {Object}
  */
-export function moveNodeTo(nodeId: string, nodePosition: { x: number; y: number }) {
+export function moveNodeTo(nodeId: string, nodePosition: Position) {
 	return {
 		type: FLOWDESIGNER_NODE_MOVE,
 		nodeId,
@@ -67,7 +68,7 @@ export function moveNodeTo(nodeId: string, nodePosition: { x: number; y: number 
  *
  * @return {Object}
  */
-export const applyMovementTo = (nodesId: number[], movement: { x: number; y: number }) => ({
+export const applyMovementTo = (nodesId: number[], movement: Position) => ({
 	type: FLOWDESIGNER_NODE_APPLY_MOVEMENT,
 	nodesId,
 	movement,

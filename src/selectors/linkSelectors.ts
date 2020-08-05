@@ -1,18 +1,34 @@
 import { createSelector } from 'reselect';
 import { Map } from 'immutable';
+import {
+	State,
+	PortRecordMap,
+	LinkRecordMap,
+	LinkRecord,
+	PortRecord,
+	Id,
+} from '../customTypings/index.d';
 
-const getPorts = state => state.get('ports');
-const getLinks = state => state.get('links');
+const getPorts = (state: State): PortRecordMap => state.get('ports');
+const getLinks = (state: State): LinkRecordMap => state.get('links');
 
-export const getDetachedLinks = createSelector([getLinks, getPorts], (links, ports) => links.filter(link => !ports.find(port => port.id === link.sourceId) || !ports.find(port => port.id === link.targetId)));
+export const getDetachedLinks = createSelector(
+	[getLinks, getPorts],
+	(links: LinkRecordMap, ports: PortRecordMap) =>
+		links.filter(
+			(link: LinkRecord) =>
+				!ports.find((port: PortRecord) => port.id === link.sourceId) ||
+				!ports.find((port: PortRecord) => port.id === link.targetId),
+		),
+);
 
 /**
  * get outgoing link from a port
  *
  * @return {Link}
  */
-export function portOutLink(state, portId) {
-  return state.get('links').filter(link => link.sourceId === portId) || new Map();
+export function portOutLink(state: State, portId: Id) {
+	return state.get('links').filter((link: LinkRecord) => link.sourceId === portId) || Map();
 }
 
 /**
@@ -20,8 +36,8 @@ export function portOutLink(state, portId) {
  *
  * @return {Link}
  */
-export function portInLink(state, portId) {
-  return state.get('links').filter(link => link.targetId === portId) || new Map();
+export function portInLink(state: State, portId: Id) {
+	return state.get('links').filter((link: LinkRecord) => link.targetId === portId) || Map();
 }
 
 /**
@@ -29,8 +45,10 @@ export function portInLink(state, portId) {
  *
  * @return number
  */
-export function outLink(state, nodeId) {
-  return state.getIn(['out', nodeId]).reduce((reduction, port) => reduction.merge(port), new Map());
+export function outLink(state: State, nodeId: Id) {
+	return state
+		.getIn(['out', nodeId])
+		.reduce((reduction: PortRecordMap, port: PortRecord) => reduction.merge(port), Map());
 }
 
 /**
@@ -38,8 +56,10 @@ export function outLink(state, nodeId) {
  *
  * @return number
  */
-export function inLink(state, nodeId) {
-  return state.getIn(['in', nodeId]).reduce((reduction, port) => reduction.merge(port), new Map());
+export function inLink(state: State, nodeId: Id) {
+	return state
+		.getIn(['in', nodeId])
+		.reduce((reduction: PortRecordMap, port: PortRecord) => reduction.merge(port), Map());
 }
 
 export default getDetachedLinks;

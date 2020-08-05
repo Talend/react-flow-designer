@@ -4,59 +4,71 @@ import React from 'react';
 
 import { select, event } from 'd3-selection';
 import { drag } from 'd3-drag';
+import { PositionRecord } from '../../customTypings/index.d';
 
-class LinkHandle extends React.Component {
+type Props = {
+	position: PositionRecord;
+	onDrag?: (event: any) => void;
+	onDragEnd?: (event: any) => void;
+	component: React.ReactElement;
+};
 
-  static propTypes = {
-    position: ImmutablePropTypes.recordOf({
-      x: PropTypes.number.isRequired,
-      y: PropTypes.number.isRequired
-    }).isRequired,
-    onDrag: PropTypes.func,
-    onDragEnd: PropTypes.func,
-    component: PropTypes.element.isRequired
-  };
+class LinkHandle extends React.Component<Props> {
+	d3Handle: any;
 
-  constructor(props) {
-    super(props);
-    this.drag = this.drag.bind(this);
-    this.dragEnd = this.dragEnd.bind(this);
-  }
+	handle: React.ElementRef<'g'> | null;
 
-  componentDidMount() {
-    this.d3Handle = select(this.handle);
-    this.d3Handle.call(drag().on('drag', this.drag).on('end', this.dragEnd));
-  }
+	static propTypes = {
+		position: ImmutablePropTypes.recordOf({
+			x: PropTypes.number.isRequired,
+			y: PropTypes.number.isRequired,
+		}).isRequired,
+		onDrag: PropTypes.func,
+		onDragEnd: PropTypes.func,
+		component: PropTypes.element.isRequired,
+	};
 
-  componentWillUnmount() {
-    this.d3Handle.remove();
-  }
+	constructor(props: Props) {
+		super(props);
+		this.drag = this.drag.bind(this);
+		this.dragEnd = this.dragEnd.bind(this);
+		this.handle = null;
+	}
 
-  drag() {
-    if (this.props.onDrag) {
-      this.props.onDrag(event);
-    }
-  }
+	componentDidMount() {
+		this.d3Handle = select(this.handle);
+		this.d3Handle.call(drag().on('drag', this.drag).on('end', this.dragEnd));
+	}
 
-  dragEnd() {
-    if (this.props.onDragEnd) {
-      this.props.onDragEnd(event);
-    }
-  }
+	componentWillUnmount() {
+		this.d3Handle.remove();
+	}
 
-  render() {
-    const position = this.props.position;
-    return (
-	<g
-		ref={c => {
-      this.handle = c;
-    }}
-		transform={`translate(${position.get('x')},${position.get('y')})`}
-	>
-		{this.props.component}
-	</g>
-);
-  }
+	drag() {
+		if (this.props.onDrag) {
+			this.props.onDrag(event);
+		}
+	}
+
+	dragEnd() {
+		if (this.props.onDragEnd) {
+			this.props.onDragEnd(event);
+		}
+	}
+
+	render() {
+		const position = this.props.position;
+		return (
+			<g
+				ref={c => {
+					this.handle = c;
+				}}
+				transform={`translate(${position.get('x')},${position.get('y')})`}
+			>
+				{this.props.component}
+			</g>
+		);
+	}
 }
 
 export default LinkHandle;

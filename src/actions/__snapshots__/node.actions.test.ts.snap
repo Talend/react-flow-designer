@@ -4,9 +4,19 @@ exports[`Check that node action creators generate proper action objects and perf
 Array [
   Object {
     "data": Object {},
-    "graphicalAttributes": Object {},
+    "graphicalAttributes": Object {
+      "nodePosition": Object {
+        "x": 75,
+        "y": 75,
+      },
+      "nodeSize": Object {
+        "height": 50,
+        "width": 50,
+      },
+      "nodeType": "nodeType",
+    },
     "nodeId": "id",
-    "nodeType": "label",
+    "nodeType": "type",
     "type": "FLOWDESIGNER_NODE_ADD",
   },
 ]
@@ -57,7 +67,7 @@ Array [
 exports[`Check that node action creators generate proper action objects and perform checking setNodeData 1`] = `
 Array [
   Object {
-    "bySubmit": undefined,
+    "bySubmit": false,
     "data": Object {
       "type": "test",
     },

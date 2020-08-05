@@ -1,4 +1,6 @@
+/* eslint-disable new-cap */
 import { Record, Map } from 'immutable';
+import { Size, PortDirection, PortRecord as PortRecordType } from '../customTypings/index.d';
 
 export const NONE = 'NONE';
 export const SELECTED = 'SELECTED';
@@ -22,57 +24,57 @@ export const NodeGraphicalAttributes = Record({
 	nodeType: undefined,
 	label: '',
 	description: '',
-	properties: new Map(),
+	properties: Map(),
 });
 
 /** TO BE REMOVED */
 export const NodeData = Record({
-	properties: new Map(),
+	properties: Map(),
 	label: '',
 	description: '',
-	datasetInfo: new Map(),
+	datasetInfo: Map(),
 });
 
 /** TO BE REMOVED */
 export const LinkGraphicalAttributes = Record({
 	linkType: undefined,
-	properties: new Map(),
+	properties: Map(),
 });
 
 /** TO BE REMOVED */
 export const LinkData = Record({
-	properties: new Map(),
+	properties: Map(),
 });
 
 /** TO BE REMOVED */
 export const PortGraphicalAttributes = Record({
 	position: PositionRecord,
 	portType: undefined,
-	properties: new Map(),
+	properties: Map(),
 });
 
 /** TO BE REMOVED */
 export const PortData = Record({
-	properties: new Map(),
+	properties: Map(),
 	flowType: undefined,
 });
 
 export const NodeRecord = Record({
 	id: undefined,
 	type: undefined,
-	data: new Map({
-		properties: new Map(),
+	data: Map({
+		properties: Map(),
 		label: '',
 		description: '',
-		datasetInfo: new Map(),
+		datasetInfo: Map(),
 	}),
-	graphicalAttributes: new Map({
+	graphicalAttributes: Map({
 		position: new PositionRecord(),
 		nodeSize: new SizeRecord(),
 		nodeType: undefined,
 		label: '',
 		description: '',
-		properties: new Map(),
+		properties: Map(),
 	}),
 
 	/** methods TO BE REMOVED */
@@ -91,12 +93,12 @@ export const LinkRecord = Record({
 	id: undefined,
 	sourceId: undefined,
 	targetId: undefined,
-	data: new Map({
-		properties: new Map(),
+	data: Map({
+		properties: Map(),
 	}),
-	graphicalAttributes: new Map({
+	graphicalAttributes: Map({
 		linkType: undefined,
-		properties: new Map(),
+		properties: Map(),
 	}),
 
 	/** methods TO BE REMOVED */
@@ -108,14 +110,14 @@ export const LinkRecord = Record({
 export const PortRecord = Record({
 	id: undefined,
 	nodeId: undefined,
-	data: new Map({
-		properties: new Map(),
+	data: Map({
+		properties: Map(),
 		flowType: undefined,
 	}),
-	graphicalAttributes: new Map({
+	graphicalAttributes: Map({
 		position: PositionRecord,
 		portType: undefined,
-		properties: new Map(),
+		properties: Map(),
 	}),
 
 	/** methods TO BE REMOVED */

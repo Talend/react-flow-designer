@@ -45,7 +45,7 @@ describe('Check that node action creators generate proper action objects and per
 			},
 		});
 
-		store.dispatch(nodeActions.moveNodeTo('nodeId', { x: 10, y: 20 }, {}));
+		store.dispatch(nodeActions.moveNodeTo('nodeId', { x: 10, y: 20 }));
 
 		expect(store.getActions()).toMatchSnapshot();
 	});

@@ -10,6 +10,13 @@ import invariant from 'invariant';
 import { Node, Port, Position, Size } from '../../api';
 import { NodeType } from '../../constants/flowdesigner.proptypes';
 import { GRID_SIZE, PORT_SINK, PORT_SOURCE } from '../../constants/flowdesigner.constants';
+import {
+	PortRecordMap,
+	Position as PositionType,
+	Size as SizeType,
+	NodeRecord,
+	Id,
+} from '../../customTypings/index.d';
 
 export const ABSTRACT_NODE_INVARIANT = `<AbstractNode /> should not be used without giving it a children
 ex: <AbstractNode><rect /></AbstractNode>`;
@@ -20,178 +27,226 @@ ex: <AbstractNode><rect /></AbstractNode>`;
  * @param nodePosition
  * @param nodeSize
  */
-function calculatePortPosition(ports, nodePosition, nodeSize) {
-  let portsWithPosition = new Map();
-  const emitterPorts = ports.filter(port => Port.getTopology(port) === PORT_SOURCE);
-  const sinkPorts = ports.filter(port => Port.getTopology(port) === PORT_SINK);
-  const range = [Position.getYCoordinate(nodePosition), Position.getYCoordinate(nodePosition) + Size.getHeight(nodeSize)];
-  const scaleYEmitter = scaleLinear().domain([0, emitterPorts.size + 1]).range(range);
-  const scaleYSink = scaleLinear().domain([0, sinkPorts.size + 1]).range(range);
-  let emitterNumber = 0;
-  let sinkNumber = 0;
-  emitterPorts.sort((a, b) => {
-    if (Port.getIndex(a) < Port.getIndex(b)) {
-      return -1;
-    }
-    if (Port.getIndex(a) > Port.getIndex(b)) {
-      return 1;
-    }
-    return 0;
-  }).forEach(port => {
-    emitterNumber += 1;
+function calculatePortPosition(
+	ports: PortRecordMap,
+	nodePosition: PositionType,
+	nodeSize: SizeType,
+) {
+	let portsWithPosition = Map();
+	const emitterPorts = ports.filter(port => Port.getTopology(port) === PORT_SOURCE);
+	const sinkPorts = ports.filter(port => Port.getTopology(port) === PORT_SINK);
+	const range = [
+		Position.getYCoordinate(nodePosition),
+		Position.getYCoordinate(nodePosition) + Size.getHeight(nodeSize),
+	];
+	const scaleYEmitter = scaleLinear()
+		.domain([0, emitterPorts.size + 1])
+		.range(range);
+	const scaleYSink = scaleLinear()
+		.domain([0, sinkPorts.size + 1])
+		.range(range);
+	let emitterNumber = 0;
+	let sinkNumber = 0;
+	emitterPorts
+		.sort((a, b) => {
+			if (Port.getIndex(a) < Port.getIndex(b)) {
+				return -1;
+			}
+			if (Port.getIndex(a) > Port.getIndex(b)) {
+				return 1;
+			}
+			return 0;
+		})
+		.forEach(port => {
+			emitterNumber += 1;
 
-    const position = Position.create(Position.getXCoordinate(nodePosition) + Size.getWidth(nodeSize), scaleYEmitter(emitterNumber));
-    portsWithPosition = portsWithPosition.set(Port.getId(port), Port.setPosition(port, position));
-  });
-  sinkPorts.sort((a, b) => {
-    if (Port.getIndex(a) < Port.getIndex(b)) {
-      return -1;
-    }
-    if (Port.getIndex(a) > Port.getIndex(b)) {
-      return 1;
-    }
-    return 0;
-  }).forEach(port => {
-    sinkNumber += 1;
-    const position = Position.create(Position.getXCoordinate(nodePosition), scaleYSink(sinkNumber));
-    portsWithPosition = portsWithPosition.set(Port.getId(port), Port.setPosition(port, position));
-  });
-  return portsWithPosition;
+			const position = Position.create(
+				Position.getXCoordinate(nodePosition) + Size.getWidth(nodeSize),
+				scaleYEmitter(emitterNumber),
+			);
+			portsWithPosition = portsWithPosition.set(
+				Port.getId(port),
+				Port.setPosition(port, position),
+			);
+		});
+	sinkPorts
+		.sort((a, b) => {
+			if (Port.getIndex(a) < Port.getIndex(b)) {
+				return -1;
+			}
+			if (Port.getIndex(a) > Port.getIndex(b)) {
+				return 1;
+			}
+			return 0;
+		})
+		.forEach(port => {
+			sinkNumber += 1;
+			const position = Position.create(
+				Position.getXCoordinate(nodePosition),
+				scaleYSink(sinkNumber),
+			);
+			portsWithPosition = portsWithPosition.set(
+				Port.getId(port),
+				Port.setPosition(port, position),
+			);
+		});
+	return portsWithPosition;
 }
 
-class AbstractNode extends React.Component {
+type Props = {
+	node: NodeRecord;
+	startMoveNodeTo: (nodeId: Id, nodePosition: PositionType) => void;
+	moveNodeTo: (nodeId: Id, nodePosition: PositionType) => void;
+	moveNodeToEnd: (nodeId: Id, nodePosition: PositionType) => void;
+	snapToGrid?: boolean;
+	onDragStart?: (event: any) => void;
+	onDrag?: (event: any) => void;
+	onDragEnd?: (event: any) => void;
+	onClick?: React.MouseEventHandler;
+	children?: any;
+};
 
-  static propTypes = {
-    node: NodeType.isRequired,
-    startMoveNodeTo: PropTypes.func.isRequired,
-    moveNodeTo: PropTypes.func.isRequired,
-    moveNodeToEnd: PropTypes.func.isRequired,
-    snapToGrid: PropTypes.bool,
-    onDragStart: PropTypes.func,
-    onDrag: PropTypes.func,
-    onDragEnd: PropTypes.func,
-    onClick: PropTypes.func,
-    children: PropTypes.node
-  };
+class AbstractNode extends React.Component<Props> {
+	d3Node: any;
 
-  static calculatePortPosition = calculatePortPosition;
+	nodeElement: any;
 
-  constructor(props) {
-    super(props);
-    this.onClick = this.onClick.bind(this);
-    this.onDragStart = this.onDragStart.bind(this);
-    this.onDrag = this.onDrag.bind(this);
-    this.onDragEnd = this.onDragEnd.bind(this);
-    this.renderContent = this.renderContent.bind(this);
-    this.getEventPosition = this.getEventPosition.bind(this);
-  }
+	squaredDeltaDrag: number = 0;
 
-  componentDidMount() {
-    this.d3Node = select(this.nodeElement);
-    this.d3Node.data([this.props.node.getPosition()]);
-    this.d3Node.call(drag().on('start', this.onDragStart).on('drag', this.onDrag).on('end', this.onDragEnd));
-  }
+	static propTypes = {
+		node: NodeType.isRequired,
+		startMoveNodeTo: PropTypes.func.isRequired,
+		moveNodeTo: PropTypes.func.isRequired,
+		moveNodeToEnd: PropTypes.func.isRequired,
+		snapToGrid: PropTypes.bool,
+		onDragStart: PropTypes.func,
+		onDrag: PropTypes.func,
+		onDragEnd: PropTypes.func,
+		onClick: PropTypes.func,
+		children: PropTypes.node,
+	};
 
-  componentWillReceiveProps(nextProps) {
-    const nextPosition = Node.getPosition(nextProps.node);
-    if (nextPosition !== Node.getPosition(this.props.node)) {
-      this.d3Node.data([nextPosition]);
-    }
-  }
+	constructor(props: Props) {
+		super(props);
+		this.onClick = this.onClick.bind(this);
+		this.onDragStart = this.onDragStart.bind(this);
+		this.onDrag = this.onDrag.bind(this);
+		this.onDragEnd = this.onDragEnd.bind(this);
+		this.renderContent = this.renderContent.bind(this);
+		this.getEventPosition = this.getEventPosition.bind(this);
+	}
 
-  shouldComponentUpdate(nextProps) {
-    return nextProps !== this.props;
-  }
+	componentDidMount() {
+		this.d3Node = select(this.nodeElement);
+		this.d3Node.data([this.props.node.getPosition()]);
+		this.d3Node.call(
+			drag().on('start', this.onDragStart).on('drag', this.onDrag).on('end', this.onDragEnd),
+		);
+	}
 
-  componentWillUnmount() {
-    this.d3Node.remove();
-  }
+	UNSAFE_componentWillReceiveProps(nextProps: Props) {
+		const nextPosition = Node.getPosition(nextProps.node);
+		if (nextPosition !== Node.getPosition(this.props.node)) {
+			this.d3Node.data([nextPosition]);
+		}
+	}
 
-  onClick(clickEvent) {
-    if (this.props.onClick) {
-      this.props.onClick(clickEvent);
-    }
-  }
+	shouldComponentUpdate(nextProps: Props) {
+		return nextProps !== this.props;
+	}
 
-  onDragStart() {
-    this.squaredDeltaDrag = 0;
-    const position = {
-      x: event.x,
-      y: event.y
-    };
-    this.props.startMoveNodeTo(this.props.node.id, position);
-    if (this.props.onDragStart) {
-      this.props.onDragStart(event);
-    }
-  }
+	componentWillUnmount() {
+		this.d3Node.remove();
+	}
 
-  onDrag() {
-    this.squaredDeltaDrag += event.dx * event.dx + event.dy * event.dy;
-    const position = {
-      x: event.x,
-      y: event.y,
-      movementX: event.sourceEvent.movementX,
-      movementY: event.sourceEvent.movementY
-    };
-    this.props.moveNodeTo(this.props.node.id, position);
-    if (this.props.onDrag) {
-      this.props.onDrag(position);
-    }
-  }
+	onClick(clickEvent: React.MouseEvent) {
+		if (this.props.onClick) {
+			this.props.onClick(clickEvent);
+		}
+	}
 
-  onDragEnd() {
-    // Ok this is pretty specific
-    // for a chrome windows bug
-    // where d3 inhibit onCLick propagation
-    // if there is any delta between down and up of the mouse
-    // here we add a tolerance, so the underlying click doesn't
-    // get smooshed if the user do not initiate drag
-    if (this.squaredDeltaDrag < 1) {
-      select(window).on('click.drag', null);
-    }
-    const position = this.getEventPosition(event);
-    this.props.moveNodeToEnd(this.props.node.id, position);
-    this.d3Node.data([position]);
-    if (this.props.onDragEnd) {
-      this.props.onDragEnd(position);
-    }
-  }
+	onDragStart() {
+		this.squaredDeltaDrag = 0;
+		const position = {
+			x: event.x,
+			y: event.y,
+		};
+		this.props.startMoveNodeTo(this.props.node.id, position);
+		if (this.props.onDragStart) {
+			this.props.onDragStart(event);
+		}
+	}
 
-  getEventPosition() {
-    if (this.props.snapToGrid) {
-      return {
-        x: event.x - event.x % GRID_SIZE,
-        y: event.y - event.y % GRID_SIZE
-      };
-    }
-    return { x: event.x, y: event.y };
-  }
+	onDrag() {
+		this.squaredDeltaDrag += event.dx * event.dx + event.dy * event.dy;
+		const position = {
+			x: event.x,
+			y: event.y,
+			movementX: event.sourceEvent.movementX,
+			movementY: event.sourceEvent.movementY,
+		};
+		this.props.moveNodeTo(this.props.node.id, position);
+		if (this.props.onDrag) {
+			this.props.onDrag(position);
+		}
+	}
 
-  renderContent() {
-    if (this.props.children) {
-      return this.props.children;
-    }
-    invariant(false, ABSTRACT_NODE_INVARIANT);
-    return null;
-  }
+	onDragEnd() {
+		// Ok this is pretty specific
+		// for a chrome windows bug
+		// where d3 inhibit onCLick propagation
+		// if there is any delta between down and up of the mouse
+		// here we add a tolerance, so the underlying click doesn't
+		// get smooshed if the user do not initiate drag
+		if (this.squaredDeltaDrag < 1) {
+			select(window).on('click.drag', null);
+		}
+		const position = this.getEventPosition();
+		this.props.moveNodeToEnd(this.props.node.id, position);
+		this.d3Node.data([position]);
+		if (this.props.onDragEnd) {
+			this.props.onDragEnd(position);
+		}
+	}
 
-  render() {
-    const {
-      node
-    } = this.props;
-    const {
-      x,
-      y
-    } = Node.getPosition(node);
-    const transform = `translate(${x}, ${y})`;
-    return (
-	<g>
-		<g transform={transform} ref={c => this.nodeElement = c} onClick={this.onClick}>
-			{this.renderContent()}
-		</g>
-	</g>
-);
-  }
+	getEventPosition() {
+		if (this.props.snapToGrid) {
+			return {
+				x: event.x - (event.x % GRID_SIZE),
+				y: event.y - (event.y % GRID_SIZE),
+			};
+		}
+		return { x: event.x, y: event.y };
+	}
+
+	static calculatePortPosition = calculatePortPosition;
+
+	renderContent() {
+		if (this.props.children) {
+			return this.props.children;
+		}
+		invariant(false, ABSTRACT_NODE_INVARIANT);
+		return null;
+	}
+
+	render() {
+		const { node } = this.props;
+		const { x, y } = Node.getPosition(node);
+		const transform = `translate(${x}, ${y})`;
+		return (
+			<g>
+				<g
+					transform={transform}
+					ref={c => {
+						this.nodeElement = c;
+					}}
+					onClick={this.onClick}
+				>
+					{this.renderContent()}
+				</g>
+			</g>
+		);
+	}
 }
 
 export default AbstractNode;

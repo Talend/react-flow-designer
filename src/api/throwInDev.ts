@@ -23,7 +23,7 @@ export function throwInDev(message: string | TypeError) {
 export function throwTypeError(
 	expected: string,
 	given: { toString: () => any },
-	module: string | undefined,
+	module?: string | undefined,
 ) {
 	throwInDev(
 		new TypeError(`${expected || 'parameter'} should be a ${expected}, was given

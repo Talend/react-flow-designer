@@ -77,6 +77,7 @@ Immutable.Map {
       "id": "portId",
       "nodeId": "nodeId",
       "data": Immutable.Map {
+        "flowType": "batch",
         "properties": Immutable.Map {},
       },
       "graphicalAttributes": Immutable.Map {

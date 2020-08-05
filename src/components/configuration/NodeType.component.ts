@@ -1,20 +1,15 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import invariant from 'invariant';
 
-class NodeType extends React.Component {
-
-  static displayName = 'NodeType';
-
-  static propTypes = {
-    type: PropTypes.string.isRequired,
-    component: PropTypes.func.isRequired
-  };
-
-  render() {
-    invariant(false, '<NodeType> elements are for DataFlow configuration only and should not be rendered');
-    return null;
-  }
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function NodeType({ type, component }: { type: string; component: React.ReactNode }) {
+	invariant(
+		false,
+		'<NodeType> elements are for DataFlow configuration only and should not be rendered',
+	);
+	return null;
 }
+
+NodeType.displayName = 'NodeType';
 
 export default NodeType;

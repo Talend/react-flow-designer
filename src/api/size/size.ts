@@ -3,6 +3,7 @@ import flow from 'lodash/flow';
 
 import { throwInDev, throwTypeError } from '../throwInDev';
 import { SizeRecord } from '../../constants/flowdesigner.model';
+import { SizeRecord as SizeRecordType } from '../../customTypings/index.d';
 
 /**
  * @desc Represent a size comprised of width and height
@@ -22,11 +23,11 @@ import { SizeRecord } from '../../constants/flowdesigner.model';
  * @param {*} size
  * @return {bool}
  */
-export function isSize(size) {
-  if (size && size instanceof SizeRecord) {
-    return true;
-  }
-  return false;
+export function isSize(size: SizeRecordType) {
+	if (size && size instanceof SizeRecord) {
+		return true;
+	}
+	return false;
 }
 
 /**
@@ -34,12 +35,12 @@ export function isSize(size) {
  * @param {*} size
  * @return {bool}
  */
-export function isSizeElseThrow(size) {
-  const test = isSize(size);
-  if (!test) {
-    throwTypeError('SizeRecord', size, 'size', 'Size');
-  }
-  return test;
+export function isSizeElseThrow(size: SizeRecordType) {
+	const test = isSize(size);
+	if (!test) {
+		throwTypeError('SizeRecord', size, 'Size');
+	}
+	return test;
 }
 
 /**
@@ -47,11 +48,11 @@ export function isSizeElseThrow(size) {
  * @param {SizeRecord} size
  * @return {number}
  */
-export function getWidth(size) {
-  if (isSizeElseThrow(size)) {
-    return size.get('width');
-  }
-  return null;
+export function getWidth(size: SizeRecordType) {
+	if (isSizeElseThrow(size)) {
+		return size.get('width');
+	}
+	return null;
 }
 
 /**
@@ -61,12 +62,12 @@ export function getWidth(size) {
  * @param {SizeRecord} size
  * @return {SizeRecord}
  */
-export const setWidth = curry((width, size) => {
-  if (isSizeElseThrow(size) && typeof width === 'number') {
-    return size.set('width', width);
-  }
-  throwInDev(`width should be a number, was given ${width.toString()}  of type ${typeof width}`);
-  return size;
+export const setWidth = curry((width: number, size: SizeRecordType) => {
+	if (isSizeElseThrow(size) && typeof width === 'number') {
+		return size.set('width', width);
+	}
+	throwInDev(`width should be a number, was given ${width.toString()}  of type ${typeof width}`);
+	return size;
 });
 
 /**
@@ -74,11 +75,11 @@ export const setWidth = curry((width, size) => {
  * @param {SizeRecord} size
  * @return {number}
  */
-export function getHeight(size) {
-  if (isSizeElseThrow(size)) {
-    return size.get('height');
-  }
-  return null;
+export function getHeight(size: SizeRecordType) {
+	if (isSizeElseThrow(size)) {
+		return size.get('height');
+	}
+	return null;
 }
 
 /**
@@ -88,12 +89,14 @@ export function getHeight(size) {
  * @param {SizeRecord} size
  * @returns {SizeRecord}
  */
-export const setHeight = curry((height, size) => {
-  if (isSizeElseThrow(size) && typeof height === 'number') {
-    return size.set('height', height);
-  }
-  throwInDev(`height should be a number, was given ${height.toString()}  of type ${typeof height}`);
-  return size;
+export const setHeight = curry((height: number, size: SizeRecordType) => {
+	if (isSizeElseThrow(size) && typeof height === 'number') {
+		return size.set('height', height);
+	}
+	throwInDev(
+		`height should be a number, was given ${height.toString()}  of type ${typeof height}`,
+	);
+	return size;
 });
 
 /**
@@ -103,4 +106,6 @@ export const setHeight = curry((height, size) => {
  * @param {number} height
  * @return {SizeRecord}
  */
-export const create = curry((width, height) => flow([setWidth(width), setHeight(height)])(new SizeRecord()));
+export const create = curry((width: number, height: number) =>
+	flow([setWidth(width), setHeight(height)])(new SizeRecord()),
+);

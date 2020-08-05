@@ -1,88 +1,98 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import { select, event } from 'd3-selection';
-import { zoom as d3ZoomFactory } from 'd3-zoom';
+import { zoom as d3ZoomFactory, ZoomBehavior } from 'd3-zoom';
+import { Transform } from '../customTypings/index.d';
 
-export function transformToString(transform) {
-  return `translate(${transform.x}, ${transform.y}) scale(${transform.k})`;
+export function transformToString(transform?: Transform) {
+	if (transform) {
+		return `translate(${transform.x}, ${transform.y}) scale(${transform.k})`;
+	}
+	return '';
 }
-class ZoomHandler extends React.Component {
 
-  static propTypes = {
-    children: PropTypes.arrayOf(PropTypes.element).isRequired,
-    setZoom: PropTypes.func,
-    transform: PropTypes.shape({
-      k: PropTypes.number.isRequired,
-      x: PropTypes.number.isRequired,
-      y: PropTypes.number.isRequired
-    }),
-    transformToApply: PropTypes.shape({
-      k: PropTypes.number.isRequired,
-      x: PropTypes.number.isRequired,
-      y: PropTypes.number.isRequired
-    })
-  };
+type State = {
+	transform?: Transform;
+	transformToApply?: Transform;
+};
 
-  zoom;
+type Props = {
+	children?: any;
+	setZoom?: (transform: Transform) => void;
+	transform?: Transform;
+	transformToApply?: Transform;
+};
 
-  selection;
+class ZoomHandler extends React.Component<Props, State> {
+	zoom: ZoomBehavior<Element, unknown>;
 
-  constructor(props) {
-    super(props);
-    this.onZoom = this.onZoom.bind(this);
-    this.onZoomEnd = this.onZoomEnd.bind(this);
-  }
+	selection: any;
 
-  componentWillMount() {
-    this.setState({ transform: this.props.transform });
-  }
+	zoomCatcher: any;
 
-  componentDidMount() {
-    this.selection = select(this.zoomCatcher);
-    this.zoom = d3ZoomFactory().scaleExtent([1 / 4, 2]).on('zoom', this.onZoom).on('end', this.onZoomEnd);
-    this.selection.call(this.zoom);
-  }
+	constructor(props: Props) {
+		super(props);
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.transformToApply) {
-      if (nextProps.transformToApply !== this.props.transformToApply) {
-        this.selection.transition().duration(230).call(this.zoom.transform, nextProps.transformToApply);
-      }
-    }
-  }
+		this.zoom = d3ZoomFactory()
+			.scaleExtent([1 / 4, 2])
+			.on('zoom', this.onZoom)
+			.on('end', this.onZoomEnd);
 
-  onZoomEnd() {
-    this.props.setZoom(event.transform);
-  }
+		this.onZoom = this.onZoom.bind(this);
+		this.onZoomEnd = this.onZoomEnd.bind(this);
+	}
 
-  onZoom() {
-    this.setState({ transform: event.transform });
-  }
+	UNSAFE_componentWillMount() {
+		this.setState({ transform: this.props.transform });
+	}
 
-  render() {
-    const {
-      transform
-    } = this.state;
-    const childrens = React.Children.map(this.props.children, children => React.cloneElement(children, {
-      transformData: transform,
-      transform: transformToString(transform)
-    }));
-    return (
-	<g x="0" y="0" width="100%" height="100%">
-		<rect
-			ref={c => {
-        this.zoomCatcher = c;
-      }}
-			style={{ fill: 'none', pointerEvents: 'all' }}
-			x="0"
-			y="0"
-			width="100%"
-			height="100%"
-		/>
-		{childrens}
-	</g>
-);
-  }
+	componentDidMount() {
+		this.selection = select(this.zoomCatcher);
+		this.selection.call(this.zoom);
+	}
+
+	UNSAFE_componentWillReceiveProps(nextProps: Props) {
+		if (nextProps.transformToApply) {
+			if (nextProps.transformToApply !== this.props.transformToApply) {
+				this.selection
+					.transition()
+					.duration(230)
+					.call(this.zoom.transform, nextProps.transformToApply);
+			}
+		}
+	}
+
+	onZoomEnd() {
+		if (this.props.setZoom) this.props.setZoom(event.transform);
+	}
+
+	onZoom() {
+		this.setState({ transform: event.transform });
+	}
+
+	render() {
+		const { transform } = this.state;
+		const childrens = React.Children.map(this.props.children, children =>
+			React.cloneElement(children, {
+				transformData: transform,
+				transform: transformToString(transform),
+			}),
+		);
+		return (
+			<g x="0" y="0" width="100%" height="100%">
+				<rect
+					ref={c => {
+						this.zoomCatcher = c;
+					}}
+					style={{ fill: 'none', pointerEvents: 'all' }}
+					x="0"
+					y="0"
+					width="100%"
+					height="100%"
+				/>
+				{childrens}
+			</g>
+		);
+	}
 }
 
 export default ZoomHandler;

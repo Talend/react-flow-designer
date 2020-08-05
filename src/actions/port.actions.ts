@@ -11,13 +11,15 @@ import {
  * return an action to create a new port
  * @param {string} nodeId - identifier of the node to wich the created connector should be attached
  * @param {string} id
- * @param {string} portType
  * @param {Object} attributes
  */
 export function addPort(
 	nodeId: Id,
 	id: Id,
-	{ data, graphicalAttributes }: { data: PortData; graphicalAttributes: PortGraphicalAttributes },
+	{
+		data,
+		graphicalAttributes,
+	}: { data?: PortData; graphicalAttributes?: PortGraphicalAttributes },
 ): PortActionAdd {
 	return {
 		type: 'FLOWDESIGNER_PORT_ADD',

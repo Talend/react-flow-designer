@@ -4,6 +4,7 @@ import isNumber from 'lodash/isNumber';
 
 import { throwInDev, throwTypeError } from '../throwInDev';
 import { PositionRecord } from '../../constants/flowdesigner.model';
+import { PositionRecord as PositionRecordType } from '../../customTypings/index.d';
 
 /**
  * @desc Represent a position comprised of X and Y coordinates
@@ -23,11 +24,11 @@ import { PositionRecord } from '../../constants/flowdesigner.model';
  * @param {*} position
  * @return {bool}
  */
-export function isPosition(position) {
-  if (position && position instanceof PositionRecord) {
-    return true;
-  }
-  return false;
+export function isPosition(position: PositionRecordType) {
+	if (position && position instanceof PositionRecord) {
+		return true;
+	}
+	return false;
 }
 
 /**
@@ -35,12 +36,12 @@ export function isPosition(position) {
  * @param {*} position
  * @return {bool}
  */
-export function isPositionElseThrow(position) {
-  const test = isPosition(position);
-  if (!test) {
-    throwTypeError('PositionRecord', position, 'position', 'Position');
-  }
-  return test;
+export function isPositionElseThrow(position: PositionRecordType) {
+	const test = isPosition(position);
+	if (!test) {
+		throwTypeError('PositionRecord', position, 'Position');
+	}
+	return test;
 }
 
 /**
@@ -48,11 +49,11 @@ export function isPositionElseThrow(position) {
  * @param {PositionRecord} position
  * @return {number}
  */
-export function getXCoordinate(position) {
-  if (isPositionElseThrow(position)) {
-    return position.get('x');
-  }
-  return null;
+export function getXCoordinate(position: PositionRecordType) {
+	if (isPositionElseThrow(position)) {
+		return position.get('x');
+	}
+	return null;
 }
 
 /**
@@ -62,12 +63,12 @@ export function getXCoordinate(position) {
  * @param {PositionRecord} position
  * @return {PositionRecord}
  */
-export const setXCoordinate = curry((x, position) => {
-  if (isPositionElseThrow(position) && isNumber(x)) {
-    return position.set('x', x);
-  }
-  throwInDev(`x should be a number, was given ${x && x.toString()} of type ${typeof x}`);
-  return position;
+export const setXCoordinate = curry((x: number, position: PositionRecordType) => {
+	if (isPositionElseThrow(position) && isNumber(x)) {
+		return position.set('x', x);
+	}
+	throwInDev(`x should be a number, was given ${x && x.toString()} of type ${typeof x}`);
+	return position;
 });
 
 /**
@@ -75,11 +76,11 @@ export const setXCoordinate = curry((x, position) => {
  * @param {PositionRecord} position
  * @return {number}
  */
-export function getYCoordinate(position) {
-  if (isPositionElseThrow(position)) {
-    return position.get('y');
-  }
-  return null;
+export function getYCoordinate(position: PositionRecordType) {
+	if (isPositionElseThrow(position)) {
+		return position.get('y');
+	}
+	return null;
 }
 
 /**
@@ -88,12 +89,12 @@ export function getYCoordinate(position) {
  * @param {PositionRecord} position
  * @return {PositionRecord}
  */
-export const setYCoordinate = curry((y, position) => {
-  if (isPositionElseThrow(position) && isNumber(y)) {
-    return position.set('y', y);
-  }
-  throwInDev(`y should be a number, was given ${y && y.toString()} of type ${typeof y}`);
-  return position;
+export const setYCoordinate = curry((y: number, position: PositionRecordType) => {
+	if (isPositionElseThrow(position) && isNumber(y)) {
+		return position.set('y', y);
+	}
+	throwInDev(`y should be a number, was given ${y && y.toString()} of type ${typeof y}`);
+	return position;
 });
 
 /**
@@ -102,4 +103,6 @@ export const setYCoordinate = curry((y, position) => {
  * @param {number} y
  * @return {PositionRecord}
  */
-export const create = curry((x, y) => flow([setXCoordinate(x), setYCoordinate(y)])(new PositionRecord()));
+export const create = curry((x: number, y: number) =>
+	flow([setXCoordinate(x), setYCoordinate(y)])(new PositionRecord()),
+);

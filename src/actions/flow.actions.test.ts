@@ -15,6 +15,6 @@ describe('setZoom', () => {
 	});
 
 	it('if transform object is not well set return null', () => {
-		expect(flowActions.setZoom({ k: 'yolo', x: 0, y: 0 })).toMatchSnapshot();
+		expect(flowActions.setZoom({ k: 'yolo' as any, x: 0, y: 0 })).toMatchSnapshot();
 	});
 });

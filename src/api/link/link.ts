@@ -8,10 +8,10 @@ import indexOf from 'lodash/indexOf';
 import isString from 'lodash/isString';
 import upperFirst from 'lodash/upperFirst';
 
-import { Map } from 'immutable';
 import { throwInDev, throwTypeError } from '../throwInDev';
 import { LinkRecord } from '../../constants/flowdesigner.model';
 import * as Data from '../data/data';
+import { LinkRecord as LinkRecordType, Id } from '../../customTypings/index.d';
 
 const linkTypeSelector = ['graphicalAttributes', 'linkType'];
 
@@ -29,7 +29,7 @@ const FORBIDEN_GRAPHICAL_ATTRIBUTES = ['properties', 'linkType'];
  * @return {bool}
  * @throws
  */
-export function isLink(link: any) {
+export function isLink(link: LinkRecordType) {
 	if (link && link instanceof LinkRecord) {
 		return true;
 	}
@@ -42,7 +42,7 @@ export function isLink(link: any) {
  * @return {bool}
  * @throws
  */
-export function isLinkElseThrow(link: Map<string, any>) {
+export function isLinkElseThrow(link: LinkRecordType) {
 	const test = isLink(link);
 	if (!test) {
 		throwTypeError('Linkrecord', link, 'Link');
@@ -55,7 +55,7 @@ export function isLinkElseThrow(link: Map<string, any>) {
  * @param {LinkRecord} link
  * @return {string}
  */
-export function getId(link: Map<string, any>) {
+export function getId(link: LinkRecordType) {
 	if (isLinkElseThrow(link)) {
 		return link.get('id');
 	}
@@ -68,7 +68,7 @@ export function getId(link: Map<string, any>) {
  * @param {LinkRecord} link
  * @return {LinkRecord}
  */
-export const setId = curry((id: { toString: () => any }, link: Map<string, any>) => {
+export const setId = curry((id: Id, link: LinkRecordType) => {
 	if (isString(id) && isLinkElseThrow(link)) {
 		return link.set('id', id);
 	}
@@ -80,7 +80,7 @@ export const setId = curry((id: { toString: () => any }, link: Map<string, any>)
  * @param {LinkRecord} link
  * @return {string}
  */
-export function getSourceId(link: Map<string, any>) {
+export function getSourceId(link: LinkRecordType) {
 	if (isLinkElseThrow(link)) {
 		return link.get('sourceId');
 	}
@@ -93,7 +93,7 @@ export function getSourceId(link: Map<string, any>) {
  * @param {LinkRecord} link
  * @return {LinkRecord}
  */
-export const setSourceId = curry((sourceId: { toString: () => any }, link: Map<string, any>) => {
+export const setSourceId = curry((sourceId: Id, link: LinkRecordType) => {
 	if (isString(sourceId) && isLinkElseThrow(link)) {
 		return link.set('sourceId', sourceId);
 	}
@@ -105,7 +105,7 @@ export const setSourceId = curry((sourceId: { toString: () => any }, link: Map<s
  * @param {LinkRecord} link
  * @return {string}
  */
-export function getTargetId(link: Map<string, any>) {
+export function getTargetId(link: LinkRecordType) {
 	if (isLinkElseThrow(link)) {
 		return link.get('targetId');
 	}
@@ -118,7 +118,7 @@ export function getTargetId(link: Map<string, any>) {
  * @param {LinkRecord} link
  * @return {LinkRecord}
  */
-export const setTargetId = curry((targetId: { toString: () => any }, link: Map<string, any>) => {
+export const setTargetId = curry((targetId: Id, link: LinkRecordType) => {
 	if (isString(targetId) && isLinkElseThrow(link)) {
 		return link.set('targetId', targetId);
 	}
@@ -130,7 +130,7 @@ export const setTargetId = curry((targetId: { toString: () => any }, link: Map<s
  * @param {LinkRecord} link
  * @return {string}
  */
-export function getComponentType(link: Map<string, any>) {
+export function getComponentType(link: LinkRecordType) {
 	if (isLinkElseThrow(link)) {
 		return link.getIn(linkTypeSelector);
 	}
@@ -143,15 +143,13 @@ export function getComponentType(link: Map<string, any>) {
  * @param {LinkRecord} link
  * @return {LinkRecord}
  */
-export const setComponentType = curry(
-	(linkType: { toString: () => any }, link: Map<string, any>) => {
-		if (isString(linkType) && isLinkElseThrow(link)) {
-			return link.setIn(linkTypeSelector, linkType);
-		}
-		throwInDev(`linkType should be a string, was given ${linkType && linkType.toString()}`);
-		return link;
-	},
-);
+export const setComponentType = curry((linkType: string, link: LinkRecordType) => {
+	if (isString(linkType) && isLinkElseThrow(link)) {
+		return link.setIn(linkTypeSelector, linkType);
+	}
+	throwInDev(`linkType should be a string, was given ${linkType && linkType.toString()}`);
+	return link;
+});
 
 /**
  * @function
@@ -160,7 +158,7 @@ export const setComponentType = curry(
  * @param {LinkRecord} link
  * @return {LinkRecord}
  */
-export const setData = curry((key: string, value: any, link: Map<string, any>) => {
+export const setData = curry((key: string, value: any, link: LinkRecordType) => {
 	if (isLinkElseThrow(link)) {
 		return link.set('data', Data.set(key, value, link.get('data')));
 	}
@@ -173,7 +171,7 @@ export const setData = curry((key: string, value: any, link: Map<string, any>) =
  * @param {LinkRecord} link
  * @return {any | null}
  */
-export const getData = curry((key: string, link: Map<string, any>) => {
+export const getData = curry((key: string, link: LinkRecordType) => {
 	if (isLinkElseThrow(link)) {
 		return Data.get(key, link.get('data'));
 	}
@@ -186,7 +184,7 @@ export const getData = curry((key: string, link: Map<string, any>) => {
  * @param {LinkRecord} link
  * @return {bool}
  */
-export const hasData = curry((key: string, link: Map<string, any>) => {
+export const hasData = curry((key: string, link: LinkRecordType) => {
 	if (isLinkElseThrow(link)) {
 		return Data.has(key, link.get('data'));
 	}
@@ -199,7 +197,7 @@ export const hasData = curry((key: string, link: Map<string, any>) => {
  * @param {LinkRecord} link
  * @return {NodeRecord}
  */
-export const deleteData = curry((key: string, link: Map<string, any>) => {
+export const deleteData = curry((key: string, link: LinkRecordType) => {
 	if (isLinkElseThrow(link)) {
 		return link.set('data', Data.deleteKey(key, link.get('data')));
 	}
@@ -230,7 +228,7 @@ function isWhiteListAttribute(key: string) {
  * @param {LinkRecord} link
  * @return {LinkRecord}
  */
-export const setGraphicalAttribute = curry((key, value, link) => {
+export const setGraphicalAttribute = curry((key: string, value: any, link: LinkRecordType) => {
 	if (isLinkElseThrow(link) && isWhiteListAttribute(key)) {
 		return link.set(
 			'graphicalAttributes',
@@ -246,7 +244,7 @@ export const setGraphicalAttribute = curry((key, value, link) => {
  * @param {LinkRecord} link
  * @return {any | null}
  */
-export const getGraphicalAttribute = curry((key, link) => {
+export const getGraphicalAttribute = curry((key: string, link: LinkRecordType) => {
 	if (isLinkElseThrow(link) && isWhiteListAttribute(key)) {
 		return Data.get(key, link.get('graphicalAttributes'));
 	}
@@ -259,7 +257,7 @@ export const getGraphicalAttribute = curry((key, link) => {
  * @param {LinkRecord} link
  * @return {bool}
  */
-export const hasGraphicalAttribute = curry((key, link) => {
+export const hasGraphicalAttribute = curry((key: string, link: LinkRecordType) => {
 	if (isLinkElseThrow(link) && isWhiteListAttribute(key)) {
 		return Data.has(key, link.get('graphicalAttributes'));
 	}
@@ -272,7 +270,7 @@ export const hasGraphicalAttribute = curry((key, link) => {
  * @param {LinkRecord} node
  * @return {LinkRecord}
  */
-export const deleteGraphicalAttribute = curry((key, link) => {
+export const deleteGraphicalAttribute = curry((key: string, link: LinkRecordType) => {
 	if (isLinkElseThrow(link) && isWhiteListAttribute(key)) {
 		return link.set(
 			'graphicalAttributes',
@@ -292,7 +290,7 @@ export const deleteGraphicalAttribute = curry((key, link) => {
  * @param {string} componenttype
  * @return {LinkRecord}
  */
-export const create = curry((id, sourceId, targetId, componentType) =>
+export const create = curry((id: Id, sourceId: Id, targetId: Id, componentType: string) =>
 	flow([
 		setId(id),
 		setSourceId(sourceId),

@@ -3,46 +3,65 @@ import React from 'react';
 import { select, event } from 'd3-selection';
 
 import { Port, Position } from '../../api';
+import { PortRecord } from '../../customTypings/index.d';
 import { PortType } from '../../constants/flowdesigner.proptypes';
 
-class AbstractPort extends React.Component {
+type Props = {
+	port: PortRecord;
+	onClick?: React.MouseEventHandler;
+	children?: React.ReactChildren;
+};
 
-  static propTypes = {
-    port: PortType,
-    onClick: PropTypes.func,
-    children: PropTypes.element
-  };
+type State = {};
 
-  constructor(props) {
-    super(props);
-    this.onClick = this.onClick.bind(this);
-  }
+class AbstractPort extends React.Component<Props, State> {
+	d3Node: any;
 
-  componentDidMount() {
-    this.d3Node = select(this.node);
-    this.d3Node.on('click', this.onClick);
-  }
+	node: any;
 
-  shouldComponentUpdate(nextProps) {
-    return nextProps.port !== this.props.port || nextProps.children !== this.props.children;
-  }
+	static propTypes = {
+		port: PortType,
+		onClick: PropTypes.func,
+		children: PropTypes.element,
+	};
 
-  onClick() {
-    if (this.props.onClick) {
-      this.props.onClick(event);
-    }
-  }
+	constructor(props: Props) {
+		super(props);
+		this.onClick = this.onClick.bind(this);
+	}
 
-  render() {
-    const position = Port.getPosition(this.props.port);
-    return (
-	<g>
-		<g ref={c => this.node = c} transform={`translate(${Position.getXCoordinate(position)},${Position.getYCoordinate(position)})`}>
-			{this.props.children}
-		</g>
-	</g>
-);
-  }
+	componentDidMount() {
+		this.d3Node = select(this.node);
+		this.d3Node.on('click', this.onClick);
+	}
+
+	shouldComponentUpdate(nextProps: Props) {
+		return nextProps.port !== this.props.port || nextProps.children !== this.props.children;
+	}
+
+	onClick() {
+		if (this.props.onClick) {
+			this.props.onClick(event);
+		}
+	}
+
+	render() {
+		const position = Port.getPosition(this.props.port);
+		return (
+			<g>
+				<g
+					ref={c => {
+						this.node = c;
+					}}
+					transform={`translate(${Position.getXCoordinate(
+						position,
+					)},${Position.getYCoordinate(position)})`}
+				>
+					{this.props.children}
+				</g>
+			</g>
+		);
+	}
 }
 
 export default AbstractPort;

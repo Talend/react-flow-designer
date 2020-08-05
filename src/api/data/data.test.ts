@@ -12,21 +12,21 @@ object
 export const isNotKeyException = 'key should be a string, was given 8 of type number';
 
 describe('isMapElseThrow', () => {
-	it('return true if parameter is an Immutable.Map', () => {
+	it('return true if parameter is an Map', () => {
 		// given
-		const testMap = Immutable.Map();
+		const testMap = Immutable.Map<any, any>();
 		// when
 		const test = Data.isMapElseThrow(testMap);
 		// expect
 		expect(test).toEqual(true);
 	});
 
-	it('throw an error if parameter is not an Immutable.Map', () => {
+	it('throw an error if parameter is not an Map', () => {
 		// given
 		const testMap = new Map();
 		// when
 		// expect
-		expect(() => Data.isMapElseThrow(testMap)).toThrow(isNotMapException);
+		expect(() => Data.isMapElseThrow(testMap as any)).toThrow(isNotMapException);
 	});
 });
 
@@ -83,7 +83,7 @@ describe('Data', () => {
 			const map = new Map();
 			// when
 			// expect
-			expect(() => Data.set(key, value, map)).toThrow(isNotMapException);
+			expect(() => Data.set(key, value, map as any)).toThrow(isNotMapException);
 		});
 	});
 
@@ -131,7 +131,7 @@ describe('Data', () => {
 			const map = new Map();
 			// when
 			// expect
-			expect(() => Data.get(key, map)).toThrow(isNotMapException);
+			expect(() => Data.get(key, map as any)).toThrow(isNotMapException);
 		});
 	});
 
@@ -179,7 +179,7 @@ describe('Data', () => {
 			const map = new Map();
 			// when
 			// expect
-			expect(() => Data.has(key, map)).toThrow(isNotMapException);
+			expect(() => Data.has(key, map as any)).toThrow(isNotMapException);
 		});
 	});
 
@@ -227,7 +227,7 @@ describe('Data', () => {
 			const map = new Map();
 			// when
 			// expect
-			expect(() => Data.deleteKey(key, map)).toThrow(isNotMapException);
+			expect(() => Data.deleteKey(key, map as any)).toThrow(isNotMapException);
 		});
 	});
 });

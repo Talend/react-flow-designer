@@ -4,7 +4,9 @@ exports[`Check that link action creators generate proper action objects and perf
 Array [
   Object {
     "data": Object {},
-    "graphicalAttributes": Object {},
+    "graphicalAttributes": Object {
+      "selected": true,
+    },
     "linkId": "linkId",
     "sourceId": "sourceId",
     "targetId": "targetId",

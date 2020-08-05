@@ -3,7 +3,7 @@
  */
 import curry from 'lodash/curry';
 import isString from 'lodash/isString';
-import Immutable from 'immutable';
+import { Map } from 'immutable';
 
 import { throwInDev, throwTypeError } from '../throwInDev';
 
@@ -14,7 +14,7 @@ import { throwInDev, throwTypeError } from '../throwInDev';
  * @return {bool}
  */
 export function isMapElseThrow(map: Map<any, any>) {
-	const test = Immutable.Map.isMap(map);
+	const test = Map.isMap(map);
 	if (!test) {
 		throwTypeError('Immutable.Map', map, 'map');
 	}
@@ -45,7 +45,7 @@ export function isKeyElseThrow(key: string | number) {
  * @param {Immutable.Map} map
  * @returns {Immutable.Map}
  */
-export const set = curry((key: any, value: any, map: { set: (arg0: any, arg1: any) => any }) => {
+export const set = curry((key: any, value: any, map: Map<any, any>) => {
 	if (isKeyElseThrow(key) && isMapElseThrow(map)) {
 		return map.set(key, value);
 	}
@@ -59,7 +59,7 @@ export const set = curry((key: any, value: any, map: { set: (arg0: any, arg1: an
  * @param {Immutable.Map} map
  * @returns {any | null}
  */
-export const get = curry((key: any, map: { get: (arg0: any) => any }) => {
+export const get = curry((key: any, map: Map<any, any>) => {
 	if (isKeyElseThrow(key) && isMapElseThrow(map)) {
 		return map.get(key);
 	}
@@ -73,7 +73,7 @@ export const get = curry((key: any, map: { get: (arg0: any) => any }) => {
  * @param {Immutable.Map} map
  * @return {bool}
  */
-export const has = curry((key: any, map: { has: (arg0: any) => any }) => {
+export const has = curry((key: any, map: Map<any, any>) => {
 	if (isKeyElseThrow(key) && isMapElseThrow(map)) {
 		return map.has(key);
 	}
@@ -87,7 +87,7 @@ export const has = curry((key: any, map: { has: (arg0: any) => any }) => {
  * @param {Immutable.Map} map
  * @returns {Immutable.Map}
  */
-export const deleteKey = curry((key: any, map: { delete: (arg0: any) => any }) => {
+export const deleteKey = curry((key: any, map: Map<any, any>) => {
 	if (isKeyElseThrow(key) && isMapElseThrow(map)) {
 		return map.delete(key);
 	}
