@@ -3,7 +3,7 @@ import React from 'react';
 import get from 'lodash/get';
 
 import { GRID_SIZE } from '../../constants/flowdesigner.constants';
-import { Transform } from '../../customTypings/index.d';
+import { Transform } from '../../customTypings';
 
 function Grid({ transformData }: { transformData?: Transform }) {
 	const largeGridSize = GRID_SIZE * get(transformData, 'k', 1);

@@ -12,11 +12,7 @@ import { NodeRecord } from '../../constants/flowdesigner.model';
 import { isPositionElseThrow } from '../position/position';
 import { isSizeElseThrow } from '../size/size';
 import * as Data from '../data/data';
-import {
-	NodeRecord as NodeRecordType,
-	PositionRecord,
-	SizeRecord,
-} from '../../customTypings/index.d';
+import { NodeRecord as NodeRecordType, PositionRecord, SizeRecord } from '../../customTypings';
 
 const positionSelector = ['graphicalAttributes', 'position'];
 const sizeSelector = ['graphicalAttributes', 'nodeSize'];

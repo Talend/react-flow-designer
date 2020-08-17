@@ -1,7 +1,7 @@
 import React from 'react';
 import invariant from 'invariant';
 import get from 'lodash/get';
-import { NodeRecordMap, NodeRecord, Id, Position } from '../../customTypings/index.d';
+import { NodeRecordMap, NodeRecord, Id, Position } from '../../customTypings';
 
 type Props = {
 	nodes: NodeRecordMap;

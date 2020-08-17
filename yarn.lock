@@ -1279,10 +1279,10 @@
     redux-thunk "^2.2.0"
     uuid "^7.0.3"
 
-"@talend/scripts-config-babel@^6.4.1":
-  version "6.4.1"
-  resolved "https://registry.yarnpkg.com/@talend/scripts-config-babel/-/scripts-config-babel-6.4.1.tgz#691d5d2da0aed2a57ef3f7a065e66bfcb2fcf671"
-  integrity sha512-19IBznSGEEe0/ShMH/fGs8gk6pilTT4tJifSFNYwOMJ9FX8Pf4UsgMpagMmh9q2liDkcujiZv0cG09uG+P3k1w==
+"@talend/scripts-config-babel@^6.4.2":
+  version "6.4.2"
+  resolved "https://registry.yarnpkg.com/@talend/scripts-config-babel/-/scripts-config-babel-6.4.2.tgz#f740925e1f3330c11877ca689866c8123936de54"
+  integrity sha512-LEauwWEAAcXD4a6NpNcnS7IU9ZPV/u/DZ5NIVLXQlGha52W8kt56Tf47xQvnQLvSRd4HrM8pNzC7W52cjVAF3A==
   dependencies:
     "@babel/core" "^7.8.7"
     "@babel/plugin-proposal-class-properties" "^7.8.3"
@@ -1293,10 +1293,10 @@
     "@babel/preset-react" "^7.8.3"
     babel-core "^7.0.0-bridge.0"
 
-"@talend/scripts-config-eslint@^6.4.1":
-  version "6.4.1"
-  resolved "https://registry.yarnpkg.com/@talend/scripts-config-eslint/-/scripts-config-eslint-6.4.1.tgz#1b2dc6e4924b07aa63d9264e9f77b0a4f8faddb8"
-  integrity sha512-MS9YCsO2+bKV8fvPOe7x12Lh1zYN7pIEaSv0qbqbmdnJGfu6TXM44KXQucesi3MaDMZxRImMEf04A1gFpyHG8A==
+"@talend/scripts-config-eslint@^6.4.2":
+  version "6.4.2"
+  resolved "https://registry.yarnpkg.com/@talend/scripts-config-eslint/-/scripts-config-eslint-6.4.2.tgz#d00aaaea3a52040e250502778a35fdfd551be808"
+  integrity sha512-JoUzid5h1b2P0UM0u2acELwpwk+jN6NPgxbU3nmL98rxlR9yy132TXBYwc7C97twRJB/W9B+MvVn+JNYbFB5Ng==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^2.23.0"
     babel-eslint "^10.1.0"
@@ -1309,12 +1309,12 @@
     eslint-plugin-react "^7.19.0"
     eslint-plugin-react-hooks "^2.5.0"
 
-"@talend/scripts-config-jest@^6.4.1":
-  version "6.4.1"
-  resolved "https://registry.yarnpkg.com/@talend/scripts-config-jest/-/scripts-config-jest-6.4.1.tgz#e4cfae96a142f73a11068535404de136f0de4af0"
-  integrity sha512-sd90o7+Oy1iyqRW9lkw15wJg2EyALAyV8uXAFRDUb2tRdtBXo9Giao4nIINiO3KzTBjFJ58KBkJl3sVPAgpMbw==
+"@talend/scripts-config-jest@^6.4.2":
+  version "6.4.2"
+  resolved "https://registry.yarnpkg.com/@talend/scripts-config-jest/-/scripts-config-jest-6.4.2.tgz#ac8fe7b0a80a69064a6dab66b24b05c3c7c056f5"
+  integrity sha512-K84AOE15IgxL14gZN0GAO0mLoR6FcNk7GVVKY1AgaogvJPrv9xEigXvILrWl+OaGPSCYQ3YOn3RFejGlRv+AcQ==
   dependencies:
-    "@talend/scripts-config-babel" "^6.4.1"
+    "@talend/scripts-config-babel" "^6.4.2"
     "@types/jest" "^25.1.4"
     babel-jest "^25.1.0"
     core-js "^3.6.4"
@@ -1327,14 +1327,14 @@
     regenerator-runtime "^0.13.3"
     ts-jest "^25.2.1"
 
-"@talend/scripts-config-react-webpack@^6.4.1":
-  version "6.4.1"
-  resolved "https://registry.yarnpkg.com/@talend/scripts-config-react-webpack/-/scripts-config-react-webpack-6.4.1.tgz#a0d5c9e7881e91ebb242135f7fbb0bb3aa3e6699"
-  integrity sha512-xIrVnjI5GrK/DKTEhDIO6GRb1Fj5Kiq9xfsX/a4OqMQyJw97IABpR7bAIJFQgXRqJjJxyATjsoGSurgiDwTOjA==
+"@talend/scripts-config-react-webpack@^6.4.2":
+  version "6.4.2"
+  resolved "https://registry.yarnpkg.com/@talend/scripts-config-react-webpack/-/scripts-config-react-webpack-6.4.2.tgz#3d0077c79c7993de50649d3f22fede9fb1b313b5"
+  integrity sha512-NvfbfEt110lx6peVrrWPu1pgciLbRK5PWud2xBbx7vtepTPV9k+MlCyoI6f02q+oxPxVSL0aNVhvPHHUcFya7Q==
   dependencies:
     "@talend/html-webpack-plugin" "^1.1.0"
     "@talend/react-cmf-webpack-plugin" ">=3.4.0"
-    "@talend/scripts-config-babel" "^6.4.1"
+    "@talend/scripts-config-babel" "^6.4.2"
     autoprefixer "^9.7.4"
     babel-loader "^8.0.6"
     cache-loader "^4.1.0"
@@ -1365,17 +1365,17 @@
     webpack-dev-server "^3.10.3"
     whatwg-fetch "^3.0.0"
 
-"@talend/scripts-config-typescript@^6.4.1":
-  version "6.4.1"
-  resolved "https://registry.yarnpkg.com/@talend/scripts-config-typescript/-/scripts-config-typescript-6.4.1.tgz#c8ecb8107b4265eac57e36f61036edc6630638d4"
-  integrity sha512-LVR5NOD8hOa6Ln+uPL6E4xhS4ue2N1z1NZru0gKv7vhlG4yaESgcU2Phv693sVg2DC0hnbjGfQfozvcAkHJQxg==
+"@talend/scripts-config-typescript@^6.4.2":
+  version "6.4.2"
+  resolved "https://registry.yarnpkg.com/@talend/scripts-config-typescript/-/scripts-config-typescript-6.4.2.tgz#81067371231d9c15a86fdf940066ea6ca3dd1e3a"
+  integrity sha512-PnpapzTQUQC5xPlxWDWHnKPbYAqVf5xTnYOQNHcHCJiWIJe4rFeTPUgVbEmRjQz09wxCcb6woF6lyW7cg07NWA==
   dependencies:
     typescript "^3.8.3"
 
-"@talend/scripts-core@^6.4.1":
-  version "6.4.1"
-  resolved "https://registry.yarnpkg.com/@talend/scripts-core/-/scripts-core-6.4.1.tgz#c004878a3cf3fec152939dcee0873a3ee316881f"
-  integrity sha512-GJZ7Sia0kQib/R+A3Fi+sjLYhMfVGWhvhVS/C5FifbVUhHpO1hGP5ZMbqCnQJgYnA3jzA/rODIlXi/rWUyzWtg==
+"@talend/scripts-core@^6.4.2":
+  version "6.4.2"
+  resolved "https://registry.yarnpkg.com/@talend/scripts-core/-/scripts-core-6.4.2.tgz#228d1ef92fc008731d42adb540b23bb0db17dde3"
+  integrity sha512-YGPRBc1tf+iMPRHCskwGY+rwqpB+WobIWDSkAkQukZ3YFGGpx5I1fKBUtLthazdvHZRK5mkWwfgPjRH5mwUWJw==
   dependencies:
     "@babel/cli" "^7.8.3"
     "@babel/core" "^7.8.7"
@@ -1390,16 +1390,16 @@
     which "^2.0.1"
     yargs "^15.3.0"
 
-"@talend/scripts-preset-react-lib@^6.4.1":
-  version "6.4.1"
-  resolved "https://registry.yarnpkg.com/@talend/scripts-preset-react-lib/-/scripts-preset-react-lib-6.4.1.tgz#924b6c66b6e112618355395421495edeece92cdd"
-  integrity sha512-/oDxAis3SD5/C0Vg4erEyNrpAbPYtavHKJwwuv5EWudsYxwTHdnGSyBEAU0xPXru4QleBEmwlO3Az7PI6IBKPA==
+"@talend/scripts-preset-react-lib@^6.4.2":
+  version "6.4.2"
+  resolved "https://registry.yarnpkg.com/@talend/scripts-preset-react-lib/-/scripts-preset-react-lib-6.4.2.tgz#38c17ab03a825d43e1b72c8b2fe6129588349c6e"
+  integrity sha512-bMQNYMseqH4LkfG9TZd+QlMRDxs20yLPfd57kt9GqQz1YoJcqBevOg9C7jOM9NyDuGP30qdIW/cCuyUlCKIjgw==
   dependencies:
-    "@talend/scripts-config-babel" "^6.4.1"
-    "@talend/scripts-config-eslint" "^6.4.1"
-    "@talend/scripts-config-jest" "^6.4.1"
-    "@talend/scripts-config-react-webpack" "^6.4.1"
-    "@talend/scripts-config-typescript" "^6.4.1"
+    "@talend/scripts-config-babel" "^6.4.2"
+    "@talend/scripts-config-eslint" "^6.4.2"
+    "@talend/scripts-config-jest" "^6.4.2"
+    "@talend/scripts-config-react-webpack" "^6.4.2"
+    "@talend/scripts-config-typescript" "^6.4.2"
 
 "@types/anymatch@*":
   version "1.3.1"

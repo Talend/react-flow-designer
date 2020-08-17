@@ -5,7 +5,7 @@ import {
 	Port,
 	PortAction,
 	PortActionAdd,
-} from '../customTypings/index.d';
+} from '../customTypings';
 
 /**
  * return an action to create a new port

@@ -10,7 +10,7 @@ import { PortRecord } from '../../constants/flowdesigner.model';
 import { PORT_SOURCE, PORT_SINK } from '../../constants/flowdesigner.constants';
 import { isPositionElseThrow } from '../position/position';
 import * as Data from '../data/data';
-import { PortRecord as PortRecordType, Id, Position } from '../../customTypings/index.d';
+import { PortRecord as PortRecordType, Id, Position } from '../../customTypings';
 
 const positionSelector = ['graphicalAttributes', 'position'];
 const componentTypeSelector = ['graphicalAttributes', 'portType'];

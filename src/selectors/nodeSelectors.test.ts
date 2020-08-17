@@ -7,7 +7,7 @@ import {
 	PortRecord as PortRecordType,
 	LinkRecord as LinkRecordType,
 	Id,
-} from '../customTypings/index.d';
+} from '../customTypings';
 
 describe('Testing node selectors', () => {
 	const node1 = new NodeRecord({

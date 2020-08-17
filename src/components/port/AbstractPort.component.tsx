@@ -2,7 +2,7 @@ import React from 'react';
 import { select, event } from 'd3-selection';
 
 import { Port, Position } from '../../api';
-import { PortRecord } from '../../customTypings/index.d';
+import { PortRecord } from '../../customTypings';
 
 type Props = {
 	port?: PortRecord;

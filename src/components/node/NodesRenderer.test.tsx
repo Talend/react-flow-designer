@@ -4,7 +4,7 @@ import { Map } from 'immutable';
 
 import NodesRenderer from './NodesRenderer.component';
 import { NodeRecord, NodeGraphicalAttributes } from '../../constants/flowdesigner.model';
-import { NodeRecord as NodeRecordType } from '../../customTypings/index.d';
+import { NodeRecord as NodeRecordType } from '../../customTypings';
 
 const MockNode = () => <span>MockNodes</span>;
 

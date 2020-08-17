@@ -1,6 +1,6 @@
 /* eslint-disable new-cap */
 import { Record, Map } from 'immutable';
-import { Size, PortDirection, PortRecord as PortRecordType } from '../customTypings/index.d';
+import { Size, PortDirection, PortRecord as PortRecordType } from '../customTypings';
 
 export const NONE = 'NONE';
 export const SELECTED = 'SELECTED';

@@ -4,7 +4,7 @@ import isNumber from 'lodash/isNumber';
 
 import { throwInDev, throwTypeError } from '../throwInDev';
 import { PositionRecord } from '../../constants/flowdesigner.model';
-import { PositionRecord as PositionRecordType } from '../../customTypings/index.d';
+import { PositionRecord as PositionRecordType } from '../../customTypings';
 
 /**
  * @desc Represent a position comprised of X and Y coordinates

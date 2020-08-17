@@ -26,7 +26,7 @@ import {
 	SizeRecord,
 	NodeGraphicalAttributes,
 } from '../constants/flowdesigner.model';
-import { PortRecord, Id, State, NodeRecordMap } from '../customTypings/index.d';
+import { PortRecord, Id, State, NodeRecordMap } from '../customTypings';
 
 const defaultState = Map();
 const nodeReducer = (state: State = defaultState, action: any) => {

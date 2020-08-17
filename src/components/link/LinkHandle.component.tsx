@@ -1,7 +1,7 @@
 import React from 'react';
 import { select, event } from 'd3-selection';
 import { drag } from 'd3-drag';
-import { PositionRecord } from '../../customTypings/index.d';
+import { PositionRecord } from '../../customTypings';
 
 type Props = {
 	position: PositionRecord;

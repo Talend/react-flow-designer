@@ -11,7 +11,7 @@ import upperFirst from 'lodash/upperFirst';
 import { throwInDev, throwTypeError } from '../throwInDev';
 import { LinkRecord } from '../../constants/flowdesigner.model';
 import * as Data from '../data/data';
-import { LinkRecord as LinkRecordType, Id } from '../../customTypings/index.d';
+import { LinkRecord as LinkRecordType, Id } from '../../customTypings';
 
 const linkTypeSelector = ['graphicalAttributes', 'linkType'];
 

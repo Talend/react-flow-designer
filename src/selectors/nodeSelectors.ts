@@ -1,5 +1,5 @@
 import { Set } from 'immutable';
-import { State, Id } from '../customTypings/index.d';
+import { State, Id } from '../customTypings';
 
 /**
  * @param state Map flow state

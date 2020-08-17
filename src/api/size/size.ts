@@ -3,7 +3,7 @@ import flow from 'lodash/flow';
 
 import { throwInDev, throwTypeError } from '../throwInDev';
 import { SizeRecord } from '../../constants/flowdesigner.model';
-import { SizeRecord as SizeRecordType } from '../../customTypings/index.d';
+import { SizeRecord as SizeRecordType } from '../../customTypings';
 
 /**
  * @desc Represent a size comprised of width and height

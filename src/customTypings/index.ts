@@ -5,83 +5,83 @@ import { PORT_SINK, PORT_SOURCE } from '../constants/flowdesigner.constants';
 
 export type Id = string;
 
-export type Position = {
+export interface Position {
 	x: number;
 	y: number;
-};
+}
 
-export type Size = {
+export interface Size {
 	width: number;
 	height: number;
-};
+}
 
-export type Action = {
+export interface Action {
 	type: string;
-};
+}
 
-export type PortDirection = typeof PORT_SINK | typeof PORT_SOURCE;
+export type PortDirection = PORT_SINK | PORT_SOURCE;
 
-export type PortGraphicalAttributes = {
+export interface PortGraphicalAttributes {
 	portType?: string;
 	position?: Position;
 	properties: {
 		type: PortDirection;
 		index?: number;
 	} & any;
-};
+}
 
-export type PortData = {
+export interface PortData {
 	flowType: string;
 	properties?: {};
-};
+}
 
-export type Port = {
+export interface Port {
 	id: Id;
 	nodeId: string;
 	data?: PortData;
 	graphicalAttributes?: PortGraphicalAttributes;
-};
+}
 
-export type NodeGraphicalAttributes = {
+export interface NodeGraphicalAttributes {
 	position: Position;
 	nodeSize: Size;
 	nodeType: string;
 	label: string;
 	description: string;
 	properties?: {};
-};
+}
 
-export type NodeData = {
+export interface NodeData {
 	datasetId: Id;
 	properties?: {};
 	label: string;
 	description: string;
 	datasetInfo?: {};
-};
+}
 
-export type Node = {
+export interface Node {
 	id: Id;
 	type: string;
 	data: NodeData;
 	graphicalAttributes: NodeGraphicalAttributes;
-};
+}
 
-export type LinkGraphicalAttributes = {
+export interface LinkGraphicalAttributes {
 	linkType: string;
 	properties?: {};
-};
+}
 
-export type LinkData = {
+export interface LinkData {
 	properties?: {};
-};
+}
 
-export type Link = {
+export interface Link {
 	id: Id;
 	source: Id;
 	target: Id;
 	data: LinkData;
 	graphicalAttributes: LinkGraphicalAttributes;
-};
+}
 
 /** $RECORDS */
 export type PositionRecord = Record<Position> & Position;
@@ -134,13 +134,13 @@ export type State = {
 } & Map & { getIn: getStateNodes | getStatePorts | getStateLinks | getStateIn | getStateOut };
 
 /** $ACTIONS */
-export type PortActionAdd = {
+export interface PortActionAdd {
 	type: 'FLOWDESIGNER_PORT_ADD';
 	nodeId: Id;
 	id: Id;
 	data?: PortData;
 	graphicalAttributes?: PortGraphicalAttributes;
-};
+}
 
 export type PortAction =
 	| PortActionAdd
@@ -174,25 +174,25 @@ export type PortAction =
 			portId: Id;
 	  };
 
-export type NodeType = {
+export interface NodeType {
 	id: string;
 	position: Position;
-};
+}
 
-export type PortType = {
+export interface PortType {
 	id: string;
 	nodeId: string;
 	position: Position;
-};
+}
 
-export type LinkType = {
+export interface LinkType {
 	id: string;
 	sourceId: string;
 	targetId: string;
-};
+}
 
-export type Transform = {
+export interface Transform {
 	k: number;
 	x: number;
 	y: number;
-};
+}
