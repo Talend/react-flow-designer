@@ -6,12 +6,10 @@
   "mainSrc": "src/index.js",
   "scripts": {
     "build": "talend-scripts build:ts:lib",
-    "clean": "yarn clean:lib && yarn clean:coverage",
-    "clean:lib": "rimraf ./lib",
-    "clean:coverage": "rimraf ./coverage",
     "lint": "talend-scripts lint:es",
-    "prepublish": "babel -d lib ./src/ && rimraf lib/**/*.test.js",
-    "test": "talend-scripts test"
+    "test": "talend-scripts test --silent",
+    "prepublishOnly": "yarn test",
+    "prepare": "yarn build"
   },
   "repository": {
     "type": "git",
@@ -74,5 +72,9 @@
     "invariant": "2.2.4",
     "prop-types": "^15.7.2",
     "react-immutable-proptypes": "2.2.0"
-  }
+  },
+  "files": [
+    "/lib",
+    "/src"
+  ]
 }
