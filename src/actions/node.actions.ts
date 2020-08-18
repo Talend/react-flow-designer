@@ -13,7 +13,7 @@ import {
 	FLOWDESIGNER_NODE_REMOVE,
 	FLOWDESIGNER_NODE_UPDATE,
 } from '../constants/flowdesigner.constants';
-import { Position } from '../customTypings';
+import { Position } from '../customTypings/index.d';
 
 /**
  * Ask for node creation and injection into current dataflow

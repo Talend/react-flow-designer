@@ -11,7 +11,7 @@ import {
 	LinkRecordMap,
 	State,
 	LinkRecord,
-} from '../customTypings';
+} from '../customTypings/index.d';
 
 const getNodes = (state: State): NodeRecordMap => state.get('nodes');
 const getPorts = (state: State): PortRecordMap => state.get('ports');

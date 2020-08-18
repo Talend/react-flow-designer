@@ -20,7 +20,7 @@ import {
 	LinkRecordMap,
 	Position,
 	Id,
-} from '../customTypings';
+} from '../customTypings/index.d';
 
 type Props = {
 	children?: any;

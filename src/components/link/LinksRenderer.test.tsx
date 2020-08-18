@@ -9,7 +9,7 @@ import {
 	Id,
 	LinkRecord as LinkRecordType,
 	PortRecord as PortRecordType,
-} from '../../customTypings';
+} from '../../customTypings/index.d';
 
 const MockLink = () => <span>MockLink</span>;
 

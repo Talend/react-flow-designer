@@ -4,7 +4,7 @@ import { line, curveBasis } from 'd3-shape';
 import { interpolateBasis } from 'd3-interpolate';
 
 import LinkHandle from './LinkHandle.component';
-import { Position, PortRecord } from '../../customTypings';
+import { Position, PortRecord } from '../../customTypings/index.d';
 
 const concreteLine = line()
 	.x((d: any) => d.x)

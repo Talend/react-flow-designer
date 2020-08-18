@@ -4,7 +4,7 @@ import { Map } from 'immutable';
 
 import { FlowDesigner } from './FlowDesigner.container';
 import NodeType from './configuration/NodeType.component';
-import { NodeRecord, Id, PortRecord, LinkRecord } from '../customTypings';
+import { NodeRecord, Id, PortRecord, LinkRecord } from '../customTypings/index.d';
 
 jest.mock('./ZoomHandler.component');
 jest.mock('./grid/Grid.component', () => {

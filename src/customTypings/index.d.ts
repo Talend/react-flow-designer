@@ -19,7 +19,7 @@ export interface Action {
 	type: string;
 }
 
-export type PortDirection = PORT_SINK | PORT_SOURCE;
+export type PortDirection = typeof PORT_SINK | typeof PORT_SOURCE;
 
 export interface PortGraphicalAttributes {
 	portType?: string;

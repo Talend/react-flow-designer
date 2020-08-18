@@ -12,7 +12,7 @@ import nodesReducer from './node.reducer';
 import linksReducer from './link.reducer';
 import portsReducer from './port.reducer';
 import nodeTypeReducer from './nodeType.reducer';
-import { State, NodeRecord, Id, LinkRecord, PortRecord } from '../customTypings';
+import { State, NodeRecord, Id, LinkRecord, PortRecord } from '../customTypings/index.d';
 
 export const defaultState: Partial<State> = Map({
 	nodes: Map<Id, NodeRecord>(),

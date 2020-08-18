@@ -25,7 +25,7 @@ import {
 	PortDirection,
 	State,
 	PortAction,
-} from '../customTypings';
+} from '../customTypings/index.d';
 
 /**
  * get ports attached to a node

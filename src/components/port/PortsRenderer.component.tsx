@@ -2,7 +2,7 @@ import React from 'react';
 import get from 'lodash/get';
 
 import { Port } from '../../api';
-import { PortRecord, PortRecordMap } from '../../customTypings';
+import { PortRecord, PortRecordMap } from '../../customTypings/index.d';
 
 function PortsRenderer({ ports, portTypeMap }: { ports: PortRecordMap; portTypeMap: Object }) {
 	const renderPort = (port: PortRecord) => {

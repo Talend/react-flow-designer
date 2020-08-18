@@ -4,7 +4,7 @@ import { Map } from 'immutable';
 
 import PortsRenderer from './PortsRenderer.component';
 import { PortRecord } from '../../constants/flowdesigner.model';
-import { Id, PortRecord as PortRecordType } from '../../customTypings';
+import { Id, PortRecord as PortRecordType } from '../../customTypings/index.d';
 
 const MockPort = () => <span>MockPort</span>;
 

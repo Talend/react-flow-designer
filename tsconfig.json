@@ -7,6 +7,6 @@
     "incremental": true,
     "jsx": "react",
     "module": "CommonJs",
-    "typeRoots": ["src/customTypings", "node_modules/@types"]
+    "typeRoots": ["src/customTypings/index.d", "node_modules/@types"]
   }
 }

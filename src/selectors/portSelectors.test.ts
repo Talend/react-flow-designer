@@ -9,7 +9,7 @@ import {
 	Id,
 	LinkRecord as LinkRecordType,
 	PortRecord as PortRecordType,
-} from '../customTypings';
+} from '../customTypings/index.d';
 
 const port1 = Port.create('id1', 'nodeId1', 0, PORT_SINK, 'reactComponentType');
 const port2 = Port.create('id2', 'nodeId1', 0, PORT_SOURCE, 'reactComponentType');

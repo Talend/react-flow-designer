@@ -1,6 +1,13 @@
 import { createSelector } from 'reselect';
 import { Map } from 'immutable';
-import { State, PortRecordMap, LinkRecordMap, LinkRecord, PortRecord, Id } from '../customTypings';
+import {
+	State,
+	PortRecordMap,
+	LinkRecordMap,
+	LinkRecord,
+	PortRecord,
+	Id,
+} from '../customTypings/index.d';
 
 const getPorts = (state: State): PortRecordMap => state.get('ports');
 const getLinks = (state: State): LinkRecordMap => state.get('links');

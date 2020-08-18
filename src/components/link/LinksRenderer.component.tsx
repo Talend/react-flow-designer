@@ -1,7 +1,7 @@
 import React from 'react';
 import invariant from 'invariant';
 import get from 'lodash/get';
-import { LinkRecordMap, PortRecordMap, LinkRecord } from '../../customTypings';
+import { LinkRecordMap, PortRecordMap, LinkRecord } from '../../customTypings/index.d';
 
 type Props = {
 	links: LinkRecordMap;
