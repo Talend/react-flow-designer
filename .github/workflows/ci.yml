@@ -33,7 +33,6 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install
-        if: steps.rfd-yarn-cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
 
       - name: Test
