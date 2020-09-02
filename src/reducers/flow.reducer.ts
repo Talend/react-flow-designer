@@ -5,6 +5,8 @@ import {
 	FLOWDESIGNER_FLOW_RESET,
 	FLOWDESIGNER_FLOW_LOAD,
 	FLOWDESIGNER_FLOW_SET_ZOOM,
+	FLOWDESIGNER_FLOW_ZOOM_IN,
+	FLOWDESIGNER_FLOW_ZOOM_OUT,
 	FLOWDESIGNER_PAN_TO,
 	FLOWDESIGNER_NODETYPE_SET,
 } from '../constants/flowdesigner.constants';
@@ -52,6 +54,20 @@ export function reducer(state: State, action: any) {
 			);
 		case FLOWDESIGNER_FLOW_SET_ZOOM:
 			return state.set('transform', action.transform);
+		case FLOWDESIGNER_FLOW_ZOOM_IN:
+			return state.set(
+				'transformToApply',
+				zoomIdentity
+					.translate(state.get('transform').x, state.get('transform').y)
+					.scale(state.get('transform').k + (action.scale || 0.1)),
+			);
+		case FLOWDESIGNER_FLOW_ZOOM_OUT:
+			return state.set(
+				'transformToApply',
+				zoomIdentity
+					.translate(state.get('transform').x, state.get('transform').y)
+					.scale(state.get('transform').k - (action.scale || 0.1)),
+			);
 		case FLOWDESIGNER_PAN_TO:
 			return state.update('transformToApply', () =>
 				zoomIdentity
