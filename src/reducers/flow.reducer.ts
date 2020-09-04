@@ -36,6 +36,13 @@ function combinedReducer(state = defaultState, action: any) {
 	);
 }
 
+function roundByStep(type: string, number: number, step: number) {
+	if (type === 'down') {
+		return Math.ceil(number / step) * step;
+	}
+	return Math.floor(number / step) * step;
+}
+
 export function reducer(state: State, action: any) {
 	switch (action.type) {
 		case FLOWDESIGNER_FLOW_ADD_ELEMENTS:
@@ -59,14 +66,26 @@ export function reducer(state: State, action: any) {
 				'transformToApply',
 				zoomIdentity
 					.translate(state.get('transform').x, state.get('transform').y)
-					.scale(state.get('transform').k + (action.scale || 0.1)),
+					.scale(
+						roundByStep(
+							'up',
+							state.get('transform').k + (action.scale || 0.1),
+							action.scale || 0.1,
+						),
+					),
 			);
 		case FLOWDESIGNER_FLOW_ZOOM_OUT:
 			return state.set(
 				'transformToApply',
 				zoomIdentity
 					.translate(state.get('transform').x, state.get('transform').y)
-					.scale(state.get('transform').k - (action.scale || 0.1)),
+					.scale(
+						roundByStep(
+							'down',
+							state.get('transform').k - (action.scale || 0.1),
+							action.scale || 0.1,
+						),
+					),
 			);
 		case FLOWDESIGNER_PAN_TO:
 			return state.update('transformToApply', () =>
