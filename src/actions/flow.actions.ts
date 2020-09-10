@@ -43,14 +43,14 @@ export function setZoom(transform: { k: number; x: number; y: number }) {
 	return null;
 }
 
-export function zoomIn(scale) {
+export function zoomIn(scale: number) {
 	return {
 		type: FLOWDESIGNER_FLOW_ZOOM_IN,
 		scale,
 	};
 }
 
-export function zoomOut(scale) {
+export function zoomOut(scale: number) {
 	return {
 		type: FLOWDESIGNER_FLOW_ZOOM_OUT,
 		scale,
