@@ -70,10 +70,17 @@ function calculateZoomScale(
 	zoomDirection: ZoomDirection,
 	step: number,
 ): number {
+	let zoomValue;
 	if (zoomDirection === ZoomDirection.IN) {
-		return Math.floor(currentZoom + step / step) * step;
+		zoomValue = Math.floor((currentZoom + step) / step) * step;
+	} else {
+		zoomValue = Math.ceil((currentZoom - step) / step) * step;
 	}
-	return Math.ceil(currentZoom - step / step) * step;
+
+	// If the new zoom should be 0, we set a zoom at 1%.
+	if (zoomValue < step) zoomValue = step;
+
+	return zoomValue;
 }
 
 export function reducer(state: State, action: any) {
