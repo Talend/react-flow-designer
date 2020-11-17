@@ -103,6 +103,8 @@ type Props = {
 };
 
 class AbstractNode extends React.Component<Props> {
+	static calculatePortPosition = calculatePortPosition;
+
 	d3Node: any;
 
 	nodeElement: any;
@@ -201,8 +203,6 @@ class AbstractNode extends React.Component<Props> {
 		}
 		return { x: event.x, y: event.y };
 	}
-
-	static calculatePortPosition = calculatePortPosition;
 
 	renderContent() {
 		if (this.props.children) {
