@@ -26,6 +26,7 @@ Immutable.Map {
     "nodeId": Immutable.Record {
       "id": "nodeId",
       "type": undefined,
+      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
       },
@@ -50,6 +51,7 @@ Immutable.Map {
     "node2": Immutable.Record {
       "id": "node2",
       "type": undefined,
+      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
       },
@@ -129,6 +131,7 @@ Immutable.Map {
     "nodeId": Immutable.Record {
       "id": "nodeId",
       "type": undefined,
+      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
       },
@@ -186,6 +189,7 @@ Immutable.Map {
     "nodeId": Immutable.Record {
       "id": "nodeId",
       "type": undefined,
+      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
       },
@@ -210,6 +214,7 @@ Immutable.Map {
     "node2": Immutable.Record {
       "id": "node2",
       "type": undefined,
+      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
       },

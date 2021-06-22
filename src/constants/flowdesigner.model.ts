@@ -1,6 +1,6 @@
 /* eslint-disable new-cap */
-import { Record, Map } from 'immutable';
-import { Size, PortDirection, PortRecord as PortRecordType } from '../customTypings/index.d';
+import { Record, Map, List } from 'immutable';
+import { Size, Position, PortDirection, PortRecord as PortRecordType } from '../customTypings/index.d';
 
 export const NONE = 'NONE';
 export const SELECTED = 'SELECTED';
@@ -62,6 +62,7 @@ export const PortData = Record({
 export const NodeRecord = Record({
 	id: undefined,
 	type: undefined,
+	components: List(),
 	data: Map({
 		properties: Map(),
 		label: '',
