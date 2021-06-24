@@ -81,27 +81,38 @@ const nodeRecordDefinition = {
 		description: '',
 		properties: Map(),
 	}),
+};
 
-	/** methods TO BE REMOVED */
+export class NodeRecord extends Record({
+	...nodeRecordDefinition,
 	getPosition(): Position {
 		return this.getIn(['graphicalAttributes', 'position']);
 	},
+
 	getSize(): Size {
 		return this.getIn(['graphicalAttributes', 'nodeSize']);
 	},
+
 	getNodeType(): string {
 		return this.getIn(['graphicalAttributes', 'nodeType']);
 	},
-};
+}) {}
 
-export const NodeRecord = Record(nodeRecordDefinition);
+export class NestedNodeRecord extends Record({
+	...nodeRecordDefinition,
+	components: List(),
+	getPosition(): Position {
+		return this.getIn(['graphicalAttributes', 'position']);
+	},
 
-export const NestedNodeRecord = Record(
-	{
-		...nodeRecordDefinition,
-		components: List()
-	}
-);
+	getSize(): Size {
+		return this.getIn(['graphicalAttributes', 'nodeSize']);
+	},
+
+	getNodeType(): string {
+		return this.getIn(['graphicalAttributes', 'nodeType']);
+	},
+}) {}
 
 export const LinkRecord = Record({
 	id: undefined,
