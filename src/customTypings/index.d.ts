@@ -64,6 +64,7 @@ export interface Node {
 	type: string;
 	data: NodeData;
 	graphicalAttributes: NodeGraphicalAttributes;
+	components?: List<Node>;
 }
 
 export interface LinkGraphicalAttributes {
@@ -104,6 +105,12 @@ export type NodeRecord = Record<Node> & {
 	getNodeType: () => string;
 } & Node;
 
+export type NestedNodeRecord = Record<Node> & {
+	getPosition: () => Position;
+	getSize: () => Size;
+	getNodeType: () => string;
+} & Node;
+
 export type LinkRecord = Record<Link> & {
 	getLinkType: () => string;
 } & Link;
@@ -111,7 +118,7 @@ export type LinkRecord = Record<Link> & {
 /** $STATE */
 
 export type PortRecordMap = Map<Id, PortRecord>;
-export type NodeRecordMap = Map<Id, NodeRecord>;
+export type NodeRecordMap = Map<Id, NodeRecord|NestedNodeRecord>;
 export type LinkRecordMap = Map<Id, LinkRecord>;
 
 type getStateNodes = (selector: ['nodes', Id]) => NodeRecord;

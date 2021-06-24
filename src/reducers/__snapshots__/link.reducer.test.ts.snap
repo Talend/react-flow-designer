@@ -33,7 +33,6 @@ Immutable.Map {
     "id1": Immutable.Record {
       "id": "id1",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -61,7 +60,6 @@ Immutable.Map {
     "id2": Immutable.Record {
       "id": "id2",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -89,7 +87,6 @@ Immutable.Map {
     "id3": Immutable.Record {
       "id": "id3",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -322,7 +319,6 @@ Immutable.Map {
     "id1": Immutable.Record {
       "id": "id1",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -350,7 +346,6 @@ Immutable.Map {
     "id2": Immutable.Record {
       "id": "id2",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -378,7 +373,6 @@ Immutable.Map {
     "id3": Immutable.Record {
       "id": "id3",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -600,7 +594,6 @@ Immutable.Map {
     "id1": Immutable.Record {
       "id": "id1",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -628,7 +621,6 @@ Immutable.Map {
     "id2": Immutable.Record {
       "id": "id2",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -656,7 +648,6 @@ Immutable.Map {
     "id3": Immutable.Record {
       "id": "id3",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -835,7 +826,6 @@ Immutable.Map {
     "id1": Immutable.Record {
       "id": "id1",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -863,7 +853,6 @@ Immutable.Map {
     "id2": Immutable.Record {
       "id": "id2",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -891,7 +880,6 @@ Immutable.Map {
     "id3": Immutable.Record {
       "id": "id3",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -1087,7 +1075,6 @@ Immutable.Map {
     "id1": Immutable.Record {
       "id": "id1",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -1115,7 +1102,6 @@ Immutable.Map {
     "id2": Immutable.Record {
       "id": "id2",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -1143,7 +1129,6 @@ Immutable.Map {
     "id3": Immutable.Record {
       "id": "id3",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -1337,7 +1322,6 @@ Immutable.Map {
     "id1": Immutable.Record {
       "id": "id1",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -1365,7 +1349,6 @@ Immutable.Map {
     "id2": Immutable.Record {
       "id": "id2",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -1393,7 +1376,6 @@ Immutable.Map {
     "id3": Immutable.Record {
       "id": "id3",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -1590,7 +1572,6 @@ Immutable.Map {
     "id1": Immutable.Record {
       "id": "id1",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -1618,7 +1599,6 @@ Immutable.Map {
     "id2": Immutable.Record {
       "id": "id2",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -1646,7 +1626,6 @@ Immutable.Map {
     "id3": Immutable.Record {
       "id": "id3",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -1849,7 +1828,6 @@ Immutable.Map {
     "id1": Immutable.Record {
       "id": "id1",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -1877,7 +1855,6 @@ Immutable.Map {
     "id2": Immutable.Record {
       "id": "id2",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -1905,7 +1882,6 @@ Immutable.Map {
     "id3": Immutable.Record {
       "id": "id3",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -2107,7 +2083,6 @@ Immutable.Map {
     "id1": Immutable.Record {
       "id": "id1",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -2135,7 +2110,6 @@ Immutable.Map {
     "id2": Immutable.Record {
       "id": "id2",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",
@@ -2163,7 +2137,6 @@ Immutable.Map {
     "id3": Immutable.Record {
       "id": "id3",
       "type": undefined,
-      "components": Immutable.List [],
       "data": Immutable.Map {
         "properties": Immutable.Map {},
         "label": "",

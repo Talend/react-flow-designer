@@ -1,6 +1,11 @@
 /* eslint-disable new-cap */
 import { Record, Map, List } from 'immutable';
-import { Size, Position, PortDirection, PortRecord as PortRecordType } from '../customTypings/index.d';
+import {
+	Size,
+	Position,
+	PortDirection,
+	PortRecord as PortRecordType,
+} from '../customTypings/index.d';
 
 export const NONE = 'NONE';
 export const SELECTED = 'SELECTED';
@@ -59,10 +64,9 @@ export const PortData = Record({
 	flowType: undefined,
 });
 
-export const NodeRecord = Record({
+const nodeRecordDefinition = {
 	id: undefined,
 	type: undefined,
-	components: List(),
 	data: Map({
 		properties: Map(),
 		label: '',
@@ -88,7 +92,16 @@ export const NodeRecord = Record({
 	getNodeType(): string {
 		return this.getIn(['graphicalAttributes', 'nodeType']);
 	},
-});
+};
+
+export const NodeRecord = Record(nodeRecordDefinition);
+
+export const NestedNodeRecord = Record(
+	{
+		...nodeRecordDefinition,
+		components: List()
+	}
+);
 
 export const LinkRecord = Record({
 	id: undefined,
