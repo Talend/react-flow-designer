@@ -8,7 +8,7 @@ import isString from 'lodash/isString';
 import upperFirst from 'lodash/upperFirst';
 
 import { throwInDev, throwTypeError } from '../throwInDev';
-import { NodeRecord } from '../../constants/flowdesigner.model';
+import { NodeRecord, NestedNodeRecord } from '../../constants/flowdesigner.model';
 import { isPositionElseThrow } from '../position/position';
 import { isSizeElseThrow } from '../size/size';
 import * as Data from '../data/data';
@@ -37,7 +37,7 @@ const FORBIDEN_GRAPHICAL_ATTRIBUTES = ['position', 'nodeSize', 'nodeType'];
  * @throws
  */
 export function isNode(node: NodeRecordType) {
-	if (node && node instanceof NodeRecord) {
+	if (node && (node instanceof NodeRecord || node instanceof NestedNodeRecord)) {
 		return true;
 	}
 	return false;
@@ -294,8 +294,27 @@ export const deleteGraphicalAttribute = curry((key: string, node: NodeRecordType
  * @returns {NodeRecord}
  */
 export const create = curry(
-	(id: string, position: PositionRecord, size: SizeRecord, componentType: string) =>
-		flow([setId(id), setPosition(position), setSize(size), setComponentType(componentType)])(
-			new NodeRecord(),
-		),
+	(
+		id: string,
+		position: PositionRecord,
+		size: SizeRecord,
+		componentType: string,
+		nested: boolean,
+	) => {
+		if (nested) {
+			return flow([
+				setId(id),
+				setPosition(position),
+				setSize(size),
+				setComponentType(componentType),
+			])(new NestedNodeRecord());
+		}
+
+		return flow([
+			setId(id),
+			setPosition(position),
+			setSize(size),
+			setComponentType(componentType),
+		])(new NodeRecord());
+	},
 );
