@@ -6,6 +6,7 @@ import flow from 'lodash/flow';
 import indexOf from 'lodash/indexOf';
 import isString from 'lodash/isString';
 import upperFirst from 'lodash/upperFirst';
+import { List } from 'immutable';
 
 import { throwInDev, throwTypeError } from '../throwInDev';
 import { NodeRecord, NestedNodeRecord } from '../../constants/flowdesigner.model';
@@ -14,6 +15,7 @@ import { isSizeElseThrow } from '../size/size';
 import * as Data from '../data/data';
 import {
 	NodeRecord as NodeRecordType,
+	NestedNodeRecord as NestedNodeRecordType,
 	PositionRecord,
 	SizeRecord,
 } from '../../customTypings/index.d';
@@ -21,6 +23,7 @@ import {
 const positionSelector = ['graphicalAttributes', 'position'];
 const sizeSelector = ['graphicalAttributes', 'nodeSize'];
 const componentTypeSelector = ['graphicalAttributes', 'nodeType'];
+const componentsSelector = ['components'];
 
 /** in future properties should be removed from the react-flow-designer lib */
 const FORBIDEN_GRAPHICAL_ATTRIBUTES = ['position', 'nodeSize', 'nodeType'];
@@ -36,7 +39,7 @@ const FORBIDEN_GRAPHICAL_ATTRIBUTES = ['position', 'nodeSize', 'nodeType'];
  * @returns {bool}
  * @throws
  */
-export function isNode(node: NodeRecordType) {
+export function isNode(node: NodeRecordType | NestedNodeRecordType) {
 	if (node && (node instanceof NodeRecord || node instanceof NestedNodeRecord)) {
 		return true;
 	}
@@ -154,6 +157,33 @@ export const setComponentType = curry((nodeType: string, node: NodeRecordType) =
 	throwInDev(`nodeType should be a string, was given ${nodeType && nodeType.toString()}`);
 	return node;
 });
+
+/**
+ * @function
+ * @param {List<NodeRecord>} components
+ * @param {NodeRecord} node
+ * @returns {NodeRecord}
+ */
+export const setComponents = curry((components: List<NodeRecordType>, node: NestedNodeRecordType) => {
+	if (List.isList(components) && isNodeElseThrow(node)) {
+		return node.setIn(componentsSelector, components);
+	}
+	throwInDev(
+		`components should be a Immutable.List, was given ${components && components.toString()}`,
+	);
+	return node;
+});
+
+/**
+ * @param {NodeRecord} node
+ * @returns {NodeRecord}
+ */
+export function getComponents(node: NestedNodeRecordType) {
+	if (isNodeElseThrow(node)) {
+		return node.getIn(componentsSelector);
+	}
+	return null;
+}
 
 /**
  * @function
@@ -291,6 +321,7 @@ export const deleteGraphicalAttribute = curry((key: string, node: NodeRecordType
  * @param {PositionRecord} position
  * @param {SizeRecord} size
  * @param {string} componentType
+ * @param {boolean} nested
  * @returns {NodeRecord}
  */
 export const create = curry(
@@ -299,7 +330,7 @@ export const create = curry(
 		position: PositionRecord,
 		size: SizeRecord,
 		componentType: string,
-		nested: boolean,
+		nested: boolean = false,
 	) => {
 		if (nested) {
 			return flow([
@@ -307,6 +338,7 @@ export const create = curry(
 				setPosition(position),
 				setSize(size),
 				setComponentType(componentType),
+				setComponents(List()),
 			])(new NestedNodeRecord());
 		}
 

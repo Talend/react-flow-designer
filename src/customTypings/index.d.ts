@@ -133,7 +133,7 @@ export type State = {
 	transform: Transform;
 	transformToApply?: Transform;
 	out: Map<string, Map<Id, Id>>;
-	nodes: Map<string, Map<Id, NodeRecord>>;
+	nodes: Map<string, Map<Id, NodeRecord|NestedNodeRecord>>;
 	ports: Map<string, Map<Id, PortRecord>>;
 	children: Map<string, Map<Id, Id>>;
 	nodeTypes: Map<string, Map<Id, any>>;
