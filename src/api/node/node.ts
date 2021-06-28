@@ -52,7 +52,7 @@ export function isNode(node: NodeRecordType | NestedNodeRecordType) {
  * @returns {bool}
  * @throws
  */
-export function isNodeElseThrow(node: NodeRecordType) {
+export function isNodeElseThrow(node: NodeRecordType | NestedNodeRecordType) {
 	const test = isNode(node);
 	if (!test) {
 		throwTypeError('NodeRecord', node, 'Node');
@@ -64,7 +64,7 @@ export function isNodeElseThrow(node: NodeRecordType) {
  * @param {NodeRecord} node
  * @returns {string}
  */
-export function getId(node: NodeRecordType) {
+export function getId(node: NodeRecordType | NestedNodeRecordType) {
 	if (isNodeElseThrow(node)) {
 		return node.get('id');
 	}
@@ -77,7 +77,7 @@ export function getId(node: NodeRecordType) {
  * @param {NodeRecord} node
  * @returns {NodeRecord}
  */
-export const setId = curry((id: string, node: NodeRecordType) => {
+export const setId = curry((id: string, node: NodeRecordType | NestedNodeRecordType) => {
 	if (isString(id) && isNodeElseThrow(node)) {
 		return node.set('id', id);
 	}
@@ -89,7 +89,7 @@ export const setId = curry((id: string, node: NodeRecordType) => {
  * @param {NodeRecord} node
  * @returns {PositionRecord}
  */
-export function getPosition(node: NodeRecordType) {
+export function getPosition(node: NodeRecordType | NestedNodeRecordType) {
 	if (isNodeElseThrow(node)) {
 		return node.getIn(positionSelector);
 	}
@@ -102,7 +102,7 @@ export function getPosition(node: NodeRecordType) {
  * @param {NodeRecord} node
  * @returns {NodeRecord}
  */
-export const setPosition = curry((position: PositionRecord, node: NodeRecordType) => {
+export const setPosition = curry((position: PositionRecord, node: NodeRecordType | NestedNodeRecordType) => {
 	if (isPositionElseThrow(position) && isNodeElseThrow(node)) {
 		return node.setIn(positionSelector, position);
 	}
@@ -113,7 +113,7 @@ export const setPosition = curry((position: PositionRecord, node: NodeRecordType
  * @param {NodeRecord} node
  * @returns {SizeRecord}
  */
-export function getSize(node: NodeRecordType) {
+export function getSize(node: NodeRecordType | NestedNodeRecordType) {
 	if (isNodeElseThrow(node)) {
 		return node.getIn(sizeSelector);
 	}
@@ -126,7 +126,7 @@ export function getSize(node: NodeRecordType) {
  * @param {NodeRecord} node
  * @returns {NodeRecord}
  */
-export const setSize = curry((size: SizeRecord, node: NodeRecordType) => {
+export const setSize = curry((size: SizeRecord, node: NodeRecordType | NestedNodeRecordType) => {
 	if (isSizeElseThrow(size) && isNodeElseThrow(node)) {
 		return node.setIn(sizeSelector, size);
 	}
@@ -137,7 +137,7 @@ export const setSize = curry((size: SizeRecord, node: NodeRecordType) => {
  * @param {NodeRecord} node
  * @returns {NodeRecord}
  */
-export function getComponentType(node: NodeRecordType) {
+export function getComponentType(node: NodeRecordType | NestedNodeRecordType) {
 	if (isNodeElseThrow(node)) {
 		return node.getIn(componentTypeSelector);
 	}
@@ -150,7 +150,7 @@ export function getComponentType(node: NodeRecordType) {
  * @param {NodeRecord} node
  * @returns {NodeRecord}
  */
-export const setComponentType = curry((nodeType: string, node: NodeRecordType) => {
+export const setComponentType = curry((nodeType: string, node: NodeRecordType | NestedNodeRecordType) => {
 	if (isString(nodeType) && isNodeElseThrow(node)) {
 		return node.setIn(componentTypeSelector, nodeType);
 	}
@@ -192,7 +192,7 @@ export function getComponents(node: NestedNodeRecordType) {
  * @param {NodeRecord} node
  * @returns {NodeRecord}
  */
-export const setData = curry((key: string, value: any, node: NodeRecordType) => {
+export const setData = curry((key: string, value: any, node: NodeRecordType | NestedNodeRecordType) => {
 	if (isNodeElseThrow(node)) {
 		return node.set('data', Data.set(key, value, node.get('data')));
 	}
@@ -205,7 +205,7 @@ export const setData = curry((key: string, value: any, node: NodeRecordType) => 
  * @param {NodeRecord} node
  * @returns {any | null}
  */
-export const getData = curry((key: string, node: NodeRecordType) => {
+export const getData = curry((key: string, node: NodeRecordType | NestedNodeRecordType) => {
 	if (isNodeElseThrow(node)) {
 		return Data.get(key, node.get('data'));
 	}
@@ -218,7 +218,7 @@ export const getData = curry((key: string, node: NodeRecordType) => {
  * @param {NodeRecord} node
  * @returns {bool}
  */
-export const hasData = curry((key: string, node: NodeRecordType) => {
+export const hasData = curry((key: string, node: NodeRecordType | NestedNodeRecordType) => {
 	if (isNodeElseThrow(node)) {
 		return Data.has(key, node.get('data'));
 	}
@@ -231,7 +231,7 @@ export const hasData = curry((key: string, node: NodeRecordType) => {
  * @param {NodeRecord} node
  * @returns {NodeRecord}
  */
-export const deleteData = curry((key: string, node: NodeRecordType) => {
+export const deleteData = curry((key: string, node: NodeRecordType | NestedNodeRecordType) => {
 	if (isNodeElseThrow(node)) {
 		return node.set('data', Data.deleteKey(key, node.get('data')));
 	}
@@ -262,7 +262,7 @@ export function isWhiteListAttribute(key: string) {
  * @param {NodeRecord} node
  * @returns {NodeRecord}
  */
-export const setGraphicalAttribute = curry((key: string, value: any, node: NodeRecordType) => {
+export const setGraphicalAttribute = curry((key: string, value: any, node: NodeRecordType | NestedNodeRecordType) => {
 	if (isNodeElseThrow(node) && isWhiteListAttribute(key)) {
 		return node.set(
 			'graphicalAttributes',
@@ -278,7 +278,7 @@ export const setGraphicalAttribute = curry((key: string, value: any, node: NodeR
  * @param {NodeRecord} node
  * @returns {any | null}
  */
-export const getGraphicalAttribute = curry((key: string, node: NodeRecordType) => {
+export const getGraphicalAttribute = curry((key: string, node: NodeRecordType | NestedNodeRecordType) => {
 	if (isNodeElseThrow(node) && isWhiteListAttribute(key)) {
 		return Data.get(key, node.get('graphicalAttributes'));
 	}
@@ -291,7 +291,7 @@ export const getGraphicalAttribute = curry((key: string, node: NodeRecordType) =
  * @param {NodeRecord} node
  * @returns {bool}
  */
-export const hasGraphicalAttribute = curry((key: string, node: NodeRecordType) => {
+export const hasGraphicalAttribute = curry((key: string, node: NodeRecordType | NestedNodeRecordType) => {
 	if (isNodeElseThrow(node) && isWhiteListAttribute(key)) {
 		return Data.has(key, node.get('graphicalAttributes'));
 	}
@@ -304,7 +304,7 @@ export const hasGraphicalAttribute = curry((key: string, node: NodeRecordType) =
  * @param {NodeRecord} node
  * @returns {NodeRecord}
  */
-export const deleteGraphicalAttribute = curry((key: string, node: NodeRecordType) => {
+export const deleteGraphicalAttribute = curry((key: string, node: NodeRecordType | NestedNodeRecordType) => {
 	if (isNodeElseThrow(node) && isWhiteListAttribute(key)) {
 		return node.set(
 			'graphicalAttributes',
