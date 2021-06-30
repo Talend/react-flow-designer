@@ -5,6 +5,7 @@ import {
 	FLOWDESIGNER_FLOW_SET_ZOOM,
 	FLOWDESIGNER_FLOW_ZOOM_IN,
 	FLOWDESIGNER_FLOW_ZOOM_OUT,
+	FLOWDESIGNER_PAN_TO,
 } from '../constants/flowdesigner.constants';
 
 /**
@@ -54,5 +55,13 @@ export function zoomOut(scale: number) {
 	return {
 		type: FLOWDESIGNER_FLOW_ZOOM_OUT,
 		scale,
+	};
+}
+
+export function panTo(x: number, y: number) {
+	return {
+		type: FLOWDESIGNER_PAN_TO,
+		x,
+		y,
 	};
 }
