@@ -59,9 +59,12 @@ export function zoomOut(scale: number) {
 }
 
 export function panTo(x: number, y: number) {
-	return {
-		type: FLOWDESIGNER_PAN_TO,
-		x,
-		y,
-	};
+	if (!isNaN(x) && !isNaN(y)) {
+		return {
+			type: FLOWDESIGNER_PAN_TO,
+			x,
+			y,
+		};
+	}
+	return null;
 }
