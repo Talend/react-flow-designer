@@ -1440,10 +1440,10 @@
     eslint-plugin-react "^7.19.0"
     eslint-plugin-react-hooks "^2.5.0"
 
-"@talend/scripts-config-jest@^9.6.2":
-  version "9.6.2"
-  resolved "https://registry.yarnpkg.com/@talend/scripts-config-jest/-/scripts-config-jest-9.6.2.tgz#6a2f924d66ff12b449e745f02e032b899cac9631"
-  integrity sha512-RZT62GC4LTMfHDgc8IXY0Qyo7Y4pVxSwEGoOFsrutWCq77YDy2fYYysbor+Y8FomXSmrDAGkDT7KC13i2cez5A==
+"@talend/scripts-config-jest@^9.6.3":
+  version "9.6.3"
+  resolved "https://registry.yarnpkg.com/@talend/scripts-config-jest/-/scripts-config-jest-9.6.3.tgz#75f8d5b235e000ff6b95cc7590a5711b7507e6b7"
+  integrity sha512-qbx5DSB62zoz6qjRAjH94cULGBCFg8lG9BehPdC2e+qP9yfqCzN+gtKnZ7aMCEbB6/6n6DUnRpQfsv3cTV79TA==
   dependencies:
     "@talend/scripts-config-babel" "^9.6.2"
     "@types/jest" "^26.0.0"
@@ -1541,15 +1541,15 @@
     yargs "^15.3.0"
     yarn-deduplicate "^3.1.0"
 
-"@talend/scripts-preset-react-lib@^9.8.2":
-  version "9.8.2"
-  resolved "https://registry.yarnpkg.com/@talend/scripts-preset-react-lib/-/scripts-preset-react-lib-9.8.2.tgz#f439fc865ebb7586e2e8651c12cb656f0f91a7cd"
-  integrity sha512-wi36VHvdyu8UZU5aIWML7JE18KrAcdYOEiCMyE7Viluklk7nPXVYvDgOgxaGgVg1x/NnF9f5u/S5+TygiK03Dg==
+"@talend/scripts-preset-react-lib@^9.8.3":
+  version "9.8.3"
+  resolved "https://registry.yarnpkg.com/@talend/scripts-preset-react-lib/-/scripts-preset-react-lib-9.8.3.tgz#aa2f110fa54c791f85b074f1662ec7f22319b3c7"
+  integrity sha512-VuibIBOVtw2R60nrqYikX9XcTfqdSmcKBFGq98jB1fd2WXQnBXHoexH+uhIu8YqNcZPes0fYejA+QlIvD1tBBA==
   dependencies:
     "@talend/scripts-config-babel" "^9.6.2"
     "@talend/scripts-config-cdn" "^9.9.1"
     "@talend/scripts-config-eslint" "^9.6.2"
-    "@talend/scripts-config-jest" "^9.6.2"
+    "@talend/scripts-config-jest" "^9.6.3"
     "@talend/scripts-config-prettier" "^9.6.2"
     "@talend/scripts-config-react-webpack" "^9.9.6"
     "@talend/scripts-config-stylelint" "^1.0.0"
