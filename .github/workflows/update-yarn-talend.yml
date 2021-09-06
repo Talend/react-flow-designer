@@ -18,14 +18,13 @@ jobs:
           node-version: 14
           registry-url: "https://registry.npmjs.org/"
           scope: "@talend"
+          cache: 'yarn'
 
       # NODE_AUTH_TOKEN is not working with "npx" command..
       - name: Upgrade talend dependencies
         run: |
-          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" >> ~/.npmrc
-          npx npm-check-updates "/@talend\/.*/" -u
           yarn
-          npx yarn-deduplicate yarn.lock
+          talend-scripts upgrade:deps
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
