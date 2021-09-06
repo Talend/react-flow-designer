@@ -33,7 +33,6 @@ jobs:
         with:
           assignees: tlnd-mhuchet
           reviewers: tlnd-mhuchet
-          commit-message: "chore(scripts): Upgrade talend scripts libs"
-          title: "chore(scripts): Upgrade talend scripts libs"
-          branch: ci/chore/upgrade_webapp_talend_libs
-          branch-suffix: timestamp
+          commit-message: "chore(scripts): Upgrade dependencies"
+          title: "chore(scripts): Upgrade talend dependencies"
+          branch: ci/chore/upgrade_webapp_talend_dependencies

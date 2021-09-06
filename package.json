@@ -9,7 +9,8 @@
     "lint": "talend-scripts lint:es",
     "test": "talend-scripts test --silent",
     "pre-release": "talend-scripts build:lib:umd",
-    "prepare": "yarn build"
+    "prepare": "yarn build",
+    "release": "yarn changeset publish"
   },
   "repository": {
     "type": "git",
