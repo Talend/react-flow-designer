@@ -37,7 +37,7 @@
   resolved "https://registry.npmjs.org/@babel/compat-data/-/compat-data-7.15.0.tgz#2dbaf8b85334796cafbb0f5793a90a2fc010b176"
   integrity sha512-0NqAC1IJE0S0+lL1SWFMxMkz1pKCNCjI4tr2Zx4LJSXxCLAdr6KyArnY+sno5m3yH9g737ygOyPABDsnXkpxiA==
 
-"@babel/core@>=7.9.0", "@babel/core@^7.1.0", "@babel/core@^7.15.0", "@babel/core@^7.7.5", "@babel/core@^7.8.7":
+"@babel/core@>=7.9.0", "@babel/core@^7.1.0", "@babel/core@^7.15.0", "@babel/core@^7.7.5":
   version "7.15.5"
   resolved "https://registry.npmjs.org/@babel/core/-/core-7.15.5.tgz#f8ed9ace730722544609f90c9bb49162dc3bf5b9"
   integrity sha512-pYgXxiwAgQpgM1bNkZsDEq85f0ggXMA5L7c+o3tskGMh2BunCI9QUwB9Z4jpvXUOuMdyGKiGKQiRe11VS6Jzvg==
@@ -306,7 +306,7 @@
     "@babel/helper-remap-async-to-generator" "^7.15.4"
     "@babel/plugin-syntax-async-generators" "^7.8.4"
 
-"@babel/plugin-proposal-class-properties@^7.14.5", "@babel/plugin-proposal-class-properties@^7.8.3":
+"@babel/plugin-proposal-class-properties@^7.14.5":
   version "7.14.5"
   resolved "https://registry.npmjs.org/@babel/plugin-proposal-class-properties/-/plugin-proposal-class-properties-7.14.5.tgz#40d1ee140c5b1e31a350f4f5eed945096559b42e"
   integrity sha512-q/PLpv5Ko4dVc1LYMpCY7RVAAO4uk55qPwrIuJ5QJ8c6cVuAmhu7I/49JOppXL6gXf7ZHzpRVEUZdYoPLM04Gg==
@@ -331,7 +331,7 @@
     "@babel/helper-plugin-utils" "^7.14.5"
     "@babel/plugin-syntax-dynamic-import" "^7.8.3"
 
-"@babel/plugin-proposal-export-default-from@^7.14.5", "@babel/plugin-proposal-export-default-from@^7.8.3":
+"@babel/plugin-proposal-export-default-from@^7.14.5":
   version "7.14.5"
   resolved "https://registry.npmjs.org/@babel/plugin-proposal-export-default-from/-/plugin-proposal-export-default-from-7.14.5.tgz#8931a6560632c650f92a8e5948f6e73019d6d321"
   integrity sha512-T8KZ5abXvKMjF6JcoXjgac3ElmXf0AWzJwi2O/42Jk+HmCky3D9+i1B7NPP1FblyceqTevKeV/9szeikFoaMDg==
@@ -339,7 +339,7 @@
     "@babel/helper-plugin-utils" "^7.14.5"
     "@babel/plugin-syntax-export-default-from" "^7.14.5"
 
-"@babel/plugin-proposal-export-namespace-from@^7.14.5", "@babel/plugin-proposal-export-namespace-from@^7.8.3":
+"@babel/plugin-proposal-export-namespace-from@^7.14.5":
   version "7.14.5"
   resolved "https://registry.npmjs.org/@babel/plugin-proposal-export-namespace-from/-/plugin-proposal-export-namespace-from-7.14.5.tgz#dbad244310ce6ccd083072167d8cea83a52faf76"
   integrity sha512-g5POA32bXPMmSBu5Dx/iZGLGnKmKPc5AiY7qfZgurzrCYgIztDlHFbznSNCoQuv57YQLnQfaDi7dxCtLDIdXdA==
@@ -398,7 +398,7 @@
     "@babel/helper-plugin-utils" "^7.14.5"
     "@babel/plugin-syntax-optional-catch-binding" "^7.8.3"
 
-"@babel/plugin-proposal-optional-chaining@^7.12.7", "@babel/plugin-proposal-optional-chaining@^7.14.5":
+"@babel/plugin-proposal-optional-chaining@^7.14.5":
   version "7.14.5"
   resolved "https://registry.npmjs.org/@babel/plugin-proposal-optional-chaining/-/plugin-proposal-optional-chaining-7.14.5.tgz#fa83651e60a360e3f13797eef00b8d519695b603"
   integrity sha512-ycz+VOzo2UbWNI1rQXxIuMOzrDdHGrI23fRiz/Si2R4kv2XZQ1BK8ccdHwehMKBlcH/joGW/tzrUmo67gbJHlQ==
@@ -727,7 +727,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.14.5"
 
-"@babel/plugin-transform-object-assign@^7.14.5", "@babel/plugin-transform-object-assign@^7.8.3":
+"@babel/plugin-transform-object-assign@^7.14.5":
   version "7.14.5"
   resolved "https://registry.npmjs.org/@babel/plugin-transform-object-assign/-/plugin-transform-object-assign-7.14.5.tgz#62537d54b6d85de04f4df48bfdba2eebff17b760"
   integrity sha512-lvhjk4UN9xJJYB1mI5KC0/o1D5EcJXdbhVe+4fSk08D6ZN+iuAIs7LJC+71h8av9Ew4+uRq9452v9R93SFmQlQ==
@@ -863,7 +863,7 @@
     "@babel/helper-create-regexp-features-plugin" "^7.14.5"
     "@babel/helper-plugin-utils" "^7.14.5"
 
-"@babel/preset-env@^7.15.0", "@babel/preset-env@^7.8.7":
+"@babel/preset-env@^7.15.0":
   version "7.15.6"
   resolved "https://registry.npmjs.org/@babel/preset-env/-/preset-env-7.15.6.tgz#0f3898db9d63d320f21b17380d8462779de57659"
   integrity sha512-L+6jcGn7EWu7zqaO2uoTDjjMBW+88FXzV8KvrBl2z6MtRNxlsmUNRlZPaNNPUTgqhyC5DHNFk/2Jmra+ublZWw==
@@ -953,7 +953,7 @@
     "@babel/types" "^7.4.4"
     esutils "^2.0.2"
 
-"@babel/preset-react@^7.14.5", "@babel/preset-react@^7.8.3":
+"@babel/preset-react@^7.14.5":
   version "7.14.5"
   resolved "https://registry.npmjs.org/@babel/preset-react/-/preset-react-7.14.5.tgz#0fbb769513f899c2c56f3a882fa79673c2d4ab3c"
   integrity sha512-XFxBkjyObLvBaAvkx1Ie95Iaq4S/GUEIrejyrntQ/VCMKUYvKLoyKxOBzJ2kjA3b6rC9/KL6KXfDC2GqvLiNqQ==
@@ -1541,7 +1541,7 @@
     remark "^13.0.0"
     unist-util-find-all-after "^3.0.2"
 
-"@talend/babel-plugin-import-from-index@^1.4.3", "@talend/babel-plugin-import-from-index@^1.5.0":
+"@talend/babel-plugin-import-from-index@^1.5.0":
   version "1.5.0"
   resolved "https://registry.npmjs.org/@talend/babel-plugin-import-from-index/-/babel-plugin-import-from-index-1.5.0.tgz#f91904a07e098ba7e6359cbc86e76355b3c71c8f"
   integrity sha512-oC3k2h47tcK8HiiQ6hsnFzGqMRlfdcNut6bIu73Ue5FkGGLpDw4FH/I4cjI+U7qNh+JVGvtFQLM4o39nT3bwVg==
@@ -1610,23 +1610,6 @@
     redux-thunk "^2.2.0"
     uuid "^3.4.0"
 
-"@talend/scripts-config-babel@^10.1.0":
-  version "10.1.0"
-  resolved "https://registry.npmjs.org/@talend/scripts-config-babel/-/scripts-config-babel-10.1.0.tgz#d1a38358ae72076e1a6f278e6facb93d975c2b4f"
-  integrity sha512-bt89Wwen1rTnI5ps6MwDRWuyn51Tf89HL6zy7dFRr3Aa/KsMY2X2e9xN58Ag3Exc58wt4cGpCwD0nPb1hJeojw==
-  dependencies:
-    "@babel/core" "^7.8.7"
-    "@babel/plugin-proposal-class-properties" "^7.8.3"
-    "@babel/plugin-proposal-export-default-from" "^7.8.3"
-    "@babel/plugin-proposal-export-namespace-from" "^7.8.3"
-    "@babel/plugin-proposal-optional-chaining" "^7.12.7"
-    "@babel/plugin-transform-object-assign" "^7.8.3"
-    "@babel/preset-env" "^7.8.7"
-    "@babel/preset-react" "^7.8.3"
-    "@talend/babel-plugin-import-from-index" "^1.4.3"
-    babel-core "^7.0.0-bridge.0"
-    babel-plugin-angularjs-annotate "^0.10.0"
-
 "@talend/scripts-config-babel@^9.6.3", "@talend/scripts-config-babel@^9.7.0", "@talend/scripts-config-babel@^9.7.1":
   version "9.7.2"
   resolved "https://registry.npmjs.org/@talend/scripts-config-babel/-/scripts-config-babel-9.7.2.tgz#2f3e60062ed4994e2ca7be53bf8071edba3950b8"
@@ -1671,24 +1654,6 @@
     eslint-plugin-jsx-a11y "^6.4.1"
     eslint-plugin-react "^7.25.1"
     eslint-plugin-react-hooks "^2.5.1"
-
-"@talend/scripts-config-jest@^10.1.0":
-  version "10.1.0"
-  resolved "https://registry.npmjs.org/@talend/scripts-config-jest/-/scripts-config-jest-10.1.0.tgz#7064f0c527964660256a6e22b377a3958f6dd259"
-  integrity sha512-5+2L15rMgbjSw2ltN7gaLL9Bqt24kRJigaxWhTvyoYETQFCuhbL62QK14IhdhFUWEPDLlYjwDSC4Py8J5O/+FQ==
-  dependencies:
-    "@talend/scripts-config-babel" "^10.1.0"
-    "@types/jest" "^26.0.0"
-    babel-jest "^26.6.3"
-    core-js "^3.6.4"
-    enzyme-adapter-react-16 "^1.15.1"
-    jest "^26.6.3"
-    jest-environment-jsdom "^26.6.2"
-    jest-environment-jsdom-global "^2.0.4"
-    jest-serializer-html "^7.0.0"
-    raf "^3.4.1"
-    regenerator-runtime "^0.13.3"
-    ts-jest "^26.4.4"
 
 "@talend/scripts-config-jest@^9.6.4":
   version "9.6.4"
@@ -2136,7 +2101,7 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@^26.0.0", "@types/jest@^26.0.24":
+"@types/jest@^26.0.24":
   version "26.0.24"
   resolved "https://registry.npmjs.org/@types/jest/-/jest-26.0.24.tgz#943d11976b16739185913a1936e0de0c4a7d595a"
   integrity sha512-E/X5Vib8BWqZNRlDxj9vYXhsDwPYbPINqKF9BsnSoon4RQ0D9moEuLD8txgyypFLH7J4+Lho9Nr/c8H0Fi+17w==
@@ -4058,7 +4023,7 @@ core-js-pure@^3.16.0:
   resolved "https://registry.npmjs.org/core-js-pure/-/core-js-pure-3.18.1.tgz#097d34d24484be45cea700a448d1e74622646c80"
   integrity sha512-kmW/k8MaSuqpvA1xm2l3TVlBuvW+XBkcaOroFUpO3D4lsTGQWBTb/tBDCf/PNkkPLrwgrkQRIYNPB0CeqGJWGQ==
 
-core-js@^3.17.1, core-js@^3.6.4:
+core-js@^3.17.1:
   version "3.18.1"
   resolved "https://registry.npmjs.org/core-js/-/core-js-3.18.1.tgz#289d4be2ce0085d40fc1244c0b1a54c00454622f"
   integrity sha512-vJlUi/7YdlCZeL6fXvWNaLUPh/id12WXj3MbkMw5uOyF0PfWPBNOCNbs53YqgrvtujLNlt9JQpruyIKkUZ+PKA==
@@ -5004,7 +4969,7 @@ envinfo@^7.7.3:
   resolved "https://registry.npmjs.org/envinfo/-/envinfo-7.8.1.tgz#06377e3e5f4d379fea7ac592d5ad8927e0c4d475"
   integrity sha512-/o+BXHmB7ocbHEAs6F2EnG0ogybVVUdkRunTT2glZU9XAaGmhqskrvKwqXuDfNjEO0LZKWdejEEpnq8aM0tOaw==
 
-enzyme-adapter-react-16@^1.15.1, enzyme-adapter-react-16@^1.15.6:
+enzyme-adapter-react-16@^1.15.6:
   version "1.15.6"
   resolved "https://registry.npmjs.org/enzyme-adapter-react-16/-/enzyme-adapter-react-16-1.15.6.tgz#fd677a658d62661ac5afd7f7f541f141f8085901"
   integrity sha512-yFlVJCXh8T+mcQo8M6my9sPgeGzj85HSHi6Apgf1Cvq/7EL/J9+1JoJmJsRxZgyTvPMAqOEpRSu/Ii/ZpyOk0g==
@@ -7495,7 +7460,7 @@ jest-runtime@^26.6.3:
     strip-bom "^4.0.0"
     yargs "^15.4.1"
 
-jest-serializer-html@^7.0.0, jest-serializer-html@^7.1.0:
+jest-serializer-html@^7.1.0:
   version "7.1.0"
   resolved "https://registry.npmjs.org/jest-serializer-html/-/jest-serializer-html-7.1.0.tgz#0cfea8a03b9b82bc420fd2cb969bd76713a87c08"
   integrity sha512-xYL2qC7kmoYHJo8MYqJkzrl/Fdlx+fat4U1AqYg+kafqwcKPiMkOcjWHPKhueuNEgr+uemhGc+jqXYiwCyRyLA==
@@ -9934,7 +9899,7 @@ regenerate@^1.4.2:
   resolved "https://registry.npmjs.org/regenerate/-/regenerate-1.4.2.tgz#b9346d8827e8f5a32f7ba29637d398b69014848a"
   integrity sha512-zrceR/XhGYU/d/opr2EKO7aRHUeiBI8qjtfHqADTwZd6Szfy16la6kqD0MIUs5z5hx6AaKa+PixpPrR289+I0A==
 
-regenerator-runtime@^0.13.3, regenerator-runtime@^0.13.4, regenerator-runtime@^0.13.9:
+regenerator-runtime@^0.13.4, regenerator-runtime@^0.13.9:
   version "0.13.9"
   resolved "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.9.tgz#8925742a98ffd90814988d7566ad30ca3b263b52"
   integrity sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==
@@ -11354,7 +11319,7 @@ trough@^1.0.0:
   resolved "https://registry.npmjs.org/trough/-/trough-1.0.5.tgz#b8b639cefad7d0bb2abd37d433ff8293efa5f406"
   integrity sha512-rvuRbTarPXmMb79SmzEp8aqXNKcK+y0XaB298IXueQ8I2PsrATcPBCSPyK/dDNa2iWOhKlfNnOjdAOTBU/nkFA==
 
-ts-jest@^26.4.4, ts-jest@^26.5.6:
+ts-jest@^26.5.6:
   version "26.5.6"
   resolved "https://registry.npmjs.org/ts-jest/-/ts-jest-26.5.6.tgz#c32e0746425274e1dfe333f43cd3c800e014ec35"
   integrity sha512-rua+rCP8DxpA8b4DQD/6X2HQS8Zy/xzViVYfEs2OQu68tkCuKLV0Md8pmX55+W24uRIyAsf/BajRfxOs+R2MKA==
