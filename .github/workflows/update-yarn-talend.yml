@@ -24,7 +24,7 @@ jobs:
             - name: Upgrade talend dependencies
               run: |
                   yarn
-                  talend-scripts upgrade:deps
+                  yarn talend-scripts upgrade:deps
                   yarn talend-scripts upgrade:deps --latest --dry > dependencies-latest.md
                   git add dependencies-latest.md
               env:
