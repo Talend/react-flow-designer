@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect, InferableComponentEnhancerWithProps } from 'react-redux';
+import { connect } from 'react-redux';
 import invariant from 'invariant';
 import get from 'lodash/get';
 import { Map } from 'immutable';
@@ -22,7 +22,7 @@ import {
 	Id,
 } from '../customTypings/index.d';
 
-interface Props {
+type Props = {
 	children?: any;
 	setNodeTypes: (nodeTypeMap: Map<string, any>) => void;
 	startMoveNodeTo: (nodeId: Id, nodePosition: string) => void;
@@ -37,7 +37,8 @@ interface Props {
 	transformToApply?: Transform;
 	setZoom?: (transform: Transform) => void;
 	snapToGrid?: boolean;
-}
+};
+
 type State = {
 	nodeTypeMap: Map<string, any>;
 	linkTypeMap: Map<string, any>;
