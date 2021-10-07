@@ -29,7 +29,7 @@ spec:
     - talend-registry
   containers:
     - name: nodejs
-      image: artifactory.datapwn.com/tlnd-docker-prod/talend/common/tsbi/node-builder:2.5.4-20210112094055
+      image: artifactory.datapwn.com/tlnd-docker-prod/talend/common/tsbi/node-builder:2.9.0-20210907155713
       resources:
         requests:
           memory: "2G"
